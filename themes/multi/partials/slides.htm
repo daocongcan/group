@@ -1,0 +1,14 @@
+==
+{% if locale == "fr" %}
+    <ul class="rslides" id="slider1">
+		<li><img width="100%" src="{{ 'assets/images/slider/Banner_1.jpg'|theme }}" alt=""></li>
+		<li><img width="100%" src="{{ 'assets/images/slider/Banner_2.jpg'|theme }}" alt=""></li>
+		<li><img width="100%" src="{{ 'assets/images/slider/Banner_3.jpg'|theme }}" alt=""></li>
+	</ul>
+{% elseif locale == "en" %}
+	<ul class="rslides" id="slider1">
+		<li><img width="100%" src="{{ 'assets/images/slider/en/Banner_1.jpg'|theme }}" alt=""></li>
+		<li><img width="100%" src="{{ 'assets/images/slider/en/Banner_2.jpg'|theme }}" alt=""></li>
+		<li><img width="100%" src="{{ 'assets/images/slider/en/Banner_3.jpg'|theme }}" alt=""></li>
+	</ul>
+{% endif %}
