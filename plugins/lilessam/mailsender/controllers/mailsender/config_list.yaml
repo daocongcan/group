@@ -1,3 +1,0 @@
-modelClass: Backend\Models\User
-list: ~/modules/backend/models/user/columns.yaml
-title: lilessam.mailsender::lang.backend.title
