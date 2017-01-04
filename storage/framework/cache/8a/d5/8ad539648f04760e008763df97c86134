@@ -1,0 +1,23 @@
+1483501729a:1:{s:15:"bonne-annee.htm";a:8:{s:8:"fileName";s:15:"bonne-annee.htm";s:7:"content";s:320:"title = "Multi"
+url = "/bonne-annee-2017"
+layout = "bonne-annee"
+==
+
+
+<div class="container">
+    <br>
+    <div class="col-sm-6 col-sm-offset-3" style="background-color: #fff;padding: 20px;">
+        <div class="col-sm-12">
+            <img class="img-responsive" src="" alt="">
+        </div>
+    </div>
+</div>
+    <br>";s:5:"mtime";i:1483462940;s:6:"markup";s:250:"<div class="container">
+    <br>
+    <div class="col-sm-6 col-sm-offset-3" style="background-color: #fff;padding: 20px;">
+        <div class="col-sm-12">
+            <img class="img-responsive" src="" alt="">
+        </div>
+    </div>
+</div>
+    <br>";s:4:"code";N;s:5:"title";s:5:"Multi";s:3:"url";s:17:"/bonne-annee-2017";s:6:"layout";s:11:"bonne-annee";}}

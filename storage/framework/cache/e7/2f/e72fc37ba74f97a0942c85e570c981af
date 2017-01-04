@@ -1,0 +1,47 @@
+1483501730a:1:{s:10:"social.htm";a:5:{s:8:"fileName";s:10:"social.htm";s:7:"content";s:1372:"<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="col-sm-2 col-xs-4 icon-social-custom wow animated flip" data-wow-duration="2000ms">
+                <a class="icon-social" href="#"><i class="fa fa-facebook"></i></a>
+            </div>
+            <div class="col-sm-2 col-xs-4 icon-social-custom wow animated flip" data-wow-duration="2000ms">
+                <a class="icon-social" href="#"><i class="fa fa-twitter"></i></a>
+            </div>
+            <div class="col-sm-2 col-xs-4 icon-social-custom wow animated flip" data-wow-duration="2000ms">
+                <a class="icon-social" href="#"><i class="fa fa-google-plus"></i></a>
+            </div>
+            <div class="col-sm-2 col-xs-4 icon-social-custom wow animated flip" data-wow-duration="2000ms">
+                <a class="icon-social" href="#"><i class="fa fa-pinterest"></i></a>
+            </div>
+            <div class="col-sm-2 col-xs-4 icon-social-custom wow animated flip" data-wow-duration="2000ms">
+                <a class="icon-social" href="#"><i class="fa fa-linkedin"></i></a>
+            </div>
+            <div class="col-sm-2 col-xs-4 icon-social-custom wow animated flip" data-wow-duration="2000ms">
+                <a class="icon-social" href="#"><i class="fa fa-youtube"></i></a>
+            </div>
+        </div>
+    </div>
+</div>";s:5:"mtime";i:1483462940;s:6:"markup";s:1372:"<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="col-sm-2 col-xs-4 icon-social-custom wow animated flip" data-wow-duration="2000ms">
+                <a class="icon-social" href="#"><i class="fa fa-facebook"></i></a>
+            </div>
+            <div class="col-sm-2 col-xs-4 icon-social-custom wow animated flip" data-wow-duration="2000ms">
+                <a class="icon-social" href="#"><i class="fa fa-twitter"></i></a>
+            </div>
+            <div class="col-sm-2 col-xs-4 icon-social-custom wow animated flip" data-wow-duration="2000ms">
+                <a class="icon-social" href="#"><i class="fa fa-google-plus"></i></a>
+            </div>
+            <div class="col-sm-2 col-xs-4 icon-social-custom wow animated flip" data-wow-duration="2000ms">
+                <a class="icon-social" href="#"><i class="fa fa-pinterest"></i></a>
+            </div>
+            <div class="col-sm-2 col-xs-4 icon-social-custom wow animated flip" data-wow-duration="2000ms">
+                <a class="icon-social" href="#"><i class="fa fa-linkedin"></i></a>
+            </div>
+            <div class="col-sm-2 col-xs-4 icon-social-custom wow animated flip" data-wow-duration="2000ms">
+                <a class="icon-social" href="#"><i class="fa fa-youtube"></i></a>
+            </div>
+        </div>
+    </div>
+</div>";s:4:"code";N;}}

@@ -1,0 +1,26 @@
+1483501729a:1:{s:10:"slides.htm";a:6:{s:8:"fileName";s:10:"slides.htm";s:7:"content";s:721:"==
+{% if locale == "fr" %}
+    <ul class="rslides" id="slider1">
+		<li><img width="100%" src="{{ 'assets/images/slider/Banner_1.jpg'|theme }}" alt=""></li>
+		<li><img width="100%" src="{{ 'assets/images/slider/Banner_2.jpg'|theme }}" alt=""></li>
+		<li><img width="100%" src="{{ 'assets/images/slider/Banner_3.jpg'|theme }}" alt=""></li>
+	</ul>
+{% elseif locale == "en" %}
+	<ul class="rslides" id="slider1">
+		<li><img width="100%" src="{{ 'assets/images/slider/en/Banner_1.jpg'|theme }}" alt=""></li>
+		<li><img width="100%" src="{{ 'assets/images/slider/en/Banner_2.jpg'|theme }}" alt=""></li>
+		<li><img width="100%" src="{{ 'assets/images/slider/en/Banner_3.jpg'|theme }}" alt=""></li>
+	</ul>
+{% endif %}";s:5:"mtime";i:1483462940;s:6:"markup";s:717:"{% if locale == "fr" %}
+    <ul class="rslides" id="slider1">
+		<li><img width="100%" src="{{ 'assets/images/slider/Banner_1.jpg'|theme }}" alt=""></li>
+		<li><img width="100%" src="{{ 'assets/images/slider/Banner_2.jpg'|theme }}" alt=""></li>
+		<li><img width="100%" src="{{ 'assets/images/slider/Banner_3.jpg'|theme }}" alt=""></li>
+	</ul>
+{% elseif locale == "en" %}
+	<ul class="rslides" id="slider1">
+		<li><img width="100%" src="{{ 'assets/images/slider/en/Banner_1.jpg'|theme }}" alt=""></li>
+		<li><img width="100%" src="{{ 'assets/images/slider/en/Banner_2.jpg'|theme }}" alt=""></li>
+		<li><img width="100%" src="{{ 'assets/images/slider/en/Banner_3.jpg'|theme }}" alt=""></li>
+	</ul>
+{% endif %}";s:4:"code";N;s:17:"_PARSER_ERROR_INI";s:0:"";}}
