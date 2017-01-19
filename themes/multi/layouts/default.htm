@@ -1,7 +1,7 @@
 description = "Default layout"
 
 [localePicker]
-
+forceUrl = 0
 ==
 <?php
 use RainLab\Translate\Classes\Translator;
@@ -90,7 +90,7 @@ function onStart()
 
             $(".group1").colorbox({rel:'group1', transition:"fade"});
             $(".group2").colorbox({rel:'group2', transition:"fade"});
-            $.colorbox({inline:true, href:".ajax"});
+            /* $.colorbox({inline:true, href:".ajax"}); */
         });
     </script>   
 {% framework extras %}
@@ -107,10 +107,10 @@ function onStart()
             }
         });
     </script>
-
+<!--
     <div class="ajax">
         <iframe title="Happy New Year" width="640" height="390" src="https://www.youtube.com/embed/xt_z8mnI-HU?rel=0?version=3&autoplay=1&controls=0&&showinfo=0&loop=1​" frameborder="0">
         </iframe>
-    </div>
+    </div> -->
     </body>
 </html>
