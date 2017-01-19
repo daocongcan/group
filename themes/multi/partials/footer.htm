@@ -14,7 +14,11 @@
                     </ul>
                 </div>
                 <div class="col-sm-1 col-xs-offset-1">
-                    <a href="/contact" class="drop"><b>{{ "Contact" |_}}</b></a>
+                    {% if locale == "vn" %}
+                        <a href="http://dfm-engineering.com/vi/lien-he" class="drop"><b>{{ "Liên hệ" |_}}</b></a>
+                    {% else %}
+                        <a href="/contact" class="drop"><b>{{ "Contact" |_}}</b></a>
+                    {% endif %}
                     <div class="fc_under_text_custom"></div>
                 </div>
             </div>
