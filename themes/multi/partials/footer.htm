@@ -13,13 +13,16 @@
                         <li><a class="navigationMenu" href="/services-solutions/ingenierie-technique-scientifique-virtuelle/"><i>{{ "Ingénierie Technique & Scientifique & Virtuelle" |_}}</i></a></li>
                     </ul>
                 </div>
-                <div class="col-sm-1 col-xs-offset-1">
-                    {% if locale == "vn" %}
-                        <a href="http://dfm-engineering.com/vi/lien-he" class="drop"><b>{{ "Liên hệ" |_}}</b></a>
-                    {% else %}
-                        <a href="/contact" class="drop"><b>{{ "Contact" |_}}</b></a>
-                    {% endif %}
+                <div class="col-sm-4 col-sm-offset-1">
+                    <a href="/contact" class="drop"><b>{{ "Contact" |_}}</b></a>
                     <div class="fc_under_text_custom"></div>
+                {% if locale == "vn" %}
+                    <ul class="sitemap">
+                        <li>DFM-Engineering, Tòa nhà Helios, Công viên phần mềm Quang Trung, Quận 12, TP HCM</li>
+                        <li><a href="mailto:contact@dfm-engineering.com">contact@dfm-engineering.com</a></li>
+                        <li>(+84) 3715 8010</li>
+                    </ul>
+                {% endif %}
                 </div>
             </div>
             <div class="row">
