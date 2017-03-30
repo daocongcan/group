@@ -68,7 +68,7 @@ function onSend()
             <div class="row">
                 <div class="col-sm-6">
                     {% if locale == "vn" %}
-                        <div id="google-map" style="height:650px" data-latitude="14.058324" data-longitude="108.277199"></div>
+                        <div id="google-map" style="height:650px" data-latitude="10.8554777" data-longitude="106.6247843"></div>
                     {% else %}
                         <div id="google-map" style="height:650px" data-latitude="46.6844994" data-longitude="0.3622801"></div>
                     {% endif %}
@@ -91,7 +91,11 @@ function onSend()
                             <address>
                               21 Rue de brin<br>
                               86130 Jaunay Clan, France<br>
-                              Téléphone: (+33) 610150607 (+33) 549458135<br>
+                              {% if locale == "fr" %}
+                                Téléphone: (+33) 610150607 (+33) 549458135<br>
+                              {% else %}
+                                Telephone: (+33) 610150607 (+33) 549458135<br>
+                              {% endif %}
                               E-mail: <a href="mailto:info@dfm-europe.com">info@dfm-europe.com</a><br>
                             </address>
                         </div>
