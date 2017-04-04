@@ -1,4 +1,4 @@
-config/database.php
+#config/database.php
 storage/cms/cache/*
 storage/cms/combiner/assets/*
 storage/cms/twig/*
