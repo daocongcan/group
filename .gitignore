@@ -1,2 +1,8 @@
 config/database.php
-#storage/
+storage/cms/cache/*
+storage/cms/combiner/assets/*
+storage/cms/twig/*
+storage/framework/cache/*
+storage/framework/sessions/*
+
+
