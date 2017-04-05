@@ -4,5 +4,6 @@ storage/cms/combiner/assets/*
 storage/cms/twig/*
 storage/framework/cache/*
 storage/framework/sessions/*
+storage/logs/*
 
 
