@@ -10,7 +10,19 @@ is_hidden = 0
             <p class="text-center wow fadeInDown">
                 {{ "La réalité virtuelle assure la reproduction d’un environnement réel ou imaginaire, et simule présence et l'environnement physique d'un utilisateur et son interaction. DFM offre des expériences premium en réalité virtuelle et notre finalité est de proposer les services et les outils  des ingénieurs de demain." |_}}
             </p>
-            <p class="text-center" style="margin-top: 30px"><a target="_blank" href="https://dfm-vr.com/" class="btn btn-default btn-lg"><i class="glyphicon glyphicon-globe"></i> {{ "Visitez la page DFM VR dédiée" |_}}</a></p>
+            <p class="text-center" style="margin-top: 30px">
+                <a  target="_blank" 
+                    href="{% if locale == 'fr' %} 
+                            {{ 'http://dfm-vr.com/?lang=fr' }} 
+                          {% elseif locale == 'en' %}
+                            {{ 'http://dfm-vr.com/?lang=en' }}
+                          {% elseif locale == 'vn' %}
+                            {{ 'http://congnghethucteao.vn' }}
+                          {% endif %}" 
+                    class="btn btn-default btn-lg">
+                    <i class="glyphicon glyphicon-globe"></i> {{ "Visitez la page DFM VR dédiée" |_}}
+                </a>
+            </p>
         </div>
     </div>
 </section>
