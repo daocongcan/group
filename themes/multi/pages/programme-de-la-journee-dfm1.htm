@@ -1,0 +1,94 @@
+title = "Programme de la journee DFM"
+url = "/programme-de-la-journee-dfm-1"
+is_hidden = 0
+
+[viewBag]
+localeUrl[en] = "/programme-de-la-journee-dfm"
+localeUrl[vn] = "/programme-de-la-journee-dfm"
+==
+<!DOCTYPE html>
+<html>
+	<header>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<link rel="stylesheet" type="text/css" href="{{ 'assets/letter/css/bootstrap.min.css'|theme }}">
+		<link rel="stylesheet" type="text/css" href="{{ 'assets/letter/css/styles.css'|theme }}">
+		<title>Programme de la journee DFM</title>
+	</header>
+	<body>
+		<div class="container">
+			<div class="template-1">
+				<div class="dfm-img">
+					<img src="{{ 'assets/letter/images/dfm.png'|theme }}" alt="background">
+				</div>
+				<div class="dfm-text-o">
+					<p class="dfm-text-t">
+						Programme de la journée <br> 
+								DFM <br>
+						8 septembre 2017 <br> 
+								***
+					</p>
+					<p class="dfm-text-cotent">
+						9 heures - 10 heures : acceuil café
+					</p>
+					<p class="dfm-text-cotent">
+						10 heures - 10 heures 30 : visite de la société DFM par vidéo conférence
+					</p>
+
+					<p class="dfm-text-cotent">
+						10 heures 30 - 12 heures 30 : présentation des travaux de la société DFM
+					</p>
+
+					<p class="dfm-text-cotent">
+						12 heures 30 - 14 heures 30 : repas
+
+					</p>
+
+					<p class="dfm-text-cotent">
+						14 heures 30 - 16 heures 30:  tour en bateau
+					</p>
+
+					<p class="dfm-text-cotent">
+						17 heures : fin
+					</p>
+					<p class="dfm-logo">
+						<img src="{{ 'assets/letter/images/dfm-europe.png'|theme }}" alt="dfm-logo">
+						<p class="dfm">
+							<!-- <textarea id="yesbody" style="display: none;">
+							Bonjour,Je confirme ma présence. Merci.
+								
+							</textarea> -->
+							<input type="hidden" id="yesbody" value="Bonjour,&#10; &#13; Je confirme ma presence. Merci.">
+							<input type="hidden" id="nobody" value="No">
+							<b>Merci de confirmer votre présence</b>
+							<button onclick="sendYesMail(); return false">Oui</button>
+							<button>Non</button>
+						</p>
+					</p>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			function sendYesMail() {
+			    var link = "mailto:contact@dfm-europe.com"
+			             + "?cc="
+			             + "&subject=" + escape("Confirmer votre presence")
+			             + "&body=" + escape(document.getElementById('yesbody').value)
+			    ;
+
+			    window.location.href = link;
+			}
+
+			function sendNoMail() {
+			    var link = "mailto:contact@dfm-europe.com"
+			             + "?cc=nga.tran@dfm-engineering.com"
+			             + "&subject=" + escape("Confirmer votre presence")
+			             + "&body=" + escape(document.getElementById('nobody').value)
+			    ;
+
+			    window.location.href = link;
+			}
+		</script>
+	</body>
+</html>
