@@ -96,6 +96,7 @@
 .dfm-logo img {
 	padding: 0px;
 	margin: 0px 10px;
+	display: inline;
 }
 
 .dfm-logo-left {
@@ -118,3 +119,22 @@
     font-size: 15px;
 }
 
+@media only screen and (max-width: 1300px) {
+ 	.dfm-text-t {
+ 		font-size: 15px;
+ 	}
+
+ 	.dfm-text {
+ 		font-size: 15px;
+ 	}
+}
+
+@media only screen and (max-width: 1000px) {
+ 	.dfm-text-t {
+ 		font-size: 15px;
+ 	}
+
+ 	.dfm-text {
+ 		font-size: 10px;
+ 	}
+}

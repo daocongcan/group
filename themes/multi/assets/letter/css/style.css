@@ -75,7 +75,7 @@
 }
 
 .dfm-text-cotent {
-	padding-top: 25px;
+	padding-top: 20px;
 	text-align: left;
 	margin: 10px;
 }
@@ -87,6 +87,7 @@
 
 .dfm-logo img {
 	padding-right: 20px;
+	display: inline;
 }
 
 .dfm-logo-left {
@@ -96,6 +97,32 @@
 
 .dfm-logo-left img {
 	padding: 20px;
+	display: inline;
 }
 
+@media only screen and (max-width: 1300px) { 
+	.dfm-text {
+		font-size: 20px;
+	}
+	.dfm-text-cotent {
+		font-size: 20px;
+	}
 
+	.dfm-text-o {
+		font-size: 20px;
+	}
+}
+
+@media only screen and (max-width: 900px) { 
+	.dfm-text {
+		font-size: 15px;
+	}
+	.dfm-text-cotent {
+		font-size: 15px;
+		padding-top: 10px;
+	}
+
+	.dfm-text-o {
+		font-size: 15px;
+	}
+}
