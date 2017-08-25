@@ -81,7 +81,7 @@
 }
 
 .dfm-text-cotent {
-	padding-top: 15px;
+	padding-top: 12px;
 	text-align: left;
 	margin: 10px;
 	padding-left: 20px;
@@ -106,6 +106,7 @@
 
 .dfm-logo-left img {
 	padding: 20px;
+	display: inline;
 }
 
 .text-right {
@@ -127,6 +128,16 @@
  	.dfm-text {
  		font-size: 15px;
  	}
+
+ 	.dfm-text-cotent {
+ 		font-size: 13px;
+ 		padding-top: 10px;
+ 	}
+
+ 	.dfm {
+ 		font-size: 12px;
+
+ 	}
 }
 
 @media only screen and (max-width: 1000px) {
@@ -135,6 +146,15 @@
  	}
 
  	.dfm-text {
+ 		font-size: 10px;
+ 	}
+
+ 	.dfm-text-cotent {
+ 		font-size: 10px;
+ 		padding-top: 10px;
+ 	}
+
+ 	.dfm {
  		font-size: 10px;
  	}
 }
