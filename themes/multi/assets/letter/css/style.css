@@ -3,9 +3,9 @@
 	/*background-image: url(images/bg.jpg);*/
 	/*background: url(images/bg.jpg) no-repeat;*/
 	background: url("images/img.jpg") no-repeat center center fixed; 
-
 	width: 100%;
 	height: auto;
+	font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
 .template-1 {
@@ -82,12 +82,11 @@
 
 .dfm-logo {
 	text-align: right;
-	padding-top: 30px;
 	margin: auto;
 }
 
 .dfm-logo img {
-	padding: 20px;
+	padding-right: 20px;
 }
 
 .dfm-logo-left {
