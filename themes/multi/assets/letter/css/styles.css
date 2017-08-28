@@ -49,23 +49,27 @@
 .dfm-text {
 	position: absolute;
 	margin: auto;
-	top: 10px;
+	top: 30px;
 	color: #fff;
 	font-size: 20px;
 }
 
 .dfm-text-left {
 	margin: auto;
-	top: 10px;
+	top: 30px;
 	color: #2f85b6;
 	font-size: 20px;
 	float: right;
 	width: 50%;
 }
 
+.dfm-content {
+	padding-top: 40px;
+}
+
 .dfm-text-right {
 	margin: auto;
-	top: 10px;
+	top: 30px;
 	color: #2f85b6;
 	font-size: 20px;
 	float: left;
@@ -81,7 +85,7 @@
 }
 
 .dfm-text-cotent {
-	padding-top: 12px;
+	padding-top: 25px;
 	text-align: left;
 	margin: 10px;
 	padding-left: 20px;
