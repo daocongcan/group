@@ -80,20 +80,35 @@
 	color: #000;
 	position: absolute;
 	margin: auto;
-	top: 30px;
+	top: 5px;
 	font-size: 20px;
+}
+
+.dfm-lg {
+	position: absolute;
+	top: 5px;
+	font-size: 20px;
+}
+
+.dfm-text-o img {
+	text-align: right;
+}
+
+.dfm-logo-center {
+	display: inline-block;
+	margin-left: 70%;
 }
 
 .dfm-text-cotent {
 	padding-top: 25px;
-	text-align: left;
+	text-align: center;
 	margin: 10px;
 	padding-left: 20px;
 }
 
 .dfm-logo {
 	text-align: right;
-	padding-top: 0px;
+	padding-top: 30px;
 	margin: auto;
 }
 

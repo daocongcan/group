@@ -25,6 +25,7 @@ localeUrl[vn] = "/programme-de-la-journee-dfm"
 					<img class="img-responsive" src="{{ 'assets/letter/images/dfm2.jpg'|theme }}" alt="background">
 				</div>
 				<div class="dfm-text-o">
+					<img class="img-responsive dfm-logo-center" src="{{ 'assets/letter/images/dfm-europe.png'|theme }}" alt="dfm-logo">
 					<p class="dfm-text-t">
 						Programme de la journée <br> 
 								DFM <br>
@@ -32,30 +33,29 @@ localeUrl[vn] = "/programme-de-la-journee-dfm"
 								***
 					</p>
 					<p class="dfm-text-cotent">
-						9 heures - 10 heures : acceuil café
+						9 h - 10 h : Accueil café
 					</p>
 					<p class="dfm-text-cotent">
-						10 heures - 10 heures 30 : visite de la société DFM par vidéo conférence
-					</p>
-
-					<p class="dfm-text-cotent">
-						10 heures 30 - 12 heures 30 : présentation des travaux de la société DFM
+						10 h - 10 h 30 : DFM, le souffle de l’innovation
 					</p>
 
 					<p class="dfm-text-cotent">
-						12 heures 30 - 14 heures 30 : repas
+						10 h 30 - 12 h 30 : Sortie en mer / Atelier
+					</p>
+
+					<p class="dfm-text-cotent">
+						12 h 30 - 14 h 30 : Déjeuner
 
 					</p>
 
 					<p class="dfm-text-cotent">
-						14 heures 30 - 16 heures 30:  tour en bateau
+						14 h 30 - 16 h 30 : Sortie en mer / Atelier
 					</p>
 
 					<p class="dfm-text-cotent">
-						17 heures : fin
+						17 h : Clôture
 					</p>
 					<p class="dfm-logo">
-						<img class="img-responsive" src="{{ 'assets/letter/images/dfm-europe.png'|theme }}" alt="dfm-logo">
 						<p class="dfm">
 							<!-- <textarea id="yesbody" style="display: none;">
 							Bonjour,Je confirme ma présence. Merci.
@@ -63,10 +63,12 @@ localeUrl[vn] = "/programme-de-la-journee-dfm"
 							</textarea> -->
 							<input type="hidden" id="yesbody" value="Bonjour,&#10; &#13; Je confirme ma presence. Merci.">
 							<input type="hidden" id="nobody" value="No">
-							<b>Merci de confirmer votre présence</b>
+							<b>Pour une bonne organisation, <i>merci</i> de bien vouloir <i>confirmer votre </i> présence</b>
+						</p>
+						<div>
 							<button onclick="sendYesMail(); return false">Oui</button>
 							<button>Non</button>
-						</p>
+						</div>
 					</p>
 				</div>
 			</div>
