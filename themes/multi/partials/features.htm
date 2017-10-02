@@ -8,14 +8,14 @@
             <div class="row">
                 <div class="col-sm-4 wow bounceIn" style="overflow: hidden;" data-wow-duration="2000ms" >
                     <div class="content_service">
-                        <a target="_blank" 
-                            href="
+                        <a target="_blank" href="http://dfm-infotech.com/" data-request="onSwitchLocale" 
+                            data-request-data="
                                 {% if locale == 'fr' %} 
-                                    {{ 'http://dfm-infotech.com/fr' }} 
+                                    locale: 'fr'  
                                 {% elseif locale == 'en' %}
-                                    {{ 'http://dfm-infotech.com/' }}
+                                    locale: 'en'
                                 {% elseif locale == 'vn' %}
-                                  {{ 'http://dfm-infotech.com/vn' }}
+                                    locale: 'vn'
                                 {% endif %}
                             ">
                             <h4>{{ "Développement logiciel" |_}}</h4>
@@ -30,9 +30,9 @@
                         {% if locale == 'fr' %} 
                             {{ 'http://dfm-infotech.com/fr' }} 
                         {% elseif locale == 'en' %}
-                            {{ 'http://dfm-infotech.com/' }}
+                            {{ 'http://dfm-infotech.com/en' }}
                         {% elseif locale == 'vn' %}
-                          {{ 'http://dfm-infotech.com/vn' }}
+                            {{ 'http://dfm-infotech.com/vn' }}
                         {% endif %}
                         ">
                             <img class="hoverImg" width="100%" src="{{ 'assets/images/icon/pic_4x3_1.jpg'|theme }}">
