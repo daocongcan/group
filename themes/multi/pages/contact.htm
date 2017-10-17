@@ -30,6 +30,12 @@ function onStart()
         $this['test'] = "fr";
         header('Location: '.$actual_link);
         exit();
+    } else if($this['country'] == 'VN'){
+        $actual_link = "http://".$_SERVER['HTTP_HOST']."/vn".$_SERVER['REQUEST_URI'];
+        $_SESSION['langset'] = true;
+        $this['test'] = "vn";
+        header('Location: '.$actual_link);
+        exit();
     } else {
         $actual_link = "http://".$_SERVER['HTTP_HOST']."/en".$_SERVER['REQUEST_URI'];
         $_SESSION['langset'] = true;
@@ -80,7 +86,7 @@ function onSend()
 	                        <address>
                                 Địa chỉ: DFM-Engineering, Tòa nhà Helios,
                                 Công viên phần mềm Quang Trung, Quận 12, TP HCM<br>
-                                Điện thoại: (+84) 3715 8010<br>
+                                Điện thoại: (+84) 23715 8010<br>
                                 Website: <a href="http://dfm-engineering.com/vi">http://dfm-engineering.com/vi</a> <br>
 	                           E-mail: <a href="mailto:info@dfm-engineering.com">info@dfm-engineering.com</a><br>
 	                        </address>
@@ -91,11 +97,7 @@ function onSend()
                             <address>
                               21 Rue de brin<br>
                               86130 Jaunay Clan, France<br>
-                              {% if locale == "fr" %}
-                                Téléphone: (+33) 610150607 (+33) 549458135<br>
-                              {% else %}
-                                Telephone: (+33) 610150607 (+33) 549458135<br>
-                              {% endif %}
+                              Téléphone: (+33) 610150607 (+33) 549458135<br>
                               E-mail: <a href="mailto:info@dfm-europe.com">info@dfm-europe.com</a><br>
                             </address>
                         </div>

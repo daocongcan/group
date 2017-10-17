@@ -1,5 +1,5 @@
 <div class="container">
-            <div class="section-header">
+            <div id="dfm-group" class="section-header">
                 <h2 class="section-title text-center wow fadeInDown">{{ "DFM groupe" |_}}</h2>
                 <p class="text-center wow fadeInDown">
                     {{ "DFM est un groupe proposant des activités et des services en développement logiciel, ingénierie scientifique et informatique. Au cœur des enjeux de nos clients, dans une relation de proximité, nos experts assisté de notre centre de développement en Asie accompagne les PME et grands comptes dans de nombreux secteurs et dans une large gamme de services :" |_ }} 
@@ -9,15 +9,7 @@
                 <div class="col-sm-4 wow bounceIn" style="overflow: hidden;" data-wow-duration="2000ms" >
                     <div class="content_service">
                         <a target="_blank" 
-                            href="
-                                {% if locale == 'fr' %} 
-                                    {{ 'http://dfm-infotech.com/fr' }} 
-                                {% elseif locale == 'en' %}
-                                    {{ 'http://dfm-infotech.com/en' }}
-                                {% elseif locale == 'vn' %}
-                                    {{ 'http://dfm-infotech.com/vn' }}
-                                {% endif %}
-                            ">
+                            href="http://dfm-infotech.com/">
                             <h4>{{ "Développement logiciel" |_}}</h4>
                         </a>
                         <hr>
@@ -26,15 +18,7 @@
                         <p>{{ "DFM propose une solution globale permettant d’assurer le développement de votre outil informatique dédié, connecté à votre environnement propre (serveur, smartphone etc). Des systèmes connectés/embarqués peuvent également la compléter." |_}}</p>
                     </div>
                     <a  target="_blank" 
-                        href="
-                        {% if locale == 'fr' %} 
-                            {{ 'http://dfm-infotech.com/fr' }} 
-                        {% elseif locale == 'en' %}
-                            {{ 'http://dfm-infotech.com/en' }}
-                        {% elseif locale == 'vn' %}
-                            {{ 'http://dfm-infotech.com/vn' }}
-                        {% endif %}
-                        ">
+                        href="http://dfm-infotech.com/">
                             <img class="hoverImg" width="100%" src="{{ 'assets/images/icon/pic_4x3_1.jpg'|theme }}">
                     </a>
                         
@@ -73,31 +57,16 @@
                 </div>
                 <div class="col-sm-4 wow bounceIn" style="overflow: hidden;" data-wow-duration="2000ms">
                     <div class="content_service">
-                        <a target="_blank" 
-                            href="{% if locale == 'fr' %} 
-                                    {{ 'http://dfm-engineering.com/fr' }} 
-                                  {% elseif locale == 'en' %}
-                                    {{ 'http://dfm-engineering.com/en' }}
-                                  {% elseif locale == 'vn' %}
-                                    {{ 'http://dfm-engineering.com/vi' }}
-                                  {% endif %}
-                                  ">
+                        <a href="/services-solutions/ingenierie-technique-scientifique-virtuelle/">
                                   <h4>{{ "Ingénierie technique & scientifique" |_}}</h4>
                         </a>
                         <hr>
-                        <p class="subtitle_service">{{ "Calculs scientifiques dédiés" |_}}</p>
+                        <p class="subtitle_service">{{ "CONSEILS, CONCEPTIONS ET CALCULS CALCULS SCIENTIFIQUES DÉDIÉS" |_}}</p>
                         <hr>
                         <p>{{ "De la mécanique (conception- validation) à la mécanique des fluides tout en intégrant les couplages complexes, DFM se positionne comme un interlocuteur privilégié (aéronautique, défense, transport, énergie, …) en apportant une réponse dédiée et experte." |_}}</p>
                     </div>
-                    <a  target="_blank" 
-                        href="{% if locale == 'fr' %}
-                                {{ 'http://dfm-engineering.com/fr' }}
-                              {% elseif locale == 'en' %}
-                                {{ 'http://dfm-engineering.com/en' }}
-                              {% elseif locale == 'vn' %}
-                                {{ 'http://dfm-engineering.com/vi' }}
-                              {% endif %}
-                        ">
+                    <a  
+                        href="/services-solutions/ingenierie-technique-scientifique-virtuelle/">
                         <img class="hoverImg" width="100%" src="{{ 'assets/images/icon/pic_4x3_3.jpg'|theme }}">
                     </a>
                 </div>

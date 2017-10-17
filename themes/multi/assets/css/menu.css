@@ -228,3 +228,13 @@
 .navigationMenu h2 {
 	box-shadow: 10px 10px 5px rgb(136, 136, 136);
 }
+
+/*dongtp add*/
+.menu-size {
+	font-size: 20px;
+}
+
+.menu-size > li > a {
+	font-size: 20px;
+}
+

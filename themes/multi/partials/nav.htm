@@ -13,12 +13,12 @@
 
 
     <div class="collapse navbar-collapse js-navbar-collapse pull-right">
-      <ul class="nav navbar-nav">
+      <ul class="nav navbar-nav menu-size">
         <li>
             <a class="drop" href="/">{{ "Accueil" |_}}</a>
         </li>
         <li class="dropdown mega-dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ "Services & Solutions" |_}}<span class="glyphicon glyphicon-chevron-down"></span></a>
+          <a href="#" class="dropdown-toggle menu-size" data-toggle="dropdown">{{ "Services & Solutions" |_}}<span class="glyphicon glyphicon-chevron-down"></span></a>
 
           <ul class="dropdown-menu mega-dropdown-menu row" >
             <li class="col-sm-12"><a href="/services-solutions/developpement-logiciel"><h4>{{ "Développement logiciel" |_}}</h4></a>
@@ -51,7 +51,9 @@
         <li><a href="/contact" class="drop">{{ "Contact" |_}}</a></li>
         <li><a href="#" data-request="onSwitchLocale" data-request-data="locale: 'fr'"><img width="100%" src="{{ 'assets/images/flags/fr.png'|theme }}" alt=""></a></li>
         <li><a href="#" data-request="onSwitchLocale" data-request-data="locale: 'en'"><img width="100%" src="{{ 'assets/images/flags/us.png'|theme }}" alt=""></a></li>
-        <li><a href="#" data-request="onSwitchLocale" data-request-data="locale: 'vn'"><img width="100%" src="{{ 'assets/images/flags/vn.png'|theme }}" alt=""></a></li>
+        {% if locale == "vn" %}
+          <li><a href="#" data-request="onSwitchLocale" data-request-data="locale: 'vn'"><img width="100%" src="{{ 'assets/images/flags/vn.png'|theme }}" alt=""></a></li>
+        {% endif %}
       </ul>
 
     </div>
