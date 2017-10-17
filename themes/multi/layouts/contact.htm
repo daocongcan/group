@@ -28,12 +28,6 @@ function onStart()
         $this['test'] = "fr";
         header('Location: '.$actual_link);
         exit();
-    } else if($this['country'] == 'VN'){
-        $actual_link = "http://".$_SERVER['HTTP_HOST']."/vn".$_SERVER['REQUEST_URI'];
-        $_SESSION['langset'] = true;
-        $this['test'] = "vn";
-        header('Location: '.$actual_link);
-        exit();
     } else {
         $actual_link = "http://".$_SERVER['HTTP_HOST']."/en".$_SERVER['REQUEST_URI'];
         $_SESSION['langset'] = true;

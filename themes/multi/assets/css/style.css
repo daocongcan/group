@@ -192,3 +192,14 @@
 #main-contact-form {
 	margin-bottom: 50px;
 }
+
+.btn-readmore {
+	border: 1px solid #2f85b6;
+    border-radius: 2px;
+    padding: 3px;
+}
+
+.btn-readmore a:hover {
+	background: #2f85b6
+	color: #000;
+}
