@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 18, 2017 at 04:53 AM
+-- Generation Time: Oct 18, 2017 at 08:42 AM
 -- Server version: 5.5.57-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.22
 
@@ -401,7 +401,7 @@ CREATE TABLE IF NOT EXISTS `rainlab_translate_messages` (
   `message_data` mediumtext COLLATE utf8_unicode_ci,
   PRIMARY KEY (`id`),
   KEY `rainlab_translate_messages_code_index` (`code`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=88 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=89 ;
 
 --
 -- Dumping data for table `rainlab_translate_messages`
@@ -492,7 +492,8 @@ INSERT INTO `rainlab_translate_messages` (`id`, `code`, `message_data`) VALUES
 (84, 'conseils.conceptions.et.calculs.calculs.scientifiques.dédiés', '{"x":"CONSEILS, CONCEPTIONS ET CALCULS CALCULS SCIENTIFIQUES D\\u00c9DI\\u00c9S"}'),
 (85, 'dfm.groupe.est.internationale.innovante.r.amp.d.nous.services.sont.de.haute.qualité.et.nos.clients.sont.satisfaisants', '{"x":"DFM-Groupe est internationale, innovante (R &amp; D). Nous services sont de haute qualit\\u00e9 et nos clients sont satisfaisants.","vn":"DFM Group mang t\\u1ea7m qu\\u1ed1c t\\u1ebf, lu\\u00f4n s\\u00e1ng t\\u1ea1o, \\u0111\\u1ed5i m\\u1edbi. Ch\\u00fang t\\u00f4i mang \\u0111\\u1ebfn cho kh\\u00e1ch h\\u00e0ng s\\u1ef1 h\\u00e0i l\\u00f2ng nh\\u1edd v\\u00e0o vi\\u1ec7c cung c\\u1ea5p c\\u00e1c d\\u1ecbch v\\u1ee5  ch\\u1ea5t l\\u01b0\\u1ee3ng cao.","en":"DFM-Group is international, innovative (R & D). We are high quality services and our customers are satisfied."}'),
 (86, 'lire.la.suite', '{"x":"Lire la suite","vn":"Xem th\\u00eam","en":"Read more"}'),
-(87, 'conseils.conceptions.et.calculs.scientifiques.dédiés', '{"x":"CONSEILS, CONCEPTIONS ET CALCULS SCIENTIFIQUES D\\u00c9DI\\u00c9S","en":"ADVICE, DESIGNS AND DEDICATED SCIENTIFIC CALCULATIONS","vn":"T\\u01af V\\u1ea4N K\\u1ef8 THU\\u1eacT, THI\\u1ebeT K\\u1ebe V\\u00c0 T\\u00cdNH TO\\u00c1N"}');
+(87, 'conseils.conceptions.et.calculs.scientifiques.dédiés', '{"x":"CONSEILS, CONCEPTIONS ET CALCULS SCIENTIFIQUES D\\u00c9DI\\u00c9S","en":"ADVICE, DESIGNS AND DEDICATED SCIENTIFIC CALCULATIONS","vn":"T\\u01af V\\u1ea4N K\\u1ef8 THU\\u1eacT, THI\\u1ebeT K\\u1ebe V\\u00c0 T\\u00cdNH TO\\u00c1N"}'),
+(88, 'propos.de.dfm.groupe', '{"x":"Propos de DFM Groupe","en":" About DFM Group","vn":"Gi\\u1edbi thi\\u1ec7u v\\u1ec1 DFM"}');
 
 -- --------------------------------------------------------
 
@@ -913,12 +914,12 @@ INSERT INTO `system_request_logs` (`id`, `status_code`, `url`, `referer`, `count
 (2, 404, 'http://dfm-europe.com/en/src/Frontend/Files/userfiles/images/02180e97d4596ba.png', '["http:\\/\\/dfm-europe.com\\/en\\/advantages"]', 5, '2016-11-18 11:41:47', '2016-11-20 08:03:12'),
 (3, 404, 'http://dfm-europe.com/en/src/Frontend/Files/userfiles/images/2783055b26720ca.png', '["http:\\/\\/dfm-europe.com\\/en\\/advantages"]', 5, '2016-11-18 11:41:47', '2016-11-20 08:03:12'),
 (4, 404, 'http://dfm-europe.com/en/src/Frontend/Files/userfiles/images/297ddec1bc3cb78.png', '["http:\\/\\/dfm-europe.com\\/en\\/advantages"]', 5, '2016-11-18 11:41:47', '2016-11-20 08:03:12'),
-(5, 404, 'http://dfm-europe.com/wp-login.php', NULL, 153, '2016-11-18 14:28:11', '2017-10-17 01:03:14'),
+(5, 404, 'http://dfm-europe.com/wp-login.php', NULL, 155, '2016-11-18 14:28:11', '2017-10-18 06:26:36'),
 (6, 404, 'http://dfm-europe.com/administrator/index.php', NULL, 16, '2016-11-18 14:28:11', '2017-10-13 15:54:12'),
 (7, 404, 'http://dfm-europe.com/xmlrpc.php', NULL, 14, '2016-11-18 20:43:41', '2017-10-15 13:57:48'),
 (8, 404, 'http://dfm-europe.com/blog/xmlrpc.php', NULL, 3, '2016-11-18 20:43:41', '2017-04-04 13:47:50'),
 (9, 404, 'http://dfm-europe.com/en/advantages', NULL, 6, '2016-11-18 21:10:03', '2016-12-01 18:29:59'),
-(10, 404, 'http://dfm-europe.com/favicon.ico', '["http:\\/\\/dfm-europe.com\\/en\\/advantages"]', 274, '2016-11-18 21:10:03', '2017-10-18 04:33:10'),
+(10, 404, 'http://dfm-europe.com/favicon.ico', '["http:\\/\\/dfm-europe.com\\/en\\/advantages"]', 275, '2016-11-18 21:10:03', '2017-10-18 08:20:26'),
 (11, 404, 'http://www.dfm-europe.com/blog/rss/all.rss', NULL, 908, '2016-11-18 21:19:41', '2017-05-10 18:27:25'),
 (12, 404, 'http://www.dfm-europe.com/contact.html', NULL, 155, '2016-11-18 21:39:21', '2017-10-14 20:08:02'),
 (13, 404, 'http://www.dfm-europe.com/robots.txt', NULL, 776, '2016-11-19 01:45:11', '2017-10-17 10:51:23'),
@@ -1113,7 +1114,7 @@ INSERT INTO `system_request_logs` (`id`, `status_code`, `url`, `referer`, `count
 (202, 404, 'http://dfm-europe.com/assets/js/respond.min.js', '["http:\\/\\/dfm-europe.com\\/"]', 11, '2016-12-29 01:40:09', '2016-12-30 04:17:38'),
 (203, 404, 'http://dfm-europe.com/enen', NULL, 5, '2016-12-30 09:48:02', '2016-12-30 10:00:24'),
 (204, 404, 'http://dfm-europe.com/services-solutions/developpement-logiciel/fr', NULL, 1, '2016-12-30 10:23:30', '2016-12-30 10:23:30'),
-(205, 404, 'http://dfm-europe.com/en/en', NULL, 1143, '2016-12-30 10:54:38', '2017-10-17 23:28:31'),
+(205, 404, 'http://dfm-europe.com/en/en', NULL, 1146, '2016-12-30 10:54:38', '2017-10-18 08:20:25'),
 (206, 404, 'http://www.dfm-europe.com/gurqzsvoey.html', NULL, 1, '2016-12-31 08:23:21', '2016-12-31 08:23:21'),
 (207, 404, 'http://dfm-europe.com//wp-login.php', NULL, 57, '2016-12-31 22:28:30', '2017-10-14 01:04:14'),
 (208, 404, 'http://www.dfm-europe.com/m', NULL, 2, '2017-01-02 16:51:27', '2017-01-05 11:46:12'),
@@ -1649,7 +1650,7 @@ INSERT INTO `system_request_logs` (`id`, `status_code`, `url`, `referer`, `count
 INSERT INTO `system_request_logs` (`id`, `status_code`, `url`, `referer`, `count`, `created_at`, `updated_at`) VALUES
 (737, 404, 'http://dofilink.dfm-europe.com/robots.txt', NULL, 1, '2017-10-17 13:38:07', '2017-10-17 13:38:07'),
 (738, 404, 'http://dofilink.dfm-europe.com/robots.txt', NULL, 1, '2017-10-17 13:38:07', '2017-10-17 13:38:07'),
-(739, 404, 'http://dofilink.dfm-europe.com/en/robots.txt', NULL, 2, '2017-10-17 14:08:39', '2017-10-17 14:21:46'),
+(739, 404, 'http://dofilink.dfm-europe.com/en/robots.txt', NULL, 3, '2017-10-17 14:08:39', '2017-10-18 08:30:51'),
 (740, 404, 'http://dofilink.dfm-europe.com/base/base/turn-dev-mode-on?back-uri=blogs%252F8%27%22', NULL, 1, '2017-10-17 16:40:13', '2017-10-17 16:40:13'),
 (741, 404, 'http://dofilink.dfm-europe.com/base/base/turn-dev-mode-on?back-uri=blogs%252F8', NULL, 2, '2017-10-17 16:40:13', '2017-10-17 16:40:15'),
 (742, 404, 'http://dofilink.dfm-europe.com/base/base/turn-dev-mode-on?back-uri=blogs%252F82121121121212.1', NULL, 1, '2017-10-17 16:40:14', '2017-10-17 16:40:14'),
