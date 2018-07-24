@@ -27,9 +27,9 @@ class BackendHelpers {
     /**
      * Check if Translator plugin is installed
      *
-     * @return boolean
+     * @return boolean :bool
      */
-    public static function isTranslatePlugin() :bool {
+    public static function isTranslatePlugin()  {
         return class_exists('\RainLab\Translate\Classes\Translator') && class_exists('\RainLab\Translate\Models\Message');
     }
 
