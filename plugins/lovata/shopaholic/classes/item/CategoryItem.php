@@ -142,9 +142,9 @@ class CategoryItem extends ElementItem
 
     /**
      * Get array with categories slugs
-     * @return array
+     * @return array : array
      */
-    protected function getSlugList() : array
+    protected function getSlugList() 
     {
         $arResult = [$this->slug];
 
