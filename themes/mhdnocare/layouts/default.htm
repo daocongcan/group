@@ -1,5 +1,15 @@
 description = "Default layout"
 [localePicker]
+
+[menu]
+start = "id-15"
+activeNode = 0
+listItemClasses = "menu-item-simple-parent menu-item-depth-0 hasSubmenu"
+primaryClasses = "menu"
+secondaryClasses = "sub-menu"
+numberOfLevels = 2
+
+
 ==
 <?php
 use RainLab\Translate\Classes\Translator;
@@ -80,7 +90,7 @@ function onStart()
     <script type="text/javascript" src="{{'assets/js/jquery.nicescroll.min.js'|theme}}"></script>
     <script type="text/javascript" src="{{'assets/js/jquery.smartresize.js'|theme}}"></script> 
     <script type="text/javascript" src="{{'assets/js/shortcodes.js'|theme}}"></script>   
-    <script type="text/javascript" src="{{'assets/js/controlpanel.js'|theme}}"></script>
+    <!-- <script type="text/javascript" src="{{'assets/js/controlpanel.js'|theme}}"></script> -->
     <script type="text/javascript" src="{{'assets/js/jquery.cookie.js'|theme}}"></script>
     <script type="text/javascript" src="{{'assets/js/custom.js'|theme}}"></script>
     
