@@ -62,9 +62,9 @@ class BackendHelpers {
      *
      * @param string $address IPv4 address
      *
-     * @return string Anonymized address
+     * @return string Anonymized address :string 
      */
-    public static function anonymizeIPv4(string $address) :string {
+    public static function anonymizeIPv4(string $address) {
         return inet_ntop(inet_pton($address) & inet_pton("255.255.255.0"));
     }
 
