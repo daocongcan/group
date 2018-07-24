@@ -75,9 +75,9 @@ class BackendHelpers {
      * @param string $replacement Replacement string
      * @param string $subject     Strings to replace
      *
-     * @return string
+     * @return string :string
      */
-    public static function replaceToken(string $pattern, string $replacement = null, string $subject) :string {
+    public static function replaceToken(string $pattern, string $replacement = null, string $subject)  {
         $pattern = '/{{\s*('.$pattern.')\s*}}/';
         return preg_replace($pattern, $replacement, $subject);
     }
