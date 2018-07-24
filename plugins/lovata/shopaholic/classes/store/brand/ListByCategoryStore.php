@@ -17,9 +17,9 @@ class ListByCategoryStore extends AbstractStoreWithParam
 
     /**
      * Get ID list from database
-     * @return array
+     * @return array : array
      */
-    protected function getIDListFromDB() : array
+    protected function getIDListFromDB() 
     {
         $arElementIDList = (array) Product::getByCategory($this->sValue)
             ->where('brand_id', '>', 0)
@@ -39,9 +39,9 @@ class ListByCategoryStore extends AbstractStoreWithParam
 
     /**
      * Get ID list from cache
-     * @return array
+     * @return array : array
      */
-    protected function getIDListFromCache() : array
+    protected function getIDListFromCache() 
     {
         $arElementIDList = parent::getIDListFromCache();
 
