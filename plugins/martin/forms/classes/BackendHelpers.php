@@ -11,10 +11,10 @@ class BackendHelpers {
      *
      * @param array  $urls    Matrix of permissions and URLs
      * @param string $default Default URL
-     *
-     * @return string
+     * 
+     * @return string :string
      */
-    public static function getBackendURL(array $urls, string $default) :string {
+    public static function getBackendURL(array $urls, string $default)  {
         $user = BackendAuth::getUser();
         foreach ($urls as $permission => $URL) {
             if ($user->hasAccess($permission)) {
