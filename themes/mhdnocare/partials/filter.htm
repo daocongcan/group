@@ -1,0 +1,77 @@
+==
+<?
+    use RainLab\Blog\Models\Category;
+    
+    function onStart()
+    {
+        $this['categories'] = Category::where("parent_id",'=',NULL)->get();
+        
+    }
+?>    
+==
+<div class="container wrap-filter">
+    
+    <form data-request="onTest" data-request-update="search: '.left'">    
+        
+        <div class="col-md-3">
+            <p class="ft-title">{{'ACTIVITÉS'|_}}</p>
+            <select name="activites" data-request="onTest" id="s_category" data-request-update="subfilter: '#subfilter'" class="form-control"  >
+                <option value="000"> - {{'ACTIVITÉS'|_}} - </option>
+                {% for category in categories %}
+        
+                    <option value="{{category.id}}">  {{category.name}}  </option>
+
+                {% endfor %}
+
+
+                <!-- <option value="Tous"> Tous </option>
+                <option value="DFM"> DFM </option>
+                <option value="Innovation"> Innovation </option>
+                <option value="Partenariat"> Partenariat </option>
+                <option value="Produits"> Produits </option>
+                <option value="Recompense"> Récompense </option> -->
+            </select>    
+        </div>
+        
+        <div class="col-md-3">
+            
+            <p class="ft-title">{{'THÈMES'|_}}</p>
+            
+            <select name="themes" id="subfilter" class="form-control" >
+                <option value="000"> - {{'THÈMES'|_}} - </option>
+                
+
+                <option value="Tous">  Tous  </option>
+                
+                
+            </select>
+
+        </div>
+
+        <div class="col-md-3 ">
+            
+            <p class="ft-title">{{'PÉRIODE'|_}}</p>
+            <select name="year" class="form-control" >
+                <option value="000"> - {{'PÉRIODE'|_}} - </option>
+                <option value="2018"> 2018 </option>
+                <option value="2017"> 2017 </option>
+                <option value="2016"> 2016 </option>
+                <option value="2016"> 2015 </option>
+            </select>
+
+        </div>
+
+        <div class="col-md-3 filter">
+
+            <button style="margin-right: 23%;background-color: transparent;" type="reset" class="btn">{{'Réinitialiser'|_}}</button>
+            <button type="submit" class="btn btn-primary">{{'Filter'|_}}</button>
+        </div>
+
+    </form>    
+
+    <div class="col-md-12 line">
+        <hr />    
+    </div>
+
+    </div>
+

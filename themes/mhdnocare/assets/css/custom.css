@@ -1,0 +1,392 @@
+.dt-sc-hr-title:after {
+    content: "";
+    width: 70px;
+    height: 3px;
+    position: absolute;
+    top: -38px;
+    left: 0px;
+    right: 0px;
+    display: block;
+    margin: 0 auto;
+}
+.dt-sc-hr-title:before {
+    content: "";
+    width: 370px;
+    height: 1px;
+    display: block;
+    margin: -39px auto;
+}
+
+th, .top-bar, .dt-sc-bordered-button, #main-menu > ul > li:hover > a, #main-menu > ul.menu > li.current_page_item > a, #main-menu > ul.menu > li > a:hover, .dt-sc-ico-content.type1:hover, .dt-sc-ico-content.type2:hover .icon, .entry-meta .comments, .dt-sc-button, .mailchimp-form input[type="submit"], .dt-sc-bordered-title:before, .dt-sc-toggle-frame h5.dt-sc-toggle-accordion.active:after, .dt-sc-toggle-frame h5.dt-sc-toggle.active:after, h5.dt-sc-toggle-accordion.active:after, ul.dt-sc-tabs-frame li a.current, ul.dt-sc-tabs-vertical-frame li a.current, h5.dt-sc-toggle.active:before, h5.dt-sc-toggle-accordion.active:before, #secondary.type2 .widget:after, blockquote q:before, blockquote q:after, ul.dt-sc-locations li .dt-sc-text-overlay a.dt-sc-button:hover, .dt-sc-titled-box h4.dt-sc-titled-box-title, .breadcrumb-section h1, .dt-sc-attorney-carousel-wrapper .carousel-arrows a:hover, .dt-sc-ico-content.type1:hover:before, .dt-sc-hr-title:after, .megamenu-child-container:before, #main-menu ul li.menu-item-simple-parent ul:before, .dt-sc-ico-content.type3:hover .icon span, .dt-sc-simple-border-button:hover, .fixed-help-form .help-form input[type=submit] {
+    background-color: #5dd0ba;
+}
+
+
+#menu-container, .dt-sc-ico-content.type1, .dt-sc-ico-content.type1:before, .entry-meta .date, .mailchimp, .mailchimp:before, footer, .dt-sc-colored-box, .dt-sc-toggle-frame h5.dt-sc-toggle-accordion:after, .dt-sc-toggle-frame h5.dt-sc-toggle:after, .dt-sc-toggle-frame h5.dt-sc-toggle-accordion:after, h5.dt-sc-toggle-accordion:before, h5.dt-sc-toggle:before, ul.dt-sc-locations li .dt-sc-text-overlay a.dt-sc-button, .dt-sc-attorney-carousel-wrapper .carousel-arrows a, #secondary.type2 .widget:before, footer, .pagination ul li a:hover, .dt-sc-pr-tb-col.selected .dt-sc-tb-header .dt-sc-price, .dt-sc-hr-title:before, .dt-sc-counter:hover .icon, .dt-sc-video-wrapper h6, .fixed-help-form, .fixed-help-form .fixed-help-form-icon {
+    background-color: #157362;
+}
+
+#dt-style-picker,.dt-style-picker-wrapper {
+	display: none;
+}
+
+.dt-sc-team .dt-sc-team-thumb {
+    
+     max-width: 99%; 
+}
+
+.dt-sc-team .dt-sc-team-thumb img, .attorney_content .image img, .our-people-detail .image img {
+    border: 1px solid #ddd;
+    
+}
+
+.dt-sc-team-content > h4, .dt-sc-team-content > h5 {
+	text-align: left;
+	padding-left: 3px;
+}
+.quality li{
+	display: inline-block;
+}
+
+.quality li img{
+	border-radius: 100%;
+}
+
+.quality li p { 
+	font-size: 18px;
+	color:#5dd0ba;
+	font-weight: bold;
+
+}
+
+.media-left img {
+	width: 105px;
+	border-radius: 5px;
+	max-width: none;
+}
+
+.media-body span {
+    font-size: 16px;
+    color: #000;
+
+}
+
+.mailchimp {
+	background-color: #5dd0ba;
+	width: 100%;
+	height: 72px;
+	padding-left: 0;
+	padding-right: 0;
+}
+.nl-submit, .mailchimp p {
+	color: #000;
+}
+
+.mailchimp-form input[type=submit] {
+	color:#000;
+}
+
+
+
+
+::placeholder { 
+  color:#f5f5f5 !important;
+}
+
+
+::-webkit-input-placeholder { 
+	color:#f5f5f5 !important;    
+}
+
+
+.mailchimp-form input[type=email].error, .mailchimp-form textarea.error {
+     padding-top: 0px; 
+     padding-bottom: 0px; 
+    border: 1px solid #FF0000;
+}
+
+
+
+.mailchimp-form input[type=email] {
+	width: 80%;
+	padding: 10px 23px;
+	background-color: #fff;
+	color:#bcbcbc;
+}
+
+.mailchimp p {
+    color: #000;
+    padding-left: 22px;
+    padding-top: 10px;
+    margin:0px;
+}
+
+.mailchimp-form input[type=submit] {
+    color: #000;
+    width: 20%;
+}
+
+
+input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color:#f5f5f5 !important;
+}
+
+.copyright {
+	background-color: #5dd0ba;
+	color: #000;
+}
+
+footer .widget_text_logo img {
+    
+    float: none;
+}
+
+footer {
+	border:none;
+}
+
+.san-pham, footer {
+
+	background-color: #f5f5f5;
+
+}
+
+.back-to-top {
+	background-color: #157362;
+}
+
+#khoahoc,.san-pham,.hoidap {
+	padding-top: 50px;
+}
+
+#khoahoc ul {
+	list-style: inherit;
+	padding-left: 30px;
+}
+#khoahoc table tr td {
+	padding-left: 0px;
+}
+
+#khoahoc h2 span, .san-pham h2 span {
+	font-size: 40px;
+	color:#525867;
+}
+
+.dt-sc-toggle-frame-set .dt-sc-block {
+
+}
+
+#slider,#main {
+	float: none;
+}
+
+.dt-sc-hr-title {
+	padding:0;
+	margin: 0;
+}
+
+#main-menu > ul.menu > li.current_page_item > a:after, .dt-sc-ico-content.type1:hover:after, .dt-sc-ico-content.type1:hover {
+    border-bottom-color: transparent;
+
+}
+a:hover, a:focus {
+	text-decoration: none;
+}
+
+#khoahoc,p,h1, h2, h3, h4, h5, h6, a, input, .tuvan, .media-body span,.copyright-info, table span {
+	font-family: 'Roboto', sans-serif !important;
+
+}
+
+.wrap-search {
+	position: relative;
+}
+
+#s {
+	padding: 6px 28px; 
+}
+.search {
+	box-shadow: none !important;
+	border-radius: 100%;
+	position: absolute;
+    top: 0;
+    right: 0;
+    border: none !important;
+    padding: 8px 28px !important; 
+
+}
+
+.top-bar {
+	height: 10px;
+}
+
+.logo {
+	padding: 20px;
+	padding-left: 0px;
+}
+
+header .alignright {
+    margin: 97px 0px 0px;
+}
+
+header .dt-sc-contact-number {
+    border-radius: 5px;
+    position: absolute;
+    top: 16px;
+    right: 17px;
+    background: #5dd0ba;
+    padding: 16px;
+    width: 234px;
+    text-align: center;
+}
+.tuvan {
+	text-transform: uppercase;
+	font-weight: bold;
+	color:#fff;
+}
+.dt-sc-contact-number span img {
+	width: 33px;
+}
+
+.dt-sc-contact-number {
+
+}
+
+a, .dt-sc-ico-content:hover h4 a, footer .widget ul li:before, footer .dt-sc-contact-info a:hover, .mailchimp-form p span, .dt-sc-ico-content.type1:hover h4 a, .fullwidth_banner h1, .audio-list h5 a:hover, .author-description h5 a:hover, .events-list h2 a:hover, .faq h5.dt-sc-toggle-accordion a:hover, .faq h5.dt-sc-toggle-accordion.active a, .dt-sc-team:hover .team-details h4, .highlighter, ul.dt-sc-tabs li a.current, .entry-title h3, .summary p.price span, ul.dt-sc-tabs-vertical-frame li a.current, .faq .dt-sc-toggle-frame h5.active a, .faq h5.dt-sc-toggle a:hover, .faq h5.dt-sc-toggle.active a, ul.dt-sc-social-icons li a:hover, #main-menu .megamenu-child-container .widget ul.product_list_widget li a:hover, #main-menu .megamenu-child-container .widget ul.product_list_widget li span.amount, .dt-sc-ico-content.type2 h6 a:hover, .dt-sc-ico-content.type2:hover h6 a, .recent_studys h6 a:hover, .widget_recent_entries .entry-title h6 a:hover, .dt-sc-simple-button:hover, .faq h5.dt-sc-toggle-accordion.active:before, .breadcrumb-section .breadcrumb a:hover, .pagination .next-post a:hover, .pagination .prev-post a:hover, #primary.page-with-sidebar .dt-sc-one-column .entry-title h5 a:hover, .entry-meta .alignright p a:hover, #secondary .widget_categories ul li a:hover, #secondary .widget_categories ul li:hover:before, .about-author .author-description h6 a:hover, ul.commentlist li .author-name a:hover, .comment-details a:hover, ul.dt-sc-locations li > a:hover, ul.dt-sc-tabs li a.current, .attorney_content h6 a:hover, .our-people-detail-info ul li a:hover, .dt-sc-contact-info a:hover, .dt-sc-ico-content.type3 h6 a:hover, .widget.widget_text h6 a:hover, #main-menu ul.menu ul.sub-menu li.current_page_item > a, #main-menu ul.menu li ul li a:hover, .dt-sc-ico-content.type3:hover h6 a, .dt-sc-counter .icon span, .ls-l.caption-2, #secondary .widget .investigation_content h6 a:hover, ul.dt-sc-locations li .dt-sc-text-overlay a:hover {
+    color: #157362;
+}
+
+.dt-sc-ico-content.type1, .dt-sc-ico-content.type2:hover .icon, .dt-sc-testimonial:hover .author img, .dt-sc-team:hover .dt-sc-team-thumb img, .faq h5.dt-sc-toggle-accordion.active:before, .dt-sc-simple-border-button:hover {
+    border-color: #157362;
+}
+
+::selection {
+  background: #5dd0ba; /* WebKit/Blink Browsers */
+}
+.widget .title {
+	text-transform: uppercase;
+	font-size: 18px;
+}
+
+footer, footer a, footer p, footer .widget_recent_entries h6 a, footer .widget_recent_entries .entry-meta span, footer .widget_recent_entries .entry-meta .date, footer .widget_recent_entries .entry-meta .comments, footer ul.dt-sc-social-icons li a, footer .widget_text_logo h4, footer .widget_text_logo span i, .fixed-help-form p, .fixed-help-form .help-form input[type=text], .fixed-help-form .help-form input[type=email], .fixed-help-form .help-form select, .help-form .success-msg {
+    color: #5e667c;
+
+}
+.widget h3 {
+	text-transform: uppercase;
+}
+
+footer .dt-sc-contact-info span,.fa-location-arrow {
+    width: 25px;
+}
+
+.quality {
+	padding-bottom: 30px;
+}
+.quality li {
+	padding: 10px;
+}
+.quality li img {
+	width: 90px;
+	
+}
+.dt-sc-hr-title {
+	text-transform: capitalize;
+}
+ table, td {
+ 	border:none;
+ }
+
+ table span  {
+ 	line-height: 30px;
+ }
+
+.dt-sc-toggle-accordion {
+	height: 50px !important;
+}
+ .dt-sc-toggle-frame-set a {
+ 	line-height: 26px !important;
+ }
+
+.textwidget {
+	margin-top: 50px;
+}
+
+#main-menu {
+    width: 100%;
+    
+}
+
+#main-menu > ul.menu > li > a {
+	text-transform: uppercase;
+    font-size: 14px;
+    font-weight: bold;
+}
+.dt-sc-one-half {
+	height: 516px;
+}
+
+.logo img, .widget_text_logo img {
+	width: 280px;
+}
+
+footer .dt-sc-contact-info span i {
+    margin: -5px 5px 0px 0px;
+}
+.breadcrumb h2, .breadcrumb h3, .breadcrumb h4 {
+	display: inline-block;
+	font-weight: bold;
+	padding-top: 20px;
+}
+.breadcrumb a {
+	text-transform: uppercase;
+    color: #000;
+    font-weight: bold;
+
+}
+
+.breadcrumb {
+    background-color: transparent;
+    text-align: right;
+    border-bottom: 1px solid #f5f5f5;
+    -webkit-box-shadow: 1px 9px 12px #f5f5f5;
+    -moz-box-shadow: 1px 9px 12px #f5f5f5;
+    box-shadow: 1px 9px 12px #f5f5f5;
+}
+
+#detail img {
+ 	float: left;
+ 	padding-right: 15px;
+}
+
+#detail .short {
+	border-left: 3px solid #5dd0b8 ;
+
+	text-align: justify;
+	margin-left: 10px;
+}
+
+#detail table tr td {
+	padding-left: 0px;
+	vertical-align: initial;
+	background-color: transparent;
+	color:#000;
+	text-align: left;
+}
+#detail {
+	font-family: 'Roboto', sans-serif !important;
+	line-height: 27px;
+	color:#000;
+	padding-top: 30px;
+}
+
+#comment-form {
+	padding-top: 15px;
+	background-color: #f7f7f7;
+}
+@media (min-width: 1200px) {
+	.container {
+	    width: 900px ;
+	}
+
+}

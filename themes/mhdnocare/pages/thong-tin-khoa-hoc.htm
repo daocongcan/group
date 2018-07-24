@@ -1,0 +1,126 @@
+title = "Thong tin khoa hoc"
+url = "/thong-tin-khoa-hoc"
+layout = "default"
+meta_title = "Thông Tin Khoa Học "
+meta_description = "Thông Tin Khoa Học"
+is_hidden = 0
+
+[localePicker]
+forceUrl = 0
+
+[blogPost]
+slug = "thong-tin-khoa-hoc"
+categoryPage = "blog/category"
+
+[menu]
+start = "id-15"
+activeNode = 0
+listItemClasses = "menu-item-simple-parent menu-item-depth-0 hasSubmenu"
+primaryClasses = "menu"
+secondaryClasses = "sub-menu"
+numberOfLevels = 2
+
+
+==
+<div class="wrapper">
+        <!--inner-wrapper starts-->
+        <div class="inner-wrapper">
+            <!--header starts-->
+            {% partial "header" %}
+            <!--header ends-->
+            <!--main starts-->
+            <div id="main">
+            
+
+                <!--slider starts-->
+                
+                <!-- <div id="slider">
+                    <img src="{{'assets/images/slider1-bg1.jpg'|theme}}" alt="slide" />
+                  
+                </div> -->
+                
+                <!--slider ends-->
+    
+                <!--primary starts-->
+                <section class="breadcrumb">
+                    <div class="container">
+                        {% set post = blogPost.post %}
+                        <div class="">
+                            <a>Trang chủ</a> > <a href="/thong-tin-khoa-hoc" title=""><h1>{{post.title}}</h1></a>
+                        </div>
+                    </div>
+
+                </section>
+
+               
+                <section id="khoahoc" class="content-full-width">
+                    <!--container starts-->
+                    
+
+
+                    <div class="container">
+                        {% set post = blogPost.post %}
+                       
+                            
+
+                        <!-- <h2 class="dt-sc-hr-title"><span> {{post.title}} </span> </h2> -->
+                        
+                        <!-- <p class="aligncenter no-transform"> {{post.excerpt}} </p> -->
+                        <div class="dt-sc-hr-invisible-very-small"></div>
+                        
+                            {{post.content|raw}}
+                        
+                        
+                        <!-- <div class="dt-sc-hr-invisible-medium"></div> -->
+                        
+                        <!-- <div class="dt-sc-hr-image"></div> -->
+                        
+                        <!-- <div class="dt-sc-hr-invisible"></div> -->
+                	</div>
+                </section>
+
+
+                
+
+                <section class="">
+                	<div class="container">
+                       
+                        <!--dt-sc-one-half ends-->
+                        
+                        <!--dt-sc-one-half starts-->
+                       
+                        <!--dt-sc-one-half ends--> 
+                        <div class="dt-sc-clear"></div>
+                        <div class="dt-sc-hr-invisible-very-large"></div>
+                         
+
+
+                        <div class="col-md-12" style="text-align: center;">
+                            <img src="{{'assets/images/center_align_image.png'|theme}}">
+                        </div>
+
+
+
+
+                       
+                        <!--dt-sc-one-fourth ends-->
+                        <div class="dt-sc-hr-invisible-large"></div> 
+
+                       
+                        {% partial "dang-ky-thong-bao" %}
+                        
+                    </div>
+                        
+                    <!--container ends-->
+                </section>
+                <!--primary ends-->  
+                           
+                <!--office_locations starts-->
+                
+                <!--office_locations ends-->
+                
+            </div>
+            <!--main ends-->
+        </div>
+        <!--inner-wrapper ends-->    
+    </div>

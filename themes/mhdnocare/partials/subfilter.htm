@@ -1,0 +1,16 @@
+
+==
+<?
+    use RainLab\Blog\Models\Category;
+    
+    function onStart()
+    {
+        $this['categories'] = Category::where("parent_id",'=',input("activites"))->get();
+        
+    }
+?>    
+==
+  	{% for category in categories %}
+  		<option value="{{category.id}}">{{category.name}}</option>
+  		
+    {% endfor %}

@@ -1,0 +1,52 @@
+[menu]
+start = "id-15"
+activeNode = "id-15"
+listItemClasses = "item"
+primaryClasses = "nav navbar-nav menu-size"
+secondaryClasses = "dropdown-menu"
+tertiaryClasses = "submenu"
+numberOfLevels = 3
+==
+<?php
+use RainLab\Translate\Classes\Translator;
+function onStart()
+{
+
+    if (class_exists('RainLab\Translate\Classes\Translator')) {
+        $translator = Translator::instance();
+        $this['locale'] = $translator->getLocale();
+    }
+   
+}
+?>
+==
+<style>
+    
+    
+    
+</style>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".js-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><img src="{{ 'assets/images/logoDFM.png'|theme }}" alt="logo"></a>
+    </div>
+
+
+    <div class="collapse navbar-collapse js-navbar-collapse pull-right">
+      <ul class="nav navbar-nav menu-size">
+        
+      
+
+      </ul>
+        {% component "menu" %}
+
+    </div>
+    <!-- /.nav-collapse -->
+    </div>
+  </nav>

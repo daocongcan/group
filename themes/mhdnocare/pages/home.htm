@@ -1,0 +1,270 @@
+title = "Home"
+url = "/"
+layout = "default"
+meta_title = "DFM"
+meta_description = "DFM"
+is_hidden = 0
+
+[localePicker]
+forceUrl = 0
+
+[blogPost]
+slug = "thong-tin-khoa-hoc"
+categoryPage = "blog/category"
+
+[menu]
+start = "id-15"
+activeNode = 0
+listItemClasses = "menu-item-simple-parent menu-item-depth-0 hasSubmenu"
+primaryClasses = "menu"
+secondaryClasses = "sub-menu"
+numberOfLevels = 2
+==
+<div class="wrapper">
+        <!--inner-wrapper starts-->
+        <div class="inner-wrapper">
+            <!--header starts-->
+            {% partial "header" %}
+            <!--header ends-->
+            <!--main starts-->
+            <div id="main">
+            
+                <!--slider starts-->
+                
+                <div id="slider">
+                    <img src="{{'assets/images/slider1-bg1.jpg'|theme}}" alt="slide" />
+                  
+                </div>
+                
+                <!--slider ends-->
+    
+                <!--primary starts-->
+                <section id="khoahoc" class="content-full-width">
+                    <!--container starts-->
+                    <div class="container">
+                        {% set post = blogPost.post %}
+                        <h2 class="dt-sc-hr-title"><span> {{post.title}} </span> </h2>
+                        
+                        <!-- <p class="aligncenter no-transform"> {{post.excerpt}} </p> -->
+                        <div class="dt-sc-hr-invisible-very-small"></div>
+                        <p class="aligncenter"> 
+                            {{post.content|raw}}
+
+                        </p>
+                        
+                        <div class="dt-sc-hr-invisible-medium"></div>
+                        
+                        <!-- <div class="dt-sc-hr-image"></div> -->
+                        
+                        <div class="dt-sc-hr-invisible"></div>
+                	</div>
+                </section>
+
+
+                <section class="san-pham" >
+                	<div class="container">
+                        <h2 class="dt-sc-hr-title"><span> {{'Sản Phẩm'|_}} </span></h2> 
+                        <div class="contaner" style="text-align: center;">
+                         	<ul class="quality">
+                         		<li>
+                         			<img src="{{'assets/images/san-pham/chat-luong.png'|theme}}" >
+                         			<p>{{'Chất Lượng'|_}}</p>
+                         		</li>
+                         		
+                         		<li>
+		                    	    <img src="{{'assets/images/san-pham/chat-luong2.png'|theme}}" >
+		                        	<p>{{'Uy Tín'|_}}</p>
+		                        </li>
+		                    
+		                    	<li>
+		                        	<img src="{{'assets/images/san-pham/chat-luong3.png'|theme}}" >	
+		                        	<p>{{'Hiệu Quả'|_}}</p>
+		                        </li>
+		                    </ul>
+		                    
+
+                        </div>
+                        <!--dt-sc-one-fourth starts-->
+                        <div class="col-md-3 column dt-sc-one-fourth first">
+                            <div class="dt-sc-team">
+                                <div class="dt-sc-team-thumb">                        	
+                                    <img src="{{'assets/images/san-pham/sp1-min.png'|theme}}" alt="" title="">
+                                </div>
+                                <div class="dt-sc-team-content">
+                                    <h4> Cao nấm trùng thảo cordy-x </h4>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <!--dt-sc-one-fourth ends-->
+
+                        <div class="col-md-3 column dt-sc-one-fourth first">
+                            <div class="dt-sc-team">
+                                <div class="dt-sc-team-thumb">                        	
+                                    <img src="{{'assets/images/san-pham/sp02-min.png'|theme}}" alt="" title="">
+                                </div>
+                                <div class="dt-sc-team-content">
+                                    <h4> Cao xích chi trùng thảo Cordy vital </h4>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-3 column dt-sc-one-fourth first">
+                            <div class="dt-sc-team">
+                                <div class="dt-sc-team-thumb">                        	
+                                    <img src="{{'assets/images/san-pham/sp03-min.png'|theme}}" alt="" title="">
+                                </div>
+                                <div class="dt-sc-team-content">
+                                    <h4> Dung dịch Cordy vital plus </h4>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-3 column dt-sc-one-fourth first">
+                            <div class="dt-sc-team">
+                                <div class="dt-sc-team-thumb">                        	
+                                    <img src="{{'assets/images/san-pham/sp04-min.png'|theme}}" alt="" title="">
+                                </div>
+                                <div class="dt-sc-team-content">
+                                    <h4> Thực phẩm chức năng  nano Heal </h4>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dt-sc-hr-invisible"></div>
+                        <!--dt-sc-one-half starts-->
+                    </div>
+                </section>
+
+                <section class="hoidap">
+                	<div class="container">
+                        <div class="column dt-sc-one-half first">
+                        	<h2 class="dt-sc-hr-icon-title"> <span class="fa fa-question-circle"></span> {{'Hỏi Đáp'|_}} </h2>
+                        	
+                            <!--dt-sc-toggle-frame-set starts -->
+                            <div class="dt-sc-toggle-frame-set faq">
+                                <h5 class="dt-sc-toggle-accordion active"><a href="http://wedesignthemes.com/html/attorney/index.html?storefront=envato-elements#"> Hỏi cách sử dụng cao nấm trùng thảo hiệu qủa cho người lớn tuổi? </a></h5>
+
+
+                                <div class="dt-sc-toggle-content" style="display: block;">
+                                    <!-- <div class="dt-sc-block" style="display: none;">
+                                        Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas nam imperdiet, elit ut pellentesque adipiscing tristique senectus 
+                                    </div> -->
+                                </div>
+                                <h5 class="dt-sc-toggle-accordion"><a href="http://wedesignthemes.com/html/attorney/index.html?storefront=envato-elements#"> Bị cao huyết áp, có sử dụng cao xích chi trùng thảo được không? </a></h5>
+                                <div class="dt-sc-toggle-content">
+                                    <!-- <div class="dt-sc-block">
+                                        Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas nam imperdiet, elit ut pellentesque adipiscing
+                                    </div> -->
+                                </div>
+                                <h5 class="dt-sc-toggle-accordion"><a href="http://wedesignthemes.com/html/attorney/index.html?storefront=envato-elements#"> Nano heal có tác dụng gì? </a></h5>
+                                <div class="dt-sc-toggle-content">
+                                    <!-- <div class="dt-sc-block">
+                                        Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas nam imperdiet, elit ut pellentesque adipiscing tristique 
+                                    </div> -->
+                                </div>
+
+                                <h5 class="dt-sc-toggle-accordion"><a href="http://wedesignthemes.com/html/attorney/index.html?storefront=envato-elements#"> Cordy virtal plus có tác dụng như thế nào? </a></h5>
+                                <div class="dt-sc-toggle-content">
+                                    <!-- <div class="dt-sc-block">
+                                        Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas nam imperdiet, elit ut pellentesque adipiscing tristique 
+                                    </div> -->
+                                </div>
+                                <h5 class="dt-sc-toggle-accordion"><a href="http://wedesignthemes.com/html/attorney/index.html?storefront=envato-elements#"> Cách dùng Gano Fresh?
+ </a></h5>
+                                <div class="dt-sc-toggle-content">
+                                    <!-- <div class="dt-sc-block">
+                                        Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas nam imperdiet, elit ut pellentesque adipiscing
+                                    </div> -->
+                                </div>
+
+                                <h5 class="dt-sc-toggle-accordion"><a href="http://wedesignthemes.com/html/attorney/index.html?storefront=envato-elements#"> Gano Fresh mỗi ngày dùng mấy lần cho kết quả tốt nhất? </a></h5>
+                                <div class="dt-sc-toggle-content">
+                                    <!-- <div class="dt-sc-block">
+                                        Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas nam imperdiet, elit ut pellentesque adipiscing
+                                    </div> -->
+                                </div>
+                                <a href="#" style="float: right" class="dt-sc-button"> </span> {{'Xem tất cả'|_}} </a>
+                            </div>
+                            <!--dt-sc-toggle-frame-set ends-->
+                        </div>
+                        <!--dt-sc-one-half ends-->
+                        
+                        <!--dt-sc-one-half starts-->
+                        <div class="column dt-sc-one-half">
+                        	<h2 class="dt-sc-hr-icon-title"> <span class="fa fa-file-text"></span> {{'Tham Khảo'|_}} </h2>
+                            
+                            <div class="media">
+							  <div class="media-left">
+							    <a href="#">
+							      <img class="media-object" src="{{'assets/images/san-pham/tk1.jpg'|theme}}" alt="tk1">
+							    </a>
+							  </div>
+							  <div class="media-body">
+							    <span>Các loại nấm dược liệu quan trọng trong y học truyền thống và hiện đại. </span>
+							    
+							  </div>
+							</div>
+
+							<div class="media">
+							  <div class="media-left">
+							    <a href="#">
+							      <img class="media-object" src="{{'assets/images/san-pham/tk2.jpg'|theme}}" alt="tk1">
+							    </a>
+							  </div>
+							  <div class="media-body">
+							    <span>Ngành công nghệ sinh học bước tiến của tương lai.</span>
+							    
+							  </div>
+							</div>
+
+							<div class="media">
+							  <div class="media-left">
+							    <a href="#">
+							      <img class="media-object" src="{{'assets/images/san-pham/tk3.jpg'|theme}}" alt="tk1">
+							    </a>
+							  </div>
+							  <div class="media-body">
+							    <span>15 Tác dụng của đông trùng hạ thảo trị bách bệnh. </span>
+							    
+							  </div>
+							</div>
+                            <a href="#" style="float: right; margin-top: 20px;" class="dt-sc-button"> </span> {{'Xem tất cả'|_}} </a>
+                        </div>
+                        <!--dt-sc-one-half ends--> 
+                        <div class="dt-sc-clear"></div>
+                        <div class="dt-sc-hr-invisible-very-large"></div>
+                         
+
+
+                        <div class="col-md-12" style="text-align: center;">
+                            <img src="{{'assets/images/center_align_image.png'|theme}}">
+                        </div>
+
+                       
+                        <!--dt-sc-one-fourth ends-->
+                        <div class="dt-sc-hr-invisible-large"></div> 
+
+                       
+                        {% partial "dang-ky-thong-bao" %}
+                        
+                    </div>
+                        
+                    <!--container ends-->
+                </section>
+                <!--primary ends-->  
+                           
+                <!--office_locations starts-->
+                
+                <!--office_locations ends-->
+                
+            </div>
+            <!--main ends-->
+        </div>
+        <!--inner-wrapper ends-->    
+    </div>

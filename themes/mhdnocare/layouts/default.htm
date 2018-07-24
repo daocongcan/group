@@ -1,0 +1,113 @@
+description = "Default layout"
+[localePicker]
+==
+<?php
+use RainLab\Translate\Classes\Translator;
+function onStart()
+{
+
+    if (class_exists('RainLab\Translate\Classes\Translator')) {
+        $translator = Translator::instance();
+        $this['locale'] = $translator->getLocale();
+    }
+
+    // <!-- @session_start();
+    // if (isset($_SESSION['langset'])) return;
+    // if (isset($_SERVER["HTTP_CF_IPCOUNTRY"])) {
+    //     $this['country'] = $_SERVER["HTTP_CF_IPCOUNTRY"];
+    // } else {
+    //     $this['country'] = "VN";
+    // }
+
+    // $frSpeakingCountries = array("FR","CA","BE");
+
+    // if (in_array($this['country'], $frSpeakingCountries)) {
+    
+    //     $actual_link = "http://".$_SERVER['HTTP_HOST']."/fr".$_SERVER['REQUEST_URI'];
+    //     $_SESSION['langset'] = true;
+    //     $this['test'] = "fr";
+    //     header('Location: '.$actual_link);
+    //     exit();
+    // } else {
+    //     $actual_link = "http://".$_SERVER['HTTP_HOST']."/en".$_SERVER['REQUEST_URI'];
+    //     $_SESSION['langset'] = true;
+    //     $this['test'] = "en";
+    //     header('Location: '.$actual_link);
+    //     exit();
+    // } -->
+}
+?>
+==
+<!DOCTYPE html>
+<html lang="en">
+    {% partial "meta" %}
+    <style type="text/css" media="screen">
+
+        .alignright input[type=submit] {
+            background: url({{'assets/images/icon-search3.png'|theme}}) center center no-repeat;
+            background-size: 25px;
+            outline: none;
+        }
+    </style>
+
+<body id="home" class="homepage">
+
+<header id="header">
+    
+</header>
+
+    {% page %}
+
+
+<footer id="footer">
+    {% partial "footer" %}
+</footer><!--/#footer-->
+
+    <!--wrapper ends-->
+
+    <a href="#header" title="Go to Top" class="back-to-top" style="display: inline;"> <span class="fa fa-angle-up"></span> </a>
+    <!--Java Scripts-->
+
+
+
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyC7FPdP64dBt8CXLaCGgxTdxRUk8MD4s2I&sensor=true"></script>
+    
+    <script type="text/javascript" src="{{'assets/js/jquery.js'|theme}}"></script>
+    <script type="text/javascript" src="{{'assets/js/jquery-migrate.min.js'|theme}}"></script>
+    <script type="text/javascript" src="{{'assets/js/jquery.validate.min.js'|theme}}"></script>
+    <script type="text/javascript" src="{{'assets/js/jquery-easing-1.3.js'|theme}}"></script>
+    <script type="text/javascript" src="{{'assets/js/jquery.sticky.js'|theme}}"></script>
+    <script type="text/javascript" src="{{'assets/js/jquery.nicescroll.min.js'|theme}}"></script>
+    <script type="text/javascript" src="{{'assets/js/jquery.smartresize.js'|theme}}"></script> 
+    <script type="text/javascript" src="{{'assets/js/shortcodes.js'|theme}}"></script>   
+    <script type="text/javascript" src="{{'assets/js/controlpanel.js'|theme}}"></script>
+    <script type="text/javascript" src="{{'assets/js/jquery.cookie.js'|theme}}"></script>
+    <script type="text/javascript" src="{{'assets/js/custom.js'|theme}}"></script>
+    
+    <!-- Layer Slider --> 
+    <script type="text/javascript" src="{{'assets/js/jquery-transit-modified.js'|theme}}"></script> 
+    <script type="text/javascript" src="{{'assets/js/layerslider.kreaturamedia.jquery.js'|theme}}"></script> 
+    <script type="text/javascript" src="{{'assets/js/greensock.js'|theme}}"></script> 
+    <script type="text/javascript" src="{{'assets/js/layerslider.transitions.js'|theme}}"></script> 
+
+    <script src="{{'assets/js/modernizr-2.6.2.min.js'|theme}}"></script>
+        
+    <script type="text/javascript">var lsjQuery = jQuery;</script><script type="text/javascript"> lsjQuery(document).ready(function() { if(typeof lsjQuery.fn.layerSlider == "undefined") { lsShowNotice('layerslider_2','jquery'); } else { lsjQuery("#layerslider_2").layerSlider({responsiveUnder: 1240, layersContainer: 1170, skinsPath: 'js/layerslider/skins/'}) } }); </script>
+    
+
+
+    <div id="ascrail2000" style="width: 7px; z-index: 99999; position: fixed; top: 0px; height: 100%; right: 0px; opacity: 0;">
+        <div style="position: relative; float: right; width: 5px; background-color: rgb(66, 66, 66); border: 1px solid rgb(66, 66, 66); background-clip: padding-box; border-radius: 5px; height: 99px; top: 0px;"></div>
+        </div>
+        <div id="ascrail2000-hr" style="height: 8px; z-index: 99999; position: fixed; left: 0px; width: 100%; bottom: 0px; display: none; opacity: 0;">
+        <div style="position: relative; top: 0px; height: 5px; background-color: rgb(66, 66, 66); border: 1px solid rgb(66, 66, 66); background-clip: padding-box; border-radius: 5px; width: 1366px;">
+        </div>
+    </div>
+    
+  
+
+{% framework extras %}
+{% scripts %}
+   
+    </body>
+</html>
