@@ -113,10 +113,10 @@ class ProductItem extends ElementItem
 
     /**
      * Get URL param list by page code
-     * @param string $sPageCode
+     * @param string $sPageCode : array
      * @return array
      */
-    public function getPageParamList($sPageCode) : array
+    public function getPageParamList($sPageCode) 
     {
         $arPageParamList = [];
 
