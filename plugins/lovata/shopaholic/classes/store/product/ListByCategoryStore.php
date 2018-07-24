@@ -28,9 +28,9 @@ class ListByCategoryStore extends AbstractStoreWithParam
 
     /**
      * Get ID list from database
-     * @return array
+     * @return array : array
      */
-    protected function getIDListFromDB() : array
+    protected function getIDListFromDB() 
     {
         $arElementIDList = (array) Product::getByCategory($this->sValue)->lists('id');
 

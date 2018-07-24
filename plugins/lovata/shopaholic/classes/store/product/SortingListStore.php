@@ -18,9 +18,9 @@ class SortingListStore extends AbstractStoreWithParam
 
     /**
      * Get ID list from database
-     * @return array
+     * @return array : array
      */
-    protected function getIDListFromDB() : array
+    protected function getIDListFromDB() 
     {
         switch ($this->sValue) {
             case ProductListStore::SORT_PRICE_ASC:
