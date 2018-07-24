@@ -227,688 +227,6 @@ AUTO_INCREMENT = 1;
 -- ---------------------------------------------------------
 
 
--- CREATE TABLE "ideas_categories" -------------------------
--- CREATE TABLE "ideas_categories" -----------------------------
-CREATE TABLE `ideas_categories` ( 
-	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`name` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`slug` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`parent_id` Int( 10 ) UNSIGNED NULL,
-	`nest_left` Int( 10 ) UNSIGNED NULL,
-	`nest_right` Int( 10 ) UNSIGNED NULL,
-	`nest_depth` Int( 10 ) UNSIGNED NULL,
-	`status` TinyInt( 4 ) NOT NULL,
-	`seo_title` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`seo_keyword` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`seo_description` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`featured_image` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`description` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`cat_order` Int( 10 ) UNSIGNED NULL,
-	`created_at` Timestamp NULL,
-	`updated_at` Timestamp NULL,
-	`is_homepage` TinyInt( 4 ) NOT NULL COMMENT '0: no, 1:yes',
-	`num_display` Int( 11 ) NULL DEFAULT '4',
-	PRIMARY KEY ( `id` ),
-	CONSTRAINT `ideas_categories_slug_unique` UNIQUE( `slug` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 3;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "ideas_config" -----------------------------
--- CREATE TABLE "ideas_config" ---------------------------------
-CREATE TABLE `ideas_config` ( 
-	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`name` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`slug` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`value` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`is_default` TinyInt( 4 ) NOT NULL COMMENT '1: default, 2: plus',
-	PRIMARY KEY ( `id` ),
-	CONSTRAINT `ideas_config_slug_unique` UNIQUE( `slug` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 18;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "ideas_coupon" -----------------------------
--- CREATE TABLE "ideas_coupon" ---------------------------------
-CREATE TABLE `ideas_coupon` ( 
-	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`name` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`code` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`type` TinyInt( 4 ) NOT NULL COMMENT '1: percentage, 2: fixed amount',
-	`logged` TinyInt( 4 ) NOT NULL COMMENT 'need customer logged in ? 0: no, 1: yes',
-	`discount` Decimal( 15, 2 ) NULL,
-	`total` Decimal( 15, 2 ) NULL COMMENT 'total amount that has to be reached before the coupon is valid',
-	`start_date` Timestamp NULL COMMENT 'coupon is valid from this date',
-	`end_date` Timestamp NULL COMMENT 'coupon is valid to this date',
-	`num_uses` Int( 11 ) NOT NULL DEFAULT '0' COMMENT 'number times this coupon can be used',
-	`num_per_customer` Int( 11 ) NULL COMMENT 'number times single customers can use for this coupon',
-	`status` TinyInt( 4 ) NOT NULL,
-	`is_for_all` TinyInt( 4 ) NOT NULL DEFAULT '1' COMMENT '0:not for all, 1: for all',
-	`created_at` Timestamp NULL,
-	`updated_at` Timestamp NULL,
-	PRIMARY KEY ( `id` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 1;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "ideas_coupon_history" ---------------------
--- CREATE TABLE "ideas_coupon_history" -------------------------
-CREATE TABLE `ideas_coupon_history` ( 
-	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`coupon_id` Int( 10 ) UNSIGNED NOT NULL,
-	`order_id` Int( 10 ) UNSIGNED NOT NULL,
-	`customer_id` Int( 10 ) UNSIGNED NOT NULL,
-	`total` Decimal( 15, 2 ) NULL,
-	`created_at` Timestamp NULL,
-	`updated_at` Timestamp NULL,
-	PRIMARY KEY ( `id` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 1;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "ideas_coupon_to_category" -----------------
--- CREATE TABLE "ideas_coupon_to_category" ---------------------
-CREATE TABLE `ideas_coupon_to_category` ( 
-	`coupon_id` Int( 10 ) UNSIGNED NOT NULL,
-	`category_id` Int( 10 ) UNSIGNED NOT NULL )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "ideas_coupon_to_product" ------------------
--- CREATE TABLE "ideas_coupon_to_product" ----------------------
-CREATE TABLE `ideas_coupon_to_product` ( 
-	`coupon_id` Int( 10 ) UNSIGNED NOT NULL,
-	`product_id` Int( 10 ) UNSIGNED NOT NULL )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "ideas_currency" ---------------------------
--- CREATE TABLE "ideas_currency" -------------------------------
-CREATE TABLE `ideas_currency` ( 
-	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`name` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`code` VarChar( 10 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`symbol` VarChar( 10 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`symbol_position` TinyInt( 4 ) NOT NULL COMMENT '0: before, 1: after',
-	`value` Double( 15, 8 ) NULL,
-	`date_modified` Timestamp NULL,
-	PRIMARY KEY ( `id` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 2;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "ideas_document" ---------------------------
--- CREATE TABLE "ideas_document" -------------------------------
-CREATE TABLE `ideas_document` ( 
-	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`name` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`description` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	PRIMARY KEY ( `id` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 8;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "ideas_filter" -----------------------------
--- CREATE TABLE "ideas_filter" ---------------------------------
-CREATE TABLE `ideas_filter` ( 
-	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`name` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`slug` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`filter_order` TinyInt( 4 ) NOT NULL,
-	PRIMARY KEY ( `id` ),
-	CONSTRAINT `ideas_filter_slug_unique` UNIQUE( `slug` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 4;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "ideas_filter_option" ----------------------
--- CREATE TABLE "ideas_filter_option" --------------------------
-CREATE TABLE `ideas_filter_option` ( 
-	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`name` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`slug` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`option_value` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`filter_type` TinyInt( 4 ) NOT NULL COMMENT '1: color, 2: text, 3: image',
-	`filter_id` Int( 10 ) UNSIGNED NOT NULL,
-	`option_order` Int( 10 ) UNSIGNED NOT NULL,
-	PRIMARY KEY ( `id` ),
-	CONSTRAINT `ideas_filter_option_slug_unique` UNIQUE( `slug` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 9;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "ideas_geo_zone" ---------------------------
--- CREATE TABLE "ideas_geo_zone" -------------------------------
-CREATE TABLE `ideas_geo_zone` ( 
-	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`name` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`description` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	PRIMARY KEY ( `id` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 2;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "ideas_length" -----------------------------
--- CREATE TABLE "ideas_length" ---------------------------------
-CREATE TABLE `ideas_length` ( 
-	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`name` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`unit` VarChar( 10 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`value` Decimal( 15, 2 ) NOT NULL,
-	PRIMARY KEY ( `id` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 3;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "ideas_order" ------------------------------
--- CREATE TABLE "ideas_order" ----------------------------------
-CREATE TABLE `ideas_order` ( 
-	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`user_id` Int( 10 ) UNSIGNED NULL,
-	`billing_name` VarChar( 128 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`billing_address` VarChar( 128 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`billing_email` VarChar( 128 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`billing_phone` VarChar( 32 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`shipping_name` VarChar( 128 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`shipping_address` VarChar( 128 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`shipping_email` VarChar( 128 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`shipping_phone` VarChar( 32 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`shipping_rule_id` Int( 11 ) NOT NULL,
-	`payment_method_id` Int( 11 ) NOT NULL COMMENT '1: Cod; 2:paypal, 3:Stripe',
-	`comment` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`shipping_cost` Decimal( 15, 2 ) NOT NULL,
-	`total` Decimal( 15, 2 ) NOT NULL,
-	`order_status_id` Int( 10 ) UNSIGNED NOT NULL,
-	`payment_status` TinyInt( 4 ) NOT NULL COMMENT '0: not paid; 1: paid',
-	`created_at` Timestamp NULL,
-	`updated_at` Timestamp NULL,
-	PRIMARY KEY ( `id` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 1;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "ideas_order_product" ----------------------
--- CREATE TABLE "ideas_order_product" --------------------------
-CREATE TABLE `ideas_order_product` ( 
-	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`order_id` Int( 10 ) UNSIGNED NOT NULL,
-	`product_id` Int( 10 ) UNSIGNED NOT NULL,
-	`name` VarChar( 512 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`qty` Int( 10 ) UNSIGNED NOT NULL,
-	`price_after_tax` Decimal( 15, 2 ) NOT NULL,
-	`total` Decimal( 15, 2 ) NOT NULL,
-	`weight` Decimal( 15, 2 ) NOT NULL,
-	`weight_id` TinyInt( 4 ) NOT NULL,
-	PRIMARY KEY ( `id` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 1;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "ideas_order_return" -----------------------
--- CREATE TABLE "ideas_order_return" ---------------------------
-CREATE TABLE `ideas_order_return` ( 
-	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`order_id` Int( 10 ) UNSIGNED NOT NULL,
-	`product_id` Int( 10 ) UNSIGNED NOT NULL,
-	`product_name` VarChar( 512 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`customer_id` Int( 10 ) UNSIGNED NOT NULL,
-	`billing_name` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`shipping_name` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`billing_phone` VarChar( 32 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`billing_email` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`shipping_phone` VarChar( 32 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`shipping_email` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`reason_id` Int( 10 ) UNSIGNED NOT NULL,
-	`qty_order` Int( 10 ) UNSIGNED NOT NULL,
-	`is_reverse_order_qty` TinyInt( 4 ) NULL DEFAULT '1' COMMENT '1: reverse order quantity, 0: not reverse',
-	`created_at` Timestamp NULL,
-	`updated_at` Timestamp NULL,
-	PRIMARY KEY ( `id` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 1;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "ideas_order_return_reason" ----------------
--- CREATE TABLE "ideas_order_return_reason" --------------------
-CREATE TABLE `ideas_order_return_reason` ( 
-	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`name` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	PRIMARY KEY ( `id` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 2;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "ideas_order_status" -----------------------
--- CREATE TABLE "ideas_order_status" ---------------------------
-CREATE TABLE `ideas_order_status` ( 
-	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`name` VarChar( 128 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	PRIMARY KEY ( `id` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 10;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "ideas_order_status_change" ----------------
--- CREATE TABLE "ideas_order_status_change" --------------------
-CREATE TABLE `ideas_order_status_change` ( 
-	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`order_id` Int( 10 ) UNSIGNED NOT NULL,
-	`order_status_id` Int( 10 ) UNSIGNED NOT NULL,
-	`comment` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`created_at` Timestamp NULL,
-	`updated_at` Timestamp NULL,
-	PRIMARY KEY ( `id` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 1;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "ideas_product" ----------------------------
--- CREATE TABLE "ideas_product" --------------------------------
-CREATE TABLE `ideas_product` ( 
-	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`name` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`slug` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`sku` VarChar( 128 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`price` Decimal( 15, 2 ) NULL DEFAULT '0.00',
-	`price_promotion` Decimal( 15, 2 ) NULL DEFAULT '0.00',
-	`qty` Int( 11 ) NULL DEFAULT '0',
-	`qty_order` Int( 11 ) NULL DEFAULT '0',
-	`featured_image` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`gallery` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`status` TinyInt( 4 ) NOT NULL,
-	`product_order` Int( 10 ) UNSIGNED NULL,
-	`product_type` TinyInt( 4 ) NOT NULL DEFAULT '1',
-	`tax_class_id` Int( 11 ) NOT NULL,
-	`review_count` Int( 11 ) NULL DEFAULT '0',
-	`related_product` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`created_at` Timestamp NULL,
-	`updated_at` Timestamp NULL,
-	PRIMARY KEY ( `id` ),
-	CONSTRAINT `ideas_product_slug_unique` UNIQUE( `slug` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 12;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "ideas_product_attribute" ------------------
--- CREATE TABLE "ideas_product_attribute" ----------------------
-CREATE TABLE `ideas_product_attribute` ( 
-	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`product_id` Int( 10 ) UNSIGNED NOT NULL,
-	`short_intro` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`full_intro` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`seo_title` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`seo_keyword` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`seo_description` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`is_homepage` TinyInt( 4 ) NOT NULL,
-	`is_featured_product` TinyInt( 4 ) NOT NULL,
-	`is_new` TinyInt( 4 ) NOT NULL,
-	`is_bestseller` TinyInt( 4 ) NOT NULL,
-	`weight` Decimal( 15, 2 ) NOT NULL,
-	`weight_id` Int( 10 ) UNSIGNED NOT NULL,
-	`length` Decimal( 15, 2 ) NULL,
-	`width` Decimal( 15, 2 ) NULL,
-	`height` Decimal( 15, 2 ) NULL,
-	`length_id` Int( 10 ) UNSIGNED NOT NULL,
-	PRIMARY KEY ( `id` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 12;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "ideas_product_child_to_category" ----------
--- CREATE TABLE "ideas_product_child_to_category" --------------
-CREATE TABLE `ideas_product_child_to_category` ( 
-	`product_id` Int( 10 ) UNSIGNED NOT NULL COMMENT 'id of product child of configurable product',
-	`category_id` Int( 10 ) UNSIGNED NOT NULL )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "ideas_product_configurable" ---------------
--- CREATE TABLE "ideas_product_configurable" -------------------
-CREATE TABLE `ideas_product_configurable` ( 
-	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`str_filter_id` VarChar( 128 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`str_filter_option_id` VarChar( 128 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`str_filter_option_label` VarChar( 256 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`pc_product_id` Int( 10 ) UNSIGNED NULL COMMENT 'id of product config child',
-	`product_id` Int( 10 ) UNSIGNED NULL COMMENT 'id of product config parent',
-	PRIMARY KEY ( `id` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 1;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "ideas_product_downloadable" ---------------
--- CREATE TABLE "ideas_product_downloadable" -------------------
-CREATE TABLE `ideas_product_downloadable` ( 
-	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`product_id` Int( 10 ) UNSIGNED NOT NULL,
-	`link` VarChar( 512 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	PRIMARY KEY ( `id` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 1;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "ideas_product_downloadable_link" ----------
--- CREATE TABLE "ideas_product_downloadable_link" --------------
-CREATE TABLE `ideas_product_downloadable_link` ( 
-	`product_id` Int( 10 ) UNSIGNED NOT NULL,
-	`start_date` Timestamp NULL,
-	`end_date` Timestamp NULL,
-	`code` VarChar( 12 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`link` VarChar( 512 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "ideas_product_reviews" --------------------
--- CREATE TABLE "ideas_product_reviews" ------------------------
-CREATE TABLE `ideas_product_reviews` ( 
-	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`product_id` Int( 10 ) UNSIGNED NOT NULL,
-	`customer_id` Int( 10 ) UNSIGNED NULL DEFAULT '0',
-	`author` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`content` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`rate` TinyInt( 4 ) NULL DEFAULT '1',
-	`status` TinyInt( 4 ) NULL DEFAULT '1',
-	`created_at` Timestamp NULL,
-	`updated_at` Timestamp NULL,
-	PRIMARY KEY ( `id` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 1;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "ideas_product_to_category" ----------------
--- CREATE TABLE "ideas_product_to_category" --------------------
-CREATE TABLE `ideas_product_to_category` ( 
-	`product_id` Int( 10 ) UNSIGNED NOT NULL,
-	`category_id` Int( 10 ) UNSIGNED NOT NULL )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "ideas_product_to_filter_option" -----------
--- CREATE TABLE "ideas_product_to_filter_option" ---------------
-CREATE TABLE `ideas_product_to_filter_option` ( 
-	`product_id` Int( 10 ) UNSIGNED NOT NULL,
-	`filter_option_id` Int( 10 ) UNSIGNED NOT NULL )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "ideas_routes" -----------------------------
--- CREATE TABLE "ideas_routes" ---------------------------------
-CREATE TABLE `ideas_routes` ( 
-	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`slug` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`entity_id` Int( 10 ) UNSIGNED NOT NULL,
-	`type` TinyInt( 4 ) NOT NULL COMMENT '1: product, 2: category',
-	PRIMARY KEY ( `id` ),
-	CONSTRAINT `ideas_routes_slug_unique` UNIQUE( `slug` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 14;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "ideas_ship_rule" --------------------------
--- CREATE TABLE "ideas_ship_rule" ------------------------------
-CREATE TABLE `ideas_ship_rule` ( 
-	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`name` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`above_price` Decimal( 15, 2 ) NULL,
-	`geo_zone_id` Int( 10 ) UNSIGNED NULL,
-	`weight_type` TinyInt( 4 ) NULL COMMENT '1:fixed, 2:rate',
-	`weight_based` VarChar( 512 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`cost` Decimal( 15, 2 ) NULL,
-	`type` TinyInt( 4 ) NOT NULL COMMENT '1: price, 2: geo, 3: weight based, 4: per item, 5: geo weight based',
-	`status` TinyInt( 4 ) NOT NULL,
-	PRIMARY KEY ( `id` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 5;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "ideas_tax_class" --------------------------
--- CREATE TABLE "ideas_tax_class" ------------------------------
-CREATE TABLE `ideas_tax_class` ( 
-	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`name` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`description` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	PRIMARY KEY ( `id` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 2;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "ideas_tax_rate" ---------------------------
--- CREATE TABLE "ideas_tax_rate" -------------------------------
-CREATE TABLE `ideas_tax_rate` ( 
-	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`name` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`type` TinyInt( 4 ) NOT NULL COMMENT '1: percentage, 2: fixed amount',
-	`geo_zone_id` Int( 10 ) UNSIGNED NOT NULL,
-	`rate` Decimal( 15, 2 ) NOT NULL,
-	PRIMARY KEY ( `id` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 2;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "ideas_tax_rule" ---------------------------
--- CREATE TABLE "ideas_tax_rule" -------------------------------
-CREATE TABLE `ideas_tax_rule` ( 
-	`tax_class_id` Int( 10 ) UNSIGNED NOT NULL,
-	`tax_rate_id` Int( 10 ) UNSIGNED NOT NULL )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "ideas_theme_config" -----------------------
--- CREATE TABLE "ideas_theme_config" ---------------------------
-CREATE TABLE `ideas_theme_config` ( 
-	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`name` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`slug` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`type` TinyInt( 4 ) NOT NULL COMMENT '1:textarea, 2:image',
-	PRIMARY KEY ( `id` ),
-	CONSTRAINT `ideas_theme_config_slug_unique` UNIQUE( `slug` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 6;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "ideas_theme_config_image_detail" ----------
--- CREATE TABLE "ideas_theme_config_image_detail" --------------
-CREATE TABLE `ideas_theme_config_image_detail` ( 
-	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`name` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`url` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`link` VarChar( 512 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`title` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`alt` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`description` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`image_order` Int( 10 ) UNSIGNED NOT NULL,
-	`theme_config_id` Int( 10 ) UNSIGNED NOT NULL,
-	PRIMARY KEY ( `id` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 17;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "ideas_theme_config_text_value" ------------
--- CREATE TABLE "ideas_theme_config_text_value" ----------------
-CREATE TABLE `ideas_theme_config_text_value` ( 
-	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`value` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`theme_config_id` Int( 10 ) UNSIGNED NOT NULL,
-	PRIMARY KEY ( `id` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 1;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "ideas_users_extends" ----------------------
--- CREATE TABLE "ideas_users_extends" --------------------------
-CREATE TABLE `ideas_users_extends` ( 
-	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`user_id` Int( 10 ) UNSIGNED NOT NULL,
-	`first_name` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`last_name` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`phone` VarChar( 32 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`email` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`address` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	PRIMARY KEY ( `id` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 1;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "ideas_weight" -----------------------------
--- CREATE TABLE "ideas_weight" ---------------------------------
-CREATE TABLE `ideas_weight` ( 
-	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`name` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`unit` VarChar( 10 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`value` Decimal( 15, 2 ) NOT NULL,
-	PRIMARY KEY ( `id` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 4;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
 -- CREATE TABLE "jobs" -------------------------------------
 -- CREATE TABLE "jobs" -----------------------------------------
 CREATE TABLE `jobs` ( 
@@ -1128,7 +446,7 @@ CREATE TABLE `system_event_logs` (
 CHARACTER SET = utf8
 COLLATE = utf8_unicode_ci
 ENGINE = InnoDB
-AUTO_INCREMENT = 333;
+AUTO_INCREMENT = 340;
 -- -------------------------------------------------------------
 -- ---------------------------------------------------------
 
@@ -1232,7 +550,7 @@ CREATE TABLE `system_plugin_history` (
 CHARACTER SET = utf8
 COLLATE = utf8_unicode_ci
 ENGINE = InnoDB
-AUTO_INCREMENT = 447;
+AUTO_INCREMENT = 522;
 -- -------------------------------------------------------------
 -- ---------------------------------------------------------
 
@@ -1250,7 +568,7 @@ CREATE TABLE `system_plugin_versions` (
 CHARACTER SET = utf8
 COLLATE = utf8_unicode_ci
 ENGINE = InnoDB
-AUTO_INCREMENT = 23;
+AUTO_INCREMENT = 25;
 -- -------------------------------------------------------------
 -- ---------------------------------------------------------
 
@@ -1396,6 +714,299 @@ ENGINE = InnoDB;
 -- ---------------------------------------------------------
 
 
+-- CREATE TABLE "offline_snipcartshop_categories" ----------
+-- CREATE TABLE "offline_snipcartshop_categories" --------------
+CREATE TABLE `offline_snipcartshop_categories` ( 
+	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
+	`name` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+	`slug` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+	`code` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`meta_title` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+	`meta_description` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+	`sort_order` Int( 11 ) NOT NULL DEFAULT '0',
+	`created_at` Timestamp NULL,
+	`updated_at` Timestamp NULL,
+	`parent_id` Int( 11 ) NULL,
+	`nest_left` Int( 11 ) NULL,
+	`nest_right` Int( 11 ) NULL,
+	`nest_depth` Int( 11 ) NULL,
+	PRIMARY KEY ( `id` ),
+	CONSTRAINT `offline_snipcartshop_categories_slug_unique` UNIQUE( `slug` ) )
+CHARACTER SET = utf8
+COLLATE = utf8_unicode_ci
+ENGINE = InnoDB
+AUTO_INCREMENT = 1;
+-- -------------------------------------------------------------
+-- ---------------------------------------------------------
+
+
+-- CREATE TABLE "offline_snipcartshop_category_product" ----
+-- CREATE TABLE "offline_snipcartshop_category_product" --------
+CREATE TABLE `offline_snipcartshop_category_product` ( 
+	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
+	`category_id` Int( 10 ) UNSIGNED NOT NULL,
+	`product_id` Int( 10 ) UNSIGNED NOT NULL,
+	PRIMARY KEY ( `id` ) )
+CHARACTER SET = utf8
+COLLATE = utf8_unicode_ci
+ENGINE = InnoDB
+AUTO_INCREMENT = 1;
+-- -------------------------------------------------------------
+-- ---------------------------------------------------------
+
+
+-- CREATE TABLE "offline_snipcartshop_discounts" -----------
+-- CREATE TABLE "offline_snipcartshop_discounts" ---------------
+CREATE TABLE `offline_snipcartshop_discounts` ( 
+	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
+	`guid` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+	`name` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+	`code` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+	`product_id` Int( 11 ) NULL,
+	`total_to_reach` Decimal( 10, 0 ) NULL,
+	`type` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Rate',
+	`trigger` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Code',
+	`rate` Int( 10 ) UNSIGNED NULL,
+	`amount` Decimal( 10, 0 ) NULL,
+	`alternate_price` Decimal( 10, 0 ) NULL,
+	`max_number_of_usages` Int( 10 ) UNSIGNED NULL,
+	`expires` DateTime NULL,
+	`number_of_usages` Int( 10 ) UNSIGNED NULL,
+	`number_of_usages_uncompleted` Int( 10 ) UNSIGNED NULL,
+	`shipping_description` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`shipping_cost` Decimal( 10, 0 ) NULL,
+	`shipping_guaranteed_days_to_delivery` Int( 10 ) UNSIGNED NULL,
+	`created_at` Timestamp NULL,
+	`updated_at` Timestamp NULL,
+	PRIMARY KEY ( `id` ) )
+CHARACTER SET = utf8
+COLLATE = utf8_unicode_ci
+ENGINE = InnoDB
+AUTO_INCREMENT = 1;
+-- -------------------------------------------------------------
+-- ---------------------------------------------------------
+
+
+-- CREATE TABLE "offline_snipcartshop_order_items" ---------
+-- CREATE TABLE "offline_snipcartshop_order_items" -------------
+CREATE TABLE `offline_snipcartshop_order_items` ( 
+	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
+	`unique_id` Char( 36 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`product_id` Int( 11 ) NULL,
+	`order_id` Int( 11 ) NULL,
+	`name` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`price` Decimal( 8, 2 ) NULL,
+	`total_price` Decimal( 8, 2 ) NULL,
+	`quantity` Int( 11 ) NULL,
+	`max_quantity` Int( 11 ) NULL,
+	`url` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`weight` Int( 11 ) NULL,
+	`width` Int( 11 ) NULL,
+	`length` Int( 11 ) NULL,
+	`height` Int( 11 ) NULL,
+	`total_weight` Decimal( 8, 2 ) NULL,
+	`description` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`image` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`stackable` TinyInt( 1 ) NULL,
+	`duplicatable` TinyInt( 1 ) NULL,
+	`shippable` TinyInt( 1 ) NULL,
+	`taxable` TinyInt( 1 ) NULL,
+	`custom_fields` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`taxes` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`added_on` Timestamp NULL,
+	PRIMARY KEY ( `id` ) )
+CHARACTER SET = utf8
+COLLATE = utf8_unicode_ci
+ENGINE = InnoDB
+AUTO_INCREMENT = 1;
+-- -------------------------------------------------------------
+-- ---------------------------------------------------------
+
+
+-- CREATE TABLE "offline_snipcartshop_orders" --------------
+-- CREATE TABLE "offline_snipcartshop_orders" ------------------
+CREATE TABLE `offline_snipcartshop_orders` ( 
+	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
+	`token` Char( 36 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`invoice_number` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`currency` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`creation_date` Timestamp NULL,
+	`modification_date` Timestamp NULL,
+	`completion_date` Timestamp NULL,
+	`status` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`payment_status` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`email` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`will_be_paid_later` TinyInt( 1 ) NULL,
+	`shipping_address_same_as_billing` TinyInt( 1 ) NULL,
+	`billing_address` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`shipping_address` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`credit_card_last4_digits` VarChar( 4 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`tracking_number` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`tracking_url` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`shipping_fees` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`shipping_provider` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`shipping_method` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`card_holder_name` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`card_type` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`payment_method` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`payment_gateway_used` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`tax_provider` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`lang` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`refunds_amount` Double( 8, 2 ) NULL,
+	`adjusted_amount` Double( 8, 2 ) NULL,
+	`rebate_amount` Double( 8, 2 ) NULL,
+	`taxes` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`items_total` Decimal( 8, 2 ) NULL,
+	`subtotal` Decimal( 8, 2 ) NULL,
+	`taxable_total` Decimal( 8, 2 ) NULL,
+	`grand_total` Decimal( 8, 2 ) NULL,
+	`total_weight` Int( 11 ) NULL,
+	`total_rebate_rate` Int( 11 ) NULL,
+	`notes` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`custom_fields` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`shipping_enabled` TinyInt( 1 ) NULL,
+	`payment_transaction_id` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`metadata` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`ip_address` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`user_id` Char( 36 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`discounts` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	PRIMARY KEY ( `id` ),
+	CONSTRAINT `offline_snipcartshop_orders_token_unique` UNIQUE( `token` ) )
+CHARACTER SET = utf8
+COLLATE = utf8_unicode_ci
+ENGINE = InnoDB
+AUTO_INCREMENT = 1;
+-- -------------------------------------------------------------
+-- ---------------------------------------------------------
+
+
+-- CREATE TABLE "offline_snipcartshop_product_accessory" ---
+-- CREATE TABLE "offline_snipcartshop_product_accessory" -------
+CREATE TABLE `offline_snipcartshop_product_accessory` ( 
+	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
+	`product_id` Int( 10 ) UNSIGNED NOT NULL,
+	`accessory_id` Int( 10 ) UNSIGNED NOT NULL,
+	PRIMARY KEY ( `id` ) )
+CHARACTER SET = utf8
+COLLATE = utf8_unicode_ci
+ENGINE = InnoDB
+AUTO_INCREMENT = 1;
+-- -------------------------------------------------------------
+-- ---------------------------------------------------------
+
+
+-- CREATE TABLE "offline_snipcartshop_product_custom_field_options" 
+-- CREATE TABLE "offline_snipcartshop_product_custom_field_options" 
+CREATE TABLE `offline_snipcartshop_product_custom_field_options` ( 
+	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
+	`custom_field_id` Int( 10 ) UNSIGNED NOT NULL,
+	`name` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+	`price` Int( 11 ) NULL,
+	`sort_order` Int( 11 ) NOT NULL DEFAULT '0',
+	`created_at` Timestamp NULL,
+	`updated_at` Timestamp NULL,
+	PRIMARY KEY ( `id` ) )
+CHARACTER SET = utf8
+COLLATE = utf8_unicode_ci
+ENGINE = InnoDB
+AUTO_INCREMENT = 1;
+-- -------------------------------------------------------------
+-- ---------------------------------------------------------
+
+
+-- CREATE TABLE "offline_snipcartshop_product_custom_fields" 
+-- CREATE TABLE "offline_snipcartshop_product_custom_fields" ---
+CREATE TABLE `offline_snipcartshop_product_custom_fields` ( 
+	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
+	`product_id` Int( 10 ) UNSIGNED NOT NULL,
+	`name` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+	`type` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'text',
+	`options` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`required` TinyInt( 1 ) NOT NULL DEFAULT '0',
+	`created_at` Timestamp NULL,
+	`updated_at` Timestamp NULL,
+	PRIMARY KEY ( `id` ) )
+CHARACTER SET = utf8
+COLLATE = utf8_unicode_ci
+ENGINE = InnoDB
+AUTO_INCREMENT = 1;
+-- -------------------------------------------------------------
+-- ---------------------------------------------------------
+
+
+-- CREATE TABLE "offline_snipcartshop_product_variant_custom_field_option" 
+-- CREATE TABLE "offline_snipcartshop_product_variant_custom_field_option" 
+CREATE TABLE `offline_snipcartshop_product_variant_custom_field_option` ( 
+	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
+	`variant_id` Int( 10 ) UNSIGNED NOT NULL,
+	`custom_field_option_id` Int( 10 ) UNSIGNED NOT NULL,
+	PRIMARY KEY ( `id` ) )
+CHARACTER SET = utf8
+COLLATE = utf8_unicode_ci
+ENGINE = InnoDB
+AUTO_INCREMENT = 1;
+-- -------------------------------------------------------------
+-- ---------------------------------------------------------
+
+
+-- CREATE TABLE "offline_snipcartshop_product_variants" ----
+-- CREATE TABLE "offline_snipcartshop_product_variants" --------
+CREATE TABLE `offline_snipcartshop_product_variants` ( 
+	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
+	`product_id` Int( 10 ) UNSIGNED NOT NULL,
+	`stock` Int( 11 ) NULL,
+	`allow_out_of_stock_purchases` TinyInt( 1 ) NOT NULL DEFAULT '0',
+	`created_at` Timestamp NULL,
+	`updated_at` Timestamp NULL,
+	PRIMARY KEY ( `id` ) )
+CHARACTER SET = utf8
+COLLATE = utf8_unicode_ci
+ENGINE = InnoDB
+AUTO_INCREMENT = 1;
+-- -------------------------------------------------------------
+-- ---------------------------------------------------------
+
+
+-- CREATE TABLE "offline_snipcartshop_products" ------------
+-- CREATE TABLE "offline_snipcartshop_products" ----------------
+CREATE TABLE `offline_snipcartshop_products` ( 
+	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
+	`user_defined_id` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`name` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+	`slug` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+	`price` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+	`description_short` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`description` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`meta_title` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`meta_description` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`weight` Int( 10 ) UNSIGNED NULL,
+	`width` Int( 10 ) UNSIGNED NULL,
+	`length` Int( 10 ) UNSIGNED NULL,
+	`height` Int( 10 ) UNSIGNED NULL,
+	`quantity_default` Int( 10 ) UNSIGNED NULL,
+	`quantity_max` Int( 10 ) UNSIGNED NULL,
+	`quantity_min` Int( 10 ) UNSIGNED NULL,
+	`stock` Int( 11 ) NULL DEFAULT '0',
+	`properties` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`links` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`inventory_management_method` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'single',
+	`allow_out_of_stock_purchases` TinyInt( 1 ) NOT NULL DEFAULT '0',
+	`stackable` TinyInt( 1 ) NOT NULL DEFAULT '1',
+	`shippable` TinyInt( 1 ) NOT NULL DEFAULT '1',
+	`taxable` TinyInt( 1 ) NOT NULL DEFAULT '1',
+	`published` TinyInt( 1 ) NOT NULL DEFAULT '0',
+	`created_at` Timestamp NULL,
+	`updated_at` Timestamp NULL,
+	PRIMARY KEY ( `id` ),
+	CONSTRAINT `offline_snipcartshop_products_slug_unique` UNIQUE( `slug` ) )
+CHARACTER SET = utf8
+COLLATE = utf8_unicode_ci
+ENGINE = InnoDB
+AUTO_INCREMENT = 1;
+-- -------------------------------------------------------------
+-- ---------------------------------------------------------
+
+
 -- Dump data of "backend_access_log" -----------------------
 INSERT INTO `backend_access_log`(`id`,`user_id`,`ip_address`,`created_at`,`updated_at`) VALUES ( '1', '1', '127.0.0.1', '2016-10-21 02:55:56', '2016-10-21 02:55:56' );
 INSERT INTO `backend_access_log`(`id`,`user_id`,`ip_address`,`created_at`,`updated_at`) VALUES ( '2', '1', '104.238.191.126', '2016-12-26 11:50:29', '2016-12-26 11:50:29' );
@@ -1489,398 +1100,6 @@ INSERT INTO `cms_theme_data`(`id`,`theme`,`data`,`created_at`,`updated_at`) VALU
 
 
 -- Dump data of "failed_jobs" ------------------------------
--- ---------------------------------------------------------
-
-
--- Dump data of "ideas_categories" -------------------------
-INSERT INTO `ideas_categories`(`id`,`name`,`slug`,`parent_id`,`nest_left`,`nest_right`,`nest_depth`,`status`,`seo_title`,`seo_keyword`,`seo_description`,`featured_image`,`description`,`cat_order`,`created_at`,`updated_at`,`is_homepage`,`num_display`) VALUES ( '1', 'Uncategory', 'uncategory', NULL, '1', '2', '0', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', '4' );
-INSERT INTO `ideas_categories`(`id`,`name`,`slug`,`parent_id`,`nest_left`,`nest_right`,`nest_depth`,`status`,`seo_title`,`seo_keyword`,`seo_description`,`featured_image`,`description`,`cat_order`,`created_at`,`updated_at`,`is_homepage`,`num_display`) VALUES ( '2', 'Laptop', 'laptop', NULL, '3', '4', '0', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', '4' );
--- ---------------------------------------------------------
-
-
--- Dump data of "ideas_config" -----------------------------
-INSERT INTO `ideas_config`(`id`,`name`,`slug`,`value`,`is_default`) VALUES ( '1', 'Coupon prefix', 'coupon_prefix', 'shop', '1' );
-INSERT INTO `ideas_config`(`id`,`name`,`slug`,`value`,`is_default`) VALUES ( '2', 'Coupon length random', 'coupon_length_random', '10', '1' );
-INSERT INTO `ideas_config`(`id`,`name`,`slug`,`value`,`is_default`) VALUES ( '3', 'Is cache enable', 'is_cache', '0', '1' );
-INSERT INTO `ideas_config`(`id`,`name`,`slug`,`value`,`is_default`) VALUES ( '4', 'Currency default', 'currency_default', '1', '1' );
-INSERT INTO `ideas_config`(`id`,`name`,`slug`,`value`,`is_default`) VALUES ( '5', 'weight base default', 'weight_based_default', '1', '1' );
-INSERT INTO `ideas_config`(`id`,`name`,`slug`,`value`,`is_default`) VALUES ( '6', 'Paypal id', 'paypal_id', '', '1' );
-INSERT INTO `ideas_config`(`id`,`name`,`slug`,`value`,`is_default`) VALUES ( '7', 'Paypal mode', 'paypal_mode', '0', '1' );
-INSERT INTO `ideas_config`(`id`,`name`,`slug`,`value`,`is_default`) VALUES ( '8', 'Stripe publish key', 'stripe_publish', '', '1' );
-INSERT INTO `ideas_config`(`id`,`name`,`slug`,`value`,`is_default`) VALUES ( '9', 'Stripe secret key', 'stripe_secret', '', '1' );
-INSERT INTO `ideas_config`(`id`,`name`,`slug`,`value`,`is_default`) VALUES ( '10', 'Does delete downloadable product link after one time download', 'download_once', '1', '1' );
-INSERT INTO `ideas_config`(`id`,`name`,`slug`,`value`,`is_default`) VALUES ( '11', 'Can customer download right after paying when checkout', 'download_right_after_checkout', '1', '1' );
-INSERT INTO `ideas_config`(`id`,`name`,`slug`,`value`,`is_default`) VALUES ( '12', 'Number minutes to cache', 'cache_minute', '1', '1' );
-INSERT INTO `ideas_config`(`id`,`name`,`slug`,`value`,`is_default`) VALUES ( '13', 'Send mail by function', 'mail_method', '0', '1' );
-INSERT INTO `ideas_config`(`id`,`name`,`slug`,`value`,`is_default`) VALUES ( '14', 'Paypal', 'paypal', '0', '1' );
-INSERT INTO `ideas_config`(`id`,`name`,`slug`,`value`,`is_default`) VALUES ( '15', 'Stripe', 'stripe', '0', '1' );
-INSERT INTO `ideas_config`(`id`,`name`,`slug`,`value`,`is_default`) VALUES ( '16', 'Convert Currency', 'convert_currency', '0', '1' );
-INSERT INTO `ideas_config`(`id`,`name`,`slug`,`value`,`is_default`) VALUES ( '17', 'Number product display in homepage each category', 'num_product_per_category', '4', '1' );
--- ---------------------------------------------------------
-
-
--- Dump data of "ideas_coupon" -----------------------------
--- ---------------------------------------------------------
-
-
--- Dump data of "ideas_coupon_history" ---------------------
--- ---------------------------------------------------------
-
-
--- Dump data of "ideas_coupon_to_category" -----------------
--- ---------------------------------------------------------
-
-
--- Dump data of "ideas_coupon_to_product" ------------------
--- ---------------------------------------------------------
-
-
--- Dump data of "ideas_currency" ---------------------------
-INSERT INTO `ideas_currency`(`id`,`name`,`code`,`symbol`,`symbol_position`,`value`,`date_modified`) VALUES ( '1', 'Us Dollar', 'USD', '$', '0', '1.00000000', '2018-07-24 02:19:04' );
--- ---------------------------------------------------------
-
-
--- Dump data of "ideas_document" ---------------------------
-INSERT INTO `ideas_document`(`id`,`name`,`description`) VALUES ( '1', 'Installation', '<p>- First, you install this plugin:</p><p><a data-cke-saved-href="https://octobercms.com/plugin/rainlab-user" href="https://octobercms.com/plugin/rainlab-user" target="_blank">Rainlab User plugin</a></p><p>- Then, you install ideas shop plugin:</p><p>Ideas shop plugin</p><p>- Then you can install demo template of ideas shop</p><p>Ideas shop theme</p><p>- Config mail : Settings (of octoberCMS) -&gt; Mail configuration -&gt; config your mail method (Send mail, SMTP, ....)</p><p>- Config mail templage:&nbsp;Settings (of octoberCMS) -&gt; Mail Templates -&gt; config mail of ideas shop (prefix ideas.shop::*) to layout \'Ideas Shop Mail Layout\'</p><h2>Product</h2><p>- To create product, you have to create tax class first (default is nontaxable class)</p><p>- in field \'Quantity\' : left 0 if you not manage stock</p><p>- If you create configurable product, you have to create filter and filter option first</p><h2>Order</h2><p>- Click to button \'not paid\' to change payment status to \'paid\'</p><p>- In the right top corner, there is button \'return order\'. When you click this button, you will use function \'return order\'</p><p>+ You can return each product individually with checkbox \'Check\'</p><p>+ If you don\'t want to reverse quantity of this product, you can un-check checkbox in column \'Qty reverse\'</p><h2>Config Default</h2><p>Go to Settings -&gt; Config Default</p><p>You can config something here:</p><p>- When you generate coupon code, you can config prefix of coupon code and length of code</p><p>- You can choose&nbsp;mail method between \'send\' and \'queue\', default is \'send\'. If you can access to server, you should choose \'queue\'</p><p>- You can enable \'paypal\' and \'stripe\' payment method in tab \'payment\'</p><p>- In tab \'Downloable Product\' &nbsp;you can choose:</p><p>+ Download once : if this config is enable, so your customer just can download your product 1 time. Then link will be expired.</p><p>If this config is disable. Your customer can download your product in 24 hours</p><p>+ Download right after checkout: if this funcion is enable, your customer can be receive email download immediately after pay</p><h2>Config plus</h2><p>Go to Settings -&gt; Config Plus</p><p>You can config something else if you want</p><h2>Theme manager</h2><p>Go to Settings -&gt; Theme manager</p><p>field \'type\' has two value \'text\' and \'image\'.</p><p>With type \'image\' , you can add 1 image or many images (gallery)&nbsp;</p><h2>Tax class</h2><p>Go to Settings -&gt; Tax Class manager</p><p>Before create a tax class, you have to create tax rate (Settings -&gt; Tax Rate manager)</p><h2>Coupon</h2><p>Go to Settings -&gt; Coupon Manager</p><p>Create coupon:</p><p>- field \'type\' : percentage or fixed amount</p><p>- field \'Number can be used\' : number times coupon can use, leave 0 if unlimited</p><p>- field \'Number times used by a customer\' : number times one customer can use, leave 0 if unlimited</p><p>- field \'category\' : category is applied&nbsp;by this coupon, leave empty if apply for all</p><p>- field \'product\' : product is applied by this coupon, leave emtpy if apply for all</p><p>- field \'Is Logged\' : does this coupn need logged in user ?</p><h2>Mail layout</h2><p>Settings (Of october cms) -&gt; Mail template -&gt; Layouts -&gt;&nbsp;Ideas Shop Mail Layout</p><p>=&gt; you can change html and css in tab \'HTML\' and \'CSS\'</p>' );
-INSERT INTO `ideas_document`(`id`,`name`,`description`) VALUES ( '2', 'Customize and extends', '<p>If you want to change something in Ideas Shop functions (backend). You can create a plugins then override (to add more field, save data to another table, ....)</p>
-
-<p><strong>1. extends by add columns</strong></p>
-
-<p>- For example, you like to add more field&nbsp;in table \'ideas_product\'</p>
-
-<p>- Create a&nbsp;plugin, in this plugin, create more (2) fields in table \'ideas_product\', for example : \'something1\', \'something2\'</p>
-
-<p>- in boot() of this plugin, add this code to extends form of product create page</p><pre><code>//extend form
-Event::listen(
-&nbsp; &nbsp; \'backend.form.extendFields\',
-&nbsp; &nbsp; function ($widget) {
-&nbsp; &nbsp; &nbsp; &nbsp; // Only for the Product model
-&nbsp; &nbsp; &nbsp; &nbsp; if (!$widget-&gt;model instanceof \\Ideas\\Shop\\Models\\Products) {
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return;
-&nbsp; &nbsp; &nbsp; &nbsp; }
-&nbsp; &nbsp; &nbsp; &nbsp; $widget-&gt;addTabFields([
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; \'something1\' =&gt; [
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; \'tab\' =&gt; \'other_tab\',
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; \'label\' =&gt; \'something1\',
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; \'span\' =&gt; \'left\'
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ],
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; \'something2\' =&gt; [
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; \'tab\' =&gt; \'other_tab\',
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; \'label\' =&gt; \'something2\',
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; \'span\' =&gt; \'left\'
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ]
-&nbsp; &nbsp; &nbsp; &nbsp; ]);
-&nbsp; &nbsp; &nbsp; &nbsp; // Remove some fields
-&nbsp; &nbsp; &nbsp; &nbsp; //$widget-&gt;removeField(\'qty\');
-&nbsp; &nbsp; &nbsp; &nbsp; //$widget-&gt;removeField(\'price_promotion\');
-&nbsp; &nbsp; }
-);</code></pre>
-
-<p><strong>2. extends by use event of ideas shop</strong></p>
-
-<p>for example,we can add more field in create page, but name of field has prefix \'_\' &nbsp;: \'_something1\', \'_something2\'</p><pre><code>....
-&nbsp;$widget-&gt;addTabFields([
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; \'_something1\' =&gt; [
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; \'tab\' =&gt; \'other_tab\',
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; \'label\' =&gt; \'something1\',
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; \'span\' =&gt; \'left\'
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ],
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; \'_something2\' =&gt; [
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; \'tab\' =&gt; \'other_tab\',
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; \'label\' =&gt; \'something2\',
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; \'span\' =&gt; \'left\'
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ]
-&nbsp; &nbsp; &nbsp; &nbsp; ]);</code></pre>
-
-<p>Then, in&nbsp;boot() function:</p><pre><code>Event::listen(\'ideas.shop.save_product\', function ($productSaved, $post) {
-&nbsp; &nbsp; var_dump($productSaved);
-&nbsp; &nbsp; echo \'&lt;br/&gt;\';
-&nbsp; &nbsp; var_dump($post);
-&nbsp; &nbsp; die;
-});</code></pre>
-
-<p>=&gt; we use event \'ideas.shop.save_product\' to save \'_something1\' and \'_something2\' field data to another table</p>' );
-INSERT INTO `ideas_document`(`id`,`name`,`description`) VALUES ( '3', 'Override component views', '<p>Ideas Shop has some components for frontend. If you like to change your theme. You can override component of Ideas Shop.</p><p>For example:</p><p>If you like to override product list. You can create a file name \'product_list.htm\' in your_theme/partials/product.</p><p>You can copy code from \'/plugins/ideas/shop/components/product/product_list.htm\' then customize to whatever you want</p>' );
-INSERT INTO `ideas_document`(`id`,`name`,`description`) VALUES ( '4', 'Add payment method', '<p>- Override checkout/checkout.htm</p>
-
-<p>Create file \'checkout.htm\' in your_theme/partials/partials/ with code of file checkout.htm&nbsp;in component Checkout of IdeasShop, then change this code</p><pre><code>&lt;div class="checkbox"&gt;
-&nbsp; &nbsp; &lt;label&gt;&lt;input type="radio" name="payment_method" value="1"&gt;
-&nbsp; &nbsp; &nbsp; &nbsp; &lt;span class="text-grey"&gt;Cash on delivery&lt;/span&gt;&lt;/label&gt;&lt;br/&gt;
-
-&nbsp; &nbsp; {% if paypal == enable %}
-&nbsp; &nbsp; &lt;label&gt;&lt;input type="radio" name="payment_method" value="2"&gt;
-&nbsp; &nbsp; &nbsp; &nbsp; &lt;span class="text-grey"&gt;Paypal&lt;/span&gt;&lt;/label&gt;&lt;br/&gt;
-&nbsp; &nbsp; {% endif %}
-
-&nbsp; &nbsp; {% if stripe == enable %}
-&nbsp; &nbsp; &lt;label&gt;&lt;input type="radio" name="payment_method" value="3"&gt;
-&nbsp; &nbsp; &nbsp; &nbsp; &lt;span class="text-grey"&gt;Stripe&lt;/span&gt;&lt;/label&gt;&lt;br/&gt;
-&nbsp; &nbsp; {% endif %}
-
-&nbsp; &nbsp; &lt;label&gt;&lt;input type="radio" name="payment_method" value="4"&gt;
-&nbsp; &nbsp; &nbsp; &nbsp; &lt;span class="text-grey"&gt;Other&lt;/span&gt;&lt;/label&gt;&lt;br/&gt;
-&lt;/div&gt;</code></pre>
-
-<p>=&gt; There are 3 payment method in IdeasShop : CoD, paypal, stripe with value:&nbsp;1, 2, 3</p>
-
-<p>=&gt; If you add more method, you can set from 4</p>
-
-<p>- You create your Component, then add component after component \'Checkout\' of IdeasShop:</p><pre><code>[Ideas\\Shop\\Components\\Checkout Checkout]
-[Ideas\\Shop\\Components\\AnotherPayment AnotherPayment]
-</code></pre>
-
-<p>- in your component, for example : \'AnotherPayment\', you add a file js:</p><pre><code>&nbsp; public function onRun()
-&nbsp; &nbsp; {
-&nbsp; &nbsp; &nbsp; &nbsp; $this-&gt;addJs(\'/plugins/ideas/shop/assets/components/js/another_payment.js\');
-&nbsp; &nbsp; }</code></pre>
-
-<p>&nbsp;</p>
-
-<p>- file another_payment.js:</p><pre><code>$(document).ready(function() {
-&nbsp; &nbsp; //call event anotherPaymentMethod
-&nbsp; &nbsp; $(document).on(\'anotherPaymentMethod\', function(e, params) {
-&nbsp; &nbsp; &nbsp; &nbsp; console.log(params);
-&nbsp; &nbsp; &nbsp; &nbsp; console.log(params.params);
-&nbsp; &nbsp; &nbsp; &nbsp; console.log(params.orderId);
-&nbsp; &nbsp; &nbsp; &nbsp; //do something
-&nbsp; &nbsp; &nbsp; &nbsp; //delete cart
-&nbsp; &nbsp; &nbsp; &nbsp; //sessionStorage.setItem(\'cart\', \'\');
-&nbsp; &nbsp; });
-});
-</code></pre>
-
-<p>=&gt; this file will run event : \'anotherPaymentMethod\' of IdeasShop</p>' );
-INSERT INTO `ideas_document`(`id`,`name`,`description`) VALUES ( '5', 'Event list', '<p>- ideas.shop.save_product</p><p>-&nbsp;ideas.shop.save_category</p><p>-&nbsp;ideas.shop.save_filter</p><p>-&nbsp;ideas.shop.save_filter_option</p><p>-&nbsp;ideas.shop.save_city</p><p>-&nbsp;ideas.shop.save_coupon</p><p>-&nbsp;ideas.shop.save_currency</p><p>-&nbsp;ideas.shop.save_geo</p><p>-&nbsp;ideas.shop.save_ship</p><p>-&nbsp;ideas.shop.save_tax_rate</p><p>-&nbsp;ideas.shop.save_tax_class</p><p>- ideas.shop.save_theme</p>' );
-INSERT INTO `ideas_document`(`id`,`name`,`description`) VALUES ( '6', 'Weight Based Shipping', '<ul>  <li>Check your store\'s default weight class and currency settings (in &nbsp;Settings &gt; Config default). Make sure they\'re set to what you want.</li> <li>Check your store\'s weight class values (in &nbsp;Settings &gt; &nbsp;Weight Management). Make sure your default class is set to 1.0000, and the others are set to appropriate conversion values. For example, if your default weight class is kg, then you would set its value to 1.0000, and set the value for grams to 1000.</li>  <li>Check your store\'s default currency value (in Settings &nbsp;&gt; Config default). Make sure your default currency value is set to 1.0000.</li>  <li>Since your default weight class is used in Weight Based Shipping, make sure your rates are using the appropriate values based on this weight class. So if you\'re using the rates 1:5.00, 2:7.00, etc. with a default weight class of kg, that means, "Up to 1 kg charge 5.00, up to 2 kg charge 7.00, etc."</li> <li>Check your product weights and weight classes, and make sure they\'re set to what you want.</li></ul>' );
-INSERT INTO `ideas_document`(`id`,`name`,`description`) VALUES ( '7', 'Ideas shop mail layout', '<p>- Go to settings (of Octobercms) -&gt; Mail Template -&gt; choose mails that have prefix \'ideas.shop\' to set layout \'Ideas Shop Mail Layout\'</p><p>- Change css: Settings (of Octobercms) -&gt; Mail Template -&gt; tab \'LAYOUTS\' -&gt; choose \'Ideas Shop Mail Layout\' -&gt; choose tab \'CSS\' to change css of mail template.&nbsp;</p>' );
--- ---------------------------------------------------------
-
-
--- Dump data of "ideas_filter" -----------------------------
-INSERT INTO `ideas_filter`(`id`,`name`,`slug`,`filter_order`) VALUES ( '1', 'color', 'color', '0' );
-INSERT INTO `ideas_filter`(`id`,`name`,`slug`,`filter_order`) VALUES ( '2', 'size', 'size', '0' );
-INSERT INTO `ideas_filter`(`id`,`name`,`slug`,`filter_order`) VALUES ( '3', 'brand', 'brand', '0' );
--- ---------------------------------------------------------
-
-
--- Dump data of "ideas_filter_option" ----------------------
-INSERT INTO `ideas_filter_option`(`id`,`name`,`slug`,`option_value`,`filter_type`,`filter_id`,`option_order`) VALUES ( '1', 'White', 'white', '#ffffff', '1', '1', '1' );
-INSERT INTO `ideas_filter_option`(`id`,`name`,`slug`,`option_value`,`filter_type`,`filter_id`,`option_order`) VALUES ( '2', 'Black', 'black', '#0f0f0f', '1', '1', '2' );
-INSERT INTO `ideas_filter_option`(`id`,`name`,`slug`,`option_value`,`filter_type`,`filter_id`,`option_order`) VALUES ( '3', 'S', 's', 'S', '2', '2', '1' );
-INSERT INTO `ideas_filter_option`(`id`,`name`,`slug`,`option_value`,`filter_type`,`filter_id`,`option_order`) VALUES ( '4', 'M', 'm', 'M', '2', '2', '2' );
-INSERT INTO `ideas_filter_option`(`id`,`name`,`slug`,`option_value`,`filter_type`,`filter_id`,`option_order`) VALUES ( '5', 'L', 'l', 'L', '2', '2', '3' );
-INSERT INTO `ideas_filter_option`(`id`,`name`,`slug`,`option_value`,`filter_type`,`filter_id`,`option_order`) VALUES ( '6', 'XL', 'xl', 'XL', '2', '2', '4' );
-INSERT INTO `ideas_filter_option`(`id`,`name`,`slug`,`option_value`,`filter_type`,`filter_id`,`option_order`) VALUES ( '7', 'Sony', 'sony', 'Sony', '2', '3', '1' );
-INSERT INTO `ideas_filter_option`(`id`,`name`,`slug`,`option_value`,`filter_type`,`filter_id`,`option_order`) VALUES ( '8', 'LG', 'lg', 'LG', '2', '3', '2' );
--- ---------------------------------------------------------
-
-
--- Dump data of "ideas_geo_zone" ---------------------------
-INSERT INTO `ideas_geo_zone`(`id`,`name`,`description`) VALUES ( '1', 'Area 1', '' );
--- ---------------------------------------------------------
-
-
--- Dump data of "ideas_length" -----------------------------
-INSERT INTO `ideas_length`(`id`,`name`,`unit`,`value`) VALUES ( '1', 'Centimeter', 'cm', '1.00' );
-INSERT INTO `ideas_length`(`id`,`name`,`unit`,`value`) VALUES ( '2', 'Inch', 'in', '0.39' );
--- ---------------------------------------------------------
-
-
--- Dump data of "ideas_order" ------------------------------
--- ---------------------------------------------------------
-
-
--- Dump data of "ideas_order_product" ----------------------
--- ---------------------------------------------------------
-
-
--- Dump data of "ideas_order_return" -----------------------
--- ---------------------------------------------------------
-
-
--- Dump data of "ideas_order_return_reason" ----------------
-INSERT INTO `ideas_order_return_reason`(`id`,`name`) VALUES ( '1', 'Order error' );
--- ---------------------------------------------------------
-
-
--- Dump data of "ideas_order_status" -----------------------
-INSERT INTO `ideas_order_status`(`id`,`name`) VALUES ( '1', 'Pending' );
-INSERT INTO `ideas_order_status`(`id`,`name`) VALUES ( '2', 'Shipped' );
-INSERT INTO `ideas_order_status`(`id`,`name`) VALUES ( '3', 'Processing' );
-INSERT INTO `ideas_order_status`(`id`,`name`) VALUES ( '4', 'Complete' );
-INSERT INTO `ideas_order_status`(`id`,`name`) VALUES ( '5', 'Denied' );
-INSERT INTO `ideas_order_status`(`id`,`name`) VALUES ( '6', 'Failed' );
-INSERT INTO `ideas_order_status`(`id`,`name`) VALUES ( '7', 'Refunded' );
-INSERT INTO `ideas_order_status`(`id`,`name`) VALUES ( '8', 'Canceled' );
-INSERT INTO `ideas_order_status`(`id`,`name`) VALUES ( '9', 'On hold' );
--- ---------------------------------------------------------
-
-
--- Dump data of "ideas_order_status_change" ----------------
--- ---------------------------------------------------------
-
-
--- Dump data of "ideas_product" ----------------------------
-INSERT INTO `ideas_product`(`id`,`name`,`slug`,`sku`,`price`,`price_promotion`,`qty`,`qty_order`,`featured_image`,`gallery`,`status`,`product_order`,`product_type`,`tax_class_id`,`review_count`,`related_product`,`created_at`,`updated_at`) VALUES ( '1', 'Product 1', 'product-1', '', '13.00', '13.00', '958', '0', '/product/9.jpg', '/product/8.jpg;/product/3.jpg;/product/1.jpg;/product/2.jpg', '1', '0', '1', '1', '0', NULL, '2018-07-24 02:19:05', '2018-07-24 02:19:05' );
-INSERT INTO `ideas_product`(`id`,`name`,`slug`,`sku`,`price`,`price_promotion`,`qty`,`qty_order`,`featured_image`,`gallery`,`status`,`product_order`,`product_type`,`tax_class_id`,`review_count`,`related_product`,`created_at`,`updated_at`) VALUES ( '2', 'Product 2', 'product-2', '', '66.00', '66.00', '182', '0', '/product/6.jpg', '/product/10.jpg;/product/4.jpg;/product/4.jpg;/product/9.jpg', '1', '0', '1', '1', '0', NULL, '2018-07-24 02:19:05', '2018-07-24 02:19:05' );
-INSERT INTO `ideas_product`(`id`,`name`,`slug`,`sku`,`price`,`price_promotion`,`qty`,`qty_order`,`featured_image`,`gallery`,`status`,`product_order`,`product_type`,`tax_class_id`,`review_count`,`related_product`,`created_at`,`updated_at`) VALUES ( '3', 'Product 3', 'product-3', '', '10.00', '10.00', '967', '0', '/product/2.jpg', '/product/3.jpg;/product/2.jpg;/product/5.jpg;/product/4.jpg', '1', '0', '1', '1', '0', NULL, '2018-07-24 02:19:05', '2018-07-24 02:19:05' );
-INSERT INTO `ideas_product`(`id`,`name`,`slug`,`sku`,`price`,`price_promotion`,`qty`,`qty_order`,`featured_image`,`gallery`,`status`,`product_order`,`product_type`,`tax_class_id`,`review_count`,`related_product`,`created_at`,`updated_at`) VALUES ( '4', 'Product 4', 'product-4', '', '75.00', '75.00', '669', '0', '/product/7.jpg', '/product/7.jpg;/product/5.jpg;/product/10.jpg;/product/7.jpg', '1', '0', '1', '1', '0', NULL, '2018-07-24 02:19:05', '2018-07-24 02:19:05' );
-INSERT INTO `ideas_product`(`id`,`name`,`slug`,`sku`,`price`,`price_promotion`,`qty`,`qty_order`,`featured_image`,`gallery`,`status`,`product_order`,`product_type`,`tax_class_id`,`review_count`,`related_product`,`created_at`,`updated_at`) VALUES ( '5', 'Product 5', 'product-5', '', '30.00', '30.00', '70', '0', '/product/4.jpg', '/product/6.jpg;/product/8.jpg;/product/3.jpg;/product/3.jpg', '1', '0', '1', '1', '0', NULL, '2018-07-24 02:19:05', '2018-07-24 02:19:05' );
-INSERT INTO `ideas_product`(`id`,`name`,`slug`,`sku`,`price`,`price_promotion`,`qty`,`qty_order`,`featured_image`,`gallery`,`status`,`product_order`,`product_type`,`tax_class_id`,`review_count`,`related_product`,`created_at`,`updated_at`) VALUES ( '6', 'Product 6', 'product-6', '', '48.00', '48.00', '564', '0', '/product/5.jpg', '/product/1.jpg;/product/2.jpg;/product/1.jpg;/product/10.jpg', '1', '0', '1', '1', '0', NULL, '2018-07-24 02:19:05', '2018-07-24 02:19:05' );
-INSERT INTO `ideas_product`(`id`,`name`,`slug`,`sku`,`price`,`price_promotion`,`qty`,`qty_order`,`featured_image`,`gallery`,`status`,`product_order`,`product_type`,`tax_class_id`,`review_count`,`related_product`,`created_at`,`updated_at`) VALUES ( '7', 'Product 7', 'product-7', '', '77.00', '77.00', '114', '0', '/product/2.jpg', '/product/8.jpg;/product/10.jpg;/product/8.jpg;/product/1.jpg', '1', '0', '1', '1', '0', NULL, '2018-07-24 02:19:05', '2018-07-24 02:19:05' );
-INSERT INTO `ideas_product`(`id`,`name`,`slug`,`sku`,`price`,`price_promotion`,`qty`,`qty_order`,`featured_image`,`gallery`,`status`,`product_order`,`product_type`,`tax_class_id`,`review_count`,`related_product`,`created_at`,`updated_at`) VALUES ( '8', 'Product 8', 'product-8', '', '42.00', '42.00', '820', '0', '/product/1.jpg', '/product/1.jpg;/product/4.jpg;/product/1.jpg;/product/8.jpg', '1', '0', '1', '1', '0', NULL, '2018-07-24 02:19:05', '2018-07-24 02:19:05' );
-INSERT INTO `ideas_product`(`id`,`name`,`slug`,`sku`,`price`,`price_promotion`,`qty`,`qty_order`,`featured_image`,`gallery`,`status`,`product_order`,`product_type`,`tax_class_id`,`review_count`,`related_product`,`created_at`,`updated_at`) VALUES ( '9', 'Product 9', 'product-9', '', '43.00', '43.00', '478', '0', '/product/9.jpg', '/product/5.jpg;/product/8.jpg;/product/6.jpg;/product/1.jpg', '1', '0', '1', '1', '0', NULL, '2018-07-24 02:19:05', '2018-07-24 02:19:05' );
-INSERT INTO `ideas_product`(`id`,`name`,`slug`,`sku`,`price`,`price_promotion`,`qty`,`qty_order`,`featured_image`,`gallery`,`status`,`product_order`,`product_type`,`tax_class_id`,`review_count`,`related_product`,`created_at`,`updated_at`) VALUES ( '10', 'Product 10', 'product-10', '', '34.00', '34.00', '390', '0', '/product/8.jpg', '/product/6.jpg;/product/2.jpg;/product/7.jpg;/product/6.jpg', '1', '0', '1', '1', '0', NULL, '2018-07-24 02:19:05', '2018-07-24 02:19:05' );
-INSERT INTO `ideas_product`(`id`,`name`,`slug`,`sku`,`price`,`price_promotion`,`qty`,`qty_order`,`featured_image`,`gallery`,`status`,`product_order`,`product_type`,`tax_class_id`,`review_count`,`related_product`,`created_at`,`updated_at`) VALUES ( '11', 'Product 11', 'product-11', '', '53.00', '53.00', '89', '0', '/product/10.jpg', '/product/10.jpg;/product/2.jpg;/product/3.jpg;/product/7.jpg', '1', '0', '1', '1', '0', NULL, '2018-07-24 02:19:05', '2018-07-24 02:19:05' );
--- ---------------------------------------------------------
-
-
--- Dump data of "ideas_product_attribute" ------------------
-INSERT INTO `ideas_product_attribute`(`id`,`product_id`,`short_intro`,`full_intro`,`seo_title`,`seo_keyword`,`seo_description`,`is_homepage`,`is_featured_product`,`is_new`,`is_bestseller`,`weight`,`weight_id`,`length`,`width`,`height`,`length_id`) VALUES ( '1', '1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident', 'product 1', 'product 1', 'product 1', '1', '1', '1', '1', '8.00', '1', '1.00', '1.00', '1.00', '1' );
-INSERT INTO `ideas_product_attribute`(`id`,`product_id`,`short_intro`,`full_intro`,`seo_title`,`seo_keyword`,`seo_description`,`is_homepage`,`is_featured_product`,`is_new`,`is_bestseller`,`weight`,`weight_id`,`length`,`width`,`height`,`length_id`) VALUES ( '2', '2', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident', 'product 2', 'product 2', 'product 2', '1', '1', '1', '1', '2.00', '1', '1.00', '1.00', '1.00', '1' );
-INSERT INTO `ideas_product_attribute`(`id`,`product_id`,`short_intro`,`full_intro`,`seo_title`,`seo_keyword`,`seo_description`,`is_homepage`,`is_featured_product`,`is_new`,`is_bestseller`,`weight`,`weight_id`,`length`,`width`,`height`,`length_id`) VALUES ( '3', '3', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident', 'product 3', 'product 3', 'product 3', '1', '1', '1', '1', '2.00', '1', '1.00', '1.00', '1.00', '1' );
-INSERT INTO `ideas_product_attribute`(`id`,`product_id`,`short_intro`,`full_intro`,`seo_title`,`seo_keyword`,`seo_description`,`is_homepage`,`is_featured_product`,`is_new`,`is_bestseller`,`weight`,`weight_id`,`length`,`width`,`height`,`length_id`) VALUES ( '4', '4', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident', 'product 4', 'product 4', 'product 4', '1', '1', '1', '1', '1.00', '1', '1.00', '1.00', '1.00', '1' );
-INSERT INTO `ideas_product_attribute`(`id`,`product_id`,`short_intro`,`full_intro`,`seo_title`,`seo_keyword`,`seo_description`,`is_homepage`,`is_featured_product`,`is_new`,`is_bestseller`,`weight`,`weight_id`,`length`,`width`,`height`,`length_id`) VALUES ( '5', '5', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident', 'product 5', 'product 5', 'product 5', '1', '1', '1', '1', '3.00', '1', '1.00', '1.00', '1.00', '1' );
-INSERT INTO `ideas_product_attribute`(`id`,`product_id`,`short_intro`,`full_intro`,`seo_title`,`seo_keyword`,`seo_description`,`is_homepage`,`is_featured_product`,`is_new`,`is_bestseller`,`weight`,`weight_id`,`length`,`width`,`height`,`length_id`) VALUES ( '6', '6', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident', 'product 6', 'product 6', 'product 6', '1', '1', '1', '1', '5.00', '1', '1.00', '1.00', '1.00', '1' );
-INSERT INTO `ideas_product_attribute`(`id`,`product_id`,`short_intro`,`full_intro`,`seo_title`,`seo_keyword`,`seo_description`,`is_homepage`,`is_featured_product`,`is_new`,`is_bestseller`,`weight`,`weight_id`,`length`,`width`,`height`,`length_id`) VALUES ( '7', '7', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident', 'product 7', 'product 7', 'product 7', '1', '1', '1', '1', '2.00', '1', '1.00', '1.00', '1.00', '1' );
-INSERT INTO `ideas_product_attribute`(`id`,`product_id`,`short_intro`,`full_intro`,`seo_title`,`seo_keyword`,`seo_description`,`is_homepage`,`is_featured_product`,`is_new`,`is_bestseller`,`weight`,`weight_id`,`length`,`width`,`height`,`length_id`) VALUES ( '8', '8', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident', 'product 8', 'product 8', 'product 8', '1', '1', '1', '1', '1.00', '1', '1.00', '1.00', '1.00', '1' );
-INSERT INTO `ideas_product_attribute`(`id`,`product_id`,`short_intro`,`full_intro`,`seo_title`,`seo_keyword`,`seo_description`,`is_homepage`,`is_featured_product`,`is_new`,`is_bestseller`,`weight`,`weight_id`,`length`,`width`,`height`,`length_id`) VALUES ( '9', '9', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident', 'product 9', 'product 9', 'product 9', '1', '1', '1', '1', '3.00', '1', '1.00', '1.00', '1.00', '1' );
-INSERT INTO `ideas_product_attribute`(`id`,`product_id`,`short_intro`,`full_intro`,`seo_title`,`seo_keyword`,`seo_description`,`is_homepage`,`is_featured_product`,`is_new`,`is_bestseller`,`weight`,`weight_id`,`length`,`width`,`height`,`length_id`) VALUES ( '10', '10', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident', 'product 10', 'product 10', 'product 10', '1', '1', '1', '1', '2.00', '1', '1.00', '1.00', '1.00', '1' );
-INSERT INTO `ideas_product_attribute`(`id`,`product_id`,`short_intro`,`full_intro`,`seo_title`,`seo_keyword`,`seo_description`,`is_homepage`,`is_featured_product`,`is_new`,`is_bestseller`,`weight`,`weight_id`,`length`,`width`,`height`,`length_id`) VALUES ( '11', '11', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident', 'product 11', 'product 11', 'product 11', '1', '1', '1', '1', '4.00', '1', '1.00', '1.00', '1.00', '1' );
--- ---------------------------------------------------------
-
-
--- Dump data of "ideas_product_child_to_category" ----------
--- ---------------------------------------------------------
-
-
--- Dump data of "ideas_product_configurable" ---------------
--- ---------------------------------------------------------
-
-
--- Dump data of "ideas_product_downloadable" ---------------
--- ---------------------------------------------------------
-
-
--- Dump data of "ideas_product_downloadable_link" ----------
--- ---------------------------------------------------------
-
-
--- Dump data of "ideas_product_reviews" --------------------
--- ---------------------------------------------------------
-
-
--- Dump data of "ideas_product_to_category" ----------------
-INSERT INTO `ideas_product_to_category`(`product_id`,`category_id`) VALUES ( '1', '1' );
-INSERT INTO `ideas_product_to_category`(`product_id`,`category_id`) VALUES ( '2', '1' );
-INSERT INTO `ideas_product_to_category`(`product_id`,`category_id`) VALUES ( '3', '1' );
-INSERT INTO `ideas_product_to_category`(`product_id`,`category_id`) VALUES ( '4', '1' );
-INSERT INTO `ideas_product_to_category`(`product_id`,`category_id`) VALUES ( '5', '1' );
-INSERT INTO `ideas_product_to_category`(`product_id`,`category_id`) VALUES ( '6', '1' );
-INSERT INTO `ideas_product_to_category`(`product_id`,`category_id`) VALUES ( '7', '1' );
-INSERT INTO `ideas_product_to_category`(`product_id`,`category_id`) VALUES ( '8', '1' );
-INSERT INTO `ideas_product_to_category`(`product_id`,`category_id`) VALUES ( '9', '1' );
-INSERT INTO `ideas_product_to_category`(`product_id`,`category_id`) VALUES ( '10', '1' );
-INSERT INTO `ideas_product_to_category`(`product_id`,`category_id`) VALUES ( '11', '1' );
--- ---------------------------------------------------------
-
-
--- Dump data of "ideas_product_to_filter_option" -----------
-INSERT INTO `ideas_product_to_filter_option`(`product_id`,`filter_option_id`) VALUES ( '1', '6' );
-INSERT INTO `ideas_product_to_filter_option`(`product_id`,`filter_option_id`) VALUES ( '2', '8' );
-INSERT INTO `ideas_product_to_filter_option`(`product_id`,`filter_option_id`) VALUES ( '3', '8' );
-INSERT INTO `ideas_product_to_filter_option`(`product_id`,`filter_option_id`) VALUES ( '4', '7' );
-INSERT INTO `ideas_product_to_filter_option`(`product_id`,`filter_option_id`) VALUES ( '5', '3' );
-INSERT INTO `ideas_product_to_filter_option`(`product_id`,`filter_option_id`) VALUES ( '6', '7' );
-INSERT INTO `ideas_product_to_filter_option`(`product_id`,`filter_option_id`) VALUES ( '7', '1' );
-INSERT INTO `ideas_product_to_filter_option`(`product_id`,`filter_option_id`) VALUES ( '8', '8' );
-INSERT INTO `ideas_product_to_filter_option`(`product_id`,`filter_option_id`) VALUES ( '9', '1' );
-INSERT INTO `ideas_product_to_filter_option`(`product_id`,`filter_option_id`) VALUES ( '10', '6' );
-INSERT INTO `ideas_product_to_filter_option`(`product_id`,`filter_option_id`) VALUES ( '11', '4' );
--- ---------------------------------------------------------
-
-
--- Dump data of "ideas_routes" -----------------------------
-INSERT INTO `ideas_routes`(`id`,`slug`,`entity_id`,`type`) VALUES ( '1', 'uncategory', '1', '2' );
-INSERT INTO `ideas_routes`(`id`,`slug`,`entity_id`,`type`) VALUES ( '2', 'laptop', '2', '2' );
-INSERT INTO `ideas_routes`(`id`,`slug`,`entity_id`,`type`) VALUES ( '3', 'product-1', '1', '1' );
-INSERT INTO `ideas_routes`(`id`,`slug`,`entity_id`,`type`) VALUES ( '4', 'product-2', '2', '1' );
-INSERT INTO `ideas_routes`(`id`,`slug`,`entity_id`,`type`) VALUES ( '5', 'product-3', '3', '1' );
-INSERT INTO `ideas_routes`(`id`,`slug`,`entity_id`,`type`) VALUES ( '6', 'product-4', '4', '1' );
-INSERT INTO `ideas_routes`(`id`,`slug`,`entity_id`,`type`) VALUES ( '7', 'product-5', '5', '1' );
-INSERT INTO `ideas_routes`(`id`,`slug`,`entity_id`,`type`) VALUES ( '8', 'product-6', '6', '1' );
-INSERT INTO `ideas_routes`(`id`,`slug`,`entity_id`,`type`) VALUES ( '9', 'product-7', '7', '1' );
-INSERT INTO `ideas_routes`(`id`,`slug`,`entity_id`,`type`) VALUES ( '10', 'product-8', '8', '1' );
-INSERT INTO `ideas_routes`(`id`,`slug`,`entity_id`,`type`) VALUES ( '11', 'product-9', '9', '1' );
-INSERT INTO `ideas_routes`(`id`,`slug`,`entity_id`,`type`) VALUES ( '12', 'product-10', '10', '1' );
-INSERT INTO `ideas_routes`(`id`,`slug`,`entity_id`,`type`) VALUES ( '13', 'product-11', '11', '1' );
--- ---------------------------------------------------------
-
-
--- Dump data of "ideas_ship_rule" --------------------------
-INSERT INTO `ideas_ship_rule`(`id`,`name`,`above_price`,`geo_zone_id`,`weight_type`,`weight_based`,`cost`,`type`,`status`) VALUES ( '1', 'Pick up from store', '0.00', NULL, NULL, '0', '0.00', '1', '1' );
-INSERT INTO `ideas_ship_rule`(`id`,`name`,`above_price`,`geo_zone_id`,`weight_type`,`weight_based`,`cost`,`type`,`status`) VALUES ( '2', 'Flat price', '50.00', NULL, NULL, '0', '10.00', '1', '1' );
-INSERT INTO `ideas_ship_rule`(`id`,`name`,`above_price`,`geo_zone_id`,`weight_type`,`weight_based`,`cost`,`type`,`status`) VALUES ( '3', 'weight based 1', '0.00', NULL, '1', '1:5', '0.00', '3', '1' );
-INSERT INTO `ideas_ship_rule`(`id`,`name`,`above_price`,`geo_zone_id`,`weight_type`,`weight_based`,`cost`,`type`,`status`) VALUES ( '4', 'weight based rate 1', '0.00', NULL, '2', '6:13.50,9:14.00,12:14.50,17:15.00,22:15.50,24:16.00,27:16.50,32:17.00,35:17.50,38:18.00,42:18.50,47:19.00,51:19.50,60:20.00,63:20.50,66:21.00,70:21.50,72:22.00,73:24.50', '0.00', '3', '1' );
--- ---------------------------------------------------------
-
-
--- Dump data of "ideas_tax_class" --------------------------
-INSERT INTO `ideas_tax_class`(`id`,`name`,`description`) VALUES ( '1', 'Nontaxable', '' );
--- ---------------------------------------------------------
-
-
--- Dump data of "ideas_tax_rate" ---------------------------
-INSERT INTO `ideas_tax_rate`(`id`,`name`,`type`,`geo_zone_id`,`rate`) VALUES ( '1', 'Nontaxable Rate', '0', '1', '0.00' );
--- ---------------------------------------------------------
-
-
--- Dump data of "ideas_tax_rule" ---------------------------
-INSERT INTO `ideas_tax_rule`(`tax_class_id`,`tax_rate_id`) VALUES ( '1', '1' );
--- ---------------------------------------------------------
-
-
--- Dump data of "ideas_theme_config" -----------------------
-INSERT INTO `ideas_theme_config`(`id`,`name`,`slug`,`type`) VALUES ( '1', 'Homepage Gallery', 'homepage_gallery', '2' );
-INSERT INTO `ideas_theme_config`(`id`,`name`,`slug`,`type`) VALUES ( '2', 'Welcome to our shop', 'welcome_to_our_shop', '2' );
-INSERT INTO `ideas_theme_config`(`id`,`name`,`slug`,`type`) VALUES ( '3', 'Testimonials', 'testimonials', '2' );
-INSERT INTO `ideas_theme_config`(`id`,`name`,`slug`,`type`) VALUES ( '4', 'Ship slide', 'ship_slide', '2' );
-INSERT INTO `ideas_theme_config`(`id`,`name`,`slug`,`type`) VALUES ( '5', 'Image header bottom', 'image_header_bottom', '2' );
--- ---------------------------------------------------------
-
-
--- Dump data of "ideas_theme_config_image_detail" ----------
-INSERT INTO `ideas_theme_config_image_detail`(`id`,`name`,`url`,`link`,`title`,`alt`,`description`,`image_order`,`theme_config_id`) VALUES ( '1', 'image 1', '/theme/slider1.jpg', NULL, NULL, NULL, NULL, '1', '1' );
-INSERT INTO `ideas_theme_config_image_detail`(`id`,`name`,`url`,`link`,`title`,`alt`,`description`,`image_order`,`theme_config_id`) VALUES ( '2', 'image 2', '/theme/slider1.jpg', NULL, NULL, NULL, NULL, '2', '1' );
-INSERT INTO `ideas_theme_config_image_detail`(`id`,`name`,`url`,`link`,`title`,`alt`,`description`,`image_order`,`theme_config_id`) VALUES ( '3', 'image 3', '/theme/slider1.jpg', NULL, NULL, NULL, NULL, '3', '1' );
-INSERT INTO `ideas_theme_config_image_detail`(`id`,`name`,`url`,`link`,`title`,`alt`,`description`,`image_order`,`theme_config_id`) VALUES ( '4', 'welcome 1', '/product/5.jpg', NULL, NULL, NULL, NULL, '1', '2' );
-INSERT INTO `ideas_theme_config_image_detail`(`id`,`name`,`url`,`link`,`title`,`alt`,`description`,`image_order`,`theme_config_id`) VALUES ( '5', 'welcome 2', '/product/5.jpg', NULL, NULL, NULL, NULL, '2', '2' );
-INSERT INTO `ideas_theme_config_image_detail`(`id`,`name`,`url`,`link`,`title`,`alt`,`description`,`image_order`,`theme_config_id`) VALUES ( '6', 'welcome 3', '/product/10.jpg', NULL, NULL, NULL, NULL, '3', '2' );
-INSERT INTO `ideas_theme_config_image_detail`(`id`,`name`,`url`,`link`,`title`,`alt`,`description`,`image_order`,`theme_config_id`) VALUES ( '7', 'welcome 4', '/product/4.jpg', NULL, NULL, NULL, NULL, '4', '2' );
-INSERT INTO `ideas_theme_config_image_detail`(`id`,`name`,`url`,`link`,`title`,`alt`,`description`,`image_order`,`theme_config_id`) VALUES ( '8', 'welcome 5', '/product/7.jpg', NULL, NULL, NULL, NULL, '5', '2' );
-INSERT INTO `ideas_theme_config_image_detail`(`id`,`name`,`url`,`link`,`title`,`alt`,`description`,`image_order`,`theme_config_id`) VALUES ( '9', 'testimonial 1', '/theme/user-1.jpg', NULL, 'John Doe 1', NULL, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et', '1', '3' );
-INSERT INTO `ideas_theme_config_image_detail`(`id`,`name`,`url`,`link`,`title`,`alt`,`description`,`image_order`,`theme_config_id`) VALUES ( '10', 'testimonial 2', '/theme/user-2.jpg', NULL, 'John Doe 2', NULL, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et', '2', '3' );
-INSERT INTO `ideas_theme_config_image_detail`(`id`,`name`,`url`,`link`,`title`,`alt`,`description`,`image_order`,`theme_config_id`) VALUES ( '11', 'testimonial 3', '/theme/user-3.jpg', NULL, 'John Doe 3', NULL, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et', '3', '3' );
-INSERT INTO `ideas_theme_config_image_detail`(`id`,`name`,`url`,`link`,`title`,`alt`,`description`,`image_order`,`theme_config_id`) VALUES ( '12', 'testimonial 4', '/theme/user-4.jpg', NULL, 'John Doe 4', NULL, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et', '4', '3' );
-INSERT INTO `ideas_theme_config_image_detail`(`id`,`name`,`url`,`link`,`title`,`alt`,`description`,`image_order`,`theme_config_id`) VALUES ( '13', 'ship 1', '/theme/ship-1.jpg', NULL, NULL, NULL, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et', '1', '4' );
-INSERT INTO `ideas_theme_config_image_detail`(`id`,`name`,`url`,`link`,`title`,`alt`,`description`,`image_order`,`theme_config_id`) VALUES ( '14', 'ship 2', '/theme/ship-2.jpg', NULL, NULL, NULL, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et', '2', '4' );
-INSERT INTO `ideas_theme_config_image_detail`(`id`,`name`,`url`,`link`,`title`,`alt`,`description`,`image_order`,`theme_config_id`) VALUES ( '15', 'ship 3', '/theme/ship-3.jpg', NULL, NULL, NULL, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et', '3', '4' );
-INSERT INTO `ideas_theme_config_image_detail`(`id`,`name`,`url`,`link`,`title`,`alt`,`description`,`image_order`,`theme_config_id`) VALUES ( '16', 'Image header bottom', '/theme/slider1.jpg', NULL, NULL, NULL, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et', '0', '5' );
--- ---------------------------------------------------------
-
-
--- Dump data of "ideas_theme_config_text_value" ------------
--- ---------------------------------------------------------
-
-
--- Dump data of "ideas_users_extends" ----------------------
--- ---------------------------------------------------------
-
-
--- Dump data of "ideas_weight" -----------------------------
-INSERT INTO `ideas_weight`(`id`,`name`,`unit`,`value`) VALUES ( '1', 'Kilograms', 'Kg', '1.00' );
-INSERT INTO `ideas_weight`(`id`,`name`,`unit`,`value`) VALUES ( '2', 'Gram', 'g', '1000.00' );
-INSERT INTO `ideas_weight`(`id`,`name`,`unit`,`value`) VALUES ( '3', 'Pound', 'lb', '2.20' );
 -- ---------------------------------------------------------
 
 
@@ -18266,6 +17485,677 @@ Stack trace:
 INSERT INTO `system_event_logs`(`id`,`level`,`message`,`details`,`created_at`,`updated_at`) VALUES ( '332', 'error', 'Symfony\\Component\\Debug\\Exception\\FatalErrorException: Trait \'Kharanenka\\Scope\\ActiveField\' not found in /home/candt/workspaces/mhdnocare/plugins/lovata/shopaholic/models/Product.php:93
 Stack trace:
 #0 {main}', NULL, '2018-07-24 07:43:10', '2018-07-24 07:43:10' );
+INSERT INTO `system_event_logs`(`id`,`level`,`message`,`details`,`created_at`,`updated_at`) VALUES ( '333', 'error', 'PDOException: SQLSTATE[42S01]: Base table or view already exists: 1050 Table \'ideas_categories\' already exists in /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Connection.php:390
+Stack trace:
+#0 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Connection.php(390): PDOStatement->execute(Array)
+#1 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Connection.php(655): Illuminate\\Database\\Connection->Illuminate\\Database\\{closure}(Object(Illuminate\\Database\\MySqlConnection), \'create table `i...\', Array)
+#2 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Connection.php(618): Illuminate\\Database\\Connection->runQueryCallback(\'create table `i...\', Array, Object(Closure))
+#3 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Connection.php(391): Illuminate\\Database\\Connection->run(\'create table `i...\', Array, Object(Closure))
+#4 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Schema/Blueprint.php(83): Illuminate\\Database\\Connection->statement(\'create table `i...\')
+#5 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Schema/Builder.php(191): Illuminate\\Database\\Schema\\Blueprint->build(Object(Illuminate\\Database\\MySqlConnection), Object(Illuminate\\Database\\Schema\\Grammars\\MySqlGrammar))
+#6 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Schema/Builder.php(134): Illuminate\\Database\\Schema\\Builder->build(Object(October\\Rain\\Database\\Schema\\Blueprint))
+#7 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(217): Illuminate\\Database\\Schema\\Builder->create(\'ideas_categorie...\', Object(Closure))
+#8 /home/candt/workspaces/mhdnocare/plugins/ideas/shop/updates/create_attribute_table.php(32): Illuminate\\Support\\Facades\\Facade::__callStatic(\'create\', Array)
+#9 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Database/Updater.php(31): Ideas\\Shop\\Updates\\CreateAttributeTable->up()
+#10 /home/candt/workspaces/mhdnocare/modules/system/classes/VersionManager.php(392): October\\Rain\\Database\\Updater->setUp(\'/home/candt/wor...\')
+#11 /home/candt/workspaces/mhdnocare/modules/system/classes/VersionManager.php(141): System\\Classes\\VersionManager->applyDatabaseScript(\'Ideas.Shop\', \'1.0.1\', \'create_attribut...\')
+#12 /home/candt/workspaces/mhdnocare/modules/system/classes/VersionManager.php(94): System\\Classes\\VersionManager->applyPluginUpdate(\'Ideas.Shop\', \'1.0.1\', Array)
+#13 /home/candt/workspaces/mhdnocare/modules/system/classes/UpdateManager.php(470): System\\Classes\\VersionManager->updatePlugin(Object(Ideas\\Shop\\Plugin))
+#14 /home/candt/workspaces/mhdnocare/modules/system/classes/UpdateManager.php(141): System\\Classes\\UpdateManager->updatePlugin(\'Ideas.Shop\')
+#15 /home/candt/workspaces/mhdnocare/modules/system/controllers/Updates.php(274): System\\Classes\\UpdateManager->update()
+#16 [internal function]: System\\Controllers\\Updates->onExecuteStep()
+#17 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(534): call_user_func_array(Array, Array)
+#18 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(417): Backend\\Classes\\Controller->runAjaxHandler(\'onExecuteStep\')
+#19 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(227): Backend\\Classes\\Controller->execAjaxHandlers()
+#20 /home/candt/workspaces/mhdnocare/modules/backend/classes/BackendController.php(89): Backend\\Classes\\Controller->run(\'install\', Array)
+#21 [internal function]: Backend\\Classes\\BackendController->run(\'system/updates/...\')
+#22 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(256): call_user_func_array(Array, Array)
+#23 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(164): Illuminate\\Routing\\Controller->callAction(\'run\', Array)
+#24 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(112): Illuminate\\Routing\\ControllerDispatcher->call(Object(Backend\\Classes\\BackendController), Object(Illuminate\\Routing\\Route), \'run\')
+#25 [internal function]: Illuminate\\Routing\\ControllerDispatcher->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#26 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#27 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#28 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#29 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(114): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#30 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(68): Illuminate\\Routing\\ControllerDispatcher->callWithinStack(Object(Backend\\Classes\\BackendController), Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'run\')
+#31 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(203): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'Backend\\\\Classes...\', \'run\')
+#32 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(134): Illuminate\\Routing\\Route->runWithCustomDispatcher(Object(Illuminate\\Http\\Request))
+#33 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(708): Illuminate\\Routing\\Route->run(Object(Illuminate\\Http\\Request))
+#34 [internal function]: Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#35 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#36 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#37 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#38 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(710): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#39 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(674): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#40 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(635): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#41 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(236): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#42 [internal function]: Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#43 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#44 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#45 [internal function]: Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#46 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#47 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(62): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#48 [internal function]: Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#49 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#50 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#51 [internal function]: Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#52 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#53 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(59): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#54 [internal function]: Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#55 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#56 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php(44): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#57 [internal function]: Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#58 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#59 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#60 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#61 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(122): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#62 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(87): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#63 /home/candt/workspaces/mhdnocare/index.php(43): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#64 {main}
+
+Next Illuminate\\Database\\QueryException: SQLSTATE[42S01]: Base table or view already exists: 1050 Table \'ideas_categories\' already exists (SQL: create table `ideas_categories` (`id` int unsigned not null auto_increment primary key, `name` varchar(255) not null, `slug` varchar(255) not null, `parent_id` int unsigned null, `nest_left` int unsigned null, `nest_right` int unsigned null, `nest_depth` int unsigned null, `status` tinyint not null, `seo_title` text null, `seo_keyword` text null, `seo_description` text null, `featured_image` text null, `description` text null, `cat_order` int unsigned null, `created_at` timestamp null, `updated_at` timestamp null) default character set utf8 collate utf8_unicode_ci engine = InnoDB) in /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Connection.php:662
+Stack trace:
+#0 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Connection.php(618): Illuminate\\Database\\Connection->runQueryCallback(\'create table `i...\', Array, Object(Closure))
+#1 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Connection.php(391): Illuminate\\Database\\Connection->run(\'create table `i...\', Array, Object(Closure))
+#2 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Schema/Blueprint.php(83): Illuminate\\Database\\Connection->statement(\'create table `i...\')
+#3 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Schema/Builder.php(191): Illuminate\\Database\\Schema\\Blueprint->build(Object(Illuminate\\Database\\MySqlConnection), Object(Illuminate\\Database\\Schema\\Grammars\\MySqlGrammar))
+#4 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Schema/Builder.php(134): Illuminate\\Database\\Schema\\Builder->build(Object(October\\Rain\\Database\\Schema\\Blueprint))
+#5 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(217): Illuminate\\Database\\Schema\\Builder->create(\'ideas_categorie...\', Object(Closure))
+#6 /home/candt/workspaces/mhdnocare/plugins/ideas/shop/updates/create_attribute_table.php(32): Illuminate\\Support\\Facades\\Facade::__callStatic(\'create\', Array)
+#7 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Database/Updater.php(31): Ideas\\Shop\\Updates\\CreateAttributeTable->up()
+#8 /home/candt/workspaces/mhdnocare/modules/system/classes/VersionManager.php(392): October\\Rain\\Database\\Updater->setUp(\'/home/candt/wor...\')
+#9 /home/candt/workspaces/mhdnocare/modules/system/classes/VersionManager.php(141): System\\Classes\\VersionManager->applyDatabaseScript(\'Ideas.Shop\', \'1.0.1\', \'create_attribut...\')
+#10 /home/candt/workspaces/mhdnocare/modules/system/classes/VersionManager.php(94): System\\Classes\\VersionManager->applyPluginUpdate(\'Ideas.Shop\', \'1.0.1\', Array)
+#11 /home/candt/workspaces/mhdnocare/modules/system/classes/UpdateManager.php(470): System\\Classes\\VersionManager->updatePlugin(Object(Ideas\\Shop\\Plugin))
+#12 /home/candt/workspaces/mhdnocare/modules/system/classes/UpdateManager.php(141): System\\Classes\\UpdateManager->updatePlugin(\'Ideas.Shop\')
+#13 /home/candt/workspaces/mhdnocare/modules/system/controllers/Updates.php(274): System\\Classes\\UpdateManager->update()
+#14 [internal function]: System\\Controllers\\Updates->onExecuteStep()
+#15 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(534): call_user_func_array(Array, Array)
+#16 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(417): Backend\\Classes\\Controller->runAjaxHandler(\'onExecuteStep\')
+#17 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(227): Backend\\Classes\\Controller->execAjaxHandlers()
+#18 /home/candt/workspaces/mhdnocare/modules/backend/classes/BackendController.php(89): Backend\\Classes\\Controller->run(\'install\', Array)
+#19 [internal function]: Backend\\Classes\\BackendController->run(\'system/updates/...\')
+#20 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(256): call_user_func_array(Array, Array)
+#21 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(164): Illuminate\\Routing\\Controller->callAction(\'run\', Array)
+#22 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(112): Illuminate\\Routing\\ControllerDispatcher->call(Object(Backend\\Classes\\BackendController), Object(Illuminate\\Routing\\Route), \'run\')
+#23 [internal function]: Illuminate\\Routing\\ControllerDispatcher->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#24 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#25 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#26 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#27 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(114): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#28 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(68): Illuminate\\Routing\\ControllerDispatcher->callWithinStack(Object(Backend\\Classes\\BackendController), Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'run\')
+#29 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(203): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'Backend\\\\Classes...\', \'run\')
+#30 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(134): Illuminate\\Routing\\Route->runWithCustomDispatcher(Object(Illuminate\\Http\\Request))
+#31 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(708): Illuminate\\Routing\\Route->run(Object(Illuminate\\Http\\Request))
+#32 [internal function]: Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#33 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#34 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#35 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#36 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(710): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#37 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(674): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#38 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(635): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#39 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(236): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#40 [internal function]: Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#41 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#42 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#43 [internal function]: Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#44 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#45 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(62): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#46 [internal function]: Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#47 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#48 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#49 [internal function]: Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#50 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#51 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(59): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#52 [internal function]: Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#53 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#54 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php(44): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#55 [internal function]: Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#56 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#57 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#58 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#59 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(122): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#60 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(87): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#61 /home/candt/workspaces/mhdnocare/index.php(43): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#62 {main}', NULL, '2018-07-24 08:17:49', '2018-07-24 08:17:49' );
+INSERT INTO `system_event_logs`(`id`,`level`,`message`,`details`,`created_at`,`updated_at`) VALUES ( '334', 'error', 'PDOException: SQLSTATE[42S01]: Base table or view already exists: 1050 Table \'ideas_categories\' already exists in /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Connection.php:390
+Stack trace:
+#0 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Connection.php(390): PDOStatement->execute(Array)
+#1 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Connection.php(655): Illuminate\\Database\\Connection->Illuminate\\Database\\{closure}(Object(Illuminate\\Database\\MySqlConnection), \'create table `i...\', Array)
+#2 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Connection.php(618): Illuminate\\Database\\Connection->runQueryCallback(\'create table `i...\', Array, Object(Closure))
+#3 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Connection.php(391): Illuminate\\Database\\Connection->run(\'create table `i...\', Array, Object(Closure))
+#4 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Schema/Blueprint.php(83): Illuminate\\Database\\Connection->statement(\'create table `i...\')
+#5 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Schema/Builder.php(191): Illuminate\\Database\\Schema\\Blueprint->build(Object(Illuminate\\Database\\MySqlConnection), Object(Illuminate\\Database\\Schema\\Grammars\\MySqlGrammar))
+#6 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Schema/Builder.php(134): Illuminate\\Database\\Schema\\Builder->build(Object(October\\Rain\\Database\\Schema\\Blueprint))
+#7 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(217): Illuminate\\Database\\Schema\\Builder->create(\'ideas_categorie...\', Object(Closure))
+#8 /home/candt/workspaces/mhdnocare/plugins/ideas/shop/updates/create_attribute_table.php(32): Illuminate\\Support\\Facades\\Facade::__callStatic(\'create\', Array)
+#9 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Database/Updater.php(31): Ideas\\Shop\\Updates\\CreateAttributeTable->up()
+#10 /home/candt/workspaces/mhdnocare/modules/system/classes/VersionManager.php(392): October\\Rain\\Database\\Updater->setUp(\'/home/candt/wor...\')
+#11 /home/candt/workspaces/mhdnocare/modules/system/classes/VersionManager.php(141): System\\Classes\\VersionManager->applyDatabaseScript(\'Ideas.Shop\', \'1.0.1\', \'create_attribut...\')
+#12 /home/candt/workspaces/mhdnocare/modules/system/classes/VersionManager.php(94): System\\Classes\\VersionManager->applyPluginUpdate(\'Ideas.Shop\', \'1.0.1\', Array)
+#13 /home/candt/workspaces/mhdnocare/modules/system/classes/UpdateManager.php(470): System\\Classes\\VersionManager->updatePlugin(Object(Ideas\\Shop\\Plugin))
+#14 /home/candt/workspaces/mhdnocare/modules/system/classes/UpdateManager.php(141): System\\Classes\\UpdateManager->updatePlugin(\'Ideas.Shop\')
+#15 /home/candt/workspaces/mhdnocare/modules/system/controllers/Updates.php(274): System\\Classes\\UpdateManager->update()
+#16 [internal function]: System\\Controllers\\Updates->onExecuteStep()
+#17 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(534): call_user_func_array(Array, Array)
+#18 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(417): Backend\\Classes\\Controller->runAjaxHandler(\'onExecuteStep\')
+#19 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(227): Backend\\Classes\\Controller->execAjaxHandlers()
+#20 /home/candt/workspaces/mhdnocare/modules/backend/classes/BackendController.php(89): Backend\\Classes\\Controller->run(\'install\', Array)
+#21 [internal function]: Backend\\Classes\\BackendController->run(\'system/updates/...\')
+#22 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(256): call_user_func_array(Array, Array)
+#23 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(164): Illuminate\\Routing\\Controller->callAction(\'run\', Array)
+#24 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(112): Illuminate\\Routing\\ControllerDispatcher->call(Object(Backend\\Classes\\BackendController), Object(Illuminate\\Routing\\Route), \'run\')
+#25 [internal function]: Illuminate\\Routing\\ControllerDispatcher->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#26 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#27 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#28 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#29 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(114): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#30 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(68): Illuminate\\Routing\\ControllerDispatcher->callWithinStack(Object(Backend\\Classes\\BackendController), Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'run\')
+#31 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(203): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'Backend\\\\Classes...\', \'run\')
+#32 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(134): Illuminate\\Routing\\Route->runWithCustomDispatcher(Object(Illuminate\\Http\\Request))
+#33 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(708): Illuminate\\Routing\\Route->run(Object(Illuminate\\Http\\Request))
+#34 [internal function]: Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#35 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#36 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#37 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#38 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(710): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#39 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(674): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#40 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(635): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#41 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(236): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#42 [internal function]: Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#43 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#44 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#45 [internal function]: Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#46 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#47 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(62): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#48 [internal function]: Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#49 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#50 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#51 [internal function]: Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#52 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#53 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(59): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#54 [internal function]: Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#55 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#56 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php(44): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#57 [internal function]: Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#58 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#59 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#60 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#61 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(122): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#62 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(87): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#63 /home/candt/workspaces/mhdnocare/index.php(43): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#64 {main}
+
+Next Illuminate\\Database\\QueryException: SQLSTATE[42S01]: Base table or view already exists: 1050 Table \'ideas_categories\' already exists (SQL: create table `ideas_categories` (`id` int unsigned not null auto_increment primary key, `name` varchar(255) not null, `slug` varchar(255) not null, `parent_id` int unsigned null, `nest_left` int unsigned null, `nest_right` int unsigned null, `nest_depth` int unsigned null, `status` tinyint not null, `seo_title` text null, `seo_keyword` text null, `seo_description` text null, `featured_image` text null, `description` text null, `cat_order` int unsigned null, `created_at` timestamp null, `updated_at` timestamp null) default character set utf8 collate utf8_unicode_ci engine = InnoDB) in /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Connection.php:662
+Stack trace:
+#0 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Connection.php(618): Illuminate\\Database\\Connection->runQueryCallback(\'create table `i...\', Array, Object(Closure))
+#1 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Connection.php(391): Illuminate\\Database\\Connection->run(\'create table `i...\', Array, Object(Closure))
+#2 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Schema/Blueprint.php(83): Illuminate\\Database\\Connection->statement(\'create table `i...\')
+#3 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Schema/Builder.php(191): Illuminate\\Database\\Schema\\Blueprint->build(Object(Illuminate\\Database\\MySqlConnection), Object(Illuminate\\Database\\Schema\\Grammars\\MySqlGrammar))
+#4 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Schema/Builder.php(134): Illuminate\\Database\\Schema\\Builder->build(Object(October\\Rain\\Database\\Schema\\Blueprint))
+#5 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(217): Illuminate\\Database\\Schema\\Builder->create(\'ideas_categorie...\', Object(Closure))
+#6 /home/candt/workspaces/mhdnocare/plugins/ideas/shop/updates/create_attribute_table.php(32): Illuminate\\Support\\Facades\\Facade::__callStatic(\'create\', Array)
+#7 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Database/Updater.php(31): Ideas\\Shop\\Updates\\CreateAttributeTable->up()
+#8 /home/candt/workspaces/mhdnocare/modules/system/classes/VersionManager.php(392): October\\Rain\\Database\\Updater->setUp(\'/home/candt/wor...\')
+#9 /home/candt/workspaces/mhdnocare/modules/system/classes/VersionManager.php(141): System\\Classes\\VersionManager->applyDatabaseScript(\'Ideas.Shop\', \'1.0.1\', \'create_attribut...\')
+#10 /home/candt/workspaces/mhdnocare/modules/system/classes/VersionManager.php(94): System\\Classes\\VersionManager->applyPluginUpdate(\'Ideas.Shop\', \'1.0.1\', Array)
+#11 /home/candt/workspaces/mhdnocare/modules/system/classes/UpdateManager.php(470): System\\Classes\\VersionManager->updatePlugin(Object(Ideas\\Shop\\Plugin))
+#12 /home/candt/workspaces/mhdnocare/modules/system/classes/UpdateManager.php(141): System\\Classes\\UpdateManager->updatePlugin(\'Ideas.Shop\')
+#13 /home/candt/workspaces/mhdnocare/modules/system/controllers/Updates.php(274): System\\Classes\\UpdateManager->update()
+#14 [internal function]: System\\Controllers\\Updates->onExecuteStep()
+#15 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(534): call_user_func_array(Array, Array)
+#16 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(417): Backend\\Classes\\Controller->runAjaxHandler(\'onExecuteStep\')
+#17 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(227): Backend\\Classes\\Controller->execAjaxHandlers()
+#18 /home/candt/workspaces/mhdnocare/modules/backend/classes/BackendController.php(89): Backend\\Classes\\Controller->run(\'install\', Array)
+#19 [internal function]: Backend\\Classes\\BackendController->run(\'system/updates/...\')
+#20 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(256): call_user_func_array(Array, Array)
+#21 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(164): Illuminate\\Routing\\Controller->callAction(\'run\', Array)
+#22 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(112): Illuminate\\Routing\\ControllerDispatcher->call(Object(Backend\\Classes\\BackendController), Object(Illuminate\\Routing\\Route), \'run\')
+#23 [internal function]: Illuminate\\Routing\\ControllerDispatcher->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#24 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#25 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#26 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#27 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(114): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#28 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(68): Illuminate\\Routing\\ControllerDispatcher->callWithinStack(Object(Backend\\Classes\\BackendController), Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'run\')
+#29 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(203): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'Backend\\\\Classes...\', \'run\')
+#30 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(134): Illuminate\\Routing\\Route->runWithCustomDispatcher(Object(Illuminate\\Http\\Request))
+#31 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(708): Illuminate\\Routing\\Route->run(Object(Illuminate\\Http\\Request))
+#32 [internal function]: Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#33 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#34 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#35 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#36 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(710): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#37 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(674): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#38 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(635): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#39 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(236): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#40 [internal function]: Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#41 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#42 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#43 [internal function]: Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#44 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#45 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(62): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#46 [internal function]: Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#47 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#48 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#49 [internal function]: Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#50 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#51 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(59): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#52 [internal function]: Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#53 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#54 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php(44): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#55 [internal function]: Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#56 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#57 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#58 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#59 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(122): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#60 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(87): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#61 /home/candt/workspaces/mhdnocare/index.php(43): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#62 {main}', NULL, '2018-07-24 08:17:55', '2018-07-24 08:17:55' );
+INSERT INTO `system_event_logs`(`id`,`level`,`message`,`details`,`created_at`,`updated_at`) VALUES ( '335', 'error', 'PDOException: SQLSTATE[42S01]: Base table or view already exists: 1050 Table \'ideas_categories\' already exists in /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Connection.php:390
+Stack trace:
+#0 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Connection.php(390): PDOStatement->execute(Array)
+#1 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Connection.php(655): Illuminate\\Database\\Connection->Illuminate\\Database\\{closure}(Object(Illuminate\\Database\\MySqlConnection), \'create table `i...\', Array)
+#2 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Connection.php(618): Illuminate\\Database\\Connection->runQueryCallback(\'create table `i...\', Array, Object(Closure))
+#3 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Connection.php(391): Illuminate\\Database\\Connection->run(\'create table `i...\', Array, Object(Closure))
+#4 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Schema/Blueprint.php(83): Illuminate\\Database\\Connection->statement(\'create table `i...\')
+#5 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Schema/Builder.php(191): Illuminate\\Database\\Schema\\Blueprint->build(Object(Illuminate\\Database\\MySqlConnection), Object(Illuminate\\Database\\Schema\\Grammars\\MySqlGrammar))
+#6 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Schema/Builder.php(134): Illuminate\\Database\\Schema\\Builder->build(Object(October\\Rain\\Database\\Schema\\Blueprint))
+#7 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(217): Illuminate\\Database\\Schema\\Builder->create(\'ideas_categorie...\', Object(Closure))
+#8 /home/candt/workspaces/mhdnocare/plugins/ideas/shop/updates/create_attribute_table.php(32): Illuminate\\Support\\Facades\\Facade::__callStatic(\'create\', Array)
+#9 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Database/Updater.php(31): Ideas\\Shop\\Updates\\CreateAttributeTable->up()
+#10 /home/candt/workspaces/mhdnocare/modules/system/classes/VersionManager.php(392): October\\Rain\\Database\\Updater->setUp(\'/home/candt/wor...\')
+#11 /home/candt/workspaces/mhdnocare/modules/system/classes/VersionManager.php(141): System\\Classes\\VersionManager->applyDatabaseScript(\'Ideas.Shop\', \'1.0.1\', \'create_attribut...\')
+#12 /home/candt/workspaces/mhdnocare/modules/system/classes/VersionManager.php(94): System\\Classes\\VersionManager->applyPluginUpdate(\'Ideas.Shop\', \'1.0.1\', Array)
+#13 /home/candt/workspaces/mhdnocare/modules/system/classes/UpdateManager.php(470): System\\Classes\\VersionManager->updatePlugin(Object(Ideas\\Shop\\Plugin))
+#14 /home/candt/workspaces/mhdnocare/modules/system/classes/UpdateManager.php(141): System\\Classes\\UpdateManager->updatePlugin(\'Ideas.Shop\')
+#15 /home/candt/workspaces/mhdnocare/modules/system/controllers/Updates.php(274): System\\Classes\\UpdateManager->update()
+#16 [internal function]: System\\Controllers\\Updates->onExecuteStep()
+#17 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(534): call_user_func_array(Array, Array)
+#18 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(417): Backend\\Classes\\Controller->runAjaxHandler(\'onExecuteStep\')
+#19 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(227): Backend\\Classes\\Controller->execAjaxHandlers()
+#20 /home/candt/workspaces/mhdnocare/modules/backend/classes/BackendController.php(89): Backend\\Classes\\Controller->run(\'install\', Array)
+#21 [internal function]: Backend\\Classes\\BackendController->run(\'system/updates/...\')
+#22 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(256): call_user_func_array(Array, Array)
+#23 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(164): Illuminate\\Routing\\Controller->callAction(\'run\', Array)
+#24 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(112): Illuminate\\Routing\\ControllerDispatcher->call(Object(Backend\\Classes\\BackendController), Object(Illuminate\\Routing\\Route), \'run\')
+#25 [internal function]: Illuminate\\Routing\\ControllerDispatcher->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#26 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#27 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#28 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#29 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(114): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#30 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(68): Illuminate\\Routing\\ControllerDispatcher->callWithinStack(Object(Backend\\Classes\\BackendController), Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'run\')
+#31 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(203): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'Backend\\\\Classes...\', \'run\')
+#32 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(134): Illuminate\\Routing\\Route->runWithCustomDispatcher(Object(Illuminate\\Http\\Request))
+#33 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(708): Illuminate\\Routing\\Route->run(Object(Illuminate\\Http\\Request))
+#34 [internal function]: Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#35 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#36 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#37 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#38 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(710): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#39 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(674): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#40 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(635): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#41 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(236): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#42 [internal function]: Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#43 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#44 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#45 [internal function]: Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#46 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#47 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(62): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#48 [internal function]: Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#49 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#50 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#51 [internal function]: Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#52 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#53 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(59): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#54 [internal function]: Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#55 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#56 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php(44): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#57 [internal function]: Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#58 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#59 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#60 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#61 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(122): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#62 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(87): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#63 /home/candt/workspaces/mhdnocare/index.php(43): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#64 {main}
+
+Next Illuminate\\Database\\QueryException: SQLSTATE[42S01]: Base table or view already exists: 1050 Table \'ideas_categories\' already exists (SQL: create table `ideas_categories` (`id` int unsigned not null auto_increment primary key, `name` varchar(255) not null, `slug` varchar(255) not null, `parent_id` int unsigned null, `nest_left` int unsigned null, `nest_right` int unsigned null, `nest_depth` int unsigned null, `status` tinyint not null, `seo_title` text null, `seo_keyword` text null, `seo_description` text null, `featured_image` text null, `description` text null, `cat_order` int unsigned null, `created_at` timestamp null, `updated_at` timestamp null) default character set utf8 collate utf8_unicode_ci engine = InnoDB) in /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Connection.php:662
+Stack trace:
+#0 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Connection.php(618): Illuminate\\Database\\Connection->runQueryCallback(\'create table `i...\', Array, Object(Closure))
+#1 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Connection.php(391): Illuminate\\Database\\Connection->run(\'create table `i...\', Array, Object(Closure))
+#2 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Schema/Blueprint.php(83): Illuminate\\Database\\Connection->statement(\'create table `i...\')
+#3 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Schema/Builder.php(191): Illuminate\\Database\\Schema\\Blueprint->build(Object(Illuminate\\Database\\MySqlConnection), Object(Illuminate\\Database\\Schema\\Grammars\\MySqlGrammar))
+#4 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Schema/Builder.php(134): Illuminate\\Database\\Schema\\Builder->build(Object(October\\Rain\\Database\\Schema\\Blueprint))
+#5 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(217): Illuminate\\Database\\Schema\\Builder->create(\'ideas_categorie...\', Object(Closure))
+#6 /home/candt/workspaces/mhdnocare/plugins/ideas/shop/updates/create_attribute_table.php(32): Illuminate\\Support\\Facades\\Facade::__callStatic(\'create\', Array)
+#7 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Database/Updater.php(31): Ideas\\Shop\\Updates\\CreateAttributeTable->up()
+#8 /home/candt/workspaces/mhdnocare/modules/system/classes/VersionManager.php(392): October\\Rain\\Database\\Updater->setUp(\'/home/candt/wor...\')
+#9 /home/candt/workspaces/mhdnocare/modules/system/classes/VersionManager.php(141): System\\Classes\\VersionManager->applyDatabaseScript(\'Ideas.Shop\', \'1.0.1\', \'create_attribut...\')
+#10 /home/candt/workspaces/mhdnocare/modules/system/classes/VersionManager.php(94): System\\Classes\\VersionManager->applyPluginUpdate(\'Ideas.Shop\', \'1.0.1\', Array)
+#11 /home/candt/workspaces/mhdnocare/modules/system/classes/UpdateManager.php(470): System\\Classes\\VersionManager->updatePlugin(Object(Ideas\\Shop\\Plugin))
+#12 /home/candt/workspaces/mhdnocare/modules/system/classes/UpdateManager.php(141): System\\Classes\\UpdateManager->updatePlugin(\'Ideas.Shop\')
+#13 /home/candt/workspaces/mhdnocare/modules/system/controllers/Updates.php(274): System\\Classes\\UpdateManager->update()
+#14 [internal function]: System\\Controllers\\Updates->onExecuteStep()
+#15 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(534): call_user_func_array(Array, Array)
+#16 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(417): Backend\\Classes\\Controller->runAjaxHandler(\'onExecuteStep\')
+#17 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(227): Backend\\Classes\\Controller->execAjaxHandlers()
+#18 /home/candt/workspaces/mhdnocare/modules/backend/classes/BackendController.php(89): Backend\\Classes\\Controller->run(\'install\', Array)
+#19 [internal function]: Backend\\Classes\\BackendController->run(\'system/updates/...\')
+#20 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(256): call_user_func_array(Array, Array)
+#21 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(164): Illuminate\\Routing\\Controller->callAction(\'run\', Array)
+#22 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(112): Illuminate\\Routing\\ControllerDispatcher->call(Object(Backend\\Classes\\BackendController), Object(Illuminate\\Routing\\Route), \'run\')
+#23 [internal function]: Illuminate\\Routing\\ControllerDispatcher->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#24 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#25 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#26 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#27 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(114): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#28 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(68): Illuminate\\Routing\\ControllerDispatcher->callWithinStack(Object(Backend\\Classes\\BackendController), Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'run\')
+#29 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(203): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'Backend\\\\Classes...\', \'run\')
+#30 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(134): Illuminate\\Routing\\Route->runWithCustomDispatcher(Object(Illuminate\\Http\\Request))
+#31 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(708): Illuminate\\Routing\\Route->run(Object(Illuminate\\Http\\Request))
+#32 [internal function]: Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#33 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#34 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#35 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#36 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(710): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#37 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(674): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#38 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(635): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#39 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(236): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#40 [internal function]: Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#41 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#42 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#43 [internal function]: Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#44 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#45 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(62): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#46 [internal function]: Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#47 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#48 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#49 [internal function]: Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#50 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#51 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(59): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#52 [internal function]: Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#53 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#54 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php(44): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#55 [internal function]: Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#56 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#57 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#58 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#59 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(122): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#60 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(87): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#61 /home/candt/workspaces/mhdnocare/index.php(43): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#62 {main}', NULL, '2018-07-24 08:27:34', '2018-07-24 08:27:34' );
+INSERT INTO `system_event_logs`(`id`,`level`,`message`,`details`,`created_at`,`updated_at`) VALUES ( '336', 'error', 'BadMethodCallException: Call to undefined method October\\Rain\\Database\\QueryBuilder::filter:id,name() in /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php:2123
+Stack trace:
+#0 [internal function]: Illuminate\\Database\\Query\\Builder->__call(\'filter:id,name\', Array)
+#1 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php(1015): call_user_func_array(Array, Array)
+#2 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Database/Builder.php(187): Illuminate\\Database\\Eloquent\\Builder->__call(\'filter:id,name\', Array)
+#3 [internal function]: October\\Rain\\Database\\Builder->__call(\'filter:id,name\', Array)
+#4 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(3444): call_user_func_array(Array, Array)
+#5 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Extension/ExtendableTrait.php(380): Illuminate\\Database\\Eloquent\\Model->__call(\'filter:id,name\', Array)
+#6 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Database/Model.php(492): October\\Rain\\Database\\Model->extendableCall(\'filter:id,name\', Array)
+#7 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php(545): October\\Rain\\Database\\Model->__call(\'filter:id,name\', Array)
+#8 [internal function]: Illuminate\\Database\\Eloquent\\Builder->Illuminate\\Database\\Eloquent\\{closure}()
+#9 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Relations/Relation.php(171): call_user_func(Object(Closure))
+#10 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php(546): Illuminate\\Database\\Eloquent\\Relations\\Relation::noConstraints(Object(Closure))
+#11 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php(517): Illuminate\\Database\\Eloquent\\Builder->getRelation(\'filter:id,name\')
+#12 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php(497): Illuminate\\Database\\Eloquent\\Builder->loadRelation(Array, \'filter:id,name\', Object(Closure))
+#13 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php(240): Illuminate\\Database\\Eloquent\\Builder->eagerLoadRelations(Array)
+#14 /home/candt/workspaces/mhdnocare/plugins/ideas/shop/facades/Product.php(62): Illuminate\\Database\\Eloquent\\Builder->get()
+#15 /home/candt/workspaces/mhdnocare/plugins/ideas/shop/facades/Product.php(133): Ideas\\Shop\\Facades\\Product::getAllFilterAndOption(Array)
+#16 /home/candt/workspaces/mhdnocare/plugins/ideas/shop/controllers/products/create/_filter.htm(2): Ideas\\Shop\\Facades\\Product::getFilterOptionByProductTypeAndGet(NULL, Array)
+#17 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(244): include(\'/home/candt/wor...\')
+#18 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(98): Backend\\Classes\\Controller->makeFileContents(\'/home/candt/wor...\', Array)
+#19 /home/candt/workspaces/mhdnocare/modules/backend/widgets/form/partials/_field_partial.htm(7): Backend\\Classes\\Controller->makePartial(\'~/plugins/ideas...\', Array)
+#20 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(244): include(\'/home/candt/wor...\')
+#21 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(98): Backend\\Classes\\WidgetBase->makeFileContents(\'/home/candt/wor...\', Array)
+#22 /home/candt/workspaces/mhdnocare/modules/backend/widgets/Form.php(270): Backend\\Classes\\WidgetBase->makePartial(\'_field_partial....\', Array)
+#23 /home/candt/workspaces/mhdnocare/modules/backend/widgets/form/partials/_field.htm(22): Backend\\Widgets\\Form->renderFieldElement(Object(Backend\\Classes\\FormField))
+#24 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(244): include(\'/home/candt/wor...\')
+#25 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(98): Backend\\Classes\\WidgetBase->makeFileContents(\'/home/candt/wor...\', Array)
+#26 /home/candt/workspaces/mhdnocare/modules/backend/widgets/form/partials/_field-container.htm(8): Backend\\Classes\\WidgetBase->makePartial(\'_field.htm\', Array)
+#27 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(244): include(\'/home/candt/wor...\')
+#28 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(98): Backend\\Classes\\WidgetBase->makeFileContents(\'/home/candt/wor...\', Array)
+#29 /home/candt/workspaces/mhdnocare/modules/backend/widgets/form/partials/_form_fields.htm(2): Backend\\Classes\\WidgetBase->makePartial(\'_field-containe...\', Array)
+#30 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(244): include(\'/home/candt/wor...\')
+#31 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(98): Backend\\Classes\\WidgetBase->makeFileContents(\'/home/candt/wor...\', Array)
+#32 /home/candt/workspaces/mhdnocare/modules/backend/widgets/form/partials/_form_tabs.htm(27): Backend\\Classes\\WidgetBase->makePartial(\'_form_fields.ht...\', Array)
+#33 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(244): include(\'/home/candt/wor...\')
+#34 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(98): Backend\\Classes\\WidgetBase->makeFileContents(\'/home/candt/wor...\', Array)
+#35 /home/candt/workspaces/mhdnocare/modules/backend/widgets/form/partials/_section.htm(27): Backend\\Classes\\WidgetBase->makePartial(\'_form_tabs.htm\', Array)
+#36 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(244): include(\'/home/candt/wor...\')
+#37 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(98): Backend\\Classes\\WidgetBase->makeFileContents(\'/home/candt/wor...\', Array)
+#38 /home/candt/workspaces/mhdnocare/modules/backend/widgets/form/partials/_form.htm(7): Backend\\Classes\\WidgetBase->makePartial(\'_section.htm\', Array)
+#39 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(244): include(\'/home/candt/wor...\')
+#40 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(98): Backend\\Classes\\WidgetBase->makeFileContents(\'/home/candt/wor...\', Array)
+#41 /home/candt/workspaces/mhdnocare/modules/backend/widgets/form/partials/_form-container.htm(8): Backend\\Classes\\WidgetBase->makePartial(\'_form.htm\')
+#42 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(244): include(\'/home/candt/wor...\')
+#43 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(98): Backend\\Classes\\WidgetBase->makeFileContents(\'/home/candt/wor...\', Array)
+#44 /home/candt/workspaces/mhdnocare/modules/backend/widgets/Form.php(224): Backend\\Classes\\WidgetBase->makePartial(\'_form-container...\', Array)
+#45 /home/candt/workspaces/mhdnocare/modules/backend/behaviors/FormController.php(353): Backend\\Widgets\\Form->render(Array)
+#46 [internal function]: Backend\\Behaviors\\FormController->formRender()
+#47 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Extension/ExtendableTrait.php(366): call_user_func_array(Array, Array)
+#48 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Extension/Extendable.php(42): October\\Rain\\Extension\\Extendable->extendableCall(\'formRender\', Array)
+#49 /home/candt/workspaces/mhdnocare/plugins/ideas/shop/controllers/baseview/_create.htm(4): October\\Rain\\Extension\\Extendable->__call(\'formRender\', Array)
+#50 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(244): include(\'/home/candt/wor...\')
+#51 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(98): Backend\\Classes\\Controller->makeFileContents(\'plugins/ideas/s...\', Array)
+#52 /home/candt/workspaces/mhdnocare/plugins/ideas/shop/controllers/products/create.htm(2): Backend\\Classes\\Controller->makePartial(\'plugins/ideas/s...\')
+#53 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(244): include(\'/home/candt/wor...\')
+#54 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(110): Backend\\Classes\\Controller->makeFileContents(\'/home/candt/wor...\')
+#55 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(363): Backend\\Classes\\Controller->makeView(\'create\')
+#56 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(245): Backend\\Classes\\Controller->execPageAction(\'create\', Array)
+#57 /home/candt/workspaces/mhdnocare/modules/backend/classes/BackendController.php(106): Backend\\Classes\\Controller->run(\'create\', Array)
+#58 [internal function]: Backend\\Classes\\BackendController->run(\'ideas/shop/prod...\')
+#59 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(256): call_user_func_array(Array, Array)
+#60 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(164): Illuminate\\Routing\\Controller->callAction(\'run\', Array)
+#61 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(112): Illuminate\\Routing\\ControllerDispatcher->call(Object(Backend\\Classes\\BackendController), Object(Illuminate\\Routing\\Route), \'run\')
+#62 [internal function]: Illuminate\\Routing\\ControllerDispatcher->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#63 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#64 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#65 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#66 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(114): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#67 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(68): Illuminate\\Routing\\ControllerDispatcher->callWithinStack(Object(Backend\\Classes\\BackendController), Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'run\')
+#68 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(203): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'Backend\\\\Classes...\', \'run\')
+#69 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(134): Illuminate\\Routing\\Route->runWithCustomDispatcher(Object(Illuminate\\Http\\Request))
+#70 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(708): Illuminate\\Routing\\Route->run(Object(Illuminate\\Http\\Request))
+#71 [internal function]: Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#72 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#73 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#74 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#75 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(710): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#76 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(674): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#77 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(635): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#78 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(236): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#79 [internal function]: Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#80 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#81 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#82 [internal function]: Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#83 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#84 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(62): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#85 [internal function]: Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#86 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#87 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#88 [internal function]: Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#89 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#90 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(59): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#91 [internal function]: Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#92 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#93 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php(44): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#94 [internal function]: Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#95 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#96 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#97 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#98 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(122): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#99 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(87): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#100 /home/candt/workspaces/mhdnocare/index.php(43): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#101 {main}', NULL, '2018-07-24 08:29:52', '2018-07-24 08:29:52' );
+INSERT INTO `system_event_logs`(`id`,`level`,`message`,`details`,`created_at`,`updated_at`) VALUES ( '337', 'error', 'Symfony\\Component\\Debug\\Exception\\FatalThrowableError: Call to undefined method Ideas\\Shop\\Updates\\removeCityPostCode::down() in /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Database/Updater.php:56
+Stack trace:
+#0 /home/candt/workspaces/mhdnocare/modules/system/classes/VersionManager.php(412): October\\Rain\\Database\\Updater->packDown(\'/home/candt/wor...\')
+#1 /home/candt/workspaces/mhdnocare/modules/system/classes/VersionManager.php(188): System\\Classes\\VersionManager->removeDatabaseScript(\'Ideas.Shop\', \'1.0.9\', \'remove_city_pos...\')
+#2 /home/candt/workspaces/mhdnocare/modules/system/classes/UpdateManager.php(496): System\\Classes\\VersionManager->removePlugin(Object(Ideas\\Shop\\Plugin))
+#3 /home/candt/workspaces/mhdnocare/modules/system/classes/PluginManager.php(709): System\\Classes\\UpdateManager->rollbackPlugin(\'Ideas.Shop\')
+#4 /home/candt/workspaces/mhdnocare/modules/system/controllers/Updates.php(691): System\\Classes\\PluginManager->deletePlugin(\'Ideas.Shop\')
+#5 [internal function]: System\\Controllers\\Updates->onRemovePlugins()
+#6 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(534): call_user_func_array(Array, Array)
+#7 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(417): Backend\\Classes\\Controller->runAjaxHandler(\'onRemovePlugins\')
+#8 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(227): Backend\\Classes\\Controller->execAjaxHandlers()
+#9 /home/candt/workspaces/mhdnocare/modules/backend/classes/BackendController.php(89): Backend\\Classes\\Controller->run(\'manage\', Array)
+#10 [internal function]: Backend\\Classes\\BackendController->run(\'system/updates/...\')
+#11 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(256): call_user_func_array(Array, Array)
+#12 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(164): Illuminate\\Routing\\Controller->callAction(\'run\', Array)
+#13 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(112): Illuminate\\Routing\\ControllerDispatcher->call(Object(Backend\\Classes\\BackendController), Object(Illuminate\\Routing\\Route), \'run\')
+#14 [internal function]: Illuminate\\Routing\\ControllerDispatcher->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#15 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#16 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#17 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#18 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(114): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#19 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(68): Illuminate\\Routing\\ControllerDispatcher->callWithinStack(Object(Backend\\Classes\\BackendController), Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'run\')
+#20 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(203): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'Backend\\\\Classes...\', \'run\')
+#21 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(134): Illuminate\\Routing\\Route->runWithCustomDispatcher(Object(Illuminate\\Http\\Request))
+#22 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(708): Illuminate\\Routing\\Route->run(Object(Illuminate\\Http\\Request))
+#23 [internal function]: Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#24 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#25 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#26 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#27 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(710): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#28 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(674): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#29 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(635): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#30 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(236): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#31 [internal function]: Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#32 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#33 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#34 [internal function]: Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#35 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#36 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(62): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#37 [internal function]: Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#38 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#39 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#40 [internal function]: Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#41 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#42 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(59): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#43 [internal function]: Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#44 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#45 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php(44): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#46 [internal function]: Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#47 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#48 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#49 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#50 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(122): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#51 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(87): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#52 /home/candt/workspaces/mhdnocare/index.php(43): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#53 {main}', NULL, '2018-07-24 08:30:16', '2018-07-24 08:30:16' );
+INSERT INTO `system_event_logs`(`id`,`level`,`message`,`details`,`created_at`,`updated_at`) VALUES ( '338', 'error', 'Symfony\\Component\\Debug\\Exception\\FatalThrowableError: Call to undefined method Ideas\\Shop\\Updates\\removeCityPostCode::down() in /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Database/Updater.php:56
+Stack trace:
+#0 /home/candt/workspaces/mhdnocare/modules/system/classes/VersionManager.php(412): October\\Rain\\Database\\Updater->packDown(\'/home/candt/wor...\')
+#1 /home/candt/workspaces/mhdnocare/modules/system/classes/VersionManager.php(188): System\\Classes\\VersionManager->removeDatabaseScript(\'Ideas.Shop\', \'1.0.9\', \'remove_city_pos...\')
+#2 /home/candt/workspaces/mhdnocare/modules/system/classes/UpdateManager.php(496): System\\Classes\\VersionManager->removePlugin(Object(Ideas\\Shop\\Plugin))
+#3 /home/candt/workspaces/mhdnocare/modules/system/classes/PluginManager.php(709): System\\Classes\\UpdateManager->rollbackPlugin(\'Ideas.Shop\')
+#4 /home/candt/workspaces/mhdnocare/modules/system/controllers/Updates.php(691): System\\Classes\\PluginManager->deletePlugin(\'Ideas.Shop\')
+#5 [internal function]: System\\Controllers\\Updates->onRemovePlugins()
+#6 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(534): call_user_func_array(Array, Array)
+#7 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(417): Backend\\Classes\\Controller->runAjaxHandler(\'onRemovePlugins\')
+#8 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(227): Backend\\Classes\\Controller->execAjaxHandlers()
+#9 /home/candt/workspaces/mhdnocare/modules/backend/classes/BackendController.php(89): Backend\\Classes\\Controller->run(\'manage\', Array)
+#10 [internal function]: Backend\\Classes\\BackendController->run(\'system/updates/...\')
+#11 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(256): call_user_func_array(Array, Array)
+#12 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(164): Illuminate\\Routing\\Controller->callAction(\'run\', Array)
+#13 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(112): Illuminate\\Routing\\ControllerDispatcher->call(Object(Backend\\Classes\\BackendController), Object(Illuminate\\Routing\\Route), \'run\')
+#14 [internal function]: Illuminate\\Routing\\ControllerDispatcher->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#15 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#16 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#17 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#18 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(114): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#19 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(68): Illuminate\\Routing\\ControllerDispatcher->callWithinStack(Object(Backend\\Classes\\BackendController), Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'run\')
+#20 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(203): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'Backend\\\\Classes...\', \'run\')
+#21 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(134): Illuminate\\Routing\\Route->runWithCustomDispatcher(Object(Illuminate\\Http\\Request))
+#22 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(708): Illuminate\\Routing\\Route->run(Object(Illuminate\\Http\\Request))
+#23 [internal function]: Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#24 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#25 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#26 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#27 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(710): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#28 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(674): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#29 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(635): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#30 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(236): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#31 [internal function]: Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#32 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#33 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#34 [internal function]: Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#35 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#36 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(62): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#37 [internal function]: Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#38 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#39 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#40 [internal function]: Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#41 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#42 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(59): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#43 [internal function]: Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#44 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#45 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php(44): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#46 [internal function]: Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#47 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#48 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#49 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#50 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(122): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#51 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(87): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#52 /home/candt/workspaces/mhdnocare/index.php(43): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#53 {main}', NULL, '2018-07-24 08:30:20', '2018-07-24 08:30:20' );
+INSERT INTO `system_event_logs`(`id`,`level`,`message`,`details`,`created_at`,`updated_at`) VALUES ( '339', 'error', 'Symfony\\Component\\Debug\\Exception\\FatalThrowableError: Call to undefined method Ideas\\Shop\\Updates\\removeCityPostCode::down() in /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Database/Updater.php:56
+Stack trace:
+#0 /home/candt/workspaces/mhdnocare/modules/system/classes/VersionManager.php(412): October\\Rain\\Database\\Updater->packDown(\'/home/candt/wor...\')
+#1 /home/candt/workspaces/mhdnocare/modules/system/classes/VersionManager.php(188): System\\Classes\\VersionManager->removeDatabaseScript(\'Ideas.Shop\', \'1.0.9\', \'remove_city_pos...\')
+#2 /home/candt/workspaces/mhdnocare/modules/system/classes/UpdateManager.php(496): System\\Classes\\VersionManager->removePlugin(Object(Ideas\\Shop\\Plugin))
+#3 /home/candt/workspaces/mhdnocare/modules/system/classes/PluginManager.php(709): System\\Classes\\UpdateManager->rollbackPlugin(\'Ideas.Shop\')
+#4 /home/candt/workspaces/mhdnocare/modules/system/controllers/Updates.php(691): System\\Classes\\PluginManager->deletePlugin(\'Ideas.Shop\')
+#5 [internal function]: System\\Controllers\\Updates->onRemovePlugins()
+#6 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(534): call_user_func_array(Array, Array)
+#7 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(417): Backend\\Classes\\Controller->runAjaxHandler(\'onRemovePlugins\')
+#8 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(227): Backend\\Classes\\Controller->execAjaxHandlers()
+#9 /home/candt/workspaces/mhdnocare/modules/backend/classes/BackendController.php(89): Backend\\Classes\\Controller->run(\'manage\', Array)
+#10 [internal function]: Backend\\Classes\\BackendController->run(\'system/updates/...\')
+#11 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(256): call_user_func_array(Array, Array)
+#12 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(164): Illuminate\\Routing\\Controller->callAction(\'run\', Array)
+#13 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(112): Illuminate\\Routing\\ControllerDispatcher->call(Object(Backend\\Classes\\BackendController), Object(Illuminate\\Routing\\Route), \'run\')
+#14 [internal function]: Illuminate\\Routing\\ControllerDispatcher->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#15 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#16 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#17 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#18 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(114): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#19 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(68): Illuminate\\Routing\\ControllerDispatcher->callWithinStack(Object(Backend\\Classes\\BackendController), Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'run\')
+#20 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(203): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'Backend\\\\Classes...\', \'run\')
+#21 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(134): Illuminate\\Routing\\Route->runWithCustomDispatcher(Object(Illuminate\\Http\\Request))
+#22 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(708): Illuminate\\Routing\\Route->run(Object(Illuminate\\Http\\Request))
+#23 [internal function]: Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#24 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#25 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#26 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#27 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(710): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#28 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(674): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#29 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(635): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#30 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(236): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#31 [internal function]: Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#32 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#33 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#34 [internal function]: Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#35 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#36 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(62): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#37 [internal function]: Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#38 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#39 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#40 [internal function]: Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#41 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#42 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(59): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#43 [internal function]: Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#44 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#45 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php(44): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#46 [internal function]: Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#47 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#48 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#49 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#50 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(122): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#51 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(87): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#52 /home/candt/workspaces/mhdnocare/index.php(43): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#53 {main}', NULL, '2018-07-24 08:30:32', '2018-07-24 08:30:32' );
 -- ---------------------------------------------------------
 
 
@@ -18564,6 +18454,62 @@ INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`creat
 INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '238', 'One47.FileList', 'script', '1.0.3', 'A more specific permission function will be added in the near future', '2018-07-18 06:40:08' );
 INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '239', 'One47.FileList', 'comment', '1.0.3', 'Added basic permission function to allow or deny admins to manage filelists', '2018-07-18 06:40:08' );
 INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '240', 'One47.FileList', 'comment', '1.0.4', 'Fixed issue to allow various file types to be uploaded', '2018-07-18 06:40:08' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '466', 'OFFLINE.SnipcartShop', 'script', '1.0.1', 'builder_table_create_offline_snipcartshop_products.php', '2018-07-24 08:35:01' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '467', 'OFFLINE.SnipcartShop', 'script', '1.0.1', 'builder_table_create_offline_snipcartshop_product_variants.php', '2018-07-24 08:35:01' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '468', 'OFFLINE.SnipcartShop', 'script', '1.0.1', 'builder_table_create_offline_snipcartshop_product_custom_fields.php', '2018-07-24 08:35:01' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '469', 'OFFLINE.SnipcartShop', 'script', '1.0.1', 'builder_table_create_offline_snipcartshop_product_custom_field_options.php', '2018-07-24 08:35:01' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '470', 'OFFLINE.SnipcartShop', 'script', '1.0.1', 'builder_table_create_offline_snipcartshop_product_variant_custom_field_option.php', '2018-07-24 08:35:01' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '471', 'OFFLINE.SnipcartShop', 'script', '1.0.1', 'builder_table_create_offline_snipcartshop_categories.php', '2018-07-24 08:35:01' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '472', 'OFFLINE.SnipcartShop', 'script', '1.0.1', 'builder_table_create_offline_snipcartshop_category_product.php', '2018-07-24 08:35:02' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '473', 'OFFLINE.SnipcartShop', 'script', '1.0.1', 'builder_table_create_offline_snipcartshop_orders.php', '2018-07-24 08:35:02' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '474', 'OFFLINE.SnipcartShop', 'script', '1.0.1', 'builder_table_create_offline_snipcartshop_order_items.php', '2018-07-24 08:35:02' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '475', 'OFFLINE.SnipcartShop', 'script', '1.0.1', 'builder_table_create_offline_snipcartshop_discounts.php', '2018-07-24 08:35:02' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '476', 'OFFLINE.SnipcartShop', 'comment', '1.0.1', 'Initial release.', '2018-07-24 08:35:02' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '477', 'OFFLINE.SnipcartShop', 'script', '1.0.2', 'builder_table_update_offline_snipcartshop_products.php', '2018-07-24 08:35:03' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '478', 'OFFLINE.SnipcartShop', 'comment', '1.0.2', 'Added support for product attributes, downloads and links // Optimized price validation', '2018-07-24 08:35:03' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '479', 'OFFLINE.SnipcartShop', 'script', '1.0.3', 'builder_table_create_offline_snipcartshop_product_accessory.php', '2018-07-24 08:35:03' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '480', 'OFFLINE.SnipcartShop', 'comment', '1.0.3', 'Added support for product accessories', '2018-07-24 08:35:03' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '481', 'OFFLINE.SnipcartShop', 'comment', '1.0.4', 'Fixed incorrect database schema generation (thanks to abhi1693)', '2018-07-24 08:35:03' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '482', 'OFFLINE.SnipcartShop', 'comment', '1.0.5', 'Enable support on Windows systems and make Rainlab.Translate dependency optional', '2018-07-24 08:35:03' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '483', 'OFFLINE.SnipcartShop', 'script', '1.0.6', 'set_sort_order_defaults.php', '2018-07-24 08:35:03' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '484', 'OFFLINE.SnipcartShop', 'comment', '1.0.6', 'Fixed issues with MySQL instances that run in strict mode', '2018-07-24 08:35:03' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '485', 'OFFLINE.SnipcartShop', 'comment', '1.0.7', 'Prevent generation of empty sub-category lists', '2018-07-24 08:35:03' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '486', 'OFFLINE.SnipcartShop', 'comment', '1.0.8', 'Fixed price handling with product variants and generation of category slugs', '2018-07-24 08:35:03' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '487', 'OFFLINE.SnipcartShop', 'comment', '1.0.9', 'Use category slug in sub categories directly', '2018-07-24 08:35:04' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '488', 'OFFLINE.SnipcartShop', 'comment', '1.0.10', 'Added missing categoryPage param', '2018-07-24 08:35:04' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '489', 'OFFLINE.SnipcartShop', 'comment', '1.0.11', 'Added is_accessory_of relationship to articles', '2018-07-24 08:35:04' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '490', 'OFFLINE.SnipcartShop', 'comment', '1.0.12', 'Added new Snipcart Webhook fields', '2018-07-24 08:35:04' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '491', 'OFFLINE.SnipcartShop', 'comment', '1.0.13', 'Fixed generation of quantitiy attributes in product markup', '2018-07-24 08:35:04' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '492', 'OFFLINE.SnipcartShop', 'comment', '1.0.14', 'Added workaround to make translation of product attributes work as expected', '2018-07-24 08:35:04' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '493', 'OFFLINE.SnipcartShop', 'comment', '1.0.15', 'Added maximum number of usages field to discouts', '2018-07-24 08:35:04' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '494', 'OFFLINE.SnipcartShop', 'comment', '1.0.16', 'Fixed invalid relationship column in products list', '2018-07-24 08:35:04' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '495', 'OFFLINE.SnipcartShop', 'comment', '1.0.17', 'Prevent a bug with discounts where the trigger type gets ignored by Snipcart', '2018-07-24 08:35:04' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '496', 'OFFLINE.SnipcartShop', 'comment', '1.0.18', 'Added option to display custom fields directly on the product page', '2018-07-24 08:35:04' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '497', 'OFFLINE.SnipcartShop', 'comment', '1.0.19', 'Implemented category images', '2018-07-24 08:35:04' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '498', 'OFFLINE.SnipcartShop', 'script', '1.0.20', 'builder_table_update_offline_snipcartshop_categories.php', '2018-07-24 08:35:04' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '499', 'OFFLINE.SnipcartShop', 'comment', '1.0.20', 'Added unique code field to better identify categories in frontend partials', '2018-07-24 08:35:05' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '500', 'OFFLINE.SnipcartShop', 'comment', '1.0.21', 'Added options for continue shopping button and split first and last name fields', '2018-07-24 08:35:05' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '501', 'OFFLINE.SnipcartShop', 'comment', '1.0.22', 'Fixed backend search and made components work without categories', '2018-07-24 08:35:05' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '502', 'OFFLINE.SnipcartShop', 'comment', '1.0.23', 'Calculating new price immediately after changing custom fields on the product page', '2018-07-24 08:35:05' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '503', 'OFFLINE.SnipcartShop', 'script', '1.0.24', 'make_order_fields_nullable.php', '2018-07-24 08:35:05' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '504', 'OFFLINE.SnipcartShop', 'comment', '1.0.24', 'Made order fields nullable', '2018-07-24 08:35:05' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '505', 'OFFLINE.SnipcartShop', 'comment', '1.0.25', 'Fixed "show all products" option on products component', '2018-07-24 08:35:05' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '506', 'OFFLINE.SnipcartShop', 'script', '1.0.26', 'make_order_items_fields_nullable.php', '2018-07-24 08:35:05' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '507', 'OFFLINE.SnipcartShop', 'comment', '1.0.26', 'Made order items fields nullable', '2018-07-24 08:35:05' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '508', 'OFFLINE.SnipcartShop', 'comment', '1.0.27', 'Fixed custom attribute dropdowns when using SQLite', '2018-07-24 08:35:05' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '509', 'OFFLINE.SnipcartShop', 'comment', '1.0.28', 'Added category filter to products list', '2018-07-24 08:35:05' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '510', 'OFFLINE.SnipcartShop', 'comment', '1.0.29', 'Moved frontend price calculation into a separate partial', '2018-07-24 08:35:06' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '511', 'OFFLINE.SnipcartShop', 'script', '1.0.30', 'builder_table_update_offline_snipcartshop_orders.php', '2018-07-24 08:35:06' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '512', 'OFFLINE.SnipcartShop', 'comment', '1.0.30', 'Tracking used discount codes for orders', '2018-07-24 08:35:06' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '513', 'OFFLINE.SnipcartShop', 'comment', '1.0.31', 'Implemented new Snipcart Webhook fields', '2018-07-24 08:35:06' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '514', 'OFFLINE.SnipcartShop', 'comment', '1.0.32', 'Added orders export functionality', '2018-07-24 08:35:06' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '515', 'OFFLINE.SnipcartShop', 'comment', '1.0.33', 'Implemented custom currency formats', '2018-07-24 08:35:06' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '516', 'OFFLINE.SnipcartShop', 'comment', '1.0.34', 'Added dependency on Rainlab.Translate', '2018-07-24 08:35:06' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '517', 'OFFLINE.SnipcartShop', 'comment', '1.0.35', 'Added support for new October Build 420 on Laravel 5.5', '2018-07-24 08:35:06' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '518', 'OFFLINE.SnipcartShop', 'comment', '1.0.36', 'Fixed compatibility with new Snipcart Webhook fields', '2018-07-24 08:35:06' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '519', 'OFFLINE.SnipcartShop', 'comment', '1.0.37', 'Fixed bugs when receiving Snipcart webhooks', '2018-07-24 08:35:06' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '520', 'OFFLINE.SnipcartShop', 'comment', '1.0.38', 'Fixed dependency definition on RainLab.Translate', '2018-07-24 08:35:06' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '521', 'OFFLINE.SnipcartShop', 'comment', '1.0.39', 'Changed json column types to text for new installations since it is causing problems with old MySQL versions', '2018-07-24 08:35:06' );
 -- ---------------------------------------------------------
 
 
@@ -18577,6 +18523,7 @@ INSERT INTO `system_plugin_versions`(`id`,`code`,`version`,`created_at`,`is_disa
 INSERT INTO `system_plugin_versions`(`id`,`code`,`version`,`created_at`,`is_disabled`,`is_frozen`) VALUES ( '13', 'BenFreke.MenuManager', '1.5.3', '2018-07-16 02:28:26', '0', '0' );
 INSERT INTO `system_plugin_versions`(`id`,`code`,`version`,`created_at`,`is_disabled`,`is_frozen`) VALUES ( '14', 'RainLab.Blog', '1.2.19', '2018-07-16 06:19:24', '0', '0' );
 INSERT INTO `system_plugin_versions`(`id`,`code`,`version`,`created_at`,`is_disabled`,`is_frozen`) VALUES ( '15', 'One47.FileList', '1.0.4', '2018-07-18 06:40:08', '0', '0' );
+INSERT INTO `system_plugin_versions`(`id`,`code`,`version`,`created_at`,`is_disabled`,`is_frozen`) VALUES ( '24', 'OFFLINE.SnipcartShop', '1.0.39', '2018-07-24 08:35:07', '0', '0' );
 -- ---------------------------------------------------------
 
 
@@ -19378,6 +19325,50 @@ INSERT INTO `users`(`id`,`name`,`email`,`password`,`activation_code`,`persist_co
 -- ---------------------------------------------------------
 
 
+-- Dump data of "offline_snipcartshop_categories" ----------
+-- ---------------------------------------------------------
+
+
+-- Dump data of "offline_snipcartshop_category_product" ----
+-- ---------------------------------------------------------
+
+
+-- Dump data of "offline_snipcartshop_discounts" -----------
+-- ---------------------------------------------------------
+
+
+-- Dump data of "offline_snipcartshop_order_items" ---------
+-- ---------------------------------------------------------
+
+
+-- Dump data of "offline_snipcartshop_orders" --------------
+-- ---------------------------------------------------------
+
+
+-- Dump data of "offline_snipcartshop_product_accessory" ---
+-- ---------------------------------------------------------
+
+
+-- Dump data of "offline_snipcartshop_product_custom_field_options" 
+-- ---------------------------------------------------------
+
+
+-- Dump data of "offline_snipcartshop_product_custom_fields" 
+-- ---------------------------------------------------------
+
+
+-- Dump data of "offline_snipcartshop_product_variant_custom_field_option" 
+-- ---------------------------------------------------------
+
+
+-- Dump data of "offline_snipcartshop_product_variants" ----
+-- ---------------------------------------------------------
+
+
+-- Dump data of "offline_snipcartshop_products" ------------
+-- ---------------------------------------------------------
+
+
 -- CREATE INDEX "code_index" -------------------------------
 -- CREATE INDEX "code_index" -----------------------------------
 CREATE INDEX `code_index` USING BTREE ON `backend_user_groups`( `code` );
@@ -19458,209 +19449,6 @@ CREATE INDEX `deferred_bindings_slave_id_index` USING BTREE ON `deferred_binding
 -- CREATE INDEX "deferred_bindings_slave_type_index" -------
 -- CREATE INDEX "deferred_bindings_slave_type_index" -----------
 CREATE INDEX `deferred_bindings_slave_type_index` USING BTREE ON `deferred_bindings`( `slave_type` );
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE INDEX "ideas_coupon_history_coupon_id_foreign" ---
--- CREATE INDEX "ideas_coupon_history_coupon_id_foreign" -------
-CREATE INDEX `ideas_coupon_history_coupon_id_foreign` USING BTREE ON `ideas_coupon_history`( `coupon_id` );
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE INDEX "ideas_coupon_history_order_id_foreign" ----
--- CREATE INDEX "ideas_coupon_history_order_id_foreign" --------
-CREATE INDEX `ideas_coupon_history_order_id_foreign` USING BTREE ON `ideas_coupon_history`( `order_id` );
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE INDEX "ideas_coupon_to_category_category_id_foreign" 
--- CREATE INDEX "ideas_coupon_to_category_category_id_foreign" -
-CREATE INDEX `ideas_coupon_to_category_category_id_foreign` USING BTREE ON `ideas_coupon_to_category`( `category_id` );
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE INDEX "ideas_coupon_to_category_coupon_id_foreign" 
--- CREATE INDEX "ideas_coupon_to_category_coupon_id_foreign" ---
-CREATE INDEX `ideas_coupon_to_category_coupon_id_foreign` USING BTREE ON `ideas_coupon_to_category`( `coupon_id` );
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE INDEX "ideas_coupon_to_product_coupon_id_foreign" 
--- CREATE INDEX "ideas_coupon_to_product_coupon_id_foreign" ----
-CREATE INDEX `ideas_coupon_to_product_coupon_id_foreign` USING BTREE ON `ideas_coupon_to_product`( `coupon_id` );
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE INDEX "ideas_coupon_to_product_product_id_foreign" 
--- CREATE INDEX "ideas_coupon_to_product_product_id_foreign" ---
-CREATE INDEX `ideas_coupon_to_product_product_id_foreign` USING BTREE ON `ideas_coupon_to_product`( `product_id` );
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE INDEX "ideas_filter_option_filter_id_foreign" ----
--- CREATE INDEX "ideas_filter_option_filter_id_foreign" --------
-CREATE INDEX `ideas_filter_option_filter_id_foreign` USING BTREE ON `ideas_filter_option`( `filter_id` );
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE INDEX "ideas_order_order_status_id_foreign" ------
--- CREATE INDEX "ideas_order_order_status_id_foreign" ----------
-CREATE INDEX `ideas_order_order_status_id_foreign` USING BTREE ON `ideas_order`( `order_status_id` );
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE INDEX "ideas_order_product_order_id_foreign" -----
--- CREATE INDEX "ideas_order_product_order_id_foreign" ---------
-CREATE INDEX `ideas_order_product_order_id_foreign` USING BTREE ON `ideas_order_product`( `order_id` );
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE INDEX "ideas_order_return_order_id_foreign" ------
--- CREATE INDEX "ideas_order_return_order_id_foreign" ----------
-CREATE INDEX `ideas_order_return_order_id_foreign` USING BTREE ON `ideas_order_return`( `order_id` );
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE INDEX "ideas_order_return_product_id_foreign" ----
--- CREATE INDEX "ideas_order_return_product_id_foreign" --------
-CREATE INDEX `ideas_order_return_product_id_foreign` USING BTREE ON `ideas_order_return`( `product_id` );
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE INDEX "ideas_order_return_reason_id_foreign" -----
--- CREATE INDEX "ideas_order_return_reason_id_foreign" ---------
-CREATE INDEX `ideas_order_return_reason_id_foreign` USING BTREE ON `ideas_order_return`( `reason_id` );
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE INDEX "ideas_order_status_change_order_id_foreign" 
--- CREATE INDEX "ideas_order_status_change_order_id_foreign" ---
-CREATE INDEX `ideas_order_status_change_order_id_foreign` USING BTREE ON `ideas_order_status_change`( `order_id` );
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE INDEX "ideas_product_attribute_product_id_index" -
--- CREATE INDEX "ideas_product_attribute_product_id_index" -----
-CREATE INDEX `ideas_product_attribute_product_id_index` USING BTREE ON `ideas_product_attribute`( `product_id` );
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE INDEX "ideas_product_child_to_category_category_id_foreign" 
--- CREATE INDEX "ideas_product_child_to_category_category_id_foreign" 
-CREATE INDEX `ideas_product_child_to_category_category_id_foreign` USING BTREE ON `ideas_product_child_to_category`( `category_id` );
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE INDEX "ideas_product_child_to_category_product_id_foreign" 
--- CREATE INDEX "ideas_product_child_to_category_product_id_foreign" 
-CREATE INDEX `ideas_product_child_to_category_product_id_foreign` USING BTREE ON `ideas_product_child_to_category`( `product_id` );
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE INDEX "ideas_product_configurable_product_id_foreign" 
--- CREATE INDEX "ideas_product_configurable_product_id_foreign" 
-CREATE INDEX `ideas_product_configurable_product_id_foreign` USING BTREE ON `ideas_product_configurable`( `product_id` );
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE INDEX "ideas_product_downloadable_product_id_foreign" 
--- CREATE INDEX "ideas_product_downloadable_product_id_foreign" 
-CREATE INDEX `ideas_product_downloadable_product_id_foreign` USING BTREE ON `ideas_product_downloadable`( `product_id` );
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE INDEX "ideas_product_downloadable_link_code_index" 
--- CREATE INDEX "ideas_product_downloadable_link_code_index" ---
-CREATE INDEX `ideas_product_downloadable_link_code_index` USING BTREE ON `ideas_product_downloadable_link`( `code` );
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE INDEX "ideas_product_reviews_product_id_foreign" -
--- CREATE INDEX "ideas_product_reviews_product_id_foreign" -----
-CREATE INDEX `ideas_product_reviews_product_id_foreign` USING BTREE ON `ideas_product_reviews`( `product_id` );
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE INDEX "ideas_product_to_category_category_id_foreign" 
--- CREATE INDEX "ideas_product_to_category_category_id_foreign" 
-CREATE INDEX `ideas_product_to_category_category_id_foreign` USING BTREE ON `ideas_product_to_category`( `category_id` );
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE INDEX "ideas_product_to_category_product_id_foreign" 
--- CREATE INDEX "ideas_product_to_category_product_id_foreign" -
-CREATE INDEX `ideas_product_to_category_product_id_foreign` USING BTREE ON `ideas_product_to_category`( `product_id` );
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE INDEX "ideas_product_to_filter_option_product_id_foreign" 
--- CREATE INDEX "ideas_product_to_filter_option_product_id_foreign" 
-CREATE INDEX `ideas_product_to_filter_option_product_id_foreign` USING BTREE ON `ideas_product_to_filter_option`( `product_id` );
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE INDEX "ideas_routes_entity_id_index" -------------
--- CREATE INDEX "ideas_routes_entity_id_index" -----------------
-CREATE INDEX `ideas_routes_entity_id_index` USING BTREE ON `ideas_routes`( `entity_id` );
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE INDEX "ideas_tax_rate_geo_zone_id_foreign" -------
--- CREATE INDEX "ideas_tax_rate_geo_zone_id_foreign" -----------
-CREATE INDEX `ideas_tax_rate_geo_zone_id_foreign` USING BTREE ON `ideas_tax_rate`( `geo_zone_id` );
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE INDEX "ideas_tax_rule_tax_class_id_foreign" ------
--- CREATE INDEX "ideas_tax_rule_tax_class_id_foreign" ----------
-CREATE INDEX `ideas_tax_rule_tax_class_id_foreign` USING BTREE ON `ideas_tax_rule`( `tax_class_id` );
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE INDEX "ideas_tax_rule_tax_rate_id_foreign" -------
--- CREATE INDEX "ideas_tax_rule_tax_rate_id_foreign" -----------
-CREATE INDEX `ideas_tax_rule_tax_rate_id_foreign` USING BTREE ON `ideas_tax_rule`( `tax_rate_id` );
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE INDEX "ideas_theme_config_image_detail_theme_config_id_foreign" 
--- CREATE INDEX "ideas_theme_config_image_detail_theme_config_id_foreign" 
-CREATE INDEX `ideas_theme_config_image_detail_theme_config_id_foreign` USING BTREE ON `ideas_theme_config_image_detail`( `theme_config_id` );
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE INDEX "ideas_theme_config_text_value_theme_config_id_foreign" 
--- CREATE INDEX "ideas_theme_config_text_value_theme_config_id_foreign" 
-CREATE INDEX `ideas_theme_config_text_value_theme_config_id_foreign` USING BTREE ON `ideas_theme_config_text_value`( `theme_config_id` );
 -- -------------------------------------------------------------
 -- ---------------------------------------------------------
 
@@ -19913,303 +19701,6 @@ CREATE INDEX `users_login_index` USING BTREE ON `users`( `username` );
 -- CREATE INDEX "users_reset_password_code_index" ----------
 -- CREATE INDEX "users_reset_password_code_index" --------------
 CREATE INDEX `users_reset_password_code_index` USING BTREE ON `users`( `reset_password_code` );
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE LINK "ideas_coupon_history_order_id_foreign" -----
--- CREATE LINK "ideas_coupon_history_order_id_foreign" ---------
-ALTER TABLE `ideas_coupon_history`
-	ADD CONSTRAINT `ideas_coupon_history_order_id_foreign` FOREIGN KEY ( `order_id` )
-	REFERENCES `ideas_order`( `id` )
-	ON DELETE Cascade
-	ON UPDATE Restrict;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE LINK "ideas_coupon_history_coupon_id_foreign" ----
--- CREATE LINK "ideas_coupon_history_coupon_id_foreign" --------
-ALTER TABLE `ideas_coupon_history`
-	ADD CONSTRAINT `ideas_coupon_history_coupon_id_foreign` FOREIGN KEY ( `coupon_id` )
-	REFERENCES `ideas_coupon`( `id` )
-	ON DELETE Cascade
-	ON UPDATE Restrict;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE LINK "ideas_coupon_to_category_category_id_foreign" 
--- CREATE LINK "ideas_coupon_to_category_category_id_foreign" --
-ALTER TABLE `ideas_coupon_to_category`
-	ADD CONSTRAINT `ideas_coupon_to_category_category_id_foreign` FOREIGN KEY ( `category_id` )
-	REFERENCES `ideas_categories`( `id` )
-	ON DELETE Cascade
-	ON UPDATE Restrict;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE LINK "ideas_coupon_to_category_coupon_id_foreign" 
--- CREATE LINK "ideas_coupon_to_category_coupon_id_foreign" ----
-ALTER TABLE `ideas_coupon_to_category`
-	ADD CONSTRAINT `ideas_coupon_to_category_coupon_id_foreign` FOREIGN KEY ( `coupon_id` )
-	REFERENCES `ideas_coupon`( `id` )
-	ON DELETE Cascade
-	ON UPDATE Restrict;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE LINK "ideas_coupon_to_product_product_id_foreign" 
--- CREATE LINK "ideas_coupon_to_product_product_id_foreign" ----
-ALTER TABLE `ideas_coupon_to_product`
-	ADD CONSTRAINT `ideas_coupon_to_product_product_id_foreign` FOREIGN KEY ( `product_id` )
-	REFERENCES `ideas_product`( `id` )
-	ON DELETE Cascade
-	ON UPDATE Restrict;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE LINK "ideas_coupon_to_product_coupon_id_foreign" -
--- CREATE LINK "ideas_coupon_to_product_coupon_id_foreign" -----
-ALTER TABLE `ideas_coupon_to_product`
-	ADD CONSTRAINT `ideas_coupon_to_product_coupon_id_foreign` FOREIGN KEY ( `coupon_id` )
-	REFERENCES `ideas_coupon`( `id` )
-	ON DELETE Cascade
-	ON UPDATE Restrict;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE LINK "ideas_filter_option_filter_id_foreign" -----
--- CREATE LINK "ideas_filter_option_filter_id_foreign" ---------
-ALTER TABLE `ideas_filter_option`
-	ADD CONSTRAINT `ideas_filter_option_filter_id_foreign` FOREIGN KEY ( `filter_id` )
-	REFERENCES `ideas_filter`( `id` )
-	ON DELETE Cascade
-	ON UPDATE Restrict;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE LINK "ideas_order_order_status_id_foreign" -------
--- CREATE LINK "ideas_order_order_status_id_foreign" -----------
-ALTER TABLE `ideas_order`
-	ADD CONSTRAINT `ideas_order_order_status_id_foreign` FOREIGN KEY ( `order_status_id` )
-	REFERENCES `ideas_order_status`( `id` )
-	ON DELETE Restrict
-	ON UPDATE Restrict;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE LINK "ideas_order_product_order_id_foreign" ------
--- CREATE LINK "ideas_order_product_order_id_foreign" ----------
-ALTER TABLE `ideas_order_product`
-	ADD CONSTRAINT `ideas_order_product_order_id_foreign` FOREIGN KEY ( `order_id` )
-	REFERENCES `ideas_order`( `id` )
-	ON DELETE Cascade
-	ON UPDATE Restrict;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE LINK "ideas_order_return_reason_id_foreign" ------
--- CREATE LINK "ideas_order_return_reason_id_foreign" ----------
-ALTER TABLE `ideas_order_return`
-	ADD CONSTRAINT `ideas_order_return_reason_id_foreign` FOREIGN KEY ( `reason_id` )
-	REFERENCES `ideas_order_return_reason`( `id` )
-	ON DELETE Restrict
-	ON UPDATE Restrict;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE LINK "ideas_order_return_order_id_foreign" -------
--- CREATE LINK "ideas_order_return_order_id_foreign" -----------
-ALTER TABLE `ideas_order_return`
-	ADD CONSTRAINT `ideas_order_return_order_id_foreign` FOREIGN KEY ( `order_id` )
-	REFERENCES `ideas_order`( `id` )
-	ON DELETE Restrict
-	ON UPDATE Restrict;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE LINK "ideas_order_return_product_id_foreign" -----
--- CREATE LINK "ideas_order_return_product_id_foreign" ---------
-ALTER TABLE `ideas_order_return`
-	ADD CONSTRAINT `ideas_order_return_product_id_foreign` FOREIGN KEY ( `product_id` )
-	REFERENCES `ideas_product`( `id` )
-	ON DELETE Restrict
-	ON UPDATE Restrict;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE LINK "ideas_order_status_change_order_id_foreign" 
--- CREATE LINK "ideas_order_status_change_order_id_foreign" ----
-ALTER TABLE `ideas_order_status_change`
-	ADD CONSTRAINT `ideas_order_status_change_order_id_foreign` FOREIGN KEY ( `order_id` )
-	REFERENCES `ideas_order`( `id` )
-	ON DELETE Restrict
-	ON UPDATE Restrict;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE LINK "ideas_product_attribute_product_id_foreign" 
--- CREATE LINK "ideas_product_attribute_product_id_foreign" ----
-ALTER TABLE `ideas_product_attribute`
-	ADD CONSTRAINT `ideas_product_attribute_product_id_foreign` FOREIGN KEY ( `product_id` )
-	REFERENCES `ideas_product`( `id` )
-	ON DELETE Cascade
-	ON UPDATE Restrict;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE LINK "ideas_product_child_to_category_category_id_foreign" 
--- CREATE LINK "ideas_product_child_to_category_category_id_foreign" 
-ALTER TABLE `ideas_product_child_to_category`
-	ADD CONSTRAINT `ideas_product_child_to_category_category_id_foreign` FOREIGN KEY ( `category_id` )
-	REFERENCES `ideas_categories`( `id` )
-	ON DELETE Cascade
-	ON UPDATE Restrict;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE LINK "ideas_product_child_to_category_product_id_foreign" 
--- CREATE LINK "ideas_product_child_to_category_product_id_foreign" 
-ALTER TABLE `ideas_product_child_to_category`
-	ADD CONSTRAINT `ideas_product_child_to_category_product_id_foreign` FOREIGN KEY ( `product_id` )
-	REFERENCES `ideas_product`( `id` )
-	ON DELETE Cascade
-	ON UPDATE Restrict;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE LINK "ideas_product_configurable_product_id_foreign" 
--- CREATE LINK "ideas_product_configurable_product_id_foreign" -
-ALTER TABLE `ideas_product_configurable`
-	ADD CONSTRAINT `ideas_product_configurable_product_id_foreign` FOREIGN KEY ( `product_id` )
-	REFERENCES `ideas_product`( `id` )
-	ON DELETE Cascade
-	ON UPDATE Restrict;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE LINK "ideas_product_downloadable_product_id_foreign" 
--- CREATE LINK "ideas_product_downloadable_product_id_foreign" -
-ALTER TABLE `ideas_product_downloadable`
-	ADD CONSTRAINT `ideas_product_downloadable_product_id_foreign` FOREIGN KEY ( `product_id` )
-	REFERENCES `ideas_product`( `id` )
-	ON DELETE Cascade
-	ON UPDATE Restrict;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE LINK "ideas_product_reviews_product_id_foreign" --
--- CREATE LINK "ideas_product_reviews_product_id_foreign" ------
-ALTER TABLE `ideas_product_reviews`
-	ADD CONSTRAINT `ideas_product_reviews_product_id_foreign` FOREIGN KEY ( `product_id` )
-	REFERENCES `ideas_product`( `id` )
-	ON DELETE Cascade
-	ON UPDATE Restrict;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE LINK "ideas_product_to_category_category_id_foreign" 
--- CREATE LINK "ideas_product_to_category_category_id_foreign" -
-ALTER TABLE `ideas_product_to_category`
-	ADD CONSTRAINT `ideas_product_to_category_category_id_foreign` FOREIGN KEY ( `category_id` )
-	REFERENCES `ideas_categories`( `id` )
-	ON DELETE Cascade
-	ON UPDATE Restrict;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE LINK "ideas_product_to_category_product_id_foreign" 
--- CREATE LINK "ideas_product_to_category_product_id_foreign" --
-ALTER TABLE `ideas_product_to_category`
-	ADD CONSTRAINT `ideas_product_to_category_product_id_foreign` FOREIGN KEY ( `product_id` )
-	REFERENCES `ideas_product`( `id` )
-	ON DELETE Cascade
-	ON UPDATE Restrict;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE LINK "ideas_product_to_filter_option_product_id_foreign" 
--- CREATE LINK "ideas_product_to_filter_option_product_id_foreign" 
-ALTER TABLE `ideas_product_to_filter_option`
-	ADD CONSTRAINT `ideas_product_to_filter_option_product_id_foreign` FOREIGN KEY ( `product_id` )
-	REFERENCES `ideas_product`( `id` )
-	ON DELETE Cascade
-	ON UPDATE Restrict;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE LINK "ideas_tax_rate_geo_zone_id_foreign" --------
--- CREATE LINK "ideas_tax_rate_geo_zone_id_foreign" ------------
-ALTER TABLE `ideas_tax_rate`
-	ADD CONSTRAINT `ideas_tax_rate_geo_zone_id_foreign` FOREIGN KEY ( `geo_zone_id` )
-	REFERENCES `ideas_geo_zone`( `id` )
-	ON DELETE Restrict
-	ON UPDATE Restrict;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE LINK "ideas_tax_rule_tax_rate_id_foreign" --------
--- CREATE LINK "ideas_tax_rule_tax_rate_id_foreign" ------------
-ALTER TABLE `ideas_tax_rule`
-	ADD CONSTRAINT `ideas_tax_rule_tax_rate_id_foreign` FOREIGN KEY ( `tax_rate_id` )
-	REFERENCES `ideas_tax_rate`( `id` )
-	ON DELETE Restrict
-	ON UPDATE Restrict;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE LINK "ideas_tax_rule_tax_class_id_foreign" -------
--- CREATE LINK "ideas_tax_rule_tax_class_id_foreign" -----------
-ALTER TABLE `ideas_tax_rule`
-	ADD CONSTRAINT `ideas_tax_rule_tax_class_id_foreign` FOREIGN KEY ( `tax_class_id` )
-	REFERENCES `ideas_tax_class`( `id` )
-	ON DELETE Restrict
-	ON UPDATE Restrict;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE LINK "ideas_theme_config_image_detail_theme_config_id_foreign" 
--- CREATE LINK "ideas_theme_config_image_detail_theme_config_id_foreign" 
-ALTER TABLE `ideas_theme_config_image_detail`
-	ADD CONSTRAINT `ideas_theme_config_image_detail_theme_config_id_foreign` FOREIGN KEY ( `theme_config_id` )
-	REFERENCES `ideas_theme_config`( `id` )
-	ON DELETE Restrict
-	ON UPDATE Restrict;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE LINK "ideas_theme_config_text_value_theme_config_id_foreign" 
--- CREATE LINK "ideas_theme_config_text_value_theme_config_id_foreign" 
-ALTER TABLE `ideas_theme_config_text_value`
-	ADD CONSTRAINT `ideas_theme_config_text_value_theme_config_id_foreign` FOREIGN KEY ( `theme_config_id` )
-	REFERENCES `ideas_theme_config`( `id` )
-	ON DELETE Restrict
-	ON UPDATE Restrict;
 -- -------------------------------------------------------------
 -- ---------------------------------------------------------
 
