@@ -15,9 +15,9 @@ class TopLevelListStore extends AbstractStoreWithoutParam
 
     /**
      * Get ID list from database
-     * @return array
+     * @return array : array
      */
-    protected function getIDListFromDB() : array
+    protected function getIDListFromDB() 
     {
         $arElementIDList = (array) Category::active()
             ->where('nest_depth', 0)
