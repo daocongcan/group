@@ -45,9 +45,9 @@ class SortingListStore extends AbstractStoreWithParam
 
     /**
      * Get product list with custom sorting
-     * @return array
+     * @return array : array
      */
-    protected function getCustomSortingList() : array
+    protected function getCustomSortingList() 
     {
         $arEventResult = Event::fire('shopaholic.sorting.get.list', [$this->sValue]);
         if (empty($arEventResult)) {
@@ -69,9 +69,9 @@ class SortingListStore extends AbstractStoreWithParam
 
     /**
      * Get sorting ID list by offer price (ASC)
-     * @return array
+     * @return array : array
      */
-    protected function getByPriceASC() : array
+    protected function getByPriceASC() 
     {
         //Get product ID list (sort by offer price)
         //We can not use groupBy() in this place
@@ -83,9 +83,9 @@ class SortingListStore extends AbstractStoreWithParam
 
     /**
      * Get sorting ID list by offer price (DESC)
-     * @return array
+     * @return array : array
      */
-    protected function getByPriceDESC() : array
+    protected function getByPriceDESC() 
     {
         //Get product ID list (sort by offer price)
         //We can not use groupBy() in this place
@@ -97,9 +97,9 @@ class SortingListStore extends AbstractStoreWithParam
 
     /**
      * Get new products
-     * @return array
+     * @return array : array
      */
-    protected function getNewProductList() : array
+    protected function getNewProductList() 
     {
         $arElementIDList = (array) Product::orderBy('id', 'desc')->lists('id');
 
@@ -107,10 +107,10 @@ class SortingListStore extends AbstractStoreWithParam
     }
 
     /**
-     * Get new products
+     * Get new products : array
      * @return array
      */
-    protected function getProductList() : array
+    protected function getProductList() 
     {
         $arElementIDList = (array) Product::lists('id');
 
