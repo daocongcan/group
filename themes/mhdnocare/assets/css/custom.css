@@ -523,12 +523,14 @@ h5.dt-sc-toggle a:after  {
 }
 .tq {
 	background-color: #fff;
+	padding-right: 3px;
 }
 .xemchitiet {
 	float: right;
     background: #fff;
     font-size: 11px;
     color: #5dd0ba;
+    padding-left: 3px;
 }
 .media-left img{
 	width: 100%;
