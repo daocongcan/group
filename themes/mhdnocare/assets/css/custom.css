@@ -514,6 +514,10 @@ h5.dt-sc-toggle:before  {
     width: 100%;
     display: inline-block;
 }
+
+.media-left img{
+	width: 100%;
+}
 @media (min-width: 1200px) {
 	.container {
 	    width: 900px ;
