@@ -507,14 +507,29 @@ h5.dt-sc-toggle a {
 	z-index: 5;
 
 }
-h5.dt-sc-toggle:before  {
+h5.dt-sc-toggle:before {
+	height: 0px;
+}
+h5.dt-sc-toggle a:after  {
     content: "";
     background-color: #5dd0ba;
     height: 1px;
     width: 100%;
+    top: 16px;
     display: inline-block;
+    position: absolute;
+    left: 0px;
+    z-index: -1;
 }
-
+.tq {
+	background-color: #fff;
+}
+.xemchitiet {
+	float: right;
+    background: #fff;
+    font-size: 11px;
+    color: #5dd0ba;
+}
 .media-left img{
 	width: 100%;
 }
