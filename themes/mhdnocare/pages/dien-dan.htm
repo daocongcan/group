@@ -10,7 +10,13 @@ slug = "{{:slug}}"
 categoryPage = "blog/category"
 
 ==
- 
+
+{% set post = blogPost.post %}
+
+{% put head %}
+    <title>{{post.title}} {{post.meta_title}}</title>
+    <meta name="description" content="">
+{% endput %}
 
 <div class="wrapper">
         <!--inner-wrapper starts-->
@@ -34,7 +40,7 @@ categoryPage = "blog/category"
                 <!--primary starts-->
                 <section class="breadcrumb">
                     <div class="container">
-                        {% set post = blogPost.post %}
+                        
                         <div class="">
                             <a href="/">Trang chủ</a> >
                             <a href="#" title=""><h1>{{post.title}}</h1></a>

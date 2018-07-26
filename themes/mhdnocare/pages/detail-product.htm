@@ -1,6 +1,8 @@
 title = "detail product"
-url = "/:slug"
+url = "/san-pham/:slug"
 layout = "default"
+meta_title=""
+meta_desciption=""
 is_hidden = 0
 
 
@@ -9,7 +11,15 @@ slug = "{{ :slug }}"
 
 
 ==
+
 {% set obProduct = ProductPage.get() %}
+
+{% put head %}
+    <title>{{ obProduct.name }}</title>
+    <meta name="description" content="">
+{% endput %}
+
+
 <div class="wrapper">
         <!--inner-wrapper starts-->
         <div class="inner-wrapper">

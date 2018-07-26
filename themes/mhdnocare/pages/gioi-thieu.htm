@@ -1,8 +1,8 @@
 title = "gioi thieu"
 url = "/gioi-thieu/:slug"
 layout = "default"
-meta_title = ""
-meta_description = ""
+
+
 is_hidden = 0
 
 [blogPost]
@@ -10,7 +10,12 @@ slug = "{{:slug}}"
 categoryPage = "blog/category"
 
 ==
- 
+{% set post = blogPost.post %}
+
+{% put head %}
+    <title>{{post.title}}</title>
+    <meta name="description" content="">
+{% endput %}
 
 <div class="wrapper">
         <!--inner-wrapper starts-->
@@ -34,7 +39,11 @@ categoryPage = "blog/category"
                 <!--primary starts-->
                 <section class="breadcrumb">
                     <div class="container">
-                        {% set post = blogPost.post %}
+                        
+
+
+
+                        
                         <div class="">
                             <a href="/">Trang chủ</a> >
 
