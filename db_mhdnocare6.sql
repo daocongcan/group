@@ -23,7 +23,7 @@ CREATE TABLE `backend_access_log` (
 CHARACTER SET = utf8
 COLLATE = utf8_unicode_ci
 ENGINE = InnoDB
-AUTO_INCREMENT = 33;
+AUTO_INCREMENT = 35;
 -- -------------------------------------------------------------
 -- ---------------------------------------------------------
 
@@ -153,7 +153,7 @@ CREATE TABLE `benfreke_menumanager_menus` (
 CHARACTER SET = utf8
 COLLATE = utf8_unicode_ci
 ENGINE = InnoDB
-AUTO_INCREMENT = 40;
+AUTO_INCREMENT = 45;
 -- -------------------------------------------------------------
 -- ---------------------------------------------------------
 
@@ -205,7 +205,7 @@ CREATE TABLE `deferred_bindings` (
 CHARACTER SET = utf8
 COLLATE = utf8_unicode_ci
 ENGINE = InnoDB
-AUTO_INCREMENT = 2;
+AUTO_INCREMENT = 1;
 -- -------------------------------------------------------------
 -- ---------------------------------------------------------
 
@@ -239,6 +239,122 @@ CREATE TABLE `jobs` (
 	`available_at` Int( 10 ) UNSIGNED NOT NULL,
 	`created_at` Int( 10 ) UNSIGNED NOT NULL,
 	PRIMARY KEY ( `id` ) )
+CHARACTER SET = utf8
+COLLATE = utf8_unicode_ci
+ENGINE = InnoDB
+AUTO_INCREMENT = 1;
+-- -------------------------------------------------------------
+-- ---------------------------------------------------------
+
+
+-- CREATE TABLE "lovata_shopaholic_additional_categories" --
+-- CREATE TABLE "lovata_shopaholic_additional_categories" ------
+CREATE TABLE `lovata_shopaholic_additional_categories` ( 
+	`category_id` Int( 10 ) UNSIGNED NOT NULL,
+	`product_id` Int( 10 ) UNSIGNED NOT NULL,
+	PRIMARY KEY ( `category_id`, `product_id` ) )
+CHARACTER SET = utf8
+COLLATE = utf8_unicode_ci
+ENGINE = InnoDB;
+-- -------------------------------------------------------------
+-- ---------------------------------------------------------
+
+
+-- CREATE TABLE "lovata_shopaholic_brands" -----------------
+-- CREATE TABLE "lovata_shopaholic_brands" ---------------------
+CREATE TABLE `lovata_shopaholic_brands` ( 
+	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
+	`active` TinyInt( 1 ) NOT NULL DEFAULT '0',
+	`name` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+	`slug` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+	`code` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`external_id` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`preview_text` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`description` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`sort_order` Int( 11 ) NULL,
+	`created_at` Timestamp NULL,
+	`updated_at` Timestamp NULL,
+	PRIMARY KEY ( `id` ),
+	CONSTRAINT `lovata_shopaholic_brands_slug_unique` UNIQUE( `slug` ) )
+CHARACTER SET = utf8
+COLLATE = utf8_unicode_ci
+ENGINE = InnoDB
+AUTO_INCREMENT = 1;
+-- -------------------------------------------------------------
+-- ---------------------------------------------------------
+
+
+-- CREATE TABLE "lovata_shopaholic_categories" -------------
+-- CREATE TABLE "lovata_shopaholic_categories" -----------------
+CREATE TABLE `lovata_shopaholic_categories` ( 
+	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
+	`active` TinyInt( 1 ) NOT NULL DEFAULT '0',
+	`name` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+	`slug` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+	`code` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`external_id` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`preview_text` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`description` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`parent_id` Int( 10 ) UNSIGNED NULL,
+	`nest_left` Int( 10 ) UNSIGNED NULL,
+	`nest_right` Int( 10 ) UNSIGNED NULL,
+	`nest_depth` Int( 10 ) UNSIGNED NULL,
+	`created_at` Timestamp NULL,
+	`updated_at` Timestamp NULL,
+	PRIMARY KEY ( `id` ),
+	CONSTRAINT `lovata_shopaholic_categories_slug_unique` UNIQUE( `slug` ) )
+CHARACTER SET = utf8
+COLLATE = utf8_unicode_ci
+ENGINE = InnoDB
+AUTO_INCREMENT = 1;
+-- -------------------------------------------------------------
+-- ---------------------------------------------------------
+
+
+-- CREATE TABLE "lovata_shopaholic_offers" -----------------
+-- CREATE TABLE "lovata_shopaholic_offers" ---------------------
+CREATE TABLE `lovata_shopaholic_offers` ( 
+	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
+	`active` TinyInt( 1 ) NOT NULL DEFAULT '0',
+	`product_id` Int( 10 ) UNSIGNED NULL,
+	`name` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+	`code` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`external_id` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`price` Decimal( 15, 2 ) NULL,
+	`old_price` Decimal( 15, 2 ) NULL,
+	`quantity` Int( 10 ) UNSIGNED NOT NULL DEFAULT '0',
+	`preview_text` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`description` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`deleted_at` Timestamp NULL,
+	`created_at` Timestamp NULL,
+	`updated_at` Timestamp NULL,
+	PRIMARY KEY ( `id` ) )
+CHARACTER SET = utf8
+COLLATE = utf8_unicode_ci
+ENGINE = InnoDB
+AUTO_INCREMENT = 1;
+-- -------------------------------------------------------------
+-- ---------------------------------------------------------
+
+
+-- CREATE TABLE "lovata_shopaholic_products" ---------------
+-- CREATE TABLE "lovata_shopaholic_products" -------------------
+CREATE TABLE `lovata_shopaholic_products` ( 
+	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
+	`active` TinyInt( 1 ) NOT NULL DEFAULT '0',
+	`name` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+	`slug` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+	`brand_id` Int( 10 ) UNSIGNED NULL,
+	`category_id` Int( 10 ) UNSIGNED NULL,
+	`external_id` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`code` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`preview_text` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`description` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`deleted_at` Timestamp NULL,
+	`created_at` Timestamp NULL,
+	`updated_at` Timestamp NULL,
+	PRIMARY KEY ( `id` ),
+	CONSTRAINT `lovata_shopaholic_products_slug_unique` UNIQUE( `slug` ) )
 CHARACTER SET = utf8
 COLLATE = utf8_unicode_ci
 ENGINE = InnoDB
@@ -293,7 +409,7 @@ CREATE TABLE `rainlab_blog_categories` (
 CHARACTER SET = utf8
 COLLATE = utf8_unicode_ci
 ENGINE = InnoDB
-AUTO_INCREMENT = 8;
+AUTO_INCREMENT = 9;
 -- -------------------------------------------------------------
 -- ---------------------------------------------------------
 
@@ -316,7 +432,7 @@ CREATE TABLE `rainlab_blog_posts` (
 CHARACTER SET = utf8
 COLLATE = utf8_unicode_ci
 ENGINE = InnoDB
-AUTO_INCREMENT = 8;
+AUTO_INCREMENT = 14;
 -- -------------------------------------------------------------
 -- ---------------------------------------------------------
 
@@ -346,7 +462,7 @@ CREATE TABLE `rainlab_translate_attributes` (
 CHARACTER SET = utf8
 COLLATE = utf8_unicode_ci
 ENGINE = InnoDB
-AUTO_INCREMENT = 118;
+AUTO_INCREMENT = 163;
 -- -------------------------------------------------------------
 -- ---------------------------------------------------------
 
@@ -364,7 +480,7 @@ CREATE TABLE `rainlab_translate_indexes` (
 CHARACTER SET = utf8
 COLLATE = utf8_unicode_ci
 ENGINE = InnoDB
-AUTO_INCREMENT = 31;
+AUTO_INCREMENT = 46;
 -- -------------------------------------------------------------
 -- ---------------------------------------------------------
 
@@ -396,7 +512,7 @@ CREATE TABLE `rainlab_translate_messages` (
 CHARACTER SET = utf8
 COLLATE = utf8_unicode_ci
 ENGINE = InnoDB
-AUTO_INCREMENT = 198;
+AUTO_INCREMENT = 202;
 -- -------------------------------------------------------------
 -- ---------------------------------------------------------
 
@@ -415,6 +531,45 @@ CHARACTER SET = utf8
 COLLATE = utf8_unicode_ci
 ENGINE = InnoDB
 AUTO_INCREMENT = 1;
+-- -------------------------------------------------------------
+-- ---------------------------------------------------------
+
+
+-- CREATE TABLE "redmarlin_faq_category" -------------------
+-- CREATE TABLE "redmarlin_faq_category" -----------------------
+CREATE TABLE `redmarlin_faq_category` ( 
+	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
+	`title` LongText CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+	`lang` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	PRIMARY KEY ( `id` ) )
+CHARACTER SET = utf8
+COLLATE = utf8_unicode_ci
+ENGINE = InnoDB
+AUTO_INCREMENT = 2;
+-- -------------------------------------------------------------
+-- ---------------------------------------------------------
+
+
+-- CREATE TABLE "redmarlin_faq_questions" ------------------
+-- CREATE TABLE "redmarlin_faq_questions" ----------------------
+CREATE TABLE `redmarlin_faq_questions` ( 
+	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
+	`question` LongText CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`answer` LongText CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`category_id` Int( 11 ) NULL,
+	`is_approved` TinyInt( 1 ) NOT NULL DEFAULT '0',
+	`is_featured` TinyInt( 1 ) NOT NULL DEFAULT '0',
+	`reply_email` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	`created_at` Timestamp NULL,
+	`updated_at` Timestamp NULL,
+	`sort_order` Int( 11 ) NULL,
+	`field1` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+	`name` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
+	PRIMARY KEY ( `id` ) )
+CHARACTER SET = utf8
+COLLATE = utf8_unicode_ci
+ENGINE = InnoDB
+AUTO_INCREMENT = 11;
 -- -------------------------------------------------------------
 -- ---------------------------------------------------------
 
@@ -446,7 +601,7 @@ CREATE TABLE `system_event_logs` (
 CHARACTER SET = utf8
 COLLATE = utf8_unicode_ci
 ENGINE = InnoDB
-AUTO_INCREMENT = 340;
+AUTO_INCREMENT = 366;
 -- -------------------------------------------------------------
 -- ---------------------------------------------------------
 
@@ -550,7 +705,7 @@ CREATE TABLE `system_plugin_history` (
 CHARACTER SET = utf8
 COLLATE = utf8_unicode_ci
 ENGINE = InnoDB
-AUTO_INCREMENT = 522;
+AUTO_INCREMENT = 584;
 -- -------------------------------------------------------------
 -- ---------------------------------------------------------
 
@@ -568,7 +723,7 @@ CREATE TABLE `system_plugin_versions` (
 CHARACTER SET = utf8
 COLLATE = utf8_unicode_ci
 ENGINE = InnoDB
-AUTO_INCREMENT = 25;
+AUTO_INCREMENT = 28;
 -- -------------------------------------------------------------
 -- ---------------------------------------------------------
 
@@ -587,7 +742,7 @@ CREATE TABLE `system_request_logs` (
 CHARACTER SET = utf8
 COLLATE = utf8_unicode_ci
 ENGINE = InnoDB
-AUTO_INCREMENT = 764;
+AUTO_INCREMENT = 767;
 -- -------------------------------------------------------------
 -- ---------------------------------------------------------
 
@@ -714,299 +869,6 @@ ENGINE = InnoDB;
 -- ---------------------------------------------------------
 
 
--- CREATE TABLE "offline_snipcartshop_categories" ----------
--- CREATE TABLE "offline_snipcartshop_categories" --------------
-CREATE TABLE `offline_snipcartshop_categories` ( 
-	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`name` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`slug` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`code` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`meta_title` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`meta_description` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`sort_order` Int( 11 ) NOT NULL DEFAULT '0',
-	`created_at` Timestamp NULL,
-	`updated_at` Timestamp NULL,
-	`parent_id` Int( 11 ) NULL,
-	`nest_left` Int( 11 ) NULL,
-	`nest_right` Int( 11 ) NULL,
-	`nest_depth` Int( 11 ) NULL,
-	PRIMARY KEY ( `id` ),
-	CONSTRAINT `offline_snipcartshop_categories_slug_unique` UNIQUE( `slug` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 1;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "offline_snipcartshop_category_product" ----
--- CREATE TABLE "offline_snipcartshop_category_product" --------
-CREATE TABLE `offline_snipcartshop_category_product` ( 
-	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`category_id` Int( 10 ) UNSIGNED NOT NULL,
-	`product_id` Int( 10 ) UNSIGNED NOT NULL,
-	PRIMARY KEY ( `id` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 1;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "offline_snipcartshop_discounts" -----------
--- CREATE TABLE "offline_snipcartshop_discounts" ---------------
-CREATE TABLE `offline_snipcartshop_discounts` ( 
-	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`guid` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`name` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`code` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`product_id` Int( 11 ) NULL,
-	`total_to_reach` Decimal( 10, 0 ) NULL,
-	`type` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Rate',
-	`trigger` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Code',
-	`rate` Int( 10 ) UNSIGNED NULL,
-	`amount` Decimal( 10, 0 ) NULL,
-	`alternate_price` Decimal( 10, 0 ) NULL,
-	`max_number_of_usages` Int( 10 ) UNSIGNED NULL,
-	`expires` DateTime NULL,
-	`number_of_usages` Int( 10 ) UNSIGNED NULL,
-	`number_of_usages_uncompleted` Int( 10 ) UNSIGNED NULL,
-	`shipping_description` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`shipping_cost` Decimal( 10, 0 ) NULL,
-	`shipping_guaranteed_days_to_delivery` Int( 10 ) UNSIGNED NULL,
-	`created_at` Timestamp NULL,
-	`updated_at` Timestamp NULL,
-	PRIMARY KEY ( `id` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 1;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "offline_snipcartshop_order_items" ---------
--- CREATE TABLE "offline_snipcartshop_order_items" -------------
-CREATE TABLE `offline_snipcartshop_order_items` ( 
-	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`unique_id` Char( 36 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`product_id` Int( 11 ) NULL,
-	`order_id` Int( 11 ) NULL,
-	`name` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`price` Decimal( 8, 2 ) NULL,
-	`total_price` Decimal( 8, 2 ) NULL,
-	`quantity` Int( 11 ) NULL,
-	`max_quantity` Int( 11 ) NULL,
-	`url` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`weight` Int( 11 ) NULL,
-	`width` Int( 11 ) NULL,
-	`length` Int( 11 ) NULL,
-	`height` Int( 11 ) NULL,
-	`total_weight` Decimal( 8, 2 ) NULL,
-	`description` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`image` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`stackable` TinyInt( 1 ) NULL,
-	`duplicatable` TinyInt( 1 ) NULL,
-	`shippable` TinyInt( 1 ) NULL,
-	`taxable` TinyInt( 1 ) NULL,
-	`custom_fields` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`taxes` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`added_on` Timestamp NULL,
-	PRIMARY KEY ( `id` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 1;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "offline_snipcartshop_orders" --------------
--- CREATE TABLE "offline_snipcartshop_orders" ------------------
-CREATE TABLE `offline_snipcartshop_orders` ( 
-	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`token` Char( 36 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`invoice_number` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`currency` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`creation_date` Timestamp NULL,
-	`modification_date` Timestamp NULL,
-	`completion_date` Timestamp NULL,
-	`status` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`payment_status` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`email` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`will_be_paid_later` TinyInt( 1 ) NULL,
-	`shipping_address_same_as_billing` TinyInt( 1 ) NULL,
-	`billing_address` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`shipping_address` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`credit_card_last4_digits` VarChar( 4 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`tracking_number` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`tracking_url` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`shipping_fees` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`shipping_provider` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`shipping_method` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`card_holder_name` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`card_type` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`payment_method` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`payment_gateway_used` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`tax_provider` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`lang` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`refunds_amount` Double( 8, 2 ) NULL,
-	`adjusted_amount` Double( 8, 2 ) NULL,
-	`rebate_amount` Double( 8, 2 ) NULL,
-	`taxes` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`items_total` Decimal( 8, 2 ) NULL,
-	`subtotal` Decimal( 8, 2 ) NULL,
-	`taxable_total` Decimal( 8, 2 ) NULL,
-	`grand_total` Decimal( 8, 2 ) NULL,
-	`total_weight` Int( 11 ) NULL,
-	`total_rebate_rate` Int( 11 ) NULL,
-	`notes` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`custom_fields` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`shipping_enabled` TinyInt( 1 ) NULL,
-	`payment_transaction_id` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`metadata` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`ip_address` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`user_id` Char( 36 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`discounts` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	PRIMARY KEY ( `id` ),
-	CONSTRAINT `offline_snipcartshop_orders_token_unique` UNIQUE( `token` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 1;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "offline_snipcartshop_product_accessory" ---
--- CREATE TABLE "offline_snipcartshop_product_accessory" -------
-CREATE TABLE `offline_snipcartshop_product_accessory` ( 
-	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`product_id` Int( 10 ) UNSIGNED NOT NULL,
-	`accessory_id` Int( 10 ) UNSIGNED NOT NULL,
-	PRIMARY KEY ( `id` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 1;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "offline_snipcartshop_product_custom_field_options" 
--- CREATE TABLE "offline_snipcartshop_product_custom_field_options" 
-CREATE TABLE `offline_snipcartshop_product_custom_field_options` ( 
-	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`custom_field_id` Int( 10 ) UNSIGNED NOT NULL,
-	`name` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`price` Int( 11 ) NULL,
-	`sort_order` Int( 11 ) NOT NULL DEFAULT '0',
-	`created_at` Timestamp NULL,
-	`updated_at` Timestamp NULL,
-	PRIMARY KEY ( `id` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 1;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "offline_snipcartshop_product_custom_fields" 
--- CREATE TABLE "offline_snipcartshop_product_custom_fields" ---
-CREATE TABLE `offline_snipcartshop_product_custom_fields` ( 
-	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`product_id` Int( 10 ) UNSIGNED NOT NULL,
-	`name` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`type` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'text',
-	`options` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`required` TinyInt( 1 ) NOT NULL DEFAULT '0',
-	`created_at` Timestamp NULL,
-	`updated_at` Timestamp NULL,
-	PRIMARY KEY ( `id` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 1;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "offline_snipcartshop_product_variant_custom_field_option" 
--- CREATE TABLE "offline_snipcartshop_product_variant_custom_field_option" 
-CREATE TABLE `offline_snipcartshop_product_variant_custom_field_option` ( 
-	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`variant_id` Int( 10 ) UNSIGNED NOT NULL,
-	`custom_field_option_id` Int( 10 ) UNSIGNED NOT NULL,
-	PRIMARY KEY ( `id` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 1;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "offline_snipcartshop_product_variants" ----
--- CREATE TABLE "offline_snipcartshop_product_variants" --------
-CREATE TABLE `offline_snipcartshop_product_variants` ( 
-	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`product_id` Int( 10 ) UNSIGNED NOT NULL,
-	`stock` Int( 11 ) NULL,
-	`allow_out_of_stock_purchases` TinyInt( 1 ) NOT NULL DEFAULT '0',
-	`created_at` Timestamp NULL,
-	`updated_at` Timestamp NULL,
-	PRIMARY KEY ( `id` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 1;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
--- CREATE TABLE "offline_snipcartshop_products" ------------
--- CREATE TABLE "offline_snipcartshop_products" ----------------
-CREATE TABLE `offline_snipcartshop_products` ( 
-	`id` Int( 10 ) UNSIGNED AUTO_INCREMENT NOT NULL,
-	`user_defined_id` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`name` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`slug` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`price` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`description_short` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`description` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`meta_title` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`meta_description` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`weight` Int( 10 ) UNSIGNED NULL,
-	`width` Int( 10 ) UNSIGNED NULL,
-	`length` Int( 10 ) UNSIGNED NULL,
-	`height` Int( 10 ) UNSIGNED NULL,
-	`quantity_default` Int( 10 ) UNSIGNED NULL,
-	`quantity_max` Int( 10 ) UNSIGNED NULL,
-	`quantity_min` Int( 10 ) UNSIGNED NULL,
-	`stock` Int( 11 ) NULL DEFAULT '0',
-	`properties` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`links` Text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
-	`inventory_management_method` VarChar( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'single',
-	`allow_out_of_stock_purchases` TinyInt( 1 ) NOT NULL DEFAULT '0',
-	`stackable` TinyInt( 1 ) NOT NULL DEFAULT '1',
-	`shippable` TinyInt( 1 ) NOT NULL DEFAULT '1',
-	`taxable` TinyInt( 1 ) NOT NULL DEFAULT '1',
-	`published` TinyInt( 1 ) NOT NULL DEFAULT '0',
-	`created_at` Timestamp NULL,
-	`updated_at` Timestamp NULL,
-	PRIMARY KEY ( `id` ),
-	CONSTRAINT `offline_snipcartshop_products_slug_unique` UNIQUE( `slug` ) )
-CHARACTER SET = utf8
-COLLATE = utf8_unicode_ci
-ENGINE = InnoDB
-AUTO_INCREMENT = 1;
--- -------------------------------------------------------------
--- ---------------------------------------------------------
-
-
 -- Dump data of "backend_access_log" -----------------------
 INSERT INTO `backend_access_log`(`id`,`user_id`,`ip_address`,`created_at`,`updated_at`) VALUES ( '1', '1', '127.0.0.1', '2016-10-21 02:55:56', '2016-10-21 02:55:56' );
 INSERT INTO `backend_access_log`(`id`,`user_id`,`ip_address`,`created_at`,`updated_at`) VALUES ( '2', '1', '104.238.191.126', '2016-12-26 11:50:29', '2016-12-26 11:50:29' );
@@ -1040,6 +902,8 @@ INSERT INTO `backend_access_log`(`id`,`user_id`,`ip_address`,`created_at`,`updat
 INSERT INTO `backend_access_log`(`id`,`user_id`,`ip_address`,`created_at`,`updated_at`) VALUES ( '30', '1', '::1', '2018-07-20 09:05:04', '2018-07-20 09:05:04' );
 INSERT INTO `backend_access_log`(`id`,`user_id`,`ip_address`,`created_at`,`updated_at`) VALUES ( '31', '1', '::1', '2018-07-23 01:37:52', '2018-07-23 01:37:52' );
 INSERT INTO `backend_access_log`(`id`,`user_id`,`ip_address`,`created_at`,`updated_at`) VALUES ( '32', '1', '::1', '2018-07-24 02:04:28', '2018-07-24 02:04:28' );
+INSERT INTO `backend_access_log`(`id`,`user_id`,`ip_address`,`created_at`,`updated_at`) VALUES ( '33', '1', '::1', '2018-07-25 02:05:23', '2018-07-25 02:05:23' );
+INSERT INTO `backend_access_log`(`id`,`user_id`,`ip_address`,`created_at`,`updated_at`) VALUES ( '34', '1', '::1', '2018-07-26 01:36:40', '2018-07-26 01:36:40' );
 -- ---------------------------------------------------------
 
 
@@ -1060,7 +924,7 @@ INSERT INTO `backend_user_throttle`(`id`,`user_id`,`ip_address`,`attempts`,`last
 
 
 -- Dump data of "backend_users" ----------------------------
-INSERT INTO `backend_users`(`id`,`first_name`,`last_name`,`login`,`email`,`password`,`activation_code`,`persist_code`,`reset_password_code`,`permissions`,`is_activated`,`activated_at`,`last_login`,`created_at`,`updated_at`,`is_superuser`) VALUES ( '1', 'Admin', 'Person', 'admin', 'admin@gmail.com', '$2y$10$OACm4ZnjewER4ZWpXqktxO00eRqht7TQg.5jmpMhHn34TQHBoIt/O', NULL, '$2y$10$YROz0rFM0.oxwLMT7rb1.eifIzwbnAxvb5lUkX2tl/i9QuMnq6DNy', NULL, '', '1', NULL, '2018-07-24 02:04:27', '2016-10-21 02:55:16', '2018-07-24 02:45:05', '1' );
+INSERT INTO `backend_users`(`id`,`first_name`,`last_name`,`login`,`email`,`password`,`activation_code`,`persist_code`,`reset_password_code`,`permissions`,`is_activated`,`activated_at`,`last_login`,`created_at`,`updated_at`,`is_superuser`) VALUES ( '1', 'Admin', 'Person', 'admin', 'admin@gmail.com', '$2y$10$OACm4ZnjewER4ZWpXqktxO00eRqht7TQg.5jmpMhHn34TQHBoIt/O', NULL, '$2y$10$YROz0rFM0.oxwLMT7rb1.eifIzwbnAxvb5lUkX2tl/i9QuMnq6DNy', NULL, '', '1', NULL, '2018-07-26 01:36:40', '2016-10-21 02:55:16', '2018-07-26 01:36:40', '1' );
 -- ---------------------------------------------------------
 
 
@@ -1069,19 +933,24 @@ INSERT INTO `backend_users`(`id`,`first_name`,`last_name`,`login`,`email`,`passw
 
 
 -- Dump data of "benfreke_menumanager_menus" ---------------
-INSERT INTO `benfreke_menumanager_menus`(`id`,`parent_id`,`title`,`description`,`url`,`nest_left`,`nest_right`,`nest_depth`,`created_at`,`updated_at`,`is_external`,`link_target`,`enabled`,`parameters`,`query_string`) VALUES ( '15', NULL, 'Main menu', '', NULL, '1', '26', '0', '2018-07-16 03:08:49', '2018-07-23 07:12:00', '0', '_self', '1', '', '' );
-INSERT INTO `benfreke_menumanager_menus`(`id`,`parent_id`,`title`,`description`,`url`,`nest_left`,`nest_right`,`nest_depth`,`created_at`,`updated_at`,`is_external`,`link_target`,`enabled`,`parameters`,`query_string`) VALUES ( '28', '15', 'Thông tin khoa học', '', NULL, '2', '3', '1', '2018-07-23 06:55:51', '2018-07-23 07:11:49', '0', '_self', '1', '', '' );
-INSERT INTO `benfreke_menumanager_menus`(`id`,`parent_id`,`title`,`description`,`url`,`nest_left`,`nest_right`,`nest_depth`,`created_at`,`updated_at`,`is_external`,`link_target`,`enabled`,`parameters`,`query_string`) VALUES ( '29', '15', 'Sản phẩm', '', NULL, '4', '5', '1', '2018-07-23 06:56:01', '2018-07-23 07:11:51', '0', '_self', '1', '', '' );
-INSERT INTO `benfreke_menumanager_menus`(`id`,`parent_id`,`title`,`description`,`url`,`nest_left`,`nest_right`,`nest_depth`,`created_at`,`updated_at`,`is_external`,`link_target`,`enabled`,`parameters`,`query_string`) VALUES ( '30', '15', 'Hỏi đáp - tài liệu', '', NULL, '6', '7', '1', '2018-07-23 06:56:14', '2018-07-23 07:11:53', '0', '_self', '1', '', '' );
-INSERT INTO `benfreke_menumanager_menus`(`id`,`parent_id`,`title`,`description`,`url`,`nest_left`,`nest_right`,`nest_depth`,`created_at`,`updated_at`,`is_external`,`link_target`,`enabled`,`parameters`,`query_string`) VALUES ( '31', '15', 'Giới thiệu', '', NULL, '8', '21', '1', '2018-07-23 06:56:23', '2018-07-23 07:11:55', '0', '_self', '1', '', '' );
-INSERT INTO `benfreke_menumanager_menus`(`id`,`parent_id`,`title`,`description`,`url`,`nest_left`,`nest_right`,`nest_depth`,`created_at`,`updated_at`,`is_external`,`link_target`,`enabled`,`parameters`,`query_string`) VALUES ( '32', '31', 'Giới thiệu chung', '', NULL, '9', '10', '2', '2018-07-23 06:56:36', '2018-07-23 07:11:55', '0', '_self', '1', '', '' );
-INSERT INTO `benfreke_menumanager_menus`(`id`,`parent_id`,`title`,`description`,`url`,`nest_left`,`nest_right`,`nest_depth`,`created_at`,`updated_at`,`is_external`,`link_target`,`enabled`,`parameters`,`query_string`) VALUES ( '33', '31', 'Minh chứng khoa học', '', NULL, '11', '12', '2', '2018-07-23 06:56:44', '2018-07-23 07:11:55', '0', '_self', '1', '', '' );
-INSERT INTO `benfreke_menumanager_menus`(`id`,`parent_id`,`title`,`description`,`url`,`nest_left`,`nest_right`,`nest_depth`,`created_at`,`updated_at`,`is_external`,`link_target`,`enabled`,`parameters`,`query_string`) VALUES ( '34', '31', 'Chất lượng của nguyên liệu', '', NULL, '13', '14', '2', '2018-07-23 06:56:59', '2018-07-23 07:11:55', '0', '_self', '1', '', '' );
-INSERT INTO `benfreke_menumanager_menus`(`id`,`parent_id`,`title`,`description`,`url`,`nest_left`,`nest_right`,`nest_depth`,`created_at`,`updated_at`,`is_external`,`link_target`,`enabled`,`parameters`,`query_string`) VALUES ( '35', '31', 'Giáo dục và minh bạch', '', NULL, '15', '16', '2', '2018-07-23 06:57:15', '2018-07-23 07:11:55', '0', '_self', '1', '', '' );
-INSERT INTO `benfreke_menumanager_menus`(`id`,`parent_id`,`title`,`description`,`url`,`nest_left`,`nest_right`,`nest_depth`,`created_at`,`updated_at`,`is_external`,`link_target`,`enabled`,`parameters`,`query_string`) VALUES ( '36', '31', 'Nghiên cứu và Sản xuất', '', NULL, '17', '18', '2', '2018-07-23 06:57:33', '2018-07-23 07:11:55', '0', '_self', '1', '', '' );
-INSERT INTO `benfreke_menumanager_menus`(`id`,`parent_id`,`title`,`description`,`url`,`nest_left`,`nest_right`,`nest_depth`,`created_at`,`updated_at`,`is_external`,`link_target`,`enabled`,`parameters`,`query_string`) VALUES ( '37', '31', 'Gặp gỡ và kết nối chuyên gia', '', NULL, '19', '20', '2', '2018-07-23 06:57:51', '2018-07-23 07:11:55', '0', '_self', '1', '', '' );
-INSERT INTO `benfreke_menumanager_menus`(`id`,`parent_id`,`title`,`description`,`url`,`nest_left`,`nest_right`,`nest_depth`,`created_at`,`updated_at`,`is_external`,`link_target`,`enabled`,`parameters`,`query_string`) VALUES ( '38', '15', 'Diễn đàn công nghệ', '', NULL, '22', '23', '1', '2018-07-23 06:58:03', '2018-07-23 07:11:58', '0', '_self', '1', '', '' );
-INSERT INTO `benfreke_menumanager_menus`(`id`,`parent_id`,`title`,`description`,`url`,`nest_left`,`nest_right`,`nest_depth`,`created_at`,`updated_at`,`is_external`,`link_target`,`enabled`,`parameters`,`query_string`) VALUES ( '39', '15', 'Liên hệ', '', NULL, '24', '25', '1', '2018-07-23 06:58:10', '2018-07-23 07:12:00', '0', '_self', '1', '', '' );
+INSERT INTO `benfreke_menumanager_menus`(`id`,`parent_id`,`title`,`description`,`url`,`nest_left`,`nest_right`,`nest_depth`,`created_at`,`updated_at`,`is_external`,`link_target`,`enabled`,`parameters`,`query_string`) VALUES ( '15', NULL, 'Main menu', '', NULL, '1', '36', '0', '2018-07-16 03:08:49', '2018-07-25 09:55:00', '0', '_self', '1', '', '' );
+INSERT INTO `benfreke_menumanager_menus`(`id`,`parent_id`,`title`,`description`,`url`,`nest_left`,`nest_right`,`nest_depth`,`created_at`,`updated_at`,`is_external`,`link_target`,`enabled`,`parameters`,`query_string`) VALUES ( '28', '15', 'Thông tin khoa học', '', '/khoa-hoc/thong-tin-khoa-hoc', '2', '3', '1', '2018-07-23 06:55:51', '2018-07-26 02:13:15', '1', '_self', '1', '', '' );
+INSERT INTO `benfreke_menumanager_menus`(`id`,`parent_id`,`title`,`description`,`url`,`nest_left`,`nest_right`,`nest_depth`,`created_at`,`updated_at`,`is_external`,`link_target`,`enabled`,`parameters`,`query_string`) VALUES ( '29', '15', 'Sản phẩm', '', NULL, '4', '11', '1', '2018-07-23 06:56:01', '2018-07-25 09:53:44', '0', '_self', '1', '', '' );
+INSERT INTO `benfreke_menumanager_menus`(`id`,`parent_id`,`title`,`description`,`url`,`nest_left`,`nest_right`,`nest_depth`,`created_at`,`updated_at`,`is_external`,`link_target`,`enabled`,`parameters`,`query_string`) VALUES ( '30', '15', 'Hỏi đáp - tài liệu', '', NULL, '12', '17', '1', '2018-07-23 06:56:14', '2018-07-25 09:55:00', '0', '_self', '1', '', '' );
+INSERT INTO `benfreke_menumanager_menus`(`id`,`parent_id`,`title`,`description`,`url`,`nest_left`,`nest_right`,`nest_depth`,`created_at`,`updated_at`,`is_external`,`link_target`,`enabled`,`parameters`,`query_string`) VALUES ( '31', '15', 'Giới thiệu', '', NULL, '18', '31', '1', '2018-07-23 06:56:23', '2018-07-25 09:55:00', '0', '_self', '1', '', '' );
+INSERT INTO `benfreke_menumanager_menus`(`id`,`parent_id`,`title`,`description`,`url`,`nest_left`,`nest_right`,`nest_depth`,`created_at`,`updated_at`,`is_external`,`link_target`,`enabled`,`parameters`,`query_string`) VALUES ( '32', '31', 'Giới thiệu chung', '', '/gioi-thieu/gioi-thieu-chung', '19', '20', '2', '2018-07-23 06:56:36', '2018-07-25 10:02:07', '1', '_self', '1', '', '' );
+INSERT INTO `benfreke_menumanager_menus`(`id`,`parent_id`,`title`,`description`,`url`,`nest_left`,`nest_right`,`nest_depth`,`created_at`,`updated_at`,`is_external`,`link_target`,`enabled`,`parameters`,`query_string`) VALUES ( '33', '31', 'Minh chứng khoa học', '', '/gioi-thieu/minh-chung-khoa-hoc', '21', '22', '2', '2018-07-23 06:56:44', '2018-07-25 10:03:05', '1', '_self', '1', '', '' );
+INSERT INTO `benfreke_menumanager_menus`(`id`,`parent_id`,`title`,`description`,`url`,`nest_left`,`nest_right`,`nest_depth`,`created_at`,`updated_at`,`is_external`,`link_target`,`enabled`,`parameters`,`query_string`) VALUES ( '34', '31', 'Chất lượng của nguyên liệu', '', '/gioi-thieu/chat-luong-cua-nguyen-lieu', '23', '24', '2', '2018-07-23 06:56:59', '2018-07-25 10:04:06', '1', '_self', '1', '', '' );
+INSERT INTO `benfreke_menumanager_menus`(`id`,`parent_id`,`title`,`description`,`url`,`nest_left`,`nest_right`,`nest_depth`,`created_at`,`updated_at`,`is_external`,`link_target`,`enabled`,`parameters`,`query_string`) VALUES ( '35', '31', 'Giáo dục & minh bạch', '', NULL, '25', '26', '2', '2018-07-23 06:57:15', '2018-07-25 10:04:50', '1', '_self', '0', '', '' );
+INSERT INTO `benfreke_menumanager_menus`(`id`,`parent_id`,`title`,`description`,`url`,`nest_left`,`nest_right`,`nest_depth`,`created_at`,`updated_at`,`is_external`,`link_target`,`enabled`,`parameters`,`query_string`) VALUES ( '36', '31', 'Nghiên cứu & Sản xuất', '', '/gioi-thieu/nghien-cuu-va-san-xuat', '27', '28', '2', '2018-07-23 06:57:33', '2018-07-25 10:05:27', '1', '_self', '1', '', '' );
+INSERT INTO `benfreke_menumanager_menus`(`id`,`parent_id`,`title`,`description`,`url`,`nest_left`,`nest_right`,`nest_depth`,`created_at`,`updated_at`,`is_external`,`link_target`,`enabled`,`parameters`,`query_string`) VALUES ( '37', '31', 'Gặp gỡ - kết nối chuyên gia', '', '/gioi-thieu/gap-go-ket-noi-chuyen-gia', '29', '30', '2', '2018-07-23 06:57:51', '2018-07-25 10:10:48', '1', '_self', '1', '', '' );
+INSERT INTO `benfreke_menumanager_menus`(`id`,`parent_id`,`title`,`description`,`url`,`nest_left`,`nest_right`,`nest_depth`,`created_at`,`updated_at`,`is_external`,`link_target`,`enabled`,`parameters`,`query_string`) VALUES ( '38', '15', 'Diễn đàn công nghệ', '', '/dien-dan/dien-dan-cong-nghe', '32', '33', '1', '2018-07-23 06:58:03', '2018-07-25 10:15:16', '1', '_self', '1', '', '' );
+INSERT INTO `benfreke_menumanager_menus`(`id`,`parent_id`,`title`,`description`,`url`,`nest_left`,`nest_right`,`nest_depth`,`created_at`,`updated_at`,`is_external`,`link_target`,`enabled`,`parameters`,`query_string`) VALUES ( '39', '15', 'Liên hệ', '', NULL, '34', '35', '1', '2018-07-23 06:58:10', '2018-07-25 09:55:00', '0', '_self', '1', '', '' );
+INSERT INTO `benfreke_menumanager_menus`(`id`,`parent_id`,`title`,`description`,`url`,`nest_left`,`nest_right`,`nest_depth`,`created_at`,`updated_at`,`is_external`,`link_target`,`enabled`,`parameters`,`query_string`) VALUES ( '40', '29', 'Sinh lực, đề kháng', '', NULL, '5', '6', '2', '2018-07-25 09:50:12', '2018-07-25 09:53:35', '0', '_self', '1', '', '' );
+INSERT INTO `benfreke_menumanager_menus`(`id`,`parent_id`,`title`,`description`,`url`,`nest_left`,`nest_right`,`nest_depth`,`created_at`,`updated_at`,`is_external`,`link_target`,`enabled`,`parameters`,`query_string`) VALUES ( '41', '29', 'Dạ dày', '', NULL, '7', '8', '2', '2018-07-25 09:50:23', '2018-07-25 09:53:39', '0', '_self', '1', '', '' );
+INSERT INTO `benfreke_menumanager_menus`(`id`,`parent_id`,`title`,`description`,`url`,`nest_left`,`nest_right`,`nest_depth`,`created_at`,`updated_at`,`is_external`,`link_target`,`enabled`,`parameters`,`query_string`) VALUES ( '42', '29', 'Gan Mật', '', NULL, '9', '10', '2', '2018-07-25 09:50:45', '2018-07-25 09:53:44', '0', '_self', '1', '', '' );
+INSERT INTO `benfreke_menumanager_menus`(`id`,`parent_id`,`title`,`description`,`url`,`nest_left`,`nest_right`,`nest_depth`,`created_at`,`updated_at`,`is_external`,`link_target`,`enabled`,`parameters`,`query_string`) VALUES ( '43', '30', 'Bảng thông tin khoa học sản phẩm', '', NULL, '13', '14', '2', '2018-07-25 09:51:09', '2018-07-25 09:54:56', '0', '_self', '1', '', '' );
+INSERT INTO `benfreke_menumanager_menus`(`id`,`parent_id`,`title`,`description`,`url`,`nest_left`,`nest_right`,`nest_depth`,`created_at`,`updated_at`,`is_external`,`link_target`,`enabled`,`parameters`,`query_string`) VALUES ( '44', '30', 'Những câu hỏi thường gặp', '', NULL, '15', '16', '2', '2018-07-25 09:51:29', '2018-07-25 09:55:00', '0', '_self', '1', '', '' );
 -- ---------------------------------------------------------
 
 
@@ -1104,6 +973,26 @@ INSERT INTO `cms_theme_data`(`id`,`theme`,`data`,`created_at`,`updated_at`) VALU
 
 
 -- Dump data of "jobs" -------------------------------------
+-- ---------------------------------------------------------
+
+
+-- Dump data of "lovata_shopaholic_additional_categories" --
+-- ---------------------------------------------------------
+
+
+-- Dump data of "lovata_shopaholic_brands" -----------------
+-- ---------------------------------------------------------
+
+
+-- Dump data of "lovata_shopaholic_categories" -------------
+-- ---------------------------------------------------------
+
+
+-- Dump data of "lovata_shopaholic_offers" -----------------
+-- ---------------------------------------------------------
+
+
+-- Dump data of "lovata_shopaholic_products" ---------------
 -- ---------------------------------------------------------
 
 
@@ -1149,6 +1038,7 @@ INSERT INTO `migrations`(`migration`,`batch`) VALUES ( '2016_10_01_000002_Db_Cms
 -- Dump data of "rainlab_blog_categories" ------------------
 INSERT INTO `rainlab_blog_categories`(`id`,`name`,`slug`,`code`,`description`,`parent_id`,`nest_left`,`nest_right`,`nest_depth`,`created_at`,`updated_at`) VALUES ( '6', 'Giới thiệu', 'gioi-thieu', NULL, '', NULL, '1', '2', '0', '2018-07-20 09:48:43', '2018-07-23 08:35:22' );
 INSERT INTO `rainlab_blog_categories`(`id`,`name`,`slug`,`code`,`description`,`parent_id`,`nest_left`,`nest_right`,`nest_depth`,`created_at`,`updated_at`) VALUES ( '7', 'Thông tin khoa học', 'thong-tin-khoa-hoc', NULL, '', NULL, '3', '4', '0', '2018-07-23 08:35:38', '2018-07-23 08:35:55' );
+INSERT INTO `rainlab_blog_categories`(`id`,`name`,`slug`,`code`,`description`,`parent_id`,`nest_left`,`nest_right`,`nest_depth`,`created_at`,`updated_at`) VALUES ( '8', 'Diễn đàn', 'dien-dan', NULL, '', NULL, '5', '6', '0', '2018-07-26 01:42:07', '2018-07-26 01:42:07' );
 -- ---------------------------------------------------------
 
 
@@ -1240,11 +1130,446 @@ INSERT INTO `rainlab_blog_posts`(`id`,`user_id`,`title`,`slug`,`excerpt`,`conten
                 <br></td>
             <td style="width: 36.3026%;"><img class="fr-dib fr-draggable" src="/storage/app/media/uploaded-files/ttkh2.jpg" style="width: 300px;"></td>
         </tr></tbody></table>', '2018-07-23 01:38:06', '1', '2018-07-20 09:53:36', '2018-07-23 08:50:52' );
+INSERT INTO `rainlab_blog_posts`(`id`,`user_id`,`title`,`slug`,`excerpt`,`content`,`content_html`,`published_at`,`published`,`created_at`,`updated_at`) VALUES ( '8', '1', 'Chất lượng của nguyên liệu', 'chat-luong-cua-nguyen-lieu', '', '<p>
+	<br>
+</p>
+
+<table style="width: 100%;">
+	<tbody>
+		<tr>
+			<td style="width: 75.7983%;">
+				<div style="text-align: left;"><span style="font-size: 18px;">MHD InnoCare tìm kiếm các nguyên liệu chất lượng cao đã được trồng, nghiên cứu và phát triển tại Việt Nam cũng như trên toàn thế giới.<br><br>Để đảm bảo hiệu quả lâm sàng phù hợp với nghiên cứu, InnoCare cam kết sử dụng các thành phần nguyên liệu sạch có nguồn gốc rõ ràng, nhãn hiệu uy tín cho các sản phẩm của InnoCare, phù hợp với thành phần nguyên liệu và tác dụng cụ thể trong các nghiên cứu lâm sàng.<br><br>Trong suốt quá trình sản xuất tiếp theo sau đó, InnoCare không chỉ xác minh chất lượng của thành phần nguyên liệu được sử dụng, mà còn định kỳ thường xuyên kiểm định chất lượng thành phẩm.<br></span></div>
+			</td>
+			<td style="width: 24.1177%;">
+				<div style="text-align: left;"><span style="font-size: 18px;"><img class="fr-dib fr-draggable" src="/storage/app/media/chat%20luong%20nguyen%20lieu/01.png" style="width: 300px;"></span>
+					<br>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>
+	<br>
+</p>
+
+<p>
+	<br>
+</p>
+
+<p><strong><span style="font-size: 18px;">Đồng hành cùng chúng tôi</span></strong></p>
+
+<p>
+	<br>
+</p>
+
+<p><img src="http://localhost:8888/storage/app/media/chat%20luong%20nguyen%20lieu/02.png" class="fr-draggable fr-dii">&nbsp; <img class="fr-draggable fr-dii" src="/storage/app/media/03.png" style="width: 40%;">&nbsp; &nbsp;<img class="fr-draggable fr-dii" src="/storage/app/media/04.png" style="width: 15%;"></p>
+
+<p>
+	<br>
+</p>', '<p>
+    <br></p>
+<table style="width: 100%;"><tbody><tr><td style="width: 75.7983%;">
+                <div style="text-align: left;"><span style="font-size: 18px;">MHD InnoCare tìm kiếm các nguyên liệu chất lượng cao đã được trồng, nghiên cứu và phát triển tại Việt Nam cũng như trên toàn thế giới.<br><br>Để đảm bảo hiệu quả lâm sàng phù hợp với nghiên cứu, InnoCare cam kết sử dụng các thành phần nguyên liệu sạch có nguồn gốc rõ ràng, nhãn hiệu uy tín cho các sản phẩm của InnoCare, phù hợp với thành phần nguyên liệu và tác dụng cụ thể trong các nghiên cứu lâm sàng.<br><br>Trong suốt quá trình sản xuất tiếp theo sau đó, InnoCare không chỉ xác minh chất lượng của thành phần nguyên liệu được sử dụng, mà còn định kỳ thường xuyên kiểm định chất lượng thành phẩm.<br></span></div>
+            </td>
+            <td style="width: 24.1177%;">
+                <div style="text-align: left;">
+<span style="font-size: 18px;"><img class="fr-dib fr-draggable" src="/storage/app/media/chat%20luong%20nguyen%20lieu/01.png" style="width: 300px;"></span>
+                    <br></div>
+            </td>
+        </tr></tbody></table>
+<p>
+    <br></p>
+<p>
+    <br></p>
+<p><strong><span style="font-size: 18px;">Đồng hành cùng chúng tôi</span></strong></p>
+<p>
+    <br></p>
+<p><img src="http://localhost:8888/storage/app/media/chat%20luong%20nguyen%20lieu/02.png" class="fr-draggable fr-dii">  <img class="fr-draggable fr-dii" src="/storage/app/media/03.png" style="width: 40%;">   <img class="fr-draggable fr-dii" src="/storage/app/media/04.png" style="width: 15%;"></p>
+<p>
+    <br></p>', '2018-07-25 07:39:25', '1', '2018-07-25 07:42:07', '2018-07-26 01:54:05' );
+INSERT INTO `rainlab_blog_posts`(`id`,`user_id`,`title`,`slug`,`excerpt`,`content`,`content_html`,`published_at`,`published`,`created_at`,`updated_at`) VALUES ( '9', '1', 'Giới thiệu chung', 'gioi-thieu-chung', '', '<h2 class="dt-sc-hr-title" style="text-align: center;"><strong><span style="font-size: 36px;">Về MHD Innocare</span></strong></h2>
+
+<p>
+	<br>
+</p>
+
+<p><span style="font-size: 18px;">MHD InnoCare là 1 thành viên của MHD Group, mang sứ mệnh tiếp nối ứng dụng và kế thừa những thành tựu nghiên cứu khoa học, phát triển những sản phẩm chăm sóc sức khoẻ đáp ứng nhu cầu điều trị cho bệnh nhân &amp; cộng đồng, góp phần mang lại sự an nhiên &amp; niềm hạnh phúc cho bệnh nhân, cho cộng đồng và cho chính chúng ta.<br></span></p>
+
+<table style="width: 100%;">
+	<tbody>
+		<tr>
+			<td style="width: 62.521%;">
+				<div style="text-align: left;"><span style="font-size: 18px;">Với mục tiêu là công ty dược phẩm uy tín hàng đầu Việt Nam chú trọng vào chất lượng sản phẩm, hiệu quả điều trị và nhu cầu của bệnh nhân, MHD Group đang và sẽ chung tay cùng giới chuyên môn Y - Dược mang lại sự thoả mãn &amp; hài lòng cho bệnh nhân bằng những sản phẩm chăm sóc sức khoẻ chất lượng cao và dịch vụ hoàn hảo. &nbsp;<br><br></span></div>
+			</td>
+			<td style="width: 37.395%;"><span style="font-size: 18px;"><img class="fr-dib fr-draggable" src="/storage/app/media/uploaded-files/gioi-thieu.jpg" style="width: 327px; height: 239.8px;" data-result="success"></span>
+				<br>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p><span style="font-size: 18px;">Cùng với đội ngũ nhân viên luôn đặt nhân văn &amp; y đức lên hàng đầu, năng động, đầy nhiệt huyết, chuyên nghiệp và không ngừng cải tiến chất lượng phục vụ, MHD Group luôn cam kết sẽ nỗ lực không ngừng mang những sản phẩm công nghệ cao, hiệu quả để tiếp tục cung cấp những giải pháp chăm sóc sức khỏe, y tế có chất lượng cao phục vụ nhu cầu của bệnh nhân &amp; cộng đồng; góp phần xây dựng xã hội và đất nước phồn thịnh; vì một thế hệ tương lai tươi sáng; “vì cuộc sống tốt đẹp hơn - khỏe mạnh hơn”.</span></p>
+
+<p>
+	<br>
+</p>
+
+<p>
+	<br>
+</p>
+
+<h2 class="dt-sc-hr-title" style="text-align: center;"><strong><span style="font-size: 36px;">Giá trị cốt lỗi của MHD</span></strong></h2>
+
+<p>
+	<br>
+</p>
+<div class="giatri">
+	<div class="giatri2">
+
+		<p style="text-align: center;"><span style="font-size: 24px;">Nhân văn - Y Đức</span></p>
+
+		<p style="text-align: center;">Thuần phong mỹ tục, bản sắc dân tộc Việt Nam là một trong những nền tảng quan trọng nhất trong mọi nguyên tắc đối đãi. Chúng ta thượng tôn pháp luật và duy trì đạo đức nghề nghiệp, đạo đức xã hội ở tiêu chuẩn cao nhất.</p>
+
+		<p style="text-align: center;">
+			<br>
+		</p>
+
+		<p style="text-align: center;"><span style="font-size: 24px;">Đoàn kết - Hợp tác</span></p>
+
+		<p style="text-align: center;">Vì sức khỏe của bệnh nhân, chúng ta không những cùng nhau chia sẻ trách nhiệm đối với mọi hoạt động, với các thành viên trong công ty mà còn luôn sẵn lòng cởi mở, tạo ra nhiều cơ hội hợp tác với các đối tác.</p>
+
+		<p style="text-align: center;">
+			<br>
+		</p>
+
+		<p style="text-align: center;"><span style="font-size: 24px;">Trung thực - Minh bạch</span></p>
+
+		<p style="text-align: center;">Là cơ sở cho niềm tin đóng góp, gắn bó, hợp tác lẫn nhau và cùng nhau phát triển. Luôn duy trì mực thước đạo đức, rõ ràng, trước sau duy nhất và quyết tâm không thỏa hiệp.&nbsp;</p>
+
+		<p style="text-align: center;">
+			<br>
+		</p>
+
+		<p style="text-align: center;"><span style="font-size: 24px;">Sáng tạo - Linh hoạt</span></p>
+
+		<p style="text-align: center;">Chúng ta ghi nhận, tôn trọng và khuyến khích nhân viên và các đối tác nắm bắt các giải pháp sáng tạo và đột phá trong kinh doanh phù hợp với nhu cầu chung trong từng thời kỳ.&nbsp;</p>
+
+		<p style="text-align: center;">
+			<br>
+		</p>
+
+		<p style="text-align: center;"><span style="font-size: 24px;">Chất lượng - Hiệu quả</span></p>
+
+		<p style="text-align: center;">Là kim chỉ nam trong mọi hoạt động kinh doanh. Chúng ta làm việc và cống hiến bằng tất cả sự chung lòng chung sức, áp dụng phương thức - công cụ tân tiến thoả mãn nhu cầu của bệnh nhân và các đối tác.</p>
+
+		<p class="caret">
+			<br>
+		</p>
+
+		<p class="caret2">
+			<br>
+		</p>
+
+		<p class="caret3">
+			<br>
+		</p>
+
+		<p class="caret4">
+			<br>
+		</p>
+	</div>
+</div>', '<h2 class="dt-sc-hr-title" style="text-align: center;"><strong><span style="font-size: 36px;">Về MHD Innocare</span></strong></h2>
+<p>
+    <br></p>
+<p><span style="font-size: 18px;">MHD InnoCare là 1 thành viên của MHD Group, mang sứ mệnh tiếp nối ứng dụng và kế thừa những thành tựu nghiên cứu khoa học, phát triển những sản phẩm chăm sóc sức khoẻ đáp ứng nhu cầu điều trị cho bệnh nhân &amp; cộng đồng, góp phần mang lại sự an nhiên &amp; niềm hạnh phúc cho bệnh nhân, cho cộng đồng và cho chính chúng ta.<br></span></p>
+<table style="width: 100%;"><tbody><tr><td style="width: 62.521%;">
+                <div style="text-align: left;"><span style="font-size: 18px;">Với mục tiêu là công ty dược phẩm uy tín hàng đầu Việt Nam chú trọng vào chất lượng sản phẩm, hiệu quả điều trị và nhu cầu của bệnh nhân, MHD Group đang và sẽ chung tay cùng giới chuyên môn Y - Dược mang lại sự thoả mãn &amp; hài lòng cho bệnh nhân bằng những sản phẩm chăm sóc sức khoẻ chất lượng cao và dịch vụ hoàn hảo.  <br><br></span></div>
+            </td>
+            <td style="width: 37.395%;">
+<span style="font-size: 18px;"><img class="fr-dib fr-draggable" src="/storage/app/media/uploaded-files/gioi-thieu.jpg" style="width: 327px; height: 239.8px;" data-result="success"></span>
+                <br></td>
+        </tr></tbody></table>
+<p><span style="font-size: 18px;">Cùng với đội ngũ nhân viên luôn đặt nhân văn &amp; y đức lên hàng đầu, năng động, đầy nhiệt huyết, chuyên nghiệp và không ngừng cải tiến chất lượng phục vụ, MHD Group luôn cam kết sẽ nỗ lực không ngừng mang những sản phẩm công nghệ cao, hiệu quả để tiếp tục cung cấp những giải pháp chăm sóc sức khỏe, y tế có chất lượng cao phục vụ nhu cầu của bệnh nhân &amp; cộng đồng; góp phần xây dựng xã hội và đất nước phồn thịnh; vì một thế hệ tương lai tươi sáng; “vì cuộc sống tốt đẹp hơn - khỏe mạnh hơn”.</span></p>
+<p>
+    <br></p>
+<p>
+    <br></p>
+<h2 class="dt-sc-hr-title" style="text-align: center;"><strong><span style="font-size: 36px;">Giá trị cốt lỗi của MHD</span></strong></h2>
+<p>
+    <br></p>
+<div class="giatri">
+    <div class="giatri2">
+
+        <p style="text-align: center;"><span style="font-size: 24px;">Nhân văn - Y Đức</span></p>
+
+        <p style="text-align: center;">Thuần phong mỹ tục, bản sắc dân tộc Việt Nam là một trong những nền tảng quan trọng nhất trong mọi nguyên tắc đối đãi. Chúng ta thượng tôn pháp luật và duy trì đạo đức nghề nghiệp, đạo đức xã hội ở tiêu chuẩn cao nhất.</p>
+
+        <p style="text-align: center;">
+            <br></p>
+
+        <p style="text-align: center;"><span style="font-size: 24px;">Đoàn kết - Hợp tác</span></p>
+
+        <p style="text-align: center;">Vì sức khỏe của bệnh nhân, chúng ta không những cùng nhau chia sẻ trách nhiệm đối với mọi hoạt động, với các thành viên trong công ty mà còn luôn sẵn lòng cởi mở, tạo ra nhiều cơ hội hợp tác với các đối tác.</p>
+
+        <p style="text-align: center;">
+            <br></p>
+
+        <p style="text-align: center;"><span style="font-size: 24px;">Trung thực - Minh bạch</span></p>
+
+        <p style="text-align: center;">Là cơ sở cho niềm tin đóng góp, gắn bó, hợp tác lẫn nhau và cùng nhau phát triển. Luôn duy trì mực thước đạo đức, rõ ràng, trước sau duy nhất và quyết tâm không thỏa hiệp. </p>
+
+        <p style="text-align: center;">
+            <br></p>
+
+        <p style="text-align: center;"><span style="font-size: 24px;">Sáng tạo - Linh hoạt</span></p>
+
+        <p style="text-align: center;">Chúng ta ghi nhận, tôn trọng và khuyến khích nhân viên và các đối tác nắm bắt các giải pháp sáng tạo và đột phá trong kinh doanh phù hợp với nhu cầu chung trong từng thời kỳ. </p>
+
+        <p style="text-align: center;">
+            <br></p>
+
+        <p style="text-align: center;"><span style="font-size: 24px;">Chất lượng - Hiệu quả</span></p>
+
+        <p style="text-align: center;">Là kim chỉ nam trong mọi hoạt động kinh doanh. Chúng ta làm việc và cống hiến bằng tất cả sự chung lòng chung sức, áp dụng phương thức - công cụ tân tiến thoả mãn nhu cầu của bệnh nhân và các đối tác.</p>
+
+        <p class="caret">
+            <br></p>
+
+        <p class="caret2">
+            <br></p>
+
+        <p class="caret3">
+            <br></p>
+
+        <p class="caret4">
+            <br></p>
+    </div>
+</div>', '2018-07-25 08:01:09', '1', '2018-07-25 08:01:10', '2018-07-25 08:53:07' );
+INSERT INTO `rainlab_blog_posts`(`id`,`user_id`,`title`,`slug`,`excerpt`,`content`,`content_html`,`published_at`,`published`,`created_at`,`updated_at`) VALUES ( '10', '1', 'Minh chứng khoa học', 'minh-chung-khoa-hoc', '', '<p><span style="font-size: 18px;">Tại MHD “InnoCare”, nghiên cứu khoa học là điểm khởi đầu cho mọi sản phẩm mà InnoCare hướng đến &amp; thực hiện. Điều đó có nghĩa là InnoCare cẩn thận xem xét cơ sở khoa học cho từng sản phẩm từ lâu trước khi được phát triển, sản xuất và đưa ra thị trường.<br></span></p>
+
+<table style="width: 100%;">
+	<tbody>
+		<tr>
+			<td style="width: 49.4958%;">
+				<div style="text-align: left;"><span style="font-size: 18px;">InnoCare đặc biệt quan tâm đến giá trị dược tính, sức khoẻ dựa trên chứng cứ khoa học: thành phần nào hoạt động, cách thức hoạt động và lý do hoạt động, trước khi quyết định sản xuất hoặc bán sản phẩm.</span></div><span style="font-size: 18px;"><br></span>
+				<br>
+			</td>
+			<td style="width: 50.4202%;"><span style="font-size: 18px;"><img class="fr-dib fr-draggable" src="/storage/app/media/minh%20chung%20khoa%20hoc/01.png" style="width: 447px; height: 170px;"><br></span>
+				<br>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p><span style="font-size: 18px;">InnoCare phối hợp chặt chẽ với các nhà khoa học của các trường Đại học/ Viện/ Trung tâm nghiên cứu uy tín trong và ngoài nước để cùng phát triển các thành phần mới, ứng dụng công nghệ sinh học mới và thường xuyên cập nhật những phát hiện lâm sàng của Trường/Viện để đánh giá hiệu quả của sản phẩm.&nbsp;</span></p>
+
+<p><span style="font-size: 18px;">Những sản phẩm và công thức cao cấp của InnoCare được thiết kế đặc biệt bởi các nhà khoa học, các nhà nghiên cứu y học cho kết quả cải thiện sức khoẻ và an toàn.</span></p>
+
+<p>
+	<br>
+</p>
+
+<p><span style="font-size: 18px;"><br></span></p>
+
+<h2 class="dt-sc-hr-title" style="text-align: center;"><span>Đánh giá tài liệu khoa học</span></h2>
+
+<p>
+	<br>
+</p>
+
+<p><span style="font-size: 18px;">InnoCare liên tục cập nhật thông tin khoa học mới về công nghệ dược liệu nhưng không theo đuổi mốt nhất thời. InnoCare có nhân viên là các Tiến sĩ hoá dược và các chuyên gia dinh dưỡng cùng tham gia các cuộc thảo luận về sức khỏe và dinh dưỡng trong công ty cũng như các hội thảo về các sự kiện khoa học mới nhất với Hội đồng chuyên gia tư vấn.&nbsp;</span></p>
+
+<table style="width: 100%;">
+	<tbody>
+		<tr>
+			<td style="width: 30.2521%;"><img class="fr-dib fr-draggable" src="/storage/app/media/minh%20chung%20khoa%20hoc/02.png" style="width: 308px; height: 216.089px;">
+				<br>
+			</td>
+			<td style="width: 69.6639%;">
+				<div style="text-align: left;"><span style="font-size: 18px;">Thông qua quá trình xem xét này, InnoCare thường chọn không phát triển các sản phẩm phổ biến trong cộng đồng hay trên báo đài nhưng thiếu chứng cứ về lợi ích hoặc bằng chứng về an toàn cho bệnh nhân.&nbsp;</span></div>
+				<br>
+				<br>
+				<div style="text-align: left;"><span style="font-size: 18px;">Bởi vì InnoCare luôn mong muốn &amp; đảm bảo rằng tất cả sản phẩm phải có sự hỗ trợ của khoa học về an toàn và lợi ích đến với bệnh nhân &amp; người tiêu dùng.&nbsp;</span></div>
+				<br>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>
+	<br>
+</p>
+
+<p>
+	<br>
+</p>
+
+<p>
+	<br>
+</p>
+
+<h2 class="dt-sc-hr-title" style="text-align: center;"><span>Hỗ trợ cho nghiên cứu</span></h2>
+
+<p>
+	<br>
+</p>
+
+<p><span style="font-size: 18px;">Tin chắc rằng các ứng dụng sinh học và thảo dược, dược liệu xứng đáng được nghiên cứu xa hơn và quy mô hơn, vì thế InnoCare tự hào đang và sẽ đồng hành cùng các nhà khoa học trong một số dự án về nghiên cứu ứng dụng và nghiên cứu lâm sàng trong tương lai.</span></p>
+
+<p>
+	<br>
+</p>
+
+<p><span style="font-size: 18px;"><img class="fr-dib fr-draggable" src="/storage/app/media/minh%20chung%20khoa%20hoc/03.png" style="width: 100%;"></span>
+	<br>
+</p>', '<p><span style="font-size: 18px;">Tại MHD “InnoCare”, nghiên cứu khoa học là điểm khởi đầu cho mọi sản phẩm mà InnoCare hướng đến &amp; thực hiện. Điều đó có nghĩa là InnoCare cẩn thận xem xét cơ sở khoa học cho từng sản phẩm từ lâu trước khi được phát triển, sản xuất và đưa ra thị trường.<br></span></p>
+<table style="width: 100%;"><tbody><tr><td style="width: 49.4958%;">
+                <div style="text-align: left;"><span style="font-size: 18px;">InnoCare đặc biệt quan tâm đến giá trị dược tính, sức khoẻ dựa trên chứng cứ khoa học: thành phần nào hoạt động, cách thức hoạt động và lý do hoạt động, trước khi quyết định sản xuất hoặc bán sản phẩm.</span></div>
+<span style="font-size: 18px;"><br></span>
+                <br></td>
+            <td style="width: 50.4202%;">
+<span style="font-size: 18px;"><img class="fr-dib fr-draggable" src="/storage/app/media/minh%20chung%20khoa%20hoc/01.png" style="width: 447px; height: 170px;"><br></span>
+                <br></td>
+        </tr></tbody></table>
+<p><span style="font-size: 18px;">InnoCare phối hợp chặt chẽ với các nhà khoa học của các trường Đại học/ Viện/ Trung tâm nghiên cứu uy tín trong và ngoài nước để cùng phát triển các thành phần mới, ứng dụng công nghệ sinh học mới và thường xuyên cập nhật những phát hiện lâm sàng của Trường/Viện để đánh giá hiệu quả của sản phẩm. </span></p>
+<p><span style="font-size: 18px;">Những sản phẩm và công thức cao cấp của InnoCare được thiết kế đặc biệt bởi các nhà khoa học, các nhà nghiên cứu y học cho kết quả cải thiện sức khoẻ và an toàn.</span></p>
+<p>
+    <br></p>
+<p><span style="font-size: 18px;"><br></span></p>
+<h2 class="dt-sc-hr-title" style="text-align: center;"><span>Đánh giá tài liệu khoa học</span></h2>
+<p>
+    <br></p>
+<p><span style="font-size: 18px;">InnoCare liên tục cập nhật thông tin khoa học mới về công nghệ dược liệu nhưng không theo đuổi mốt nhất thời. InnoCare có nhân viên là các Tiến sĩ hoá dược và các chuyên gia dinh dưỡng cùng tham gia các cuộc thảo luận về sức khỏe và dinh dưỡng trong công ty cũng như các hội thảo về các sự kiện khoa học mới nhất với Hội đồng chuyên gia tư vấn. </span></p>
+<table style="width: 100%;"><tbody><tr><td style="width: 30.2521%;">
+<img class="fr-dib fr-draggable" src="/storage/app/media/minh%20chung%20khoa%20hoc/02.png" style="width: 308px; height: 216.089px;"><br></td>
+            <td style="width: 69.6639%;">
+                <div style="text-align: left;"><span style="font-size: 18px;">Thông qua quá trình xem xét này, InnoCare thường chọn không phát triển các sản phẩm phổ biến trong cộng đồng hay trên báo đài nhưng thiếu chứng cứ về lợi ích hoặc bằng chứng về an toàn cho bệnh nhân. </span></div>
+                <br><br><div style="text-align: left;"><span style="font-size: 18px;">Bởi vì InnoCare luôn mong muốn &amp; đảm bảo rằng tất cả sản phẩm phải có sự hỗ trợ của khoa học về an toàn và lợi ích đến với bệnh nhân &amp; người tiêu dùng. </span></div>
+                <br></td>
+        </tr></tbody></table>
+<p>
+    <br></p>
+<p>
+    <br></p>
+<p>
+    <br></p>
+<h2 class="dt-sc-hr-title" style="text-align: center;"><span>Hỗ trợ cho nghiên cứu</span></h2>
+<p>
+    <br></p>
+<p><span style="font-size: 18px;">Tin chắc rằng các ứng dụng sinh học và thảo dược, dược liệu xứng đáng được nghiên cứu xa hơn và quy mô hơn, vì thế InnoCare tự hào đang và sẽ đồng hành cùng các nhà khoa học trong một số dự án về nghiên cứu ứng dụng và nghiên cứu lâm sàng trong tương lai.</span></p>
+<p>
+    <br></p>
+<p><span style="font-size: 18px;"><img class="fr-dib fr-draggable" src="/storage/app/media/minh%20chung%20khoa%20hoc/03.png" style="width: 100%;"></span>
+    <br></p>', '2018-07-25 08:57:30', '1', '2018-07-25 09:02:31', '2018-07-25 10:03:21' );
+INSERT INTO `rainlab_blog_posts`(`id`,`user_id`,`title`,`slug`,`excerpt`,`content`,`content_html`,`published_at`,`published`,`created_at`,`updated_at`) VALUES ( '11', '1', 'Nghiên cứu và sản xuất', 'nghien-cuu-va-san-xuat', '', '<p><span style="font-size: 18px;">Tin chắc rằng: tính toàn vẹn của các thành phần và hiệu quả của sản phẩm phụ thuộc vào chất lượng của các quy trình sản xuất. Vì thế, InnoCare lựa chọn các Nhà sản xuất một cách cẩn trọng - chỉ những Nhà sản xuất uy tín, đạt đầy đủ chứng nhận và quy định của Bộ Y tế mới được chọn làm đối tác cho sản xuất, và InnoCare giám sát mọi sản phẩm trong suốt chu kỳ sản xuất để đảm bảo đáp ứng các tiêu chuẩn chất lượng cao nhất.</span></p>
+
+<p><span style="font-size: 18px;">Trong thực tế, quá trình sản xuất các sản phẩm của InnoCare đảm bảo độ tinh khiết, chất lượng &amp; hiệu quả thông qua 8 tiêu chí sau:</span></p>
+
+<ul>
+	<li><span style="font-size: 18px;">Chỉ hợp tác với các nhà cung cấp nguyên liệu và vùng trồng đã biết trong nhiều năm.</span></li>
+	<li><span style="font-size: 18px;">Sử dụng các thành phần được chứng minh là có hiệu quả trong các nghiên cứu khoa học.</span></li>
+	<li><span style="font-size: 18px;">Không sử dụng màu nhân tạo, hoặc chất bảo quản nhân tạo.</span></li>
+	<li><span style="font-size: 18px;">Mỗi nhà cung cấp đều trải qua quá trình kiểm tra và đạt tính ổn định trong nhiều lô nguyên liệu . Vật liệu được khảo nghiệm đạt chỉ tiêu vi sinh (tụ cầu, nấm mốc, samonella….) theo chuẩn quốc gia.</span></li>
+	<li><span style="font-size: 18px;">Các lô nguyên liệu được kiểm định chất lượng bằng các máy móc hiện đại (vd: FTIR hiện đại,….) và so sánh với chỉ số độ tinh khiết chuẩn.</span></li>
+	<li><span style="font-size: 18px;">Sản phẩm được sản xuất tại các Nhà máy được chứng nhận của Bộ Y tế về ATVSTP hoặc GMP-WHO.</span></li>
+	<li><span style="font-size: 18px;">Quy trình sản xuất có nhiều đợt kiểm tra ngẫu nhiên tại chỗ. Các lô sản xuất được kiềm tra &amp; xác nhận bởi bộ phận kiểm soát chất lượng nhằm đảm bảo tính chính xác, tinh khiết và an toàn.</span></li>
+	<li><span style="font-size: 18px;">Chai/lọ của sản phẩm được xử lý vô trùng, quá trình niêm phong, bảo quản đảm bảo không nhiễm ngược. Và mỗi chai/lọ được đánh dấu bằng ngày sản xuất và ngày hết hạn.</span></li>
+</ul>
+
+<p><span style="font-size: 18px;"><br></span></p>
+
+<p><span style="font-size: 18px;"><img class="fr-dib fr-draggable" src="/storage/app/media/nghien%20cuu/01.png" style="width: 100%;"></span></p>', '<p><span style="font-size: 18px;">Tin chắc rằng: tính toàn vẹn của các thành phần và hiệu quả của sản phẩm phụ thuộc vào chất lượng của các quy trình sản xuất. Vì thế, InnoCare lựa chọn các Nhà sản xuất một cách cẩn trọng - chỉ những Nhà sản xuất uy tín, đạt đầy đủ chứng nhận và quy định của Bộ Y tế mới được chọn làm đối tác cho sản xuất, và InnoCare giám sát mọi sản phẩm trong suốt chu kỳ sản xuất để đảm bảo đáp ứng các tiêu chuẩn chất lượng cao nhất.</span></p>
+<p><span style="font-size: 18px;">Trong thực tế, quá trình sản xuất các sản phẩm của InnoCare đảm bảo độ tinh khiết, chất lượng &amp; hiệu quả thông qua 8 tiêu chí sau:</span></p>
+<ul><li><span style="font-size: 18px;">Chỉ hợp tác với các nhà cung cấp nguyên liệu và vùng trồng đã biết trong nhiều năm.</span></li>
+    <li><span style="font-size: 18px;">Sử dụng các thành phần được chứng minh là có hiệu quả trong các nghiên cứu khoa học.</span></li>
+    <li><span style="font-size: 18px;">Không sử dụng màu nhân tạo, hoặc chất bảo quản nhân tạo.</span></li>
+    <li><span style="font-size: 18px;">Mỗi nhà cung cấp đều trải qua quá trình kiểm tra và đạt tính ổn định trong nhiều lô nguyên liệu . Vật liệu được khảo nghiệm đạt chỉ tiêu vi sinh (tụ cầu, nấm mốc, samonella….) theo chuẩn quốc gia.</span></li>
+    <li><span style="font-size: 18px;">Các lô nguyên liệu được kiểm định chất lượng bằng các máy móc hiện đại (vd: FTIR hiện đại,….) và so sánh với chỉ số độ tinh khiết chuẩn.</span></li>
+    <li><span style="font-size: 18px;">Sản phẩm được sản xuất tại các Nhà máy được chứng nhận của Bộ Y tế về ATVSTP hoặc GMP-WHO.</span></li>
+    <li><span style="font-size: 18px;">Quy trình sản xuất có nhiều đợt kiểm tra ngẫu nhiên tại chỗ. Các lô sản xuất được kiềm tra &amp; xác nhận bởi bộ phận kiểm soát chất lượng nhằm đảm bảo tính chính xác, tinh khiết và an toàn.</span></li>
+    <li><span style="font-size: 18px;">Chai/lọ của sản phẩm được xử lý vô trùng, quá trình niêm phong, bảo quản đảm bảo không nhiễm ngược. Và mỗi chai/lọ được đánh dấu bằng ngày sản xuất và ngày hết hạn.</span></li>
+</ul>
+<p><span style="font-size: 18px;"><br></span></p>
+<p><span style="font-size: 18px;"><img class="fr-dib fr-draggable" src="/storage/app/media/nghien%20cuu/01.png" style="width: 100%;"></span></p>', '2018-07-25 09:26:58', '1', '2018-07-25 09:20:01', '2018-07-25 09:27:00' );
+INSERT INTO `rainlab_blog_posts`(`id`,`user_id`,`title`,`slug`,`excerpt`,`content`,`content_html`,`published_at`,`published`,`created_at`,`updated_at`) VALUES ( '12', '1', 'Diễn đàn công nghệ', 'dien-dan-cong-nghe', '', '<p><span style="font-size: 18px;">Kết nối chuyển giao công nghệ giữa Trường đại học và các công ty sản xuất trong vệc phát triển sản phẩm chất lượng cao là một nhu cầu tất yếu nhằm nâng cao chất lượng sản phẩm, đáp ứng nhu cầu cho cộng đồng. Việc cập nhật, ứng dụng tiến bộ khoa học kỹ thuật mới vào sản phẩm còn giúp các công ty tăng tính cạnh tranh của sản phẩm trên thị trường.&nbsp;</span></p>
+
+<p><span style="font-size: 18px;">Việc chuyển giao khoa học đến các công ty cũng giúp cho việc nghiên cứu của các Trường đại học tăng định hướng ứng dụng, đem lại hiệu quả về kinh tế xã hội hỗ trợ phát triển các ngành công nghiệp và tái đầu tư cho việc nghiên cứu của nhà trường. Việc chuyển giao thành công các công nghệ giữa hai bên sẽ khẳng định vai trò hỗ trợ và thúc đẩy kinh tế xã hội của các Trường, Viện theo đúng chức năng của các đơn vị này.</span></p>
+
+<p>
+	<br>
+</p>
+
+<table style="width: 100%;">
+	<tbody>
+		<tr>
+			<td style="width: 50.0000%;">
+				<div style="text-align: left;"><span style="font-size: 18px;">Hiện tại, hoạt động chuyển giao khoa học công nghệ từ các Trường đại học đến các công ty vẫn chưa gắn kết mạnh mẽ, do còn thiếu các mạng lưới kết nối chia sẻ thành tựu khoa học ứng dụng từ trường và thông tin về nhu cầu phát triển sản phẩm của các công ty.</span></div><img class="fr-dib fr-draggable" src="/storage/app/media/01.png" style="width: 462px; height: 462px;">
+				<br>
+			</td>
+			<td style="width: 50.0000%;"><img class="fr-dib fr-draggable" src="/storage/app/media/02.png" style="width: 448px; height: 317.908px;">
+				<br>
+				<div style="text-align: left;"><span style="font-size: 18px;">Do đó, INNOCARE đặt mục tiêu làm diễn đàn kết nối, liên kết thu thập thông tin về năng lực nghiên cứu, thế mạnh, thành tựu từ các nhà khoa học của các trường đại học, viện nghiên cứu trên khắp cả nước và các nước trên thế giới nhằm hỗ trợ cho việc gắn kết chuyển giao khoa học công nghệ phục vụ phát triển công nghiệp, làm vai trò tư vấn hỗ trợ các doanh nghiệp tăng tính cạnh tranh cho chất lượng, uy tín của sản phẩm trên thị trường.</span></div>
+				<br>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>
+	<br>
+</p>
+
+<p>
+	<br>
+</p>
+<div class="themanh">
+
+	<p><span style="font-size: 30px;">Các hướng nghiên cứu thế mạnh:</span></p>
+
+	<ul>
+		<li><span style="font-size: 18px;">Ứng dụng chiết xuất dược liệu trong thực phẩm hỗ trợ sức khỏe và thuốc</span></li>
+		<li><span style="font-size: 18px;">Ứng dụng công nghệ nano trong phát triển sản phẩm thực phẩm chức năng hỗ trợ sức khỏe</span></li>
+		<li><span style="font-size: 18px;">Ứng dụng chiết xuất tinh dầu cây dược liệu trong mỹ phẩm và sản phẩm chăm sóc sức khỏe</span></li>
+	</ul>
+</div>', '<p><span style="font-size: 18px;">Kết nối chuyển giao công nghệ giữa Trường đại học và các công ty sản xuất trong vệc phát triển sản phẩm chất lượng cao là một nhu cầu tất yếu nhằm nâng cao chất lượng sản phẩm, đáp ứng nhu cầu cho cộng đồng. Việc cập nhật, ứng dụng tiến bộ khoa học kỹ thuật mới vào sản phẩm còn giúp các công ty tăng tính cạnh tranh của sản phẩm trên thị trường. </span></p>
+<p><span style="font-size: 18px;">Việc chuyển giao khoa học đến các công ty cũng giúp cho việc nghiên cứu của các Trường đại học tăng định hướng ứng dụng, đem lại hiệu quả về kinh tế xã hội hỗ trợ phát triển các ngành công nghiệp và tái đầu tư cho việc nghiên cứu của nhà trường. Việc chuyển giao thành công các công nghệ giữa hai bên sẽ khẳng định vai trò hỗ trợ và thúc đẩy kinh tế xã hội của các Trường, Viện theo đúng chức năng của các đơn vị này.</span></p>
+<p>
+    <br></p>
+<table style="width: 100%;"><tbody><tr><td style="width: 50.0000%;">
+                <div style="text-align: left;"><span style="font-size: 18px;">Hiện tại, hoạt động chuyển giao khoa học công nghệ từ các Trường đại học đến các công ty vẫn chưa gắn kết mạnh mẽ, do còn thiếu các mạng lưới kết nối chia sẻ thành tựu khoa học ứng dụng từ trường và thông tin về nhu cầu phát triển sản phẩm của các công ty.</span></div>
+<img class="fr-dib fr-draggable" src="/storage/app/media/01.png" style="width: 462px; height: 462px;"><br></td>
+            <td style="width: 50.0000%;">
+<img class="fr-dib fr-draggable" src="/storage/app/media/02.png" style="width: 448px; height: 317.908px;"><br><div style="text-align: left;"><span style="font-size: 18px;">Do đó, INNOCARE đặt mục tiêu làm diễn đàn kết nối, liên kết thu thập thông tin về năng lực nghiên cứu, thế mạnh, thành tựu từ các nhà khoa học của các trường đại học, viện nghiên cứu trên khắp cả nước và các nước trên thế giới nhằm hỗ trợ cho việc gắn kết chuyển giao khoa học công nghệ phục vụ phát triển công nghiệp, làm vai trò tư vấn hỗ trợ các doanh nghiệp tăng tính cạnh tranh cho chất lượng, uy tín của sản phẩm trên thị trường.</span></div>
+                <br></td>
+        </tr></tbody></table>
+<p>
+    <br></p>
+<p>
+    <br></p>
+<div class="themanh">
+
+    <p><span style="font-size: 30px;">Các hướng nghiên cứu thế mạnh:</span></p>
+
+    <ul><li><span style="font-size: 18px;">Ứng dụng chiết xuất dược liệu trong thực phẩm hỗ trợ sức khỏe và thuốc</span></li>
+        <li><span style="font-size: 18px;">Ứng dụng công nghệ nano trong phát triển sản phẩm thực phẩm chức năng hỗ trợ sức khỏe</span></li>
+        <li><span style="font-size: 18px;">Ứng dụng chiết xuất tinh dầu cây dược liệu trong mỹ phẩm và sản phẩm chăm sóc sức khỏe</span></li>
+    </ul></div>', '2018-07-25 09:31:56', '1', '2018-07-25 09:31:48', '2018-07-25 09:37:03' );
+INSERT INTO `rainlab_blog_posts`(`id`,`user_id`,`title`,`slug`,`excerpt`,`content`,`content_html`,`published_at`,`published`,`created_at`,`updated_at`) VALUES ( '13', '1', 'Gặp gỡ - kết nối chuyên gia', 'gap-go-ket-noi-chuyen-gia', '', '<p><span style="font-size: 18px;">Kết nối khoa học và ứng dụng thực tế lâm sàng luôn là quan tâm hàng đầu của InnoCare, tích cực tiếp cận với các chuyên gia đầu ngành trong từng lĩnh vực liên quan. Hội đồng chuyên gia cố vấn khoa học đóng một vai trò quan trọng trong cuộc đối thoại liên tục của InnoCare về những phát hiện khoa học mới nhất trong ứng dụng sinh học, dược liệu, dinh dưỡng… cũng như tư vấn về việc nghiên cứu &amp; phát triển các sản phẩm bảo vệ sức khỏe cho tương lai.</span></p>
+
+<p><span style="font-size: 18px;">Hội đồng cố vấn khoa học có vai trò đánh giá độc lập, công tâm và hoàn toàn không liên quan đến mục đích thương mại. Thông tin của hội đồng cố vấn khoa học không phải để ủng hộ bất kỳ sản phẩm nào. Và các cơ quan, tổ chức của các thành viên trong hội đồng cố vấn khoa học được nêu lên chỉ cho mục đích nhận dạng.</span></p>', '<p><span style="font-size: 18px;">Kết nối khoa học và ứng dụng thực tế lâm sàng luôn là quan tâm hàng đầu của InnoCare, tích cực tiếp cận với các chuyên gia đầu ngành trong từng lĩnh vực liên quan. Hội đồng chuyên gia cố vấn khoa học đóng một vai trò quan trọng trong cuộc đối thoại liên tục của InnoCare về những phát hiện khoa học mới nhất trong ứng dụng sinh học, dược liệu, dinh dưỡng… cũng như tư vấn về việc nghiên cứu &amp; phát triển các sản phẩm bảo vệ sức khỏe cho tương lai.</span></p>
+<p><span style="font-size: 18px;">Hội đồng cố vấn khoa học có vai trò đánh giá độc lập, công tâm và hoàn toàn không liên quan đến mục đích thương mại. Thông tin của hội đồng cố vấn khoa học không phải để ủng hộ bất kỳ sản phẩm nào. Và các cơ quan, tổ chức của các thành viên trong hội đồng cố vấn khoa học được nêu lên chỉ cho mục đích nhận dạng.</span></p>', '2018-07-25 10:10:24', '1', '2018-07-25 10:10:25', '2018-07-25 10:10:25' );
 -- ---------------------------------------------------------
 
 
 -- Dump data of "rainlab_blog_posts_categories" ------------
 INSERT INTO `rainlab_blog_posts_categories`(`post_id`,`category_id`) VALUES ( '7', '7' );
+INSERT INTO `rainlab_blog_posts_categories`(`post_id`,`category_id`) VALUES ( '8', '6' );
+INSERT INTO `rainlab_blog_posts_categories`(`post_id`,`category_id`) VALUES ( '9', '6' );
+INSERT INTO `rainlab_blog_posts_categories`(`post_id`,`category_id`) VALUES ( '10', '6' );
+INSERT INTO `rainlab_blog_posts_categories`(`post_id`,`category_id`) VALUES ( '11', '6' );
+INSERT INTO `rainlab_blog_posts_categories`(`post_id`,`category_id`) VALUES ( '12', '8' );
+INSERT INTO `rainlab_blog_posts_categories`(`post_id`,`category_id`) VALUES ( '13', '6' );
 -- ---------------------------------------------------------
 
 
@@ -1331,7 +1656,7 @@ INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`
 INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '80', 'vn', '31', 'BenFreke\\MenuManager\\Models\\Menu', '{"title":"","description":""}' );
 INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '81', 'en', '32', 'BenFreke\\MenuManager\\Models\\Menu', '{"title":"","description":""}' );
 INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '82', 'vn', '32', 'BenFreke\\MenuManager\\Models\\Menu', '{"title":"","description":""}' );
-INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '83', 'en', '1', 'OFFLINE\\SnipcartShop\\Models\\Category', '{"name":"","slug":"dtht","meta_title":"","meta_description":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '83', 'en', '1', 'OFFLINE\\SnipcartShop\\Models\\Category', '{"name":"","slug":"san-pham","meta_title":"","meta_description":""}' );
 INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '84', 'vn', '1', 'OFFLINE\\SnipcartShop\\Models\\Category', '{"name":"","slug":"dtht","meta_title":"","meta_description":""}' );
 INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '85', 'en', '6', 'RainLab\\Blog\\Models\\Category', '{"name":"","slug":"gioi-thieu","description":""}' );
 INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '86', 'fr', '6', 'RainLab\\Blog\\Models\\Category', '{"name":"","slug":"gioi-thieu","description":""}' );
@@ -1366,6 +1691,51 @@ INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`
 INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '115', 'fr', '1', 'Lovata\\Shopaholic\\Models\\Category', '{"name":"","preview_text":"","description":""}' );
 INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '116', 'en', '1', 'Lovata\\Shopaholic\\Models\\Product', '{"name":"","preview_text":"","description":""}' );
 INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '117', 'fr', '1', 'Lovata\\Shopaholic\\Models\\Product', '{"name":"","preview_text":"","description":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '118', 'fr', '1', 'OFFLINE\\SnipcartShop\\Models\\Category', '{"name":"","slug":"san-pham","meta_title":"","meta_description":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '119', 'en', '1', 'RedMarlin\\Faq\\Models\\Category', '{"title":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '120', 'fr', '1', 'RedMarlin\\Faq\\Models\\Category', '{"title":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '121', 'en', '2', 'RedMarlin\\Faq\\Models\\Question', '{"question":"","answer":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '122', 'fr', '2', 'RedMarlin\\Faq\\Models\\Question', '{"question":"","answer":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '123', 'en', '1', 'RedMarlin\\Faq\\Models\\Question', '{"question":"","answer":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '124', 'fr', '1', 'RedMarlin\\Faq\\Models\\Question', '{"question":"","answer":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '125', 'en', '7', 'RedMarlin\\Faq\\Models\\Question', '{"question":"","answer":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '126', 'fr', '7', 'RedMarlin\\Faq\\Models\\Question', '{"question":"","answer":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '127', 'en', '8', 'RainLab\\Blog\\Models\\Post', '{"title":"","slug":"chat-long-nguyen-lieu","content":"","content_html":"","excerpt":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '128', 'fr', '8', 'RainLab\\Blog\\Models\\Post', '{"title":"","slug":"chat-long-nguyen-lieu","content":"","content_html":"","excerpt":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '129', 'en', '9', 'RainLab\\Blog\\Models\\Post', '{"title":"","slug":"gioi-thieu-chung","content":"","content_html":"","excerpt":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '130', 'fr', '9', 'RainLab\\Blog\\Models\\Post', '{"title":"","slug":"gioi-thieu-chung","content":"","content_html":"","excerpt":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '131', 'en', '10', 'RainLab\\Blog\\Models\\Post', '{"title":"","slug":"minh-chung-khoa-hoc","content":"","content_html":"","excerpt":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '132', 'fr', '10', 'RainLab\\Blog\\Models\\Post', '{"title":"","slug":"minh-chung-khoa-hoc","content":"","content_html":"","excerpt":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '133', 'en', '11', 'RainLab\\Blog\\Models\\Post', '{"title":"","slug":"nghien-cuu-va-san-xuat","content":"","content_html":"","excerpt":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '134', 'fr', '11', 'RainLab\\Blog\\Models\\Post', '{"title":"","slug":"nghien-cuu-va-san-xuat","content":"","content_html":"","excerpt":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '135', 'en', '12', 'RainLab\\Blog\\Models\\Post', '{"title":"","slug":"dien-djan-cong-nghe","content":"","content_html":"","excerpt":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '136', 'fr', '12', 'RainLab\\Blog\\Models\\Post', '{"title":"","slug":"dien-djan-cong-nghe","content":"","content_html":"","excerpt":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '137', 'en', '40', 'BenFreke\\MenuManager\\Models\\Menu', '{"title":"","description":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '138', 'fr', '40', 'BenFreke\\MenuManager\\Models\\Menu', '{"title":"","description":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '139', 'en', '41', 'BenFreke\\MenuManager\\Models\\Menu', '{"title":"","description":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '140', 'fr', '41', 'BenFreke\\MenuManager\\Models\\Menu', '{"title":"","description":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '141', 'en', '42', 'BenFreke\\MenuManager\\Models\\Menu', '{"title":"","description":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '142', 'fr', '42', 'BenFreke\\MenuManager\\Models\\Menu', '{"title":"","description":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '143', 'en', '43', 'BenFreke\\MenuManager\\Models\\Menu', '{"title":"","description":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '144', 'fr', '43', 'BenFreke\\MenuManager\\Models\\Menu', '{"title":"","description":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '145', 'en', '44', 'BenFreke\\MenuManager\\Models\\Menu', '{"title":"","description":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '146', 'fr', '44', 'BenFreke\\MenuManager\\Models\\Menu', '{"title":"","description":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '147', 'en', '45', 'BenFreke\\MenuManager\\Models\\Menu', '{"title":"","description":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '148', 'fr', '45', 'BenFreke\\MenuManager\\Models\\Menu', '{"title":"","description":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '149', 'en', '46', 'BenFreke\\MenuManager\\Models\\Menu', '{"title":"","description":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '150', 'fr', '46', 'BenFreke\\MenuManager\\Models\\Menu', '{"title":"","description":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '151', 'en', '47', 'BenFreke\\MenuManager\\Models\\Menu', '{"title":"","description":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '152', 'fr', '47', 'BenFreke\\MenuManager\\Models\\Menu', '{"title":"","description":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '153', 'en', '48', 'BenFreke\\MenuManager\\Models\\Menu', '{"title":"","description":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '154', 'fr', '48', 'BenFreke\\MenuManager\\Models\\Menu', '{"title":"","description":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '155', 'en', '49', 'BenFreke\\MenuManager\\Models\\Menu', '{"title":"","description":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '156', 'fr', '49', 'BenFreke\\MenuManager\\Models\\Menu', '{"title":"","description":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '157', 'en', '50', 'BenFreke\\MenuManager\\Models\\Menu', '{"title":"","description":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '158', 'fr', '50', 'BenFreke\\MenuManager\\Models\\Menu', '{"title":"","description":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '159', 'en', '13', 'RainLab\\Blog\\Models\\Post', '{"title":"","slug":"gap-go-ket-noi-chuyen-gia","content":"","content_html":"","excerpt":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '160', 'fr', '13', 'RainLab\\Blog\\Models\\Post', '{"title":"","slug":"gap-go-ket-noi-chuyen-gia","content":"","content_html":"","excerpt":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '161', 'en', '8', 'RainLab\\Blog\\Models\\Category', '{"name":"","slug":"dien-djan","description":""}' );
+INSERT INTO `rainlab_translate_attributes`(`id`,`locale`,`model_id`,`model_type`,`attribute_data`) VALUES ( '162', 'fr', '8', 'RainLab\\Blog\\Models\\Category', '{"name":"","slug":"dien-djan","description":""}' );
 -- ---------------------------------------------------------
 
 
@@ -1388,7 +1758,7 @@ INSERT INTO `rainlab_translate_indexes`(`id`,`locale`,`model_id`,`model_type`,`i
 INSERT INTO `rainlab_translate_indexes`(`id`,`locale`,`model_id`,`model_type`,`item`,`value`) VALUES ( '16', 'vn', '5', 'RainLab\\Blog\\Models\\Post', 'slug', 'tous-blog-1' );
 INSERT INTO `rainlab_translate_indexes`(`id`,`locale`,`model_id`,`model_type`,`item`,`value`) VALUES ( '17', 'en', '6', 'RainLab\\Blog\\Models\\Post', 'slug', 'tous-blog-2' );
 INSERT INTO `rainlab_translate_indexes`(`id`,`locale`,`model_id`,`model_type`,`item`,`value`) VALUES ( '18', 'vn', '6', 'RainLab\\Blog\\Models\\Post', 'slug', 'tous-blog-2' );
-INSERT INTO `rainlab_translate_indexes`(`id`,`locale`,`model_id`,`model_type`,`item`,`value`) VALUES ( '19', 'en', '1', 'OFFLINE\\SnipcartShop\\Models\\Category', 'slug', 'dtht' );
+INSERT INTO `rainlab_translate_indexes`(`id`,`locale`,`model_id`,`model_type`,`item`,`value`) VALUES ( '19', 'en', '1', 'OFFLINE\\SnipcartShop\\Models\\Category', 'slug', 'san-pham' );
 INSERT INTO `rainlab_translate_indexes`(`id`,`locale`,`model_id`,`model_type`,`item`,`value`) VALUES ( '20', 'vn', '1', 'OFFLINE\\SnipcartShop\\Models\\Category', 'slug', 'dtht' );
 INSERT INTO `rainlab_translate_indexes`(`id`,`locale`,`model_id`,`model_type`,`item`,`value`) VALUES ( '21', 'en', '6', 'RainLab\\Blog\\Models\\Category', 'slug', 'gioi-thieu' );
 INSERT INTO `rainlab_translate_indexes`(`id`,`locale`,`model_id`,`model_type`,`item`,`value`) VALUES ( '22', 'fr', '6', 'RainLab\\Blog\\Models\\Category', 'slug', 'gioi-thieu' );
@@ -1400,6 +1770,21 @@ INSERT INTO `rainlab_translate_indexes`(`id`,`locale`,`model_id`,`model_type`,`i
 INSERT INTO `rainlab_translate_indexes`(`id`,`locale`,`model_id`,`model_type`,`item`,`value`) VALUES ( '28', 'fr', '2', 'OFFLINE\\SnipcartShop\\Models\\Category', 'slug', 'san-pham' );
 INSERT INTO `rainlab_translate_indexes`(`id`,`locale`,`model_id`,`model_type`,`item`,`value`) VALUES ( '29', 'en', '1', 'OFFLINE\\SnipcartShop\\Models\\Product', 'slug', 'cao-nam-trung-thao-cordy-x' );
 INSERT INTO `rainlab_translate_indexes`(`id`,`locale`,`model_id`,`model_type`,`item`,`value`) VALUES ( '30', 'fr', '1', 'OFFLINE\\SnipcartShop\\Models\\Product', 'slug', 'cao-nam-trung-thao-cordy-x' );
+INSERT INTO `rainlab_translate_indexes`(`id`,`locale`,`model_id`,`model_type`,`item`,`value`) VALUES ( '31', 'fr', '1', 'OFFLINE\\SnipcartShop\\Models\\Category', 'slug', 'san-pham' );
+INSERT INTO `rainlab_translate_indexes`(`id`,`locale`,`model_id`,`model_type`,`item`,`value`) VALUES ( '32', 'en', '8', 'RainLab\\Blog\\Models\\Post', 'slug', 'chat-long-nguyen-lieu' );
+INSERT INTO `rainlab_translate_indexes`(`id`,`locale`,`model_id`,`model_type`,`item`,`value`) VALUES ( '33', 'fr', '8', 'RainLab\\Blog\\Models\\Post', 'slug', 'chat-long-nguyen-lieu' );
+INSERT INTO `rainlab_translate_indexes`(`id`,`locale`,`model_id`,`model_type`,`item`,`value`) VALUES ( '34', 'en', '9', 'RainLab\\Blog\\Models\\Post', 'slug', 'gioi-thieu-chung' );
+INSERT INTO `rainlab_translate_indexes`(`id`,`locale`,`model_id`,`model_type`,`item`,`value`) VALUES ( '35', 'fr', '9', 'RainLab\\Blog\\Models\\Post', 'slug', 'gioi-thieu-chung' );
+INSERT INTO `rainlab_translate_indexes`(`id`,`locale`,`model_id`,`model_type`,`item`,`value`) VALUES ( '36', 'en', '10', 'RainLab\\Blog\\Models\\Post', 'slug', 'minh-chung-khoa-hoc' );
+INSERT INTO `rainlab_translate_indexes`(`id`,`locale`,`model_id`,`model_type`,`item`,`value`) VALUES ( '37', 'fr', '10', 'RainLab\\Blog\\Models\\Post', 'slug', 'minh-chung-khoa-hoc' );
+INSERT INTO `rainlab_translate_indexes`(`id`,`locale`,`model_id`,`model_type`,`item`,`value`) VALUES ( '38', 'en', '11', 'RainLab\\Blog\\Models\\Post', 'slug', 'nghien-cuu-va-san-xuat' );
+INSERT INTO `rainlab_translate_indexes`(`id`,`locale`,`model_id`,`model_type`,`item`,`value`) VALUES ( '39', 'fr', '11', 'RainLab\\Blog\\Models\\Post', 'slug', 'nghien-cuu-va-san-xuat' );
+INSERT INTO `rainlab_translate_indexes`(`id`,`locale`,`model_id`,`model_type`,`item`,`value`) VALUES ( '40', 'en', '12', 'RainLab\\Blog\\Models\\Post', 'slug', 'dien-djan-cong-nghe' );
+INSERT INTO `rainlab_translate_indexes`(`id`,`locale`,`model_id`,`model_type`,`item`,`value`) VALUES ( '41', 'fr', '12', 'RainLab\\Blog\\Models\\Post', 'slug', 'dien-djan-cong-nghe' );
+INSERT INTO `rainlab_translate_indexes`(`id`,`locale`,`model_id`,`model_type`,`item`,`value`) VALUES ( '42', 'en', '13', 'RainLab\\Blog\\Models\\Post', 'slug', 'gap-go-ket-noi-chuyen-gia' );
+INSERT INTO `rainlab_translate_indexes`(`id`,`locale`,`model_id`,`model_type`,`item`,`value`) VALUES ( '43', 'fr', '13', 'RainLab\\Blog\\Models\\Post', 'slug', 'gap-go-ket-noi-chuyen-gia' );
+INSERT INTO `rainlab_translate_indexes`(`id`,`locale`,`model_id`,`model_type`,`item`,`value`) VALUES ( '44', 'en', '8', 'RainLab\\Blog\\Models\\Category', 'slug', 'dien-djan' );
+INSERT INTO `rainlab_translate_indexes`(`id`,`locale`,`model_id`,`model_type`,`item`,`value`) VALUES ( '45', 'fr', '8', 'RainLab\\Blog\\Models\\Category', 'slug', 'dien-djan' );
 -- ---------------------------------------------------------
 
 
@@ -1605,10 +1990,33 @@ INSERT INTO `rainlab_translate_messages`(`id`,`code`,`message_data`) VALUES ( '1
 INSERT INTO `rainlab_translate_messages`(`id`,`code`,`message_data`) VALUES ( '195', 'xem.tất.cả', '{"x":"Xem t\\u1ea5t c\\u1ea3"}' );
 INSERT INTO `rainlab_translate_messages`(`id`,`code`,`message_data`) VALUES ( '196', 'hỏi.về.sản.phẩm', '{"x":"H\\u1ecfi v\\u1ec1 s\\u1ea3n ph\\u1ea9m"}' );
 INSERT INTO `rainlab_translate_messages`(`id`,`code`,`message_data`) VALUES ( '197', 'your.form.was.successfully.submitted', '{"x":"Your form was successfully submitted"}' );
+INSERT INTO `rainlab_translate_messages`(`id`,`code`,`message_data`) VALUES ( '198', 'họ.và.tên', '{"x":"H\\u1ecd v\\u00e0 t\\u00ean"}' );
+INSERT INTO `rainlab_translate_messages`(`id`,`code`,`message_data`) VALUES ( '199', 'nội.dung.câu.hỏi', '{"x":"N\\u1ed9i dung c\\u00e2u h\\u1ecfi"}' );
+INSERT INTO `rainlab_translate_messages`(`id`,`code`,`message_data`) VALUES ( '200', 'câu.hỏi.của.bạn', '{"x":"C\\u00e2u h\\u1ecfi c\\u1ee7a b\\u1ea1n"}' );
+INSERT INTO `rainlab_translate_messages`(`id`,`code`,`message_data`) VALUES ( '201', 'đã.trả.lời', '{"x":"\\u0110\\u00e3 tr\\u1ea3 l\\u1eddi"}' );
 -- ---------------------------------------------------------
 
 
 -- Dump data of "rainlab_user_mail_blockers" ---------------
+-- ---------------------------------------------------------
+
+
+-- Dump data of "redmarlin_faq_category" -------------------
+INSERT INTO `redmarlin_faq_category`(`id`,`title`,`lang`) VALUES ( '1', 'Hỏi đáp', '' );
+-- ---------------------------------------------------------
+
+
+-- Dump data of "redmarlin_faq_questions" ------------------
+INSERT INTO `redmarlin_faq_questions`(`id`,`question`,`answer`,`category_id`,`is_approved`,`is_featured`,`reply_email`,`created_at`,`updated_at`,`sort_order`,`field1`,`name`) VALUES ( '1', 'Hỏi cách sử dụng đông trùng hạ thảo hiệu quả cho người lớn tuổi, bị bệnh tiểu đường?', '<p><img class="fr-dib fr-draggable" src="/storage/app/media/hoi-dap.jpg" style="width: 100%;"></p>', '1', '1', '0', 'test@gmail.com', '2018-07-25 02:20:53', '2018-07-25 07:18:52', '1', '', 'Thảo Nguyên' );
+INSERT INTO `redmarlin_faq_questions`(`id`,`question`,`answer`,`category_id`,`is_approved`,`is_featured`,`reply_email`,`created_at`,`updated_at`,`sort_order`,`field1`,`name`) VALUES ( '2', 'Bị cao huyết áp, có sử dụng cao xích chi trùng thỏa được hay không? Có phản ứng phụ hay không?', '', '1', '1', '0', 'test@gmail.com', '2018-07-25 02:28:35', '2018-07-25 06:34:55', '2', '', 'Nguyễn Nam' );
+INSERT INTO `redmarlin_faq_questions`(`id`,`question`,`answer`,`category_id`,`is_approved`,`is_featured`,`reply_email`,`created_at`,`updated_at`,`sort_order`,`field1`,`name`) VALUES ( '3', 'fdas', NULL, '0', '0', '0', 'test@gmail.com', '2018-07-25 02:35:13', '2018-07-25 02:35:13', '3', '', NULL );
+INSERT INTO `redmarlin_faq_questions`(`id`,`question`,`answer`,`category_id`,`is_approved`,`is_featured`,`reply_email`,`created_at`,`updated_at`,`sort_order`,`field1`,`name`) VALUES ( '4', 'fdsafdsàdasfdasfsa', NULL, '0', '0', '0', 'test@gmail.com', '2018-07-25 03:10:02', '2018-07-25 03:10:02', '4', '', NULL );
+INSERT INTO `redmarlin_faq_questions`(`id`,`question`,`answer`,`category_id`,`is_approved`,`is_featured`,`reply_email`,`created_at`,`updated_at`,`sort_order`,`field1`,`name`) VALUES ( '5', 'fdsàdsafdsafdasfdsa', NULL, '0', '0', '0', 'can@gmail.com', '2018-07-25 03:17:47', '2018-07-25 03:17:47', '5', '', NULL );
+INSERT INTO `redmarlin_faq_questions`(`id`,`question`,`answer`,`category_id`,`is_approved`,`is_featured`,`reply_email`,`created_at`,`updated_at`,`sort_order`,`field1`,`name`) VALUES ( '6', 'fdsàdsafdsafdasfdsa', NULL, '0', '0', '0', 'can@gmail.com', '2018-07-25 03:51:51', '2018-07-25 03:51:51', '6', '', NULL );
+INSERT INTO `redmarlin_faq_questions`(`id`,`question`,`answer`,`category_id`,`is_approved`,`is_featured`,`reply_email`,`created_at`,`updated_at`,`sort_order`,`field1`,`name`) VALUES ( '7', 'fdasdfsafasdfsa', 'fda', '1', '0', '0', NULL, NULL, '2018-07-25 04:06:43', '7', '', 'fdsaf' );
+INSERT INTO `redmarlin_faq_questions`(`id`,`question`,`answer`,`category_id`,`is_approved`,`is_featured`,`reply_email`,`created_at`,`updated_at`,`sort_order`,`field1`,`name`) VALUES ( '8', 'fdsafdasdas', NULL, '0', '0', '0', 'test@gmail.com', '2018-07-25 04:07:11', '2018-07-25 04:07:11', '8', '', NULL );
+INSERT INTO `redmarlin_faq_questions`(`id`,`question`,`answer`,`category_id`,`is_approved`,`is_featured`,`reply_email`,`created_at`,`updated_at`,`sort_order`,`field1`,`name`) VALUES ( '9', 'fdsafdasdas', NULL, '0', '0', '0', 'test@gmail.com', '2018-07-25 04:10:01', '2018-07-25 04:10:01', '9', '', 'DOUCHE' );
+INSERT INTO `redmarlin_faq_questions`(`id`,`question`,`answer`,`category_id`,`is_approved`,`is_featured`,`reply_email`,`created_at`,`updated_at`,`sort_order`,`field1`,`name`) VALUES ( '10', 'fdsafasdfsa', NULL, '0', '0', '0', 'test@gmail.com', '2018-07-25 04:10:17', '2018-07-25 04:10:17', '10', '', 'ROBINETTERIE' );
 -- ---------------------------------------------------------
 
 
@@ -18156,6 +18564,983 @@ Stack trace:
 #51 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(87): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
 #52 /home/candt/workspaces/mhdnocare/index.php(43): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #53 {main}', NULL, '2018-07-24 08:30:32', '2018-07-24 08:30:32' );
+INSERT INTO `system_event_logs`(`id`,`level`,`message`,`details`,`created_at`,`updated_at`) VALUES ( '340', 'error', 'RuntimeException: [snipcartshop] Please configure at least one currency via the backend settings. in /home/candt/workspaces/mhdnocare/plugins/offline/snipcartshop/models/CurrencySettings.php:45
+Stack trace:
+#0 /home/candt/workspaces/mhdnocare/plugins/offline/snipcartshop/models/Product.php(212): OFFLINE\\SnipcartShop\\Models\\CurrencySettings::activeCurrency()
+#1 /home/candt/workspaces/mhdnocare/plugins/offline/snipcartshop/models/Product.php(231): OFFLINE\\SnipcartShop\\Models\\Product->getPriceInCurrency()
+#2 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(2700): OFFLINE\\SnipcartShop\\Models\\Product->getPriceFormattedAttribute(NULL)
+#3 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(2602): Illuminate\\Database\\Eloquent\\Model->mutateAttribute(\'priceFormatted\', NULL)
+#4 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Database/Model.php(1324): Illuminate\\Database\\Eloquent\\Model->getAttributeValue(\'priceFormatted\')
+#5 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Database/Model.php(1298): October\\Rain\\Database\\Model->getAttributeValue(\'priceFormatted\')
+#6 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(3339): October\\Rain\\Database\\Model->getAttribute(\'priceFormatted\')
+#7 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Extension/ExtendableTrait.php(317): Illuminate\\Database\\Eloquent\\Model->__get(\'priceFormatted\')
+#8 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Database/Model.php(474): October\\Rain\\Database\\Model->extendableGet(\'priceFormatted\')
+#9 /home/candt/workspaces/mhdnocare/plugins/offline/snipcartshop/models/product/_price.htm(1): October\\Rain\\Database\\Model->__get(\'priceFormatted\')
+#10 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(244): include(\'/home/candt/wor...\')
+#11 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(98): Backend\\Classes\\Controller->makeFileContents(\'/home/candt/wor...\', Array)
+#12 /home/candt/workspaces/mhdnocare/modules/backend/widgets/Lists.php(965): Backend\\Classes\\Controller->makePartial(\'$/offline/snipc...\', Array)
+#13 /home/candt/workspaces/mhdnocare/modules/backend/widgets/Lists.php(848): Backend\\Widgets\\Lists->evalPartialTypeValue(Object(OFFLINE\\SnipcartShop\\Models\\Product), Object(Backend\\Classes\\ListColumn), Array)
+#14 /home/candt/workspaces/mhdnocare/modules/backend/widgets/lists/partials/_list_body_row.htm(28): Backend\\Widgets\\Lists->getColumnValue(Object(OFFLINE\\SnipcartShop\\Models\\Product), Object(Backend\\Classes\\ListColumn))
+#15 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(244): include(\'/home/candt/wor...\')
+#16 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(98): Backend\\Classes\\WidgetBase->makeFileContents(\'/home/candt/wor...\', Array)
+#17 /home/candt/workspaces/mhdnocare/modules/backend/widgets/lists/partials/_list_body_rows.htm(2): Backend\\Classes\\WidgetBase->makePartial(\'_list_body_row....\', Array)
+#18 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(244): include(\'/home/candt/wor...\')
+#19 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(98): Backend\\Classes\\WidgetBase->makeFileContents(\'/home/candt/wor...\', Array)
+#20 /home/candt/workspaces/mhdnocare/modules/backend/widgets/lists/partials/_list.htm(8): Backend\\Classes\\WidgetBase->makePartial(\'_list_body_rows...\')
+#21 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(244): include(\'/home/candt/wor...\')
+#22 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(98): Backend\\Classes\\WidgetBase->makeFileContents(\'/home/candt/wor...\', Array)
+#23 /home/candt/workspaces/mhdnocare/modules/backend/widgets/lists/partials/_list-container.htm(2): Backend\\Classes\\WidgetBase->makePartial(\'_list.htm\')
+#24 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(244): include(\'/home/candt/wor...\')
+#25 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(98): Backend\\Classes\\WidgetBase->makeFileContents(\'/home/candt/wor...\', Array)
+#26 /home/candt/workspaces/mhdnocare/modules/backend/widgets/Lists.php(236): Backend\\Classes\\WidgetBase->makePartial(\'_list-container...\')
+#27 /home/candt/workspaces/mhdnocare/modules/backend/behaviors/listcontroller/partials/_container.htm(9): Backend\\Widgets\\Lists->render()
+#28 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(244): include(\'/home/candt/wor...\')
+#29 /home/candt/workspaces/mhdnocare/modules/backend/classes/ControllerBehavior.php(142): Backend\\Classes\\Controller->makeFileContents(\'/home/candt/wor...\', Array)
+#30 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(98): Backend\\Classes\\ControllerBehavior->makeFileContents(\'/home/candt/wor...\', Array)
+#31 /home/candt/workspaces/mhdnocare/modules/backend/behaviors/ListController.php(371): Backend\\Classes\\ControllerBehavior->makePartial(\'_container.htm\', Array)
+#32 /home/candt/workspaces/mhdnocare/modules/backend/behaviors/ListController.php(358): Backend\\Behaviors\\ListController->listMakePartial(\'container\', Array)
+#33 [internal function]: Backend\\Behaviors\\ListController->listRender()
+#34 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Extension/ExtendableTrait.php(366): call_user_func_array(Array, Array)
+#35 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Extension/Extendable.php(42): October\\Rain\\Extension\\Extendable->extendableCall(\'listRender\', Array)
+#36 /home/candt/workspaces/mhdnocare/plugins/offline/snipcartshop/controllers/products/index.htm(1): October\\Rain\\Extension\\Extendable->__call(\'listRender\', Array)
+#37 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(244): include(\'/home/candt/wor...\')
+#38 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(110): Backend\\Classes\\Controller->makeFileContents(\'/home/candt/wor...\')
+#39 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(363): Backend\\Classes\\Controller->makeView(\'index\')
+#40 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(245): Backend\\Classes\\Controller->execPageAction(\'index\', Array)
+#41 /home/candt/workspaces/mhdnocare/modules/backend/classes/BackendController.php(106): Backend\\Classes\\Controller->run(\'index\', Array)
+#42 [internal function]: Backend\\Classes\\BackendController->run(\'offline/snipcar...\')
+#43 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(256): call_user_func_array(Array, Array)
+#44 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(164): Illuminate\\Routing\\Controller->callAction(\'run\', Array)
+#45 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(112): Illuminate\\Routing\\ControllerDispatcher->call(Object(Backend\\Classes\\BackendController), Object(Illuminate\\Routing\\Route), \'run\')
+#46 [internal function]: Illuminate\\Routing\\ControllerDispatcher->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#47 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#48 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#49 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#50 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(114): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#51 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(68): Illuminate\\Routing\\ControllerDispatcher->callWithinStack(Object(Backend\\Classes\\BackendController), Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'run\')
+#52 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(203): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'Backend\\\\Classes...\', \'run\')
+#53 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(134): Illuminate\\Routing\\Route->runWithCustomDispatcher(Object(Illuminate\\Http\\Request))
+#54 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(708): Illuminate\\Routing\\Route->run(Object(Illuminate\\Http\\Request))
+#55 [internal function]: Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#56 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#57 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#58 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#59 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(710): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#60 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(674): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#61 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(635): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#62 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(236): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#63 [internal function]: Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#64 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#65 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#66 [internal function]: Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#67 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#68 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(62): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#69 [internal function]: Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#70 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#71 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#72 [internal function]: Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#73 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#74 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(59): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#75 [internal function]: Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#76 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#77 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php(44): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#78 [internal function]: Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#79 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#80 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#81 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#82 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(122): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#83 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(87): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#84 /home/candt/workspaces/mhdnocare/index.php(43): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#85 {main}', NULL, '2018-07-24 09:00:57', '2018-07-24 09:00:57' );
+INSERT INTO `system_event_logs`(`id`,`level`,`message`,`details`,`created_at`,`updated_at`) VALUES ( '341', 'error', 'RuntimeException: [snipcartshop] Please configure at least one currency via the backend settings. in /home/candt/workspaces/mhdnocare/plugins/offline/snipcartshop/models/CurrencySettings.php:45
+Stack trace:
+#0 /home/candt/workspaces/mhdnocare/plugins/offline/snipcartshop/models/Product.php(212): OFFLINE\\SnipcartShop\\Models\\CurrencySettings::activeCurrency()
+#1 /home/candt/workspaces/mhdnocare/plugins/offline/snipcartshop/models/Product.php(231): OFFLINE\\SnipcartShop\\Models\\Product->getPriceInCurrency()
+#2 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(2700): OFFLINE\\SnipcartShop\\Models\\Product->getPriceFormattedAttribute(NULL)
+#3 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(2602): Illuminate\\Database\\Eloquent\\Model->mutateAttribute(\'priceFormatted\', NULL)
+#4 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Database/Model.php(1324): Illuminate\\Database\\Eloquent\\Model->getAttributeValue(\'priceFormatted\')
+#5 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Database/Model.php(1298): October\\Rain\\Database\\Model->getAttributeValue(\'priceFormatted\')
+#6 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(3339): October\\Rain\\Database\\Model->getAttribute(\'priceFormatted\')
+#7 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Extension/ExtendableTrait.php(317): Illuminate\\Database\\Eloquent\\Model->__get(\'priceFormatted\')
+#8 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Database/Model.php(474): October\\Rain\\Database\\Model->extendableGet(\'priceFormatted\')
+#9 /home/candt/workspaces/mhdnocare/plugins/offline/snipcartshop/models/product/_price.htm(1): October\\Rain\\Database\\Model->__get(\'priceFormatted\')
+#10 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(244): include(\'/home/candt/wor...\')
+#11 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(98): Backend\\Classes\\Controller->makeFileContents(\'/home/candt/wor...\', Array)
+#12 /home/candt/workspaces/mhdnocare/modules/backend/widgets/Lists.php(965): Backend\\Classes\\Controller->makePartial(\'$/offline/snipc...\', Array)
+#13 /home/candt/workspaces/mhdnocare/modules/backend/widgets/Lists.php(848): Backend\\Widgets\\Lists->evalPartialTypeValue(Object(OFFLINE\\SnipcartShop\\Models\\Product), Object(Backend\\Classes\\ListColumn), Array)
+#14 /home/candt/workspaces/mhdnocare/modules/backend/widgets/lists/partials/_list_body_row.htm(28): Backend\\Widgets\\Lists->getColumnValue(Object(OFFLINE\\SnipcartShop\\Models\\Product), Object(Backend\\Classes\\ListColumn))
+#15 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(244): include(\'/home/candt/wor...\')
+#16 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(98): Backend\\Classes\\WidgetBase->makeFileContents(\'/home/candt/wor...\', Array)
+#17 /home/candt/workspaces/mhdnocare/modules/backend/widgets/lists/partials/_list_body_rows.htm(2): Backend\\Classes\\WidgetBase->makePartial(\'_list_body_row....\', Array)
+#18 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(244): include(\'/home/candt/wor...\')
+#19 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(98): Backend\\Classes\\WidgetBase->makeFileContents(\'/home/candt/wor...\', Array)
+#20 /home/candt/workspaces/mhdnocare/modules/backend/widgets/lists/partials/_list.htm(8): Backend\\Classes\\WidgetBase->makePartial(\'_list_body_rows...\')
+#21 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(244): include(\'/home/candt/wor...\')
+#22 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(98): Backend\\Classes\\WidgetBase->makeFileContents(\'/home/candt/wor...\', Array)
+#23 /home/candt/workspaces/mhdnocare/modules/backend/widgets/lists/partials/_list-container.htm(2): Backend\\Classes\\WidgetBase->makePartial(\'_list.htm\')
+#24 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(244): include(\'/home/candt/wor...\')
+#25 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(98): Backend\\Classes\\WidgetBase->makeFileContents(\'/home/candt/wor...\', Array)
+#26 /home/candt/workspaces/mhdnocare/modules/backend/widgets/Lists.php(236): Backend\\Classes\\WidgetBase->makePartial(\'_list-container...\')
+#27 /home/candt/workspaces/mhdnocare/modules/backend/behaviors/listcontroller/partials/_container.htm(9): Backend\\Widgets\\Lists->render()
+#28 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(244): include(\'/home/candt/wor...\')
+#29 /home/candt/workspaces/mhdnocare/modules/backend/classes/ControllerBehavior.php(142): Backend\\Classes\\Controller->makeFileContents(\'/home/candt/wor...\', Array)
+#30 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(98): Backend\\Classes\\ControllerBehavior->makeFileContents(\'/home/candt/wor...\', Array)
+#31 /home/candt/workspaces/mhdnocare/modules/backend/behaviors/ListController.php(371): Backend\\Classes\\ControllerBehavior->makePartial(\'_container.htm\', Array)
+#32 /home/candt/workspaces/mhdnocare/modules/backend/behaviors/ListController.php(358): Backend\\Behaviors\\ListController->listMakePartial(\'container\', Array)
+#33 [internal function]: Backend\\Behaviors\\ListController->listRender()
+#34 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Extension/ExtendableTrait.php(366): call_user_func_array(Array, Array)
+#35 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Extension/Extendable.php(42): October\\Rain\\Extension\\Extendable->extendableCall(\'listRender\', Array)
+#36 /home/candt/workspaces/mhdnocare/plugins/offline/snipcartshop/controllers/products/index.htm(1): October\\Rain\\Extension\\Extendable->__call(\'listRender\', Array)
+#37 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(244): include(\'/home/candt/wor...\')
+#38 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(110): Backend\\Classes\\Controller->makeFileContents(\'/home/candt/wor...\')
+#39 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(363): Backend\\Classes\\Controller->makeView(\'index\')
+#40 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(245): Backend\\Classes\\Controller->execPageAction(\'index\', Array)
+#41 /home/candt/workspaces/mhdnocare/modules/backend/classes/BackendController.php(106): Backend\\Classes\\Controller->run(\'index\', Array)
+#42 [internal function]: Backend\\Classes\\BackendController->run(\'offline/snipcar...\')
+#43 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(256): call_user_func_array(Array, Array)
+#44 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(164): Illuminate\\Routing\\Controller->callAction(\'run\', Array)
+#45 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(112): Illuminate\\Routing\\ControllerDispatcher->call(Object(Backend\\Classes\\BackendController), Object(Illuminate\\Routing\\Route), \'run\')
+#46 [internal function]: Illuminate\\Routing\\ControllerDispatcher->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#47 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#48 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#49 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#50 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(114): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#51 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(68): Illuminate\\Routing\\ControllerDispatcher->callWithinStack(Object(Backend\\Classes\\BackendController), Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'run\')
+#52 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(203): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'Backend\\\\Classes...\', \'run\')
+#53 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(134): Illuminate\\Routing\\Route->runWithCustomDispatcher(Object(Illuminate\\Http\\Request))
+#54 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(708): Illuminate\\Routing\\Route->run(Object(Illuminate\\Http\\Request))
+#55 [internal function]: Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#56 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#57 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#58 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#59 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(710): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#60 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(674): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#61 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(635): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#62 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(236): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#63 [internal function]: Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#64 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#65 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#66 [internal function]: Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#67 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#68 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(62): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#69 [internal function]: Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#70 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#71 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#72 [internal function]: Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#73 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#74 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(59): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#75 [internal function]: Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#76 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#77 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php(44): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#78 [internal function]: Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#79 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#80 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#81 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#82 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(122): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#83 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(87): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#84 /home/candt/workspaces/mhdnocare/index.php(43): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#85 {main}', NULL, '2018-07-24 09:01:01', '2018-07-24 09:01:01' );
+INSERT INTO `system_event_logs`(`id`,`level`,`message`,`details`,`created_at`,`updated_at`) VALUES ( '342', 'error', 'RuntimeException: [snipcartshop] Please configure at least one currency via the backend settings. in /home/candt/workspaces/mhdnocare/plugins/offline/snipcartshop/models/CurrencySettings.php:45
+Stack trace:
+#0 /home/candt/workspaces/mhdnocare/plugins/offline/snipcartshop/models/Product.php(212): OFFLINE\\SnipcartShop\\Models\\CurrencySettings::activeCurrency()
+#1 /home/candt/workspaces/mhdnocare/plugins/offline/snipcartshop/models/Product.php(231): OFFLINE\\SnipcartShop\\Models\\Product->getPriceInCurrency()
+#2 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(2700): OFFLINE\\SnipcartShop\\Models\\Product->getPriceFormattedAttribute(NULL)
+#3 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(2602): Illuminate\\Database\\Eloquent\\Model->mutateAttribute(\'priceFormatted\', NULL)
+#4 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Database/Model.php(1324): Illuminate\\Database\\Eloquent\\Model->getAttributeValue(\'priceFormatted\')
+#5 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Database/Model.php(1298): October\\Rain\\Database\\Model->getAttributeValue(\'priceFormatted\')
+#6 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(3339): October\\Rain\\Database\\Model->getAttribute(\'priceFormatted\')
+#7 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Extension/ExtendableTrait.php(317): Illuminate\\Database\\Eloquent\\Model->__get(\'priceFormatted\')
+#8 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Database/Model.php(474): October\\Rain\\Database\\Model->extendableGet(\'priceFormatted\')
+#9 /home/candt/workspaces/mhdnocare/plugins/offline/snipcartshop/models/product/_price.htm(1): October\\Rain\\Database\\Model->__get(\'priceFormatted\')
+#10 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(244): include(\'/home/candt/wor...\')
+#11 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(98): Backend\\Classes\\Controller->makeFileContents(\'/home/candt/wor...\', Array)
+#12 /home/candt/workspaces/mhdnocare/modules/backend/widgets/Lists.php(965): Backend\\Classes\\Controller->makePartial(\'$/offline/snipc...\', Array)
+#13 /home/candt/workspaces/mhdnocare/modules/backend/widgets/Lists.php(848): Backend\\Widgets\\Lists->evalPartialTypeValue(Object(OFFLINE\\SnipcartShop\\Models\\Product), Object(Backend\\Classes\\ListColumn), Array)
+#14 /home/candt/workspaces/mhdnocare/modules/backend/widgets/lists/partials/_list_body_row.htm(28): Backend\\Widgets\\Lists->getColumnValue(Object(OFFLINE\\SnipcartShop\\Models\\Product), Object(Backend\\Classes\\ListColumn))
+#15 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(244): include(\'/home/candt/wor...\')
+#16 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(98): Backend\\Classes\\WidgetBase->makeFileContents(\'/home/candt/wor...\', Array)
+#17 /home/candt/workspaces/mhdnocare/modules/backend/widgets/lists/partials/_list_body_rows.htm(2): Backend\\Classes\\WidgetBase->makePartial(\'_list_body_row....\', Array)
+#18 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(244): include(\'/home/candt/wor...\')
+#19 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(98): Backend\\Classes\\WidgetBase->makeFileContents(\'/home/candt/wor...\', Array)
+#20 /home/candt/workspaces/mhdnocare/modules/backend/widgets/lists/partials/_list.htm(8): Backend\\Classes\\WidgetBase->makePartial(\'_list_body_rows...\')
+#21 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(244): include(\'/home/candt/wor...\')
+#22 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(98): Backend\\Classes\\WidgetBase->makeFileContents(\'/home/candt/wor...\', Array)
+#23 /home/candt/workspaces/mhdnocare/modules/backend/widgets/lists/partials/_list-container.htm(2): Backend\\Classes\\WidgetBase->makePartial(\'_list.htm\')
+#24 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(244): include(\'/home/candt/wor...\')
+#25 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(98): Backend\\Classes\\WidgetBase->makeFileContents(\'/home/candt/wor...\', Array)
+#26 /home/candt/workspaces/mhdnocare/modules/backend/widgets/Lists.php(236): Backend\\Classes\\WidgetBase->makePartial(\'_list-container...\')
+#27 /home/candt/workspaces/mhdnocare/modules/backend/behaviors/listcontroller/partials/_container.htm(9): Backend\\Widgets\\Lists->render()
+#28 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(244): include(\'/home/candt/wor...\')
+#29 /home/candt/workspaces/mhdnocare/modules/backend/classes/ControllerBehavior.php(142): Backend\\Classes\\Controller->makeFileContents(\'/home/candt/wor...\', Array)
+#30 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(98): Backend\\Classes\\ControllerBehavior->makeFileContents(\'/home/candt/wor...\', Array)
+#31 /home/candt/workspaces/mhdnocare/modules/backend/behaviors/ListController.php(371): Backend\\Classes\\ControllerBehavior->makePartial(\'_container.htm\', Array)
+#32 /home/candt/workspaces/mhdnocare/modules/backend/behaviors/ListController.php(358): Backend\\Behaviors\\ListController->listMakePartial(\'container\', Array)
+#33 [internal function]: Backend\\Behaviors\\ListController->listRender()
+#34 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Extension/ExtendableTrait.php(366): call_user_func_array(Array, Array)
+#35 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Extension/Extendable.php(42): October\\Rain\\Extension\\Extendable->extendableCall(\'listRender\', Array)
+#36 /home/candt/workspaces/mhdnocare/plugins/offline/snipcartshop/controllers/products/index.htm(1): October\\Rain\\Extension\\Extendable->__call(\'listRender\', Array)
+#37 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(244): include(\'/home/candt/wor...\')
+#38 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(110): Backend\\Classes\\Controller->makeFileContents(\'/home/candt/wor...\')
+#39 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(363): Backend\\Classes\\Controller->makeView(\'index\')
+#40 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(245): Backend\\Classes\\Controller->execPageAction(\'index\', Array)
+#41 /home/candt/workspaces/mhdnocare/modules/backend/classes/BackendController.php(106): Backend\\Classes\\Controller->run(\'index\', Array)
+#42 [internal function]: Backend\\Classes\\BackendController->run(\'offline/snipcar...\')
+#43 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(256): call_user_func_array(Array, Array)
+#44 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(164): Illuminate\\Routing\\Controller->callAction(\'run\', Array)
+#45 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(112): Illuminate\\Routing\\ControllerDispatcher->call(Object(Backend\\Classes\\BackendController), Object(Illuminate\\Routing\\Route), \'run\')
+#46 [internal function]: Illuminate\\Routing\\ControllerDispatcher->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#47 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#48 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#49 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#50 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(114): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#51 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(68): Illuminate\\Routing\\ControllerDispatcher->callWithinStack(Object(Backend\\Classes\\BackendController), Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'run\')
+#52 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(203): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'Backend\\\\Classes...\', \'run\')
+#53 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(134): Illuminate\\Routing\\Route->runWithCustomDispatcher(Object(Illuminate\\Http\\Request))
+#54 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(708): Illuminate\\Routing\\Route->run(Object(Illuminate\\Http\\Request))
+#55 [internal function]: Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#56 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#57 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#58 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#59 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(710): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#60 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(674): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#61 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(635): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#62 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(236): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#63 [internal function]: Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#64 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#65 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#66 [internal function]: Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#67 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#68 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(62): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#69 [internal function]: Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#70 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#71 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#72 [internal function]: Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#73 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#74 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(59): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#75 [internal function]: Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#76 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#77 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php(44): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#78 [internal function]: Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#79 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#80 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#81 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#82 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(122): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#83 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(87): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#84 /home/candt/workspaces/mhdnocare/index.php(43): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#85 {main}', NULL, '2018-07-24 09:03:46', '2018-07-24 09:03:46' );
+INSERT INTO `system_event_logs`(`id`,`level`,`message`,`details`,`created_at`,`updated_at`) VALUES ( '343', 'error', 'October\\Rain\\Exception\\SystemException: Class name is not registered for the component "genericForm". Check the component plugin. in /home/candt/workspaces/mhdnocare/modules/cms/classes/ComponentManager.php:201
+Stack trace:
+#0 /home/candt/workspaces/mhdnocare/modules/cms/classes/Controller.php(1222): Cms\\Classes\\ComponentManager->makeComponent(\'genericForm\', Object(Cms5b56f944a6dfa290508534_3587779357Class), Array)
+#1 /home/candt/workspaces/mhdnocare/modules/cms/classes/Controller.php(563): Cms\\Classes\\Controller->addComponent(\'genericForm\', \'genericForm\', Array)
+#2 /home/candt/workspaces/mhdnocare/modules/cms/classes/Controller.php(310): Cms\\Classes\\Controller->initComponents()
+#3 /home/candt/workspaces/mhdnocare/modules/cms/classes/Controller.php(216): Cms\\Classes\\Controller->runPage(Object(Cms\\Classes\\Page))
+#4 /home/candt/workspaces/mhdnocare/modules/cms/classes/CmsController.php(48): Cms\\Classes\\Controller->run(\'cao-nam-trung-t...\')
+#5 [internal function]: Cms\\Classes\\CmsController->run(\'cao-nam-trung-t...\')
+#6 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(256): call_user_func_array(Array, Array)
+#7 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(164): Illuminate\\Routing\\Controller->callAction(\'run\', Array)
+#8 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(112): Illuminate\\Routing\\ControllerDispatcher->call(Object(Cms\\Classes\\CmsController), Object(Illuminate\\Routing\\Route), \'run\')
+#9 [internal function]: Illuminate\\Routing\\ControllerDispatcher->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#10 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#11 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#12 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#13 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(114): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#14 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(68): Illuminate\\Routing\\ControllerDispatcher->callWithinStack(Object(Cms\\Classes\\CmsController), Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'run\')
+#15 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(203): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'Cms\\\\Classes\\\\Cms...\', \'run\')
+#16 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(134): Illuminate\\Routing\\Route->runWithCustomDispatcher(Object(Illuminate\\Http\\Request))
+#17 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(708): Illuminate\\Routing\\Route->run(Object(Illuminate\\Http\\Request))
+#18 [internal function]: Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#19 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#20 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#21 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#22 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(710): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#23 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(674): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#24 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(635): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#25 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(236): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#26 [internal function]: Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#27 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#28 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#29 [internal function]: Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#30 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#31 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(62): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#32 [internal function]: Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#33 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#34 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#35 [internal function]: Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#36 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#37 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(59): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#38 [internal function]: Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#39 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#40 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php(44): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#41 [internal function]: Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#42 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#43 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#44 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#45 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(122): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#46 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(87): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#47 /home/candt/workspaces/mhdnocare/index.php(43): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#48 {main}', NULL, '2018-07-24 10:02:44', '2018-07-24 10:02:44' );
+INSERT INTO `system_event_logs`(`id`,`level`,`message`,`details`,`created_at`,`updated_at`) VALUES ( '344', 'error', 'Symfony\\Component\\Debug\\Exception\\FatalErrorException: Maximum execution time of 30 seconds exceeded in /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Extension/ExtendableTrait.php:383
+Stack trace:
+#0 {main}', NULL, '2018-07-24 10:05:10', '2018-07-24 10:05:10' );
+INSERT INTO `system_event_logs`(`id`,`level`,`message`,`details`,`created_at`,`updated_at`) VALUES ( '345', 'error', 'Symfony\\Component\\Debug\\Exception\\FatalErrorException: Maximum execution time of 30 seconds exceeded in /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Support/Traits/Emitter.php:33
+Stack trace:
+#0 {main}', NULL, '2018-07-24 10:06:35', '2018-07-24 10:06:35' );
+INSERT INTO `system_event_logs`(`id`,`level`,`message`,`details`,`created_at`,`updated_at`) VALUES ( '346', 'error', 'Symfony\\Component\\Debug\\Exception\\FatalErrorException: Maximum execution time of 30 seconds exceeded in /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Extension/ExtendableTrait.php:383
+Stack trace:
+#0 {main}', NULL, '2018-07-24 10:08:02', '2018-07-24 10:08:02' );
+INSERT INTO `system_event_logs`(`id`,`level`,`message`,`details`,`created_at`,`updated_at`) VALUES ( '347', 'error', 'Symfony\\Component\\Debug\\Exception\\FatalErrorException: Maximum execution time of 30 seconds exceeded in /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Exception/ErrorHandler.php:101
+Stack trace:
+#0 {main}', NULL, '2018-07-24 10:09:27', '2018-07-24 10:09:27' );
+INSERT INTO `system_event_logs`(`id`,`level`,`message`,`details`,`created_at`,`updated_at`) VALUES ( '348', 'error', 'Symfony\\Component\\Debug\\Exception\\FatalErrorException: Maximum execution time of 30 seconds exceeded in /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Exception/ExceptionBase.php:95
+Stack trace:
+#0 {main}', NULL, '2018-07-24 10:10:56', '2018-07-24 10:10:56' );
+INSERT INTO `system_event_logs`(`id`,`level`,`message`,`details`,`created_at`,`updated_at`) VALUES ( '349', 'error', 'Symfony\\Component\\Debug\\Exception\\FatalErrorException: Maximum execution time of 30 seconds exceeded in /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Exception/ExceptionBase.php:95
+Stack trace:
+#0 {main}', NULL, '2018-07-24 10:28:28', '2018-07-24 10:28:28' );
+INSERT INTO `system_event_logs`(`id`,`level`,`message`,`details`,`created_at`,`updated_at`) VALUES ( '350', 'error', 'Symfony\\Component\\Debug\\Exception\\FatalErrorException: Maximum execution time of 30 seconds exceeded in /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Extension/ExtendableTrait.php:383
+Stack trace:
+#0 {main}', NULL, '2018-07-24 10:29:51', '2018-07-24 10:29:51' );
+INSERT INTO `system_event_logs`(`id`,`level`,`message`,`details`,`created_at`,`updated_at`) VALUES ( '351', 'error', 'Symfony\\Component\\Debug\\Exception\\FatalErrorException: Maximum execution time of 30 seconds exceeded in /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Exception/ExceptionBase.php:95
+Stack trace:
+#0 {main}', NULL, '2018-07-24 10:31:26', '2018-07-24 10:31:26' );
+INSERT INTO `system_event_logs`(`id`,`level`,`message`,`details`,`created_at`,`updated_at`) VALUES ( '352', 'error', 'ErrorException: syntax error, unexpected $end, expecting \'=\' in Unknown on line 18
+ in /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Parse/Ini.php:23
+Stack trace:
+#0 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, \'syntax error, u...\', \'/home/candt/wor...\', 23, Array)
+#1 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Parse/Ini.php(23): parse_ini_string(\'title = "Nhung ...\', true)
+#2 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(215): October\\Rain\\Parse\\Ini->parse(\'title = "Nhung ...\')
+#3 /home/candt/workspaces/mhdnocare/modules/cms/classes/CmsCompoundObject.php(121): Illuminate\\Support\\Facades\\Facade::__callStatic(\'parse\', Array)
+#4 /home/candt/workspaces/mhdnocare/modules/cms/classes/CmsCompoundObject.php(88): Cms\\Classes\\CmsCompoundObject->validateSettings()
+#5 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Halcyon/Model.php(245): Cms\\Classes\\CmsCompoundObject->afterFetch()
+#6 [internal function]: October\\Rain\\Halcyon\\Model->October\\Rain\\Halcyon\\{closure}(Object(Cms\\Classes\\Page))
+#7 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Events/Dispatcher.php(221): call_user_func_array(Object(Closure), Array)
+#8 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Halcyon/Model.php(1313): Illuminate\\Events\\Dispatcher->fire(\'halcyon.fetched...\', Array)
+#9 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Halcyon/Model.php(471): October\\Rain\\Halcyon\\Model->fireModelEvent(\'halcyon.fetched...\', false)
+#10 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Halcyon/Model.php(490): October\\Rain\\Halcyon\\Model->newFromBuilder(Array)
+#11 [internal function]: October\\Rain\\Halcyon\\Model::October\\Rain\\Halcyon\\{closure}(Array)
+#12 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Halcyon/Model.php(491): array_map(Object(Closure), Array)
+#13 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Halcyon/Builder.php(442): October\\Rain\\Halcyon\\Model::hydrate(Array, \'mhdnocare\')
+#14 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Halcyon/Builder.php(256): October\\Rain\\Halcyon\\Builder->getModels(Array)
+#15 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Halcyon/Builder.php(238): October\\Rain\\Halcyon\\Builder->get()
+#16 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Halcyon/Builder.php(228): October\\Rain\\Halcyon\\Builder->first()
+#17 /home/candt/workspaces/mhdnocare/modules/cms/classes/CmsObject.php(120): October\\Rain\\Halcyon\\Builder->find(\'nhung-cau-hoi-t...\')
+#18 /home/candt/workspaces/mhdnocare/modules/cms/classes/CmsObject.php(143): Cms\\Classes\\CmsObject::loadCached(Object(Cms\\Classes\\Theme), \'nhung-cau-hoi-t...\')
+#19 /home/candt/workspaces/mhdnocare/modules/cms/classes/Theme.php(127): Cms\\Classes\\CmsObject::listInTheme(Object(Cms\\Classes\\Theme), false)
+#20 /home/candt/workspaces/mhdnocare/modules/cms/classes/Router.php(232): Cms\\Classes\\Theme->listPages()
+#21 /home/candt/workspaces/mhdnocare/modules/cms/classes/Router.php(203): Cms\\Classes\\Router->loadUrlMap()
+#22 /home/candt/workspaces/mhdnocare/modules/cms/classes/Router.php(184): Cms\\Classes\\Router->getUrlMap()
+#23 /home/candt/workspaces/mhdnocare/modules/cms/classes/Router.php(104): Cms\\Classes\\Router->getRouterObject()
+#24 /home/candt/workspaces/mhdnocare/modules/cms/classes/Controller.php(158): Cms\\Classes\\Router->findByUrl(\'/hoi-dap-tai-li...\')
+#25 /home/candt/workspaces/mhdnocare/modules/cms/classes/CmsController.php(48): Cms\\Classes\\Controller->run(\'hoi-dap-tai-lie...\')
+#26 [internal function]: Cms\\Classes\\CmsController->run(\'hoi-dap-tai-lie...\')
+#27 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(256): call_user_func_array(Array, Array)
+#28 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(164): Illuminate\\Routing\\Controller->callAction(\'run\', Array)
+#29 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(112): Illuminate\\Routing\\ControllerDispatcher->call(Object(Cms\\Classes\\CmsController), Object(Illuminate\\Routing\\Route), \'run\')
+#30 [internal function]: Illuminate\\Routing\\ControllerDispatcher->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#31 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#32 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#33 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#34 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(114): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#35 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(68): Illuminate\\Routing\\ControllerDispatcher->callWithinStack(Object(Cms\\Classes\\CmsController), Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'run\')
+#36 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(203): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'Cms\\\\Classes\\\\Cms...\', \'run\')
+#37 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(134): Illuminate\\Routing\\Route->runWithCustomDispatcher(Object(Illuminate\\Http\\Request))
+#38 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(708): Illuminate\\Routing\\Route->run(Object(Illuminate\\Http\\Request))
+#39 [internal function]: Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#40 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#41 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#42 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#43 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(710): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#44 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(674): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#45 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(635): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#46 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(236): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#47 [internal function]: Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#48 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#49 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#50 [internal function]: Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#51 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#52 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(62): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#53 [internal function]: Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#54 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#55 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#56 [internal function]: Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#57 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#58 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(59): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#59 [internal function]: Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#60 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#61 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php(44): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#62 [internal function]: Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#63 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#64 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#65 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#66 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(122): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#67 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(87): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#68 /home/candt/workspaces/mhdnocare/index.php(43): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#69 {main}', NULL, '2018-07-25 02:19:24', '2018-07-25 02:19:24' );
+INSERT INTO `system_event_logs`(`id`,`level`,`message`,`details`,`created_at`,`updated_at`) VALUES ( '353', 'error', 'ErrorException: stream_socket_enable_crypto(): SSL operation failed with code 1. OpenSSL Error messages:
+error:14090086:SSL routines:SSL3_GET_SERVER_CERTIFICATE:certificate verify failed in /home/candt/workspaces/mhdnocare/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/StreamBuffer.php:95
+Stack trace:
+#0 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, \'stream_socket_e...\', \'/home/candt/wor...\', 95, Array)
+#1 /home/candt/workspaces/mhdnocare/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/StreamBuffer.php(95): stream_socket_enable_crypto(Resource id #179, true, 9)
+#2 /home/candt/workspaces/mhdnocare/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/EsmtpTransport.php(315): Swift_Transport_StreamBuffer->startTLS()
+#3 /home/candt/workspaces/mhdnocare/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/AbstractSmtpTransport.php(118): Swift_Transport_EsmtpTransport->_doHeloCommand()
+#4 /home/candt/workspaces/mhdnocare/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mailer.php(79): Swift_Transport_AbstractSmtpTransport->start()
+#5 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Mail/Mailer.php(394): Swift_Mailer->send(Object(Swift_Message), Array)
+#6 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Mail/Mailer.php(69): Illuminate\\Mail\\Mailer->sendSwiftMessage(Object(Swift_Message))
+#7 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(219): October\\Rain\\Mail\\Mailer->send(\'redmarlin.faq::...\', Array, Object(Closure))
+#8 /home/candt/workspaces/mhdnocare/plugins/redmarlin/faq/components/FaqAsk.php(69): Illuminate\\Support\\Facades\\Facade::__callStatic(\'send\', Array)
+#9 /home/candt/workspaces/mhdnocare/modules/cms/classes/ComponentBase.php(167): RedMarlin\\Faq\\Components\\FaqAsk->onPost()
+#10 /home/candt/workspaces/mhdnocare/modules/cms/classes/Controller.php(730): Cms\\Classes\\ComponentBase->runAjaxHandler(\'onPost\')
+#11 /home/candt/workspaces/mhdnocare/modules/cms/classes/Controller.php(349): Cms\\Classes\\Controller->runAjaxHandler(\'onPost\')
+#12 /home/candt/workspaces/mhdnocare/modules/cms/classes/Controller.php(216): Cms\\Classes\\Controller->runPage(Object(Cms\\Classes\\Page))
+#13 /home/candt/workspaces/mhdnocare/modules/cms/classes/CmsController.php(48): Cms\\Classes\\Controller->run(\'hoi-dap-tai-lie...\')
+#14 [internal function]: Cms\\Classes\\CmsController->run(\'hoi-dap-tai-lie...\')
+#15 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(256): call_user_func_array(Array, Array)
+#16 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(164): Illuminate\\Routing\\Controller->callAction(\'run\', Array)
+#17 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(112): Illuminate\\Routing\\ControllerDispatcher->call(Object(Cms\\Classes\\CmsController), Object(Illuminate\\Routing\\Route), \'run\')
+#18 [internal function]: Illuminate\\Routing\\ControllerDispatcher->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#19 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#20 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#21 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#22 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(114): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#23 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(68): Illuminate\\Routing\\ControllerDispatcher->callWithinStack(Object(Cms\\Classes\\CmsController), Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'run\')
+#24 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(203): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'Cms\\\\Classes\\\\Cms...\', \'run\')
+#25 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(134): Illuminate\\Routing\\Route->runWithCustomDispatcher(Object(Illuminate\\Http\\Request))
+#26 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(708): Illuminate\\Routing\\Route->run(Object(Illuminate\\Http\\Request))
+#27 [internal function]: Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#28 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#29 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#30 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#31 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(710): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#32 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(674): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#33 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(635): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#34 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(236): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#35 [internal function]: Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#36 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#37 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#38 [internal function]: Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#39 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#40 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(62): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#41 [internal function]: Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#42 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#43 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#44 [internal function]: Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#45 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#46 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(59): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#47 [internal function]: Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#48 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#49 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php(44): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#50 [internal function]: Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#51 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#52 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#53 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#54 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(122): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#55 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(87): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#56 /home/candt/workspaces/mhdnocare/index.php(43): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#57 {main}', NULL, '2018-07-25 02:20:54', '2018-07-25 02:20:54' );
+INSERT INTO `system_event_logs`(`id`,`level`,`message`,`details`,`created_at`,`updated_at`) VALUES ( '354', 'error', 'ErrorException: stream_socket_enable_crypto(): SSL operation failed with code 1. OpenSSL Error messages:
+error:14090086:SSL routines:SSL3_GET_SERVER_CERTIFICATE:certificate verify failed in /home/candt/workspaces/mhdnocare/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/StreamBuffer.php:95
+Stack trace:
+#0 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, \'stream_socket_e...\', \'/home/candt/wor...\', 95, Array)
+#1 /home/candt/workspaces/mhdnocare/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/StreamBuffer.php(95): stream_socket_enable_crypto(Resource id #70, true, 9)
+#2 /home/candt/workspaces/mhdnocare/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/EsmtpTransport.php(315): Swift_Transport_StreamBuffer->startTLS()
+#3 /home/candt/workspaces/mhdnocare/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/AbstractSmtpTransport.php(118): Swift_Transport_EsmtpTransport->_doHeloCommand()
+#4 /home/candt/workspaces/mhdnocare/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mailer.php(79): Swift_Transport_AbstractSmtpTransport->start()
+#5 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Mail/Mailer.php(394): Swift_Mailer->send(Object(Swift_Message), Array)
+#6 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Mail/Mailer.php(69): Illuminate\\Mail\\Mailer->sendSwiftMessage(Object(Swift_Message))
+#7 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(219): October\\Rain\\Mail\\Mailer->send(\'redmarlin.faq::...\', Array, Object(Closure))
+#8 /home/candt/workspaces/mhdnocare/plugins/redmarlin/faq/components/FaqAsk.php(69): Illuminate\\Support\\Facades\\Facade::__callStatic(\'send\', Array)
+#9 /home/candt/workspaces/mhdnocare/modules/cms/classes/ComponentBase.php(167): RedMarlin\\Faq\\Components\\FaqAsk->onPost()
+#10 /home/candt/workspaces/mhdnocare/modules/cms/classes/Controller.php(730): Cms\\Classes\\ComponentBase->runAjaxHandler(\'onPost\')
+#11 /home/candt/workspaces/mhdnocare/modules/cms/classes/Controller.php(349): Cms\\Classes\\Controller->runAjaxHandler(\'onPost\')
+#12 /home/candt/workspaces/mhdnocare/modules/cms/classes/Controller.php(216): Cms\\Classes\\Controller->runPage(Object(Cms\\Classes\\Page))
+#13 /home/candt/workspaces/mhdnocare/modules/cms/classes/CmsController.php(48): Cms\\Classes\\Controller->run(\'hoi-dap-tai-lie...\')
+#14 [internal function]: Cms\\Classes\\CmsController->run(\'hoi-dap-tai-lie...\')
+#15 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(256): call_user_func_array(Array, Array)
+#16 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(164): Illuminate\\Routing\\Controller->callAction(\'run\', Array)
+#17 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(112): Illuminate\\Routing\\ControllerDispatcher->call(Object(Cms\\Classes\\CmsController), Object(Illuminate\\Routing\\Route), \'run\')
+#18 [internal function]: Illuminate\\Routing\\ControllerDispatcher->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#19 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#20 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#21 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#22 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(114): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#23 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(68): Illuminate\\Routing\\ControllerDispatcher->callWithinStack(Object(Cms\\Classes\\CmsController), Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'run\')
+#24 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(203): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'Cms\\\\Classes\\\\Cms...\', \'run\')
+#25 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(134): Illuminate\\Routing\\Route->runWithCustomDispatcher(Object(Illuminate\\Http\\Request))
+#26 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(708): Illuminate\\Routing\\Route->run(Object(Illuminate\\Http\\Request))
+#27 [internal function]: Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#28 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#29 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#30 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#31 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(710): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#32 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(674): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#33 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(635): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#34 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(236): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#35 [internal function]: Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#36 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#37 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#38 [internal function]: Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#39 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#40 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(62): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#41 [internal function]: Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#42 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#43 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#44 [internal function]: Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#45 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#46 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(59): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#47 [internal function]: Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#48 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#49 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php(44): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#50 [internal function]: Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#51 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#52 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#53 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#54 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(122): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#55 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(87): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#56 /home/candt/workspaces/mhdnocare/index.php(43): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#57 {main}', NULL, '2018-07-25 02:28:37', '2018-07-25 02:28:37' );
+INSERT INTO `system_event_logs`(`id`,`level`,`message`,`details`,`created_at`,`updated_at`) VALUES ( '355', 'error', 'ErrorException: stream_socket_enable_crypto(): SSL operation failed with code 1. OpenSSL Error messages:
+error:14090086:SSL routines:SSL3_GET_SERVER_CERTIFICATE:certificate verify failed in /home/candt/workspaces/mhdnocare/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/StreamBuffer.php:95
+Stack trace:
+#0 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, \'stream_socket_e...\', \'/home/candt/wor...\', 95, Array)
+#1 /home/candt/workspaces/mhdnocare/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/StreamBuffer.php(95): stream_socket_enable_crypto(Resource id #65, true, 9)
+#2 /home/candt/workspaces/mhdnocare/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/EsmtpTransport.php(315): Swift_Transport_StreamBuffer->startTLS()
+#3 /home/candt/workspaces/mhdnocare/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/AbstractSmtpTransport.php(118): Swift_Transport_EsmtpTransport->_doHeloCommand()
+#4 /home/candt/workspaces/mhdnocare/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mailer.php(79): Swift_Transport_AbstractSmtpTransport->start()
+#5 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Mail/Mailer.php(394): Swift_Mailer->send(Object(Swift_Message), Array)
+#6 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Mail/Mailer.php(69): Illuminate\\Mail\\Mailer->sendSwiftMessage(Object(Swift_Message))
+#7 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(219): October\\Rain\\Mail\\Mailer->send(\'redmarlin.faq::...\', Array, Object(Closure))
+#8 /home/candt/workspaces/mhdnocare/plugins/redmarlin/faq/components/FaqAsk.php(69): Illuminate\\Support\\Facades\\Facade::__callStatic(\'send\', Array)
+#9 /home/candt/workspaces/mhdnocare/modules/cms/classes/ComponentBase.php(167): RedMarlin\\Faq\\Components\\FaqAsk->onPost()
+#10 /home/candt/workspaces/mhdnocare/modules/cms/classes/Controller.php(730): Cms\\Classes\\ComponentBase->runAjaxHandler(\'onPost\')
+#11 /home/candt/workspaces/mhdnocare/modules/cms/classes/Controller.php(349): Cms\\Classes\\Controller->runAjaxHandler(\'onPost\')
+#12 /home/candt/workspaces/mhdnocare/modules/cms/classes/Controller.php(216): Cms\\Classes\\Controller->runPage(Object(Cms\\Classes\\Page))
+#13 /home/candt/workspaces/mhdnocare/modules/cms/classes/CmsController.php(48): Cms\\Classes\\Controller->run(\'hoi-dap-tai-lie...\')
+#14 [internal function]: Cms\\Classes\\CmsController->run(\'hoi-dap-tai-lie...\')
+#15 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(256): call_user_func_array(Array, Array)
+#16 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(164): Illuminate\\Routing\\Controller->callAction(\'run\', Array)
+#17 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(112): Illuminate\\Routing\\ControllerDispatcher->call(Object(Cms\\Classes\\CmsController), Object(Illuminate\\Routing\\Route), \'run\')
+#18 [internal function]: Illuminate\\Routing\\ControllerDispatcher->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#19 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#20 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#21 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#22 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(114): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#23 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(68): Illuminate\\Routing\\ControllerDispatcher->callWithinStack(Object(Cms\\Classes\\CmsController), Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'run\')
+#24 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(203): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'Cms\\\\Classes\\\\Cms...\', \'run\')
+#25 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(134): Illuminate\\Routing\\Route->runWithCustomDispatcher(Object(Illuminate\\Http\\Request))
+#26 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(708): Illuminate\\Routing\\Route->run(Object(Illuminate\\Http\\Request))
+#27 [internal function]: Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#28 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#29 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#30 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#31 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(710): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#32 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(674): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#33 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(635): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#34 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(236): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#35 [internal function]: Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#36 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#37 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#38 [internal function]: Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#39 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#40 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(62): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#41 [internal function]: Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#42 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#43 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#44 [internal function]: Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#45 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#46 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(59): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#47 [internal function]: Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#48 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#49 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php(44): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#50 [internal function]: Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#51 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#52 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#53 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#54 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(122): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#55 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(87): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#56 /home/candt/workspaces/mhdnocare/index.php(43): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#57 {main}', NULL, '2018-07-25 02:35:16', '2018-07-25 02:35:16' );
+INSERT INTO `system_event_logs`(`id`,`level`,`message`,`details`,`created_at`,`updated_at`) VALUES ( '356', 'error', 'ErrorException: stream_socket_enable_crypto(): SSL operation failed with code 1. OpenSSL Error messages:
+error:14090086:SSL routines:SSL3_GET_SERVER_CERTIFICATE:certificate verify failed in /home/candt/workspaces/mhdnocare/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/StreamBuffer.php:95
+Stack trace:
+#0 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, \'stream_socket_e...\', \'/home/candt/wor...\', 95, Array)
+#1 /home/candt/workspaces/mhdnocare/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/StreamBuffer.php(95): stream_socket_enable_crypto(Resource id #65, true, 9)
+#2 /home/candt/workspaces/mhdnocare/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/EsmtpTransport.php(315): Swift_Transport_StreamBuffer->startTLS()
+#3 /home/candt/workspaces/mhdnocare/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/AbstractSmtpTransport.php(118): Swift_Transport_EsmtpTransport->_doHeloCommand()
+#4 /home/candt/workspaces/mhdnocare/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mailer.php(79): Swift_Transport_AbstractSmtpTransport->start()
+#5 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Mail/Mailer.php(394): Swift_Mailer->send(Object(Swift_Message), Array)
+#6 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Mail/Mailer.php(69): Illuminate\\Mail\\Mailer->sendSwiftMessage(Object(Swift_Message))
+#7 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(219): October\\Rain\\Mail\\Mailer->send(\'redmarlin.faq::...\', Array, Object(Closure))
+#8 /home/candt/workspaces/mhdnocare/plugins/redmarlin/faq/components/FaqAsk.php(69): Illuminate\\Support\\Facades\\Facade::__callStatic(\'send\', Array)
+#9 /home/candt/workspaces/mhdnocare/modules/cms/classes/ComponentBase.php(167): RedMarlin\\Faq\\Components\\FaqAsk->onPost()
+#10 /home/candt/workspaces/mhdnocare/modules/cms/classes/Controller.php(730): Cms\\Classes\\ComponentBase->runAjaxHandler(\'onPost\')
+#11 /home/candt/workspaces/mhdnocare/modules/cms/classes/Controller.php(349): Cms\\Classes\\Controller->runAjaxHandler(\'onPost\')
+#12 /home/candt/workspaces/mhdnocare/modules/cms/classes/Controller.php(216): Cms\\Classes\\Controller->runPage(Object(Cms\\Classes\\Page))
+#13 /home/candt/workspaces/mhdnocare/modules/cms/classes/CmsController.php(48): Cms\\Classes\\Controller->run(\'hoi-dap-tai-lie...\')
+#14 [internal function]: Cms\\Classes\\CmsController->run(\'hoi-dap-tai-lie...\')
+#15 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(256): call_user_func_array(Array, Array)
+#16 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(164): Illuminate\\Routing\\Controller->callAction(\'run\', Array)
+#17 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(112): Illuminate\\Routing\\ControllerDispatcher->call(Object(Cms\\Classes\\CmsController), Object(Illuminate\\Routing\\Route), \'run\')
+#18 [internal function]: Illuminate\\Routing\\ControllerDispatcher->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#19 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#20 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#21 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#22 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(114): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#23 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(68): Illuminate\\Routing\\ControllerDispatcher->callWithinStack(Object(Cms\\Classes\\CmsController), Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'run\')
+#24 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(203): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'Cms\\\\Classes\\\\Cms...\', \'run\')
+#25 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(134): Illuminate\\Routing\\Route->runWithCustomDispatcher(Object(Illuminate\\Http\\Request))
+#26 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(708): Illuminate\\Routing\\Route->run(Object(Illuminate\\Http\\Request))
+#27 [internal function]: Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#28 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#29 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#30 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#31 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(710): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#32 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(674): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#33 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(635): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#34 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(236): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#35 [internal function]: Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#36 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#37 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#38 [internal function]: Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#39 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#40 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(62): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#41 [internal function]: Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#42 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#43 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#44 [internal function]: Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#45 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#46 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(59): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#47 [internal function]: Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#48 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#49 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php(44): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#50 [internal function]: Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#51 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#52 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#53 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#54 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(122): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#55 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(87): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#56 /home/candt/workspaces/mhdnocare/index.php(43): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#57 {main}', NULL, '2018-07-25 03:10:04', '2018-07-25 03:10:04' );
+INSERT INTO `system_event_logs`(`id`,`level`,`message`,`details`,`created_at`,`updated_at`) VALUES ( '357', 'error', 'Symfony\\Component\\Debug\\Exception\\FatalThrowableError: Class \'RedMarlin\\Faq\\Event\' not found in /home/candt/workspaces/mhdnocare/plugins/redmarlin/faq/Plugin.php:22
+Stack trace:
+#0 /home/candt/workspaces/mhdnocare/modules/system/classes/PluginManager.php(266): RedMarlin\\Faq\\Plugin->boot()
+#1 /home/candt/workspaces/mhdnocare/modules/system/classes/PluginManager.php(248): System\\Classes\\PluginManager->bootPlugin(Object(RedMarlin\\Faq\\Plugin))
+#2 /home/candt/workspaces/mhdnocare/modules/system/ServiceProvider.php(87): System\\Classes\\PluginManager->bootAll()
+#3 [internal function]: System\\ServiceProvider->boot()
+#4 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Container/Container.php(507): call_user_func_array(Array, Array)
+#5 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(734): Illuminate\\Container\\Container->call(Array)
+#6 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(717): Illuminate\\Foundation\\Application->bootProvider(Object(System\\ServiceProvider))
+#7 [internal function]: Illuminate\\Foundation\\Application->Illuminate\\Foundation\\{closure}(Object(System\\ServiceProvider), 21)
+#8 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(718): array_walk(Array, Object(Closure))
+#9 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/BootProviders.php(17): Illuminate\\Foundation\\Application->boot()
+#10 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(203): Illuminate\\Foundation\\Bootstrap\\BootProviders->bootstrap(Object(October\\Rain\\Foundation\\Application))
+#11 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(222): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#12 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(117): Illuminate\\Foundation\\Http\\Kernel->bootstrap()
+#13 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(87): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#14 /home/candt/workspaces/mhdnocare/index.php(43): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#15 {main}', NULL, '2018-07-25 03:25:39', '2018-07-25 03:25:39' );
+INSERT INTO `system_event_logs`(`id`,`level`,`message`,`details`,`created_at`,`updated_at`) VALUES ( '358', 'error', 'Symfony\\Component\\Debug\\Exception\\FatalThrowableError: Class \'RedMarlin\\Faq\\Event\' not found in /home/candt/workspaces/mhdnocare/plugins/redmarlin/faq/Plugin.php:22
+Stack trace:
+#0 /home/candt/workspaces/mhdnocare/modules/system/classes/PluginManager.php(266): RedMarlin\\Faq\\Plugin->boot()
+#1 /home/candt/workspaces/mhdnocare/modules/system/classes/PluginManager.php(248): System\\Classes\\PluginManager->bootPlugin(Object(RedMarlin\\Faq\\Plugin))
+#2 /home/candt/workspaces/mhdnocare/modules/system/ServiceProvider.php(87): System\\Classes\\PluginManager->bootAll()
+#3 [internal function]: System\\ServiceProvider->boot()
+#4 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Container/Container.php(507): call_user_func_array(Array, Array)
+#5 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(734): Illuminate\\Container\\Container->call(Array)
+#6 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(717): Illuminate\\Foundation\\Application->bootProvider(Object(System\\ServiceProvider))
+#7 [internal function]: Illuminate\\Foundation\\Application->Illuminate\\Foundation\\{closure}(Object(System\\ServiceProvider), 21)
+#8 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(718): array_walk(Array, Object(Closure))
+#9 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/BootProviders.php(17): Illuminate\\Foundation\\Application->boot()
+#10 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(203): Illuminate\\Foundation\\Bootstrap\\BootProviders->bootstrap(Object(October\\Rain\\Foundation\\Application))
+#11 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(222): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#12 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(117): Illuminate\\Foundation\\Http\\Kernel->bootstrap()
+#13 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(87): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#14 /home/candt/workspaces/mhdnocare/index.php(43): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#15 {main}', NULL, '2018-07-25 03:27:13', '2018-07-25 03:27:13' );
+INSERT INTO `system_event_logs`(`id`,`level`,`message`,`details`,`created_at`,`updated_at`) VALUES ( '359', 'error', 'Symfony\\Component\\Debug\\Exception\\FatalThrowableError: Class \'RedMarlin\\Faq\\Event\' not found in /home/candt/workspaces/mhdnocare/plugins/redmarlin/faq/Plugin.php:88
+Stack trace:
+#0 /home/candt/workspaces/mhdnocare/modules/system/classes/PluginManager.php(266): RedMarlin\\Faq\\Plugin->boot()
+#1 /home/candt/workspaces/mhdnocare/modules/system/classes/PluginManager.php(248): System\\Classes\\PluginManager->bootPlugin(Object(RedMarlin\\Faq\\Plugin))
+#2 /home/candt/workspaces/mhdnocare/modules/system/ServiceProvider.php(87): System\\Classes\\PluginManager->bootAll()
+#3 [internal function]: System\\ServiceProvider->boot()
+#4 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Container/Container.php(507): call_user_func_array(Array, Array)
+#5 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(734): Illuminate\\Container\\Container->call(Array)
+#6 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(717): Illuminate\\Foundation\\Application->bootProvider(Object(System\\ServiceProvider))
+#7 [internal function]: Illuminate\\Foundation\\Application->Illuminate\\Foundation\\{closure}(Object(System\\ServiceProvider), 21)
+#8 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(718): array_walk(Array, Object(Closure))
+#9 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/BootProviders.php(17): Illuminate\\Foundation\\Application->boot()
+#10 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(203): Illuminate\\Foundation\\Bootstrap\\BootProviders->bootstrap(Object(October\\Rain\\Foundation\\Application))
+#11 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(222): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#12 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(117): Illuminate\\Foundation\\Http\\Kernel->bootstrap()
+#13 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(87): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#14 /home/candt/workspaces/mhdnocare/index.php(43): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#15 {main}', NULL, '2018-07-25 03:28:31', '2018-07-25 03:28:31' );
+INSERT INTO `system_event_logs`(`id`,`level`,`message`,`details`,`created_at`,`updated_at`) VALUES ( '360', 'error', 'Symfony\\Component\\Debug\\Exception\\FatalThrowableError: Class \'RedMarlin\\Faq\\Event\' not found in /home/candt/workspaces/mhdnocare/plugins/redmarlin/faq/Plugin.php:88
+Stack trace:
+#0 /home/candt/workspaces/mhdnocare/modules/system/classes/PluginManager.php(266): RedMarlin\\Faq\\Plugin->boot()
+#1 /home/candt/workspaces/mhdnocare/modules/system/classes/PluginManager.php(248): System\\Classes\\PluginManager->bootPlugin(Object(RedMarlin\\Faq\\Plugin))
+#2 /home/candt/workspaces/mhdnocare/modules/system/ServiceProvider.php(87): System\\Classes\\PluginManager->bootAll()
+#3 [internal function]: System\\ServiceProvider->boot()
+#4 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Container/Container.php(507): call_user_func_array(Array, Array)
+#5 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(734): Illuminate\\Container\\Container->call(Array)
+#6 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(717): Illuminate\\Foundation\\Application->bootProvider(Object(System\\ServiceProvider))
+#7 [internal function]: Illuminate\\Foundation\\Application->Illuminate\\Foundation\\{closure}(Object(System\\ServiceProvider), 21)
+#8 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(718): array_walk(Array, Object(Closure))
+#9 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/BootProviders.php(17): Illuminate\\Foundation\\Application->boot()
+#10 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(203): Illuminate\\Foundation\\Bootstrap\\BootProviders->bootstrap(Object(October\\Rain\\Foundation\\Application))
+#11 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(222): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#12 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(117): Illuminate\\Foundation\\Http\\Kernel->bootstrap()
+#13 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(87): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#14 /home/candt/workspaces/mhdnocare/index.php(43): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#15 {main}', NULL, '2018-07-25 03:28:33', '2018-07-25 03:28:33' );
+INSERT INTO `system_event_logs`(`id`,`level`,`message`,`details`,`created_at`,`updated_at`) VALUES ( '361', 'error', 'Symfony\\Component\\Debug\\Exception\\FatalThrowableError: Class \'RedMarlin\\Faq\\Event\' not found in /home/candt/workspaces/mhdnocare/plugins/redmarlin/faq/Plugin.php:90
+Stack trace:
+#0 /home/candt/workspaces/mhdnocare/modules/system/classes/PluginManager.php(266): RedMarlin\\Faq\\Plugin->boot()
+#1 /home/candt/workspaces/mhdnocare/modules/system/classes/PluginManager.php(248): System\\Classes\\PluginManager->bootPlugin(Object(RedMarlin\\Faq\\Plugin))
+#2 /home/candt/workspaces/mhdnocare/modules/system/ServiceProvider.php(87): System\\Classes\\PluginManager->bootAll()
+#3 [internal function]: System\\ServiceProvider->boot()
+#4 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Container/Container.php(507): call_user_func_array(Array, Array)
+#5 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(734): Illuminate\\Container\\Container->call(Array)
+#6 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(717): Illuminate\\Foundation\\Application->bootProvider(Object(System\\ServiceProvider))
+#7 [internal function]: Illuminate\\Foundation\\Application->Illuminate\\Foundation\\{closure}(Object(System\\ServiceProvider), 21)
+#8 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(718): array_walk(Array, Object(Closure))
+#9 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/BootProviders.php(17): Illuminate\\Foundation\\Application->boot()
+#10 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(203): Illuminate\\Foundation\\Bootstrap\\BootProviders->bootstrap(Object(October\\Rain\\Foundation\\Application))
+#11 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(222): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#12 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(117): Illuminate\\Foundation\\Http\\Kernel->bootstrap()
+#13 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(87): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#14 /home/candt/workspaces/mhdnocare/index.php(43): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#15 {main}', NULL, '2018-07-25 03:30:12', '2018-07-25 03:30:12' );
+INSERT INTO `system_event_logs`(`id`,`level`,`message`,`details`,`created_at`,`updated_at`) VALUES ( '362', 'error', 'PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column \'name\' in \'field list\' in /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Connection.php:390
+Stack trace:
+#0 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Connection.php(390): PDO->prepare(\'insert into `re...\')
+#1 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Connection.php(655): Illuminate\\Database\\Connection->Illuminate\\Database\\{closure}(Object(Illuminate\\Database\\MySqlConnection), \'insert into `re...\', Array)
+#2 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Connection.php(618): Illuminate\\Database\\Connection->runQueryCallback(\'insert into `re...\', Array, Object(Closure))
+#3 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Connection.php(391): Illuminate\\Database\\Connection->run(\'insert into `re...\', Array, Object(Closure))
+#4 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Connection.php(347): Illuminate\\Database\\Connection->statement(\'insert into `re...\', Array)
+#5 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Query/Processors/Processor.php(32): Illuminate\\Database\\Connection->insert(\'insert into `re...\', Array)
+#6 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(1843): Illuminate\\Database\\Query\\Processors\\Processor->processInsertGetId(Object(October\\Rain\\Database\\QueryBuilder), \'insert into `re...\', Array, \'id\')
+#7 [internal function]: Illuminate\\Database\\Query\\Builder->insertGetId(Array, \'id\')
+#8 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php(1015): call_user_func_array(Array, Array)
+#9 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Database/Builder.php(187): Illuminate\\Database\\Eloquent\\Builder->__call(\'insertGetId\', Array)
+#10 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1592): October\\Rain\\Database\\Builder->__call(\'insertGetId\', Array)
+#11 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1561): Illuminate\\Database\\Eloquent\\Model->insertAndSetId(Object(October\\Rain\\Database\\Builder), Array)
+#12 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1452): Illuminate\\Database\\Eloquent\\Model->performInsert(Object(October\\Rain\\Database\\Builder), Array)
+#13 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Database/Model.php(1113): Illuminate\\Database\\Eloquent\\Model->save(Array)
+#14 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Database/Model.php(1146): October\\Rain\\Database\\Model->saveInternal(Array)
+#15 /home/candt/workspaces/mhdnocare/modules/backend/behaviors/FormController.php(217): October\\Rain\\Database\\Model->save(NULL, \'cJo9JBDszy53NJZ...\')
+#16 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Connection.php(476): Backend\\Behaviors\\FormController->Backend\\Behaviors\\{closure}(Object(Illuminate\\Database\\MySqlConnection))
+#17 [internal function]: Illuminate\\Database\\Connection->transaction(Object(Closure))
+#18 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/DatabaseManager.php(296): call_user_func_array(Array, Array)
+#19 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(215): Illuminate\\Database\\DatabaseManager->__call(\'transaction\', Array)
+#20 /home/candt/workspaces/mhdnocare/modules/backend/behaviors/FormController.php(219): Illuminate\\Support\\Facades\\Facade::__callStatic(\'transaction\', Array)
+#21 [internal function]: Backend\\Behaviors\\FormController->create_onSave()
+#22 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Extension/ExtendableTrait.php(366): call_user_func_array(Array, Array)
+#23 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Extension/Extendable.php(42): October\\Rain\\Extension\\Extendable->extendableCall(\'create_onSave\', Array)
+#24 [internal function]: October\\Rain\\Extension\\Extendable->__call(\'create_onSave\', Array)
+#25 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(526): call_user_func_array(Array, Array)
+#26 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(417): Backend\\Classes\\Controller->runAjaxHandler(\'onSave\')
+#27 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(227): Backend\\Classes\\Controller->execAjaxHandlers()
+#28 /home/candt/workspaces/mhdnocare/modules/backend/classes/BackendController.php(106): Backend\\Classes\\Controller->run(\'create\', Array)
+#29 [internal function]: Backend\\Classes\\BackendController->run(\'redmarlin/faq/q...\')
+#30 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(256): call_user_func_array(Array, Array)
+#31 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(164): Illuminate\\Routing\\Controller->callAction(\'run\', Array)
+#32 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(112): Illuminate\\Routing\\ControllerDispatcher->call(Object(Backend\\Classes\\BackendController), Object(Illuminate\\Routing\\Route), \'run\')
+#33 [internal function]: Illuminate\\Routing\\ControllerDispatcher->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#34 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#35 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#36 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#37 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(114): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#38 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(68): Illuminate\\Routing\\ControllerDispatcher->callWithinStack(Object(Backend\\Classes\\BackendController), Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'run\')
+#39 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(203): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'Backend\\\\Classes...\', \'run\')
+#40 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(134): Illuminate\\Routing\\Route->runWithCustomDispatcher(Object(Illuminate\\Http\\Request))
+#41 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(708): Illuminate\\Routing\\Route->run(Object(Illuminate\\Http\\Request))
+#42 [internal function]: Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#43 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#44 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#45 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#46 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(710): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#47 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(674): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#48 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(635): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#49 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(236): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#50 [internal function]: Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#51 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#52 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#53 [internal function]: Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#54 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#55 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(62): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#56 [internal function]: Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#57 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#58 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#59 [internal function]: Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#60 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#61 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(59): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#62 [internal function]: Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#63 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#64 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php(44): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#65 [internal function]: Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#66 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#67 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#68 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#69 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(122): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#70 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(87): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#71 /home/candt/workspaces/mhdnocare/index.php(43): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#72 {main}
+
+Next Illuminate\\Database\\QueryException: SQLSTATE[42S22]: Column not found: 1054 Unknown column \'name\' in \'field list\' (SQL: insert into `redmarlin_faq_questions` (`question`, `answer`, `category_id`, `is_approved`, `is_featured`, `name`, `created_at`, `updated_at`) values (fdsafdsa, fdasdf, 1, 0, 0, name, , 2018-07-25 04:05:45)) in /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Connection.php:662
+Stack trace:
+#0 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Connection.php(618): Illuminate\\Database\\Connection->runQueryCallback(\'insert into `re...\', Array, Object(Closure))
+#1 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Connection.php(391): Illuminate\\Database\\Connection->run(\'insert into `re...\', Array, Object(Closure))
+#2 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Connection.php(347): Illuminate\\Database\\Connection->statement(\'insert into `re...\', Array)
+#3 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Query/Processors/Processor.php(32): Illuminate\\Database\\Connection->insert(\'insert into `re...\', Array)
+#4 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(1843): Illuminate\\Database\\Query\\Processors\\Processor->processInsertGetId(Object(October\\Rain\\Database\\QueryBuilder), \'insert into `re...\', Array, \'id\')
+#5 [internal function]: Illuminate\\Database\\Query\\Builder->insertGetId(Array, \'id\')
+#6 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php(1015): call_user_func_array(Array, Array)
+#7 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Database/Builder.php(187): Illuminate\\Database\\Eloquent\\Builder->__call(\'insertGetId\', Array)
+#8 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1592): October\\Rain\\Database\\Builder->__call(\'insertGetId\', Array)
+#9 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1561): Illuminate\\Database\\Eloquent\\Model->insertAndSetId(Object(October\\Rain\\Database\\Builder), Array)
+#10 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php(1452): Illuminate\\Database\\Eloquent\\Model->performInsert(Object(October\\Rain\\Database\\Builder), Array)
+#11 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Database/Model.php(1113): Illuminate\\Database\\Eloquent\\Model->save(Array)
+#12 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Database/Model.php(1146): October\\Rain\\Database\\Model->saveInternal(Array)
+#13 /home/candt/workspaces/mhdnocare/modules/backend/behaviors/FormController.php(217): October\\Rain\\Database\\Model->save(NULL, \'cJo9JBDszy53NJZ...\')
+#14 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/Connection.php(476): Backend\\Behaviors\\FormController->Backend\\Behaviors\\{closure}(Object(Illuminate\\Database\\MySqlConnection))
+#15 [internal function]: Illuminate\\Database\\Connection->transaction(Object(Closure))
+#16 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Database/DatabaseManager.php(296): call_user_func_array(Array, Array)
+#17 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(215): Illuminate\\Database\\DatabaseManager->__call(\'transaction\', Array)
+#18 /home/candt/workspaces/mhdnocare/modules/backend/behaviors/FormController.php(219): Illuminate\\Support\\Facades\\Facade::__callStatic(\'transaction\', Array)
+#19 [internal function]: Backend\\Behaviors\\FormController->create_onSave()
+#20 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Extension/ExtendableTrait.php(366): call_user_func_array(Array, Array)
+#21 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Extension/Extendable.php(42): October\\Rain\\Extension\\Extendable->extendableCall(\'create_onSave\', Array)
+#22 [internal function]: October\\Rain\\Extension\\Extendable->__call(\'create_onSave\', Array)
+#23 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(526): call_user_func_array(Array, Array)
+#24 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(417): Backend\\Classes\\Controller->runAjaxHandler(\'onSave\')
+#25 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(227): Backend\\Classes\\Controller->execAjaxHandlers()
+#26 /home/candt/workspaces/mhdnocare/modules/backend/classes/BackendController.php(106): Backend\\Classes\\Controller->run(\'create\', Array)
+#27 [internal function]: Backend\\Classes\\BackendController->run(\'redmarlin/faq/q...\')
+#28 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(256): call_user_func_array(Array, Array)
+#29 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(164): Illuminate\\Routing\\Controller->callAction(\'run\', Array)
+#30 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(112): Illuminate\\Routing\\ControllerDispatcher->call(Object(Backend\\Classes\\BackendController), Object(Illuminate\\Routing\\Route), \'run\')
+#31 [internal function]: Illuminate\\Routing\\ControllerDispatcher->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#32 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#33 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#34 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#35 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(114): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#36 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(68): Illuminate\\Routing\\ControllerDispatcher->callWithinStack(Object(Backend\\Classes\\BackendController), Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'run\')
+#37 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(203): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'Backend\\\\Classes...\', \'run\')
+#38 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(134): Illuminate\\Routing\\Route->runWithCustomDispatcher(Object(Illuminate\\Http\\Request))
+#39 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(708): Illuminate\\Routing\\Route->run(Object(Illuminate\\Http\\Request))
+#40 [internal function]: Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#41 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#42 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#43 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#44 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(710): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#45 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(674): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#46 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(635): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#47 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(236): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#48 [internal function]: Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#49 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#50 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#51 [internal function]: Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#52 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#53 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(62): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#54 [internal function]: Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#55 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#56 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#57 [internal function]: Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#58 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#59 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(59): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#60 [internal function]: Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#61 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#62 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php(44): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#63 [internal function]: Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#64 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#65 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#66 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#67 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(122): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#68 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(87): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#69 /home/candt/workspaces/mhdnocare/index.php(43): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#70 {main}', NULL, '2018-07-25 04:05:45', '2018-07-25 04:05:45' );
+INSERT INTO `system_event_logs`(`id`,`level`,`message`,`details`,`created_at`,`updated_at`) VALUES ( '363', 'error', 'October\\Rain\\Exception\\SystemException: The partial \'_field_richtext.htm\' is not found. in /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php:91
+Stack trace:
+#0 /home/candt/workspaces/mhdnocare/modules/backend/widgets/Form.php(270): Backend\\Classes\\WidgetBase->makePartial(\'_field_richtext...\', Array)
+#1 /home/candt/workspaces/mhdnocare/modules/backend/widgets/form/partials/_field.htm(22): Backend\\Widgets\\Form->renderFieldElement(Object(Backend\\Classes\\FormField))
+#2 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(244): include(\'/home/candt/wor...\')
+#3 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(98): Backend\\Classes\\WidgetBase->makeFileContents(\'/home/candt/wor...\', Array)
+#4 /home/candt/workspaces/mhdnocare/modules/backend/widgets/form/partials/_field-container.htm(8): Backend\\Classes\\WidgetBase->makePartial(\'_field.htm\', Array)
+#5 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(244): include(\'/home/candt/wor...\')
+#6 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(98): Backend\\Classes\\WidgetBase->makeFileContents(\'/home/candt/wor...\', Array)
+#7 /home/candt/workspaces/mhdnocare/modules/backend/widgets/form/partials/_form_fields.htm(2): Backend\\Classes\\WidgetBase->makePartial(\'_field-containe...\', Array)
+#8 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(244): include(\'/home/candt/wor...\')
+#9 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(98): Backend\\Classes\\WidgetBase->makeFileContents(\'/home/candt/wor...\', Array)
+#10 /home/candt/workspaces/mhdnocare/modules/backend/widgets/form/partials/_section.htm(17): Backend\\Classes\\WidgetBase->makePartial(\'_form_fields.ht...\', Array)
+#11 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(244): include(\'/home/candt/wor...\')
+#12 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(98): Backend\\Classes\\WidgetBase->makeFileContents(\'/home/candt/wor...\', Array)
+#13 /home/candt/workspaces/mhdnocare/modules/backend/widgets/form/partials/_form.htm(3): Backend\\Classes\\WidgetBase->makePartial(\'_section.htm\', Array)
+#14 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(244): include(\'/home/candt/wor...\')
+#15 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(98): Backend\\Classes\\WidgetBase->makeFileContents(\'/home/candt/wor...\', Array)
+#16 /home/candt/workspaces/mhdnocare/modules/backend/widgets/form/partials/_form-container.htm(8): Backend\\Classes\\WidgetBase->makePartial(\'_form.htm\')
+#17 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(244): include(\'/home/candt/wor...\')
+#18 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(98): Backend\\Classes\\WidgetBase->makeFileContents(\'/home/candt/wor...\', Array)
+#19 /home/candt/workspaces/mhdnocare/modules/backend/widgets/Form.php(224): Backend\\Classes\\WidgetBase->makePartial(\'_form-container...\', Array)
+#20 /home/candt/workspaces/mhdnocare/modules/backend/behaviors/FormController.php(353): Backend\\Widgets\\Form->render(Array)
+#21 [internal function]: Backend\\Behaviors\\FormController->formRender()
+#22 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Extension/ExtendableTrait.php(366): call_user_func_array(Array, Array)
+#23 /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Extension/Extendable.php(42): October\\Rain\\Extension\\Extendable->extendableCall(\'formRender\', Array)
+#24 /home/candt/workspaces/mhdnocare/plugins/redmarlin/faq/controllers/questions/update.htm(6): October\\Rain\\Extension\\Extendable->__call(\'formRender\', Array)
+#25 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(244): include(\'/home/candt/wor...\')
+#26 /home/candt/workspaces/mhdnocare/modules/system/traits/ViewMaker.php(110): Backend\\Classes\\Controller->makeFileContents(\'/home/candt/wor...\')
+#27 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(363): Backend\\Classes\\Controller->makeView(\'update\')
+#28 /home/candt/workspaces/mhdnocare/modules/backend/classes/Controller.php(245): Backend\\Classes\\Controller->execPageAction(\'update\', Array)
+#29 /home/candt/workspaces/mhdnocare/modules/backend/classes/BackendController.php(106): Backend\\Classes\\Controller->run(\'update\', Array)
+#30 [internal function]: Backend\\Classes\\BackendController->run(\'redmarlin/faq/q...\')
+#31 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(256): call_user_func_array(Array, Array)
+#32 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(164): Illuminate\\Routing\\Controller->callAction(\'run\', Array)
+#33 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(112): Illuminate\\Routing\\ControllerDispatcher->call(Object(Backend\\Classes\\BackendController), Object(Illuminate\\Routing\\Route), \'run\')
+#34 [internal function]: Illuminate\\Routing\\ControllerDispatcher->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#35 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#36 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#37 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#38 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(114): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#39 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(68): Illuminate\\Routing\\ControllerDispatcher->callWithinStack(Object(Backend\\Classes\\BackendController), Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'run\')
+#40 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(203): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request), \'Backend\\\\Classes...\', \'run\')
+#41 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Route.php(134): Illuminate\\Routing\\Route->runWithCustomDispatcher(Object(Illuminate\\Http\\Request))
+#42 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(708): Illuminate\\Routing\\Route->run(Object(Illuminate\\Http\\Request))
+#43 [internal function]: Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#44 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#45 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#46 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#47 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(710): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#48 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(674): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#49 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Routing/Router.php(635): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#50 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(236): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#51 [internal function]: Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#52 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#53 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#54 [internal function]: Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#55 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#56 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(62): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#57 [internal function]: Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#58 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#59 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#60 [internal function]: Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#61 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#62 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(59): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#63 [internal function]: Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#64 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#65 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php(44): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#66 [internal function]: Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#67 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#68 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#69 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))
+#70 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(122): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#71 /home/candt/workspaces/mhdnocare/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(87): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#72 /home/candt/workspaces/mhdnocare/index.php(43): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#73 {main}', NULL, '2018-07-25 07:17:23', '2018-07-25 07:17:23' );
+INSERT INTO `system_event_logs`(`id`,`level`,`message`,`details`,`created_at`,`updated_at`) VALUES ( '364', 'error', 'Symfony\\Component\\Debug\\Exception\\FatalErrorException: Maximum execution time of 30 seconds exceeded in /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Exception/ErrorHandler.php:101
+Stack trace:
+#0 {main}', NULL, '2018-07-25 10:19:15', '2018-07-25 10:19:15' );
+INSERT INTO `system_event_logs`(`id`,`level`,`message`,`details`,`created_at`,`updated_at`) VALUES ( '365', 'error', 'Symfony\\Component\\Debug\\Exception\\FatalErrorException: Maximum execution time of 30 seconds exceeded in /home/candt/workspaces/mhdnocare/vendor/october/rain/src/Exception/ExceptionBase.php:95
+Stack trace:
+#0 {main}', NULL, '2018-07-26 01:36:21', '2018-07-26 01:36:21' );
 -- ---------------------------------------------------------
 
 
@@ -18262,7 +19647,7 @@ INSERT INTO `system_mail_templates`(`id`,`code`,`subject`,`description`,`content
 INSERT INTO `system_parameters`(`id`,`namespace`,`group`,`item`,`value`) VALUES ( '1', 'system', 'update', 'count', '0' );
 INSERT INTO `system_parameters`(`id`,`namespace`,`group`,`item`,`value`) VALUES ( '2', 'system', 'core', 'hash', '"5a33bb0bf5c55d6a224be86b2fe0e54b"' );
 INSERT INTO `system_parameters`(`id`,`namespace`,`group`,`item`,`value`) VALUES ( '3', 'system', 'core', 'build', '"393"' );
-INSERT INTO `system_parameters`(`id`,`namespace`,`group`,`item`,`value`) VALUES ( '4', 'system', 'update', 'retry', '1532484269' );
+INSERT INTO `system_parameters`(`id`,`namespace`,`group`,`item`,`value`) VALUES ( '4', 'system', 'update', 'retry', '1532570725' );
 INSERT INTO `system_parameters`(`id`,`namespace`,`group`,`item`,`value`) VALUES ( '5', 'cms', 'theme', 'active', '"mhdnocare"' );
 -- ---------------------------------------------------------
 
@@ -18454,62 +19839,68 @@ INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`creat
 INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '238', 'One47.FileList', 'script', '1.0.3', 'A more specific permission function will be added in the near future', '2018-07-18 06:40:08' );
 INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '239', 'One47.FileList', 'comment', '1.0.3', 'Added basic permission function to allow or deny admins to manage filelists', '2018-07-18 06:40:08' );
 INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '240', 'One47.FileList', 'comment', '1.0.4', 'Fixed issue to allow various file types to be uploaded', '2018-07-18 06:40:08' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '466', 'OFFLINE.SnipcartShop', 'script', '1.0.1', 'builder_table_create_offline_snipcartshop_products.php', '2018-07-24 08:35:01' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '467', 'OFFLINE.SnipcartShop', 'script', '1.0.1', 'builder_table_create_offline_snipcartshop_product_variants.php', '2018-07-24 08:35:01' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '468', 'OFFLINE.SnipcartShop', 'script', '1.0.1', 'builder_table_create_offline_snipcartshop_product_custom_fields.php', '2018-07-24 08:35:01' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '469', 'OFFLINE.SnipcartShop', 'script', '1.0.1', 'builder_table_create_offline_snipcartshop_product_custom_field_options.php', '2018-07-24 08:35:01' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '470', 'OFFLINE.SnipcartShop', 'script', '1.0.1', 'builder_table_create_offline_snipcartshop_product_variant_custom_field_option.php', '2018-07-24 08:35:01' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '471', 'OFFLINE.SnipcartShop', 'script', '1.0.1', 'builder_table_create_offline_snipcartshop_categories.php', '2018-07-24 08:35:01' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '472', 'OFFLINE.SnipcartShop', 'script', '1.0.1', 'builder_table_create_offline_snipcartshop_category_product.php', '2018-07-24 08:35:02' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '473', 'OFFLINE.SnipcartShop', 'script', '1.0.1', 'builder_table_create_offline_snipcartshop_orders.php', '2018-07-24 08:35:02' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '474', 'OFFLINE.SnipcartShop', 'script', '1.0.1', 'builder_table_create_offline_snipcartshop_order_items.php', '2018-07-24 08:35:02' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '475', 'OFFLINE.SnipcartShop', 'script', '1.0.1', 'builder_table_create_offline_snipcartshop_discounts.php', '2018-07-24 08:35:02' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '476', 'OFFLINE.SnipcartShop', 'comment', '1.0.1', 'Initial release.', '2018-07-24 08:35:02' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '477', 'OFFLINE.SnipcartShop', 'script', '1.0.2', 'builder_table_update_offline_snipcartshop_products.php', '2018-07-24 08:35:03' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '478', 'OFFLINE.SnipcartShop', 'comment', '1.0.2', 'Added support for product attributes, downloads and links // Optimized price validation', '2018-07-24 08:35:03' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '479', 'OFFLINE.SnipcartShop', 'script', '1.0.3', 'builder_table_create_offline_snipcartshop_product_accessory.php', '2018-07-24 08:35:03' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '480', 'OFFLINE.SnipcartShop', 'comment', '1.0.3', 'Added support for product accessories', '2018-07-24 08:35:03' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '481', 'OFFLINE.SnipcartShop', 'comment', '1.0.4', 'Fixed incorrect database schema generation (thanks to abhi1693)', '2018-07-24 08:35:03' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '482', 'OFFLINE.SnipcartShop', 'comment', '1.0.5', 'Enable support on Windows systems and make Rainlab.Translate dependency optional', '2018-07-24 08:35:03' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '483', 'OFFLINE.SnipcartShop', 'script', '1.0.6', 'set_sort_order_defaults.php', '2018-07-24 08:35:03' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '484', 'OFFLINE.SnipcartShop', 'comment', '1.0.6', 'Fixed issues with MySQL instances that run in strict mode', '2018-07-24 08:35:03' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '485', 'OFFLINE.SnipcartShop', 'comment', '1.0.7', 'Prevent generation of empty sub-category lists', '2018-07-24 08:35:03' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '486', 'OFFLINE.SnipcartShop', 'comment', '1.0.8', 'Fixed price handling with product variants and generation of category slugs', '2018-07-24 08:35:03' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '487', 'OFFLINE.SnipcartShop', 'comment', '1.0.9', 'Use category slug in sub categories directly', '2018-07-24 08:35:04' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '488', 'OFFLINE.SnipcartShop', 'comment', '1.0.10', 'Added missing categoryPage param', '2018-07-24 08:35:04' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '489', 'OFFLINE.SnipcartShop', 'comment', '1.0.11', 'Added is_accessory_of relationship to articles', '2018-07-24 08:35:04' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '490', 'OFFLINE.SnipcartShop', 'comment', '1.0.12', 'Added new Snipcart Webhook fields', '2018-07-24 08:35:04' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '491', 'OFFLINE.SnipcartShop', 'comment', '1.0.13', 'Fixed generation of quantitiy attributes in product markup', '2018-07-24 08:35:04' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '492', 'OFFLINE.SnipcartShop', 'comment', '1.0.14', 'Added workaround to make translation of product attributes work as expected', '2018-07-24 08:35:04' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '493', 'OFFLINE.SnipcartShop', 'comment', '1.0.15', 'Added maximum number of usages field to discouts', '2018-07-24 08:35:04' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '494', 'OFFLINE.SnipcartShop', 'comment', '1.0.16', 'Fixed invalid relationship column in products list', '2018-07-24 08:35:04' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '495', 'OFFLINE.SnipcartShop', 'comment', '1.0.17', 'Prevent a bug with discounts where the trigger type gets ignored by Snipcart', '2018-07-24 08:35:04' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '496', 'OFFLINE.SnipcartShop', 'comment', '1.0.18', 'Added option to display custom fields directly on the product page', '2018-07-24 08:35:04' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '497', 'OFFLINE.SnipcartShop', 'comment', '1.0.19', 'Implemented category images', '2018-07-24 08:35:04' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '498', 'OFFLINE.SnipcartShop', 'script', '1.0.20', 'builder_table_update_offline_snipcartshop_categories.php', '2018-07-24 08:35:04' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '499', 'OFFLINE.SnipcartShop', 'comment', '1.0.20', 'Added unique code field to better identify categories in frontend partials', '2018-07-24 08:35:05' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '500', 'OFFLINE.SnipcartShop', 'comment', '1.0.21', 'Added options for continue shopping button and split first and last name fields', '2018-07-24 08:35:05' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '501', 'OFFLINE.SnipcartShop', 'comment', '1.0.22', 'Fixed backend search and made components work without categories', '2018-07-24 08:35:05' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '502', 'OFFLINE.SnipcartShop', 'comment', '1.0.23', 'Calculating new price immediately after changing custom fields on the product page', '2018-07-24 08:35:05' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '503', 'OFFLINE.SnipcartShop', 'script', '1.0.24', 'make_order_fields_nullable.php', '2018-07-24 08:35:05' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '504', 'OFFLINE.SnipcartShop', 'comment', '1.0.24', 'Made order fields nullable', '2018-07-24 08:35:05' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '505', 'OFFLINE.SnipcartShop', 'comment', '1.0.25', 'Fixed "show all products" option on products component', '2018-07-24 08:35:05' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '506', 'OFFLINE.SnipcartShop', 'script', '1.0.26', 'make_order_items_fields_nullable.php', '2018-07-24 08:35:05' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '507', 'OFFLINE.SnipcartShop', 'comment', '1.0.26', 'Made order items fields nullable', '2018-07-24 08:35:05' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '508', 'OFFLINE.SnipcartShop', 'comment', '1.0.27', 'Fixed custom attribute dropdowns when using SQLite', '2018-07-24 08:35:05' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '509', 'OFFLINE.SnipcartShop', 'comment', '1.0.28', 'Added category filter to products list', '2018-07-24 08:35:05' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '510', 'OFFLINE.SnipcartShop', 'comment', '1.0.29', 'Moved frontend price calculation into a separate partial', '2018-07-24 08:35:06' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '511', 'OFFLINE.SnipcartShop', 'script', '1.0.30', 'builder_table_update_offline_snipcartshop_orders.php', '2018-07-24 08:35:06' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '512', 'OFFLINE.SnipcartShop', 'comment', '1.0.30', 'Tracking used discount codes for orders', '2018-07-24 08:35:06' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '513', 'OFFLINE.SnipcartShop', 'comment', '1.0.31', 'Implemented new Snipcart Webhook fields', '2018-07-24 08:35:06' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '514', 'OFFLINE.SnipcartShop', 'comment', '1.0.32', 'Added orders export functionality', '2018-07-24 08:35:06' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '515', 'OFFLINE.SnipcartShop', 'comment', '1.0.33', 'Implemented custom currency formats', '2018-07-24 08:35:06' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '516', 'OFFLINE.SnipcartShop', 'comment', '1.0.34', 'Added dependency on Rainlab.Translate', '2018-07-24 08:35:06' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '517', 'OFFLINE.SnipcartShop', 'comment', '1.0.35', 'Added support for new October Build 420 on Laravel 5.5', '2018-07-24 08:35:06' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '518', 'OFFLINE.SnipcartShop', 'comment', '1.0.36', 'Fixed compatibility with new Snipcart Webhook fields', '2018-07-24 08:35:06' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '519', 'OFFLINE.SnipcartShop', 'comment', '1.0.37', 'Fixed bugs when receiving Snipcart webhooks', '2018-07-24 08:35:06' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '520', 'OFFLINE.SnipcartShop', 'comment', '1.0.38', 'Fixed dependency definition on RainLab.Translate', '2018-07-24 08:35:06' );
-INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '521', 'OFFLINE.SnipcartShop', 'comment', '1.0.39', 'Changed json column types to text for new installations since it is causing problems with old MySQL versions', '2018-07-24 08:35:06' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '522', 'Lovata.Toolbox', 'comment', '1.0.0', 'Initialize plugin.', '2018-07-24 09:29:25' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '523', 'Lovata.Toolbox', 'comment', '1.1.0', 'Add diff, unshift, push, getNearestNext, getNearestPrev methods to ElementCollection class, add ComponentSubmitForm class', '2018-07-24 09:29:25' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '524', 'Lovata.Toolbox', 'comment', '1.2.0', 'Add integration with Translate plugin', '2018-07-24 09:29:25' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '525', 'Lovata.Toolbox', 'comment', '1.3.0', 'Adding afterCreate model event handling for additional cache cleaning', '2018-07-24 09:29:26' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '526', 'Lovata.Toolbox', 'comment', '1.3.1', 'Restore getOldFormData() method in ComponentSubmitForm class', '2018-07-24 09:29:26' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '527', 'Lovata.Toolbox', 'comment', '1.3.2', 'Fix lang path for the default properties tab in CommonProperty class', '2018-07-24 09:29:26' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '528', 'Lovata.Toolbox', 'comment', '1.3.3', 'Fix path to field name with error in getErrorMessage() method', '2018-07-24 09:29:26' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '529', 'Lovata.Toolbox', 'comment', '1.4.0', 'Add PageHelper class', '2018-07-24 09:29:26' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '530', 'Lovata.Toolbox', 'comment', '1.4.1', 'Fix processing of positive results in ComponentSubmitForm::getResponseModeAjax() method, if flash_on enabled', '2018-07-24 09:29:26' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '531', 'Lovata.Toolbox', 'comment', '1.5.0', 'Add TraitInitActiveLang trait', '2018-07-24 09:29:26' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '532', 'Lovata.Toolbox', 'comment', '1.6.0', 'Add SendMailHelper class, Add CommonSettings model', '2018-07-24 09:29:26' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '533', 'Lovata.Toolbox', 'comment', '1.7.0', 'Add UserStorage classes. Add classes for integration with Lovata.Buddies and RainLab.User plugins', '2018-07-24 09:29:26' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '534', 'Lovata.Toolbox', 'comment', '1.8.0', 'Added translation into French. Thanks for contribution philmarc.', '2018-07-24 09:29:26' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '535', 'Lovata.Toolbox', 'comment', '1.9.0', 'Add TraitCached. Update vendor packages.', '2018-07-24 09:29:26' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '536', 'Lovata.Toolbox', 'comment', '1.9.1', 'Remove force boot and register plugins in CommonTest class', '2018-07-24 09:29:26' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '537', 'Lovata.Toolbox', 'comment', '1.10.0', 'Add PriceHelperTrait. Move PriceHelper class from Shopaholic plugin. Add set(), applySorting() methods to ElementCollection class. Add abstract store classes.', '2018-07-24 09:29:26' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '538', 'Lovata.Toolbox', 'comment', '1.10.1', 'Fix ItemStorage class. Clone item objects form storage.', '2018-07-24 09:29:26' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '539', 'Lovata.Toolbox', 'comment', '1.10.2', 'Fix ItemStorage class. Added cloning of *Item object before saving it to storage.', '2018-07-24 09:29:26' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '540', 'Lovata.Toolbox', 'comment', '1.11.0', 'Added saving of arrays to class properties of *Store class objects after receiving array from cache.', '2018-07-24 09:29:26' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '541', 'Lovata.Toolbox', 'comment', '1.12.0', 'Add PageHelper::getPageNameList() method.', '2018-07-24 09:29:26' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '542', 'Lovata.Shopaholic', 'script', '1.0.0', 'create_table_categories.php', '2018-07-24 09:29:27' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '543', 'Lovata.Shopaholic', 'script', '1.0.0', 'create_table_products.php', '2018-07-24 09:29:28' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '544', 'Lovata.Shopaholic', 'script', '1.0.0', 'create_table_offers.php', '2018-07-24 09:29:30' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '545', 'Lovata.Shopaholic', 'script', '1.0.0', 'create_table_brands.php', '2018-07-24 09:29:30' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '546', 'Lovata.Shopaholic', 'comment', '1.0.0', 'Initialize plugin.', '2018-07-24 09:29:30' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '547', 'Lovata.Shopaholic', 'comment', '1.1.0', 'Add integration with "Popularity for Shopaholic" and "Tags for Shopaholic" plugins', '2018-07-24 09:29:30' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '548', 'Lovata.Shopaholic', 'comment', '1.2.0', 'preview_image, images fields in item classes returns \\System\\Models\\File class objects. Add integration with "Reviews for Shopaholic" plugin', '2018-07-24 09:29:30' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '549', 'Lovata.Shopaholic', 'comment', '1.2.1', 'Remove php short tags from offers/update.htm', '2018-07-24 09:29:30' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '550', 'Lovata.Shopaholic', 'comment', '1.2.2', 'Add additional cache cleaning after category reordering', '2018-07-24 09:29:31' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '551', 'Lovata.Shopaholic', 'comment', '1.2.3', 'Adding additional cache cleaning for the sorted list of brands, after the creation of a new brand. Requires Toolbox plugin version 1.3.0 and later.', '2018-07-24 09:29:31' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '552', 'Lovata.Shopaholic', 'comment', '1.3.0', 'Add menu types for integration with the StaticPage plugin. Add getPageUrl() method to the CategoryItem class. Requires Toolbox plugin version 1.4.0 and later. Thanks for contribution Alvaro Cánepa.', '2018-07-24 09:29:31' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '553', 'Lovata.Shopaholic', 'comment', '1.3.1', 'Fix: processing of the "nesting" flag for the menu type "catalog"', '2018-07-24 09:29:31' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '554', 'Lovata.Shopaholic', 'comment', '1.4.0', 'Replace code of product sorting by popularity and rating from Shopaholic to extension plugins. Add event "shopaholic.sorting.get.list" for custom sorting of products. Add integration with "Related products for Shopaholic" and "Accessories for Shopaholic" plugins', '2018-07-24 09:29:31' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '555', 'Lovata.Shopaholic', 'comment', '1.4.1', 'Update annotations for "Reviews for Shopaholic" plugin. Fix $dates array in Product model. Thanks for contribution Alexander Shapoval.', '2018-07-24 09:29:31' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '556', 'Lovata.Shopaholic', 'comment', '1.5.0', 'Add integration with "Search for Shopaholic","Sphinx for Shopaholic" plugins', '2018-07-24 09:29:31' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '557', 'Lovata.Shopaholic', 'comment', '1.6.0', 'Add integration with "Compare for Shopaholic"', '2018-07-24 09:29:31' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '558', 'Lovata.Shopaholic', 'comment', '1.7.0', 'Added translation into French. Thanks for contribution philmarc.', '2018-07-24 09:29:31' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '559', 'Lovata.Shopaholic', 'comment', '1.8.0', 'Add integration with "Viewed products for Shopaholic" plugin', '2018-07-24 09:29:31' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '560', 'Lovata.Shopaholic', 'script', '1.9.0', 'seeder_price_format.php', '2018-07-24 09:29:31' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '561', 'Lovata.Shopaholic', 'comment', '1.9.0', 'Add PriceHelperTrait, TraitCached in models. Add active() method to CategoryCollection class. Move PriceHelper class from Shopaholic plugin to Toolbox plugin. Add new store classes. Refactoring *Store, *Item, *Collection classes. Requires Toolbox plugin version 1.10.0 and later.', '2018-07-24 09:29:31' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '562', 'Lovata.Shopaholic', 'script', '1.10.0', 'create_table_additional_categories.php', '2018-07-24 09:29:32' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '563', 'Lovata.Shopaholic', 'comment', '1.10.0', 'Adding relation between Product model and additional categories. Adding ability to get list of products by category ID list, by the parent category ID.', '2018-07-24 09:29:32' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '564', 'Lovata.Shopaholic', 'comment', '1.11.0', 'Adding getPageUrl() method to ProductItem, BrandItem classes.', '2018-07-24 09:29:32' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '565', 'Lovata.Shopaholic', 'comment', '1.11.1', 'Adding "field.additional_category" value to lang files. Fixed displaying "additional categories" field only for update/preview forms.', '2018-07-24 09:29:32' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '566', 'Lovata.Shopaholic', 'comment', '1.11.2', 'Fix work with *Store classes in *Handler classes.', '2018-07-24 09:29:32' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '567', 'RedMarlin.Faq', 'script', '1.0.0', 'create_questions_table.php', '2018-07-25 02:05:39' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '568', 'RedMarlin.Faq', 'script', '1.0.0', 'create_faqcategory_table.php', '2018-07-25 02:05:39' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '569', 'RedMarlin.Faq', 'comment', '1.0.0', 'Initialize plugin', '2018-07-25 02:05:39' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '570', 'RedMarlin.Faq', 'script', '1.0.1', 'Fixed menu highlighting', '2018-07-25 02:05:39' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '571', 'RedMarlin.Faq', 'script', '1.0.1', 'Controller naming and backend url corrected', '2018-07-25 02:05:39' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '572', 'RedMarlin.Faq', 'script', '1.0.1', 'sorting_questions_upgrade.php', '2018-07-25 02:05:39' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '573', 'RedMarlin.Faq', 'comment', '1.0.1', 'Added question sorting', '2018-07-25 02:05:39' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '574', 'RedMarlin.Faq', 'comment', '1.0.2', 'Redirect route fix for sorting questions', '2018-07-25 02:05:39' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '575', 'RedMarlin.Faq', 'comment', '1.0.3', 'Fix for issue', '2018-07-25 02:05:40' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '576', 'RedMarlin.Faq', 'comment', '1.0.4', 'Fix for issue', '2018-07-25 02:05:40' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '577', 'RedMarlin.Faq', 'comment', '1.0.5', 'Updated to work with October satble', '2018-07-25 02:05:40' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '578', 'RedMarlin.Faq', 'comment', '1.0.6', 'Patch by kubis, show Category name istead of Category ID in backend', '2018-07-25 02:05:40' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '579', 'RedMarlin.Faq', 'comment', '1.0.7', 'Added Translation support by MilosStanic', '2018-07-25 02:05:40' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '580', 'RedMarlin.Faq', 'comment', '1.0.8', 'Added Component to list all questions from all categories', '2018-07-25 02:05:40' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '581', 'RedMarlin.Faq', 'script', '1.0.9', 'MailSettings library name change to MailSetting', '2018-07-25 02:05:40' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '582', 'RedMarlin.Faq', 'script', '1.0.9', 'Adapt to Laravel 5.2', '2018-07-25 02:05:40' );
+INSERT INTO `system_plugin_history`(`id`,`code`,`type`,`version`,`detail`,`created_at`) VALUES ( '583', 'RedMarlin.Faq', 'comment', '1.0.9', 'Fixed bug with Category update', '2018-07-25 02:05:40' );
 -- ---------------------------------------------------------
 
 
@@ -18523,7 +19914,9 @@ INSERT INTO `system_plugin_versions`(`id`,`code`,`version`,`created_at`,`is_disa
 INSERT INTO `system_plugin_versions`(`id`,`code`,`version`,`created_at`,`is_disabled`,`is_frozen`) VALUES ( '13', 'BenFreke.MenuManager', '1.5.3', '2018-07-16 02:28:26', '0', '0' );
 INSERT INTO `system_plugin_versions`(`id`,`code`,`version`,`created_at`,`is_disabled`,`is_frozen`) VALUES ( '14', 'RainLab.Blog', '1.2.19', '2018-07-16 06:19:24', '0', '0' );
 INSERT INTO `system_plugin_versions`(`id`,`code`,`version`,`created_at`,`is_disabled`,`is_frozen`) VALUES ( '15', 'One47.FileList', '1.0.4', '2018-07-18 06:40:08', '0', '0' );
-INSERT INTO `system_plugin_versions`(`id`,`code`,`version`,`created_at`,`is_disabled`,`is_frozen`) VALUES ( '24', 'OFFLINE.SnipcartShop', '1.0.39', '2018-07-24 08:35:07', '0', '0' );
+INSERT INTO `system_plugin_versions`(`id`,`code`,`version`,`created_at`,`is_disabled`,`is_frozen`) VALUES ( '25', 'Lovata.Toolbox', '1.12.0', '2018-07-24 09:29:26', '0', '0' );
+INSERT INTO `system_plugin_versions`(`id`,`code`,`version`,`created_at`,`is_disabled`,`is_frozen`) VALUES ( '26', 'Lovata.Shopaholic', '1.11.2', '2018-07-24 09:29:32', '0', '0' );
+INSERT INTO `system_plugin_versions`(`id`,`code`,`version`,`created_at`,`is_disabled`,`is_frozen`) VALUES ( '27', 'RedMarlin.Faq', '1.0.9', '2018-07-25 02:05:40', '0', '0' );
 -- ---------------------------------------------------------
 
 
@@ -19291,6 +20684,9 @@ INSERT INTO `system_request_logs`(`id`,`status_code`,`url`,`referer`,`count`,`cr
 INSERT INTO `system_request_logs`(`id`,`status_code`,`url`,`referer`,`count`,`created_at`,`updated_at`) VALUES ( '761', '404', 'http://localhost:8888/brochures-dfm/brochures', '["http:\\/\\/localhost:8888\\/brochures-dfm"]', '1', '2018-07-17 07:49:45', '2018-07-17 07:49:45' );
 INSERT INTO `system_request_logs`(`id`,`status_code`,`url`,`referer`,`count`,`created_at`,`updated_at`) VALUES ( '762', '404', 'http://localhost:8888', '["http:\\/\\/localhost:8888\\/en\\/contact"]', '8', '2018-07-18 09:47:21', '2018-07-18 09:47:41' );
 INSERT INTO `system_request_logs`(`id`,`status_code`,`url`,`referer`,`count`,`created_at`,`updated_at`) VALUES ( '763', '404', 'http://localhost:8888/thong-tin-khoc-hoc', NULL, '2603', '2018-07-24 04:26:52', '2018-07-24 04:30:06' );
+INSERT INTO `system_request_logs`(`id`,`status_code`,`url`,`referer`,`count`,`created_at`,`updated_at`) VALUES ( '764', '404', 'http://localhost:8888/cao-nam-trung-thao-cordy-x', NULL, '9943', '2018-07-24 10:03:36', '2018-07-24 10:31:26' );
+INSERT INTO `system_request_logs`(`id`,`status_code`,`url`,`referer`,`count`,`created_at`,`updated_at`) VALUES ( '765', '404', 'http://localhost:8888/dien-dan-cong-nghe', NULL, '2203', '2018-07-25 10:17:25', '2018-07-25 10:21:28' );
+INSERT INTO `system_request_logs`(`id`,`status_code`,`url`,`referer`,`count`,`created_at`,`updated_at`) VALUES ( '766', '404', 'http://localhost:8888/dien-dan/dien-dan-cong-nghe', '["http:\\/\\/localhost:8888\\/gioi-thieu\\/gap-go-ket-noi-chuyen-gia"]', '1282', '2018-07-26 01:35:02', '2018-07-26 01:36:21' );
 -- ---------------------------------------------------------
 
 
@@ -19322,50 +20718,6 @@ INSERT INTO `users`(`id`,`name`,`email`,`password`,`activation_code`,`persist_co
 
 
 -- Dump data of "users_groups" -----------------------------
--- ---------------------------------------------------------
-
-
--- Dump data of "offline_snipcartshop_categories" ----------
--- ---------------------------------------------------------
-
-
--- Dump data of "offline_snipcartshop_category_product" ----
--- ---------------------------------------------------------
-
-
--- Dump data of "offline_snipcartshop_discounts" -----------
--- ---------------------------------------------------------
-
-
--- Dump data of "offline_snipcartshop_order_items" ---------
--- ---------------------------------------------------------
-
-
--- Dump data of "offline_snipcartshop_orders" --------------
--- ---------------------------------------------------------
-
-
--- Dump data of "offline_snipcartshop_product_accessory" ---
--- ---------------------------------------------------------
-
-
--- Dump data of "offline_snipcartshop_product_custom_field_options" 
--- ---------------------------------------------------------
-
-
--- Dump data of "offline_snipcartshop_product_custom_fields" 
--- ---------------------------------------------------------
-
-
--- Dump data of "offline_snipcartshop_product_variant_custom_field_option" 
--- ---------------------------------------------------------
-
-
--- Dump data of "offline_snipcartshop_product_variants" ----
--- ---------------------------------------------------------
-
-
--- Dump data of "offline_snipcartshop_products" ------------
 -- ---------------------------------------------------------
 
 
@@ -19449,6 +20801,153 @@ CREATE INDEX `deferred_bindings_slave_id_index` USING BTREE ON `deferred_binding
 -- CREATE INDEX "deferred_bindings_slave_type_index" -------
 -- CREATE INDEX "deferred_bindings_slave_type_index" -----------
 CREATE INDEX `deferred_bindings_slave_type_index` USING BTREE ON `deferred_bindings`( `slave_type` );
+-- -------------------------------------------------------------
+-- ---------------------------------------------------------
+
+
+-- CREATE INDEX "lovata_shopaholic_brands_code_index" ------
+-- CREATE INDEX "lovata_shopaholic_brands_code_index" ----------
+CREATE INDEX `lovata_shopaholic_brands_code_index` USING BTREE ON `lovata_shopaholic_brands`( `code` );
+-- -------------------------------------------------------------
+-- ---------------------------------------------------------
+
+
+-- CREATE INDEX "lovata_shopaholic_brands_external_id_index" 
+-- CREATE INDEX "lovata_shopaholic_brands_external_id_index" ---
+CREATE INDEX `lovata_shopaholic_brands_external_id_index` USING BTREE ON `lovata_shopaholic_brands`( `external_id` );
+-- -------------------------------------------------------------
+-- ---------------------------------------------------------
+
+
+-- CREATE INDEX "lovata_shopaholic_brands_name_index" ------
+-- CREATE INDEX "lovata_shopaholic_brands_name_index" ----------
+CREATE INDEX `lovata_shopaholic_brands_name_index` USING BTREE ON `lovata_shopaholic_brands`( `name` );
+-- -------------------------------------------------------------
+-- ---------------------------------------------------------
+
+
+-- CREATE INDEX "lovata_shopaholic_brands_slug_index" ------
+-- CREATE INDEX "lovata_shopaholic_brands_slug_index" ----------
+CREATE INDEX `lovata_shopaholic_brands_slug_index` USING BTREE ON `lovata_shopaholic_brands`( `slug` );
+-- -------------------------------------------------------------
+-- ---------------------------------------------------------
+
+
+-- CREATE INDEX "lovata_shopaholic_categories_code_index" --
+-- CREATE INDEX "lovata_shopaholic_categories_code_index" ------
+CREATE INDEX `lovata_shopaholic_categories_code_index` USING BTREE ON `lovata_shopaholic_categories`( `code` );
+-- -------------------------------------------------------------
+-- ---------------------------------------------------------
+
+
+-- CREATE INDEX "lovata_shopaholic_categories_external_id_index" 
+-- CREATE INDEX "lovata_shopaholic_categories_external_id_index" 
+CREATE INDEX `lovata_shopaholic_categories_external_id_index` USING BTREE ON `lovata_shopaholic_categories`( `external_id` );
+-- -------------------------------------------------------------
+-- ---------------------------------------------------------
+
+
+-- CREATE INDEX "lovata_shopaholic_categories_name_index" --
+-- CREATE INDEX "lovata_shopaholic_categories_name_index" ------
+CREATE INDEX `lovata_shopaholic_categories_name_index` USING BTREE ON `lovata_shopaholic_categories`( `name` );
+-- -------------------------------------------------------------
+-- ---------------------------------------------------------
+
+
+-- CREATE INDEX "lovata_shopaholic_categories_slug_index" --
+-- CREATE INDEX "lovata_shopaholic_categories_slug_index" ------
+CREATE INDEX `lovata_shopaholic_categories_slug_index` USING BTREE ON `lovata_shopaholic_categories`( `slug` );
+-- -------------------------------------------------------------
+-- ---------------------------------------------------------
+
+
+-- CREATE INDEX "lovata_shopaholic_offers_code_index" ------
+-- CREATE INDEX "lovata_shopaholic_offers_code_index" ----------
+CREATE INDEX `lovata_shopaholic_offers_code_index` USING BTREE ON `lovata_shopaholic_offers`( `code` );
+-- -------------------------------------------------------------
+-- ---------------------------------------------------------
+
+
+-- CREATE INDEX "lovata_shopaholic_offers_external_id_index" 
+-- CREATE INDEX "lovata_shopaholic_offers_external_id_index" ---
+CREATE INDEX `lovata_shopaholic_offers_external_id_index` USING BTREE ON `lovata_shopaholic_offers`( `external_id` );
+-- -------------------------------------------------------------
+-- ---------------------------------------------------------
+
+
+-- CREATE INDEX "lovata_shopaholic_offers_name_index" ------
+-- CREATE INDEX "lovata_shopaholic_offers_name_index" ----------
+CREATE INDEX `lovata_shopaholic_offers_name_index` USING BTREE ON `lovata_shopaholic_offers`( `name` );
+-- -------------------------------------------------------------
+-- ---------------------------------------------------------
+
+
+-- CREATE INDEX "lovata_shopaholic_offers_old_price_index" -
+-- CREATE INDEX "lovata_shopaholic_offers_old_price_index" -----
+CREATE INDEX `lovata_shopaholic_offers_old_price_index` USING BTREE ON `lovata_shopaholic_offers`( `old_price` );
+-- -------------------------------------------------------------
+-- ---------------------------------------------------------
+
+
+-- CREATE INDEX "lovata_shopaholic_offers_price_index" -----
+-- CREATE INDEX "lovata_shopaholic_offers_price_index" ---------
+CREATE INDEX `lovata_shopaholic_offers_price_index` USING BTREE ON `lovata_shopaholic_offers`( `price` );
+-- -------------------------------------------------------------
+-- ---------------------------------------------------------
+
+
+-- CREATE INDEX "lovata_shopaholic_offers_product_id_index" 
+-- CREATE INDEX "lovata_shopaholic_offers_product_id_index" ----
+CREATE INDEX `lovata_shopaholic_offers_product_id_index` USING BTREE ON `lovata_shopaholic_offers`( `product_id` );
+-- -------------------------------------------------------------
+-- ---------------------------------------------------------
+
+
+-- CREATE INDEX "lovata_shopaholic_offers_quantity_index" --
+-- CREATE INDEX "lovata_shopaholic_offers_quantity_index" ------
+CREATE INDEX `lovata_shopaholic_offers_quantity_index` USING BTREE ON `lovata_shopaholic_offers`( `quantity` );
+-- -------------------------------------------------------------
+-- ---------------------------------------------------------
+
+
+-- CREATE INDEX "lovata_shopaholic_products_brand_id_index" 
+-- CREATE INDEX "lovata_shopaholic_products_brand_id_index" ----
+CREATE INDEX `lovata_shopaholic_products_brand_id_index` USING BTREE ON `lovata_shopaholic_products`( `brand_id` );
+-- -------------------------------------------------------------
+-- ---------------------------------------------------------
+
+
+-- CREATE INDEX "lovata_shopaholic_products_category_id_index" 
+-- CREATE INDEX "lovata_shopaholic_products_category_id_index" -
+CREATE INDEX `lovata_shopaholic_products_category_id_index` USING BTREE ON `lovata_shopaholic_products`( `category_id` );
+-- -------------------------------------------------------------
+-- ---------------------------------------------------------
+
+
+-- CREATE INDEX "lovata_shopaholic_products_code_index" ----
+-- CREATE INDEX "lovata_shopaholic_products_code_index" --------
+CREATE INDEX `lovata_shopaholic_products_code_index` USING BTREE ON `lovata_shopaholic_products`( `code` );
+-- -------------------------------------------------------------
+-- ---------------------------------------------------------
+
+
+-- CREATE INDEX "lovata_shopaholic_products_external_id_index" 
+-- CREATE INDEX "lovata_shopaholic_products_external_id_index" -
+CREATE INDEX `lovata_shopaholic_products_external_id_index` USING BTREE ON `lovata_shopaholic_products`( `external_id` );
+-- -------------------------------------------------------------
+-- ---------------------------------------------------------
+
+
+-- CREATE INDEX "lovata_shopaholic_products_name_index" ----
+-- CREATE INDEX "lovata_shopaholic_products_name_index" --------
+CREATE INDEX `lovata_shopaholic_products_name_index` USING BTREE ON `lovata_shopaholic_products`( `name` );
+-- -------------------------------------------------------------
+-- ---------------------------------------------------------
+
+
+-- CREATE INDEX "lovata_shopaholic_products_slug_index" ----
+-- CREATE INDEX "lovata_shopaholic_products_slug_index" --------
+CREATE INDEX `lovata_shopaholic_products_slug_index` USING BTREE ON `lovata_shopaholic_products`( `slug` );
 -- -------------------------------------------------------------
 -- ---------------------------------------------------------
 
