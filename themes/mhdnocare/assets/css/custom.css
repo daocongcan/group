@@ -518,6 +518,11 @@ h5.dt-sc-toggle:before  {
 .media-left img{
 	width: 100%;
 }
+
+.media-middle {
+    vertical-align: middle;
+    width: 40%;
+}
 @media (min-width: 1200px) {
 	.container {
 	    width: 900px ;
