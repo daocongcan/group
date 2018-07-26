@@ -127,11 +127,6 @@ categoryPage = "blog/category"
     </div>
 
 {% put scripts %}
-    <script type="text/javascript" >
-        
-        jQuery(document).ready(function($){
-          //you can now use $ as your jQuery object.
-            $('h5').removeClass( "active" );
-        });
-    </script>
+
+    <script src="{{'assets/js/jquery.tabs.min.js'|theme}}"></script>
 {% endput %}

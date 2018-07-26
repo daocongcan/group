@@ -474,6 +474,18 @@ table {
 	padding: 30px;
 	background-color:#f6f6f6 ;
 }
+.dt-sc-tabs {
+	padding-left: 0 !important;
+}
+
+ul.dt-sc-tabs li {
+	margin-right: 0px;
+
+}
+ul.dt-sc-tabs li a {
+	padding: 0px;
+}
+
 @media (min-width: 1200px) {
 	.container {
 	    width: 900px ;
