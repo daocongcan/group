@@ -518,7 +518,9 @@ h5.dt-sc-toggle:before  {
 .media-left img{
 	width: 100%;
 }
-
+.thongtin p{
+	font-size: 18px;
+}
 .media-middle {
     vertical-align: middle;
     width: 40%;
