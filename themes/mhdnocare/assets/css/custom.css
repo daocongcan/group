@@ -485,7 +485,35 @@ ul.dt-sc-tabs li {
 ul.dt-sc-tabs li a {
 	padding: 0px;
 }
+.dt-sc-tabs-content {
+    
+    padding: 18px;
+}
 
+.dt-sc-tabs-content .dt-sc-toggle-frame-set .dt-sc-toggle::before  {
+	content: "" !important;
+}
+h5.dt-sc-toggle, h5.dt-sc-toggle a  {
+	padding: 0;
+	font-weight: bold;
+}
+h5.dt-sc-toggle {
+	position: relative;
+}
+h5.dt-sc-toggle a {
+	position: relative;
+	
+	background-color: #fff;
+	z-index: 5;
+
+}
+h5.dt-sc-toggle:before  {
+    content: "";
+    background-color: #5dd0ba;
+    height: 1px;
+    width: 100%;
+    display: inline-block;
+}
 @media (min-width: 1200px) {
 	.container {
 	    width: 900px ;
