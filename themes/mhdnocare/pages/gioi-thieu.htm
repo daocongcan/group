@@ -1,27 +1,17 @@
-title = "Thong tin khoa hoc"
-url = "khoa-hoc/thong-tin-khoa-hoc"
+title = "gioi thieu"
+url = "/gioi-thieu/:slug"
 layout = "default"
-meta_title = "Thông Tin Khoa Học "
-meta_description = "Thông Tin Khoa Học"
+meta_title = ""
+meta_description = ""
 is_hidden = 0
 
-[localePicker]
-forceUrl = 0
-
 [blogPost]
-slug = "thong-tin-khoa-hoc"
+slug = "{{:slug}}"
 categoryPage = "blog/category"
 
-[menu]
-start = "id-15"
-activeNode = 0
-listItemClasses = "menu-item-simple-parent menu-item-depth-0 hasSubmenu"
-primaryClasses = "menu"
-secondaryClasses = "sub-menu"
-numberOfLevels = 2
-
-
 ==
+ 
+
 <div class="wrapper">
         <!--inner-wrapper starts-->
         <div class="inner-wrapper">
@@ -46,7 +36,11 @@ numberOfLevels = 2
                     <div class="container">
                         {% set post = blogPost.post %}
                         <div class="">
-                            <a href="/">Trang chủ</a> > <a href="/thong-tin-khoa-hoc" title=""><h1>{{post.title}}</h1></a>
+                            <a href="/">Trang chủ</a> >
+
+                            <a href="#">Giới thiệu</a> >
+
+                            <a href="#" title=""><h1>{{post.title}}</h1></a>
                         </div>
                     </div>
 
@@ -76,7 +70,7 @@ numberOfLevels = 2
                         <!-- <div class="dt-sc-hr-image"></div> -->
                         
                         <!-- <div class="dt-sc-hr-invisible"></div> -->
-                	</div>
+                    </div>
                 </section>
 
 
@@ -124,3 +118,13 @@ numberOfLevels = 2
         </div>
         <!--inner-wrapper ends-->    
     </div>
+
+{% put scripts %}
+    <script type="text/javascript" >
+        
+        jQuery(document).ready(function($){
+          //you can now use $ as your jQuery object.
+            $('h5').removeClass( "active" );
+        });
+    </script>
+{% endput %}

@@ -1,0 +1,22 @@
+	{{ form_open({ request: 'onPost' }) }}
+        {% flash %}
+            <div class="alert alert-{{ type }}">{{ message }}</div>
+        {% endflash %}
+        <div class="col-md-6">
+        	
+        	<input type="text" value="" placeholder="{{'Họ và tên'|_}}"  name="name">
+        </div>
+        <div class="col-md-6">
+        	<input type="text" value="" placeholder="{{'Email'|_}}"  name="email">
+        </div>
+
+        <div class="col-md-12" style="padding-top: 20px;text-align: right;">
+        	<textarea name="question" rows="3" placeholder="{{'Nội dung câu hỏi'|_}}"></textarea> 
+
+        	<input type="submit"  class="dt-sc-button btnq" value="{{'Gửi'|_}}"/>
+        </div>
+
+
+        
+    {{ form_close() }}
+

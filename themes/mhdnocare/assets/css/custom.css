@@ -89,20 +89,17 @@ th, .top-bar, .dt-sc-bordered-button, #main-menu > ul > li:hover > a, #main-menu
 
 
 
-::placeholder { 
-  color:#f5f5f5 !important;
-}
-
 
 ::-webkit-input-placeholder { 
-	color:#f5f5f5 !important;    
+	color:#9f9f9f !important;    
+	opacity: 1 !important;
 }
 
 
 .mailchimp-form input[type=email].error, .mailchimp-form textarea.error {
-     padding-top: 0px; 
-     padding-bottom: 0px; 
-    border: 1px solid #FF0000;
+     
+    padding: 10px 23px
+    
 }
 
 
@@ -195,6 +192,7 @@ a:hover, a:focus {
 
 #khoahoc,p,h1, h2, h3, h4, h5, h6, a, input, .tuvan, .media-body span,.copyright-info, table span {
 	font-family: 'Roboto', sans-serif !important;
+	color:#000;
 
 }
 
@@ -359,7 +357,7 @@ footer .dt-sc-contact-info span i {
  	padding-right: 15px;
 }
 
-#detail .short {
+#detail .short,.short {
 	border-left: 3px solid #5dd0b8 ;
 
 	text-align: justify;
@@ -383,6 +381,98 @@ footer .dt-sc-contact-info span i {
 #comment-form {
 	padding-top: 15px;
 	background-color: #f7f7f7;
+}
+
+.btnq {
+	padding: 6px 65px !important;
+	box-shadow: none !important;
+}
+
+#khoahoc .ask {
+	padding: 15px;
+	background-color: #f7f7f7 ;
+	margin-top: 50px;
+
+}
+
+#khoahoc .faq h5.active  {
+	color:#000000 !important;
+}
+
+#khoahoc .ask input {
+	padding: 7px 18px;
+}
+
+table {
+	margin:0;
+}
+.giatri {
+	border:5px solid #5dd0ba;
+	padding: 15px;
+	box-shadow: 2px 5px 3px #ddd,-2px 5px 3px #ddd;;
+}
+
+.giatri2 {
+	border:1px solid #5dd0ba;
+	padding: 20px;
+	position: relative;
+}
+
+.caret, .caret2, .caret3, .caret4 {
+
+	position: absolute;
+    display: inline-block;
+    
+    width: 12px;
+    
+    height: 20px;
+    
+    vertical-align: middle;
+
+}
+
+.caret {
+	top: 0;
+	left: 0;
+    margin-left: -1px;
+    border-top: 20px solid #5dd0ba;
+    border-right: 21px solid transparent;
+    border-left: 0px solid transparent;
+    
+}
+
+.caret2 {
+	top: 0;
+	right: 0;
+    margin-left: -1px;
+    vertical-align: middle;
+    border-top: 20px solid #5dd0ba;
+    border-right: 0px solid transparent;
+    border-left: 20px solid transparent;
+}
+
+.caret3 {
+	
+    right: 0;
+    
+    vertical-align: middle;
+    bottom: -10px;
+    border-bottom: 20px solid #5dd0ba;
+    border-right: 0px solid transparent;
+    border-left: 20px solid transparent
+}
+
+.caret4 {
+	left: 0;
+    vertical-align: middle;
+    bottom: -10px;
+    border-bottom: 20px solid #5dd0ba;
+    border-right: 20px solid transparent;
+    border-left: 0px solid transparent;
+}
+.themanh {
+	padding: 30px;
+	background-color:#f6f6f6 ;
 }
 @media (min-width: 1200px) {
 	.container {
