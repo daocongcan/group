@@ -190,7 +190,7 @@ a:hover, a:focus {
 	text-decoration: none;
 }
 
-#khoahoc,p,h1, h2, h3, h4, h5, h6, a, input, .tuvan, .media-body span,.copyright-info, table span {
+textarea,#khoahoc,p,h1, h2, h3, h4, h5, h6, a, input, .tuvan, .media-body span,.copyright-info, table span {
 	font-family: 'Roboto', sans-serif !important;
 	color:#000;
 
@@ -532,6 +532,17 @@ h5.dt-sc-toggle a:after  {
     color: #5dd0ba;
     padding-left: 3px;
 }
+.duoclieu {
+	position: absolute;
+    bottom: 50px;
+    display: block;
+    z-index: 8;
+    margin: 0 auto;
+    text-align: center;
+    width: 90%;
+    font-weight: bold;
+    font-size: 19px;
+}
 .media-left img{
 	width: 100%;
 }
@@ -541,6 +552,11 @@ h5.dt-sc-toggle a:after  {
 .media-middle {
     vertical-align: middle;
     width: 40%;
+}
+textarea.form-control {
+	color: #a9a7a7;
+	
+    padding-left: 18px;
 }
 @media (min-width: 1200px) {
 	.container {

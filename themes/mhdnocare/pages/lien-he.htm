@@ -1,30 +1,40 @@
-title = "Thong tin khoa hoc"
-url = "khoa-hoc/thong-tin-khoa-hoc"
+title = "gioi thieu"
+url = "/lien-he"
 layout = "default"
+
+
 is_hidden = 0
 
-[localePicker]
-forceUrl = 0
-
 [blogPost]
-slug = "thong-tin-khoa-hoc"
+slug = "lien-he"
 categoryPage = "blog/category"
 
-[menu]
-start = "id-15"
-activeNode = 0
-listItemClasses = "menu-item-simple-parent menu-item-depth-0 hasSubmenu"
-primaryClasses = "menu"
-secondaryClasses = "sub-menu"
-numberOfLevels = 2
-
-
 ==
+function onSend()
+{
+    $name = post('name');
+    $email = post('email');
+    $subject = post('subject');
+    $msg = post('msg');
+
+    $vars = ['name' => 'Joe', 'user' => 'Mary'];
+
+    Mail::send('test', $vars, function($message) {
+        $message->from(post('email'), post('name'));
+        $message->to('contact@mhdinocare.com', 'Administrator');
+        $message->subject(post('subject'));
+
+    });
+
+    return true;
+}
+==
+{% set post = blogPost.post %}
 
 {% put head %}
-    <title>Thông Tin Khoa Học </title>
+    <title>{{post.title}}</title>
     <meta name="description" content="">
-{% endput %} 
+{% endput %}
 
 <div class="wrapper">
         <!--inner-wrapper starts-->
@@ -48,16 +58,22 @@ numberOfLevels = 2
                 <!--primary starts-->
                 <section class="breadcrumb">
                     <div class="container">
-                        {% set post = blogPost.post %}
+                        
+
+
+
+                        
                         <div class="">
-                            <a href="/">Trang chủ</a> > <a href="/thong-tin-khoa-hoc" title=""><h1>{{post.title}}</h1></a>
+                            <a href="/">Trang chủ</a> >
+
+                            <a href="#" title=""><h1>{{post.title}}</h1></a>
                         </div>
                     </div>
 
                 </section>
 
                
-                <section id="khoahoc" class="content-full-width thongtin">
+                <section id="khoahoc" class="content-full-width">
                     <!--container starts-->
                     
 
@@ -80,7 +96,28 @@ numberOfLevels = 2
                         <!-- <div class="dt-sc-hr-image"></div> -->
                         
                         <!-- <div class="dt-sc-hr-invisible"></div> -->
-                	</div>
+
+                        <form id="main-contact-form" name="contact-form" data-request="onSend"  data-request-redirect="/lien-he" data_messager="{{ ContentMessager }}">
+                        <div class="form-group col-md-6" style="padding-left: 0">
+                            
+                            <input type="text" placeholder="{{'Họ và tên'|_}}" name="name" class="form-control" required>
+                        </div>
+                        <div class="form-group col-md-6" style="padding-right: 0">
+                            
+                            <input type="email" placeholder="{{'Email'|_}}" name="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            
+                            <input type="text" placeholder="{{'Tiêu đề'|_}}" name="subject" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            
+                            <textarea name="msg" placeholder="{{'Nội dung'|_}}" class="form-control" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" style="    float: right;
+    width: 130px;" class="dt-sc-button">{{ "Gửi" |_ }}</button>
+                    </form>
+                    </div>
                 </section>
 
 
@@ -128,3 +165,13 @@ numberOfLevels = 2
         </div>
         <!--inner-wrapper ends-->    
     </div>
+
+{% put scripts %}
+    <script type="text/javascript" >
+        
+        jQuery(document).ready(function($){
+          //you can now use $ as your jQuery object.
+            $('h5').removeClass( "active" );
+        });
+    </script>
+{% endput %}

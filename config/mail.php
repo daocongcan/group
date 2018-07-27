@@ -121,4 +121,13 @@ return [
 
     'pretend' => false,
 
+    // fix error  “stream_socket_enable_crypto(): SSL operation failed with code 1”
+    'stream' => [
+        'ssl' => [
+            'allow_self_signed' => true,
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+        ],
+    ],
+
 ];
