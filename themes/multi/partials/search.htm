@@ -1,0 +1,123 @@
+title = "Catagory blogs"
+url="/search"
+layout="default"
+
+==
+<?
+	use RainLab\Blog\Models\Post;
+	
+	function onStart()
+	{
+		if( input('year')!="000" && input('activites')=="000" &&input('themes')=="000"  ) {
+			
+			$this['posts'] = Post::whereYear('published_at','=', input('year'))->orderBy('id', 'desc')->get();
+
+		}else if( input('activites')!="000" && input('year')=="000" && input('themes')=="000" )  {
+
+			$this['posts'] = Post::whereHas('categories', function ($query) {
+			    $query->where('id', '=', input('activites'));
+			})->get();
+
+		}else if ( input('activites')!="000" && input('year')=="000" && input('themes')!="000" )  {
+
+			$this['posts'] = Post::whereHas('categories', function ($query) {
+			    $query->where('id', '=', input('activites'))
+			    ->where('id', '=', input('themes'));
+			})->get();
+
+		}else if ( input('activites')!="000" && input('year')!="000" && input('themes')=="000" )  {
+
+			$this['posts'] = Post::whereHas('categories', function ($query) {
+			    $query->where('id', '=', input('activites'))
+			    ->whereYear('published_at','=', input('year'));
+			})->get();
+
+		} else if ( input('activites')!="000" && input('year')!="000" && input('themes')!="000" )  {
+
+			$this['posts'] = Post::whereHas('categories', function ($query) {
+			    $query->where('id', '=', input('activites'))
+			    ->where('id', '=', input('themes'))
+			    ->whereYear('published_at','=', input('year'));
+			})->get();
+
+		}  else if ( input('themes')!="000" && input('year')=="000" && input('activites')=="000" ) {
+
+			$this['posts'] = Post::whereHas('categories', function ($query) {
+			    $query->where('id', '=', input('themes'));
+			})->get();
+
+		} else if(input('themes')!="000" && input('year')!="000" &&  input('activites')=="000"  ) {
+
+			$this['posts'] = Post::whereHas('categories', function ($query) {
+			    $query->where('id', '=', input('themes'))
+			    ->whereYear('published_at','=', input('year'));
+			})->get();
+
+		}else {
+			$this['posts'] = Post::where("published","=",1)->orderBy('id', 'desc')->get();
+		}
+
+		$this['themes'] = input('themes');
+		$this['activites'] = input('activites');
+		
+	    // $this['kq'] =  input('value1') + input('value2');
+	    // $this['value1'] = input('activites');
+	    // $this['value2'] = input('themes');
+	    
+	}
+?>
+==
+	
+
+	<div class="col-md-12">
+	    <h1 class="title"> {{'Filter'|_}}  </h1>
+	</div>
+
+	{% if posts == "[]" %}
+    	<div class="col-md-12">
+	        <p>{{'No result'|_}}</p>
+    	</div>
+	{% endif %}
+
+	{% for post in posts %}
+
+		<!-- {{post.categories}}  -->
+
+		<!-- {% for test in post.categories %}
+               
+               {{test['id']}} 
+        
+        {% endfor %} -->
+
+
+		<!-- {{post.categories[0]['pivot']['category_id']}}  -->
+
+
+		    <div class="col-md-12">
+		        <div class="col-md-3">
+		            {% for image in post.featured_images %}
+	                    <a href="{{ post.url }}">
+	                    	<img data-src="{{ image.filename }}" src="{{ image.path }}" alt="{{ image.description }}" alt="{{ post.slug }}">
+	                    </a>
+	                {% endfor %}
+
+		        </div>
+
+		        <div class="col-md-9 content">
+		            
+		            <h2>
+		                {{ post.title }} 
+		            </h2>
+		            
+		            <span>{{ post.published_at|date('d M, Y') }} Groupe, France | PDF - 117 Ko</span>
+		            
+		            <a href="{{ post.slug }}" class="btn btn-primary"> {{'Telechager'|_}} </a>
+		        </div>
+
+		        <div class="col-md-12" style="padding-right: 0px;" >
+		            <hr />    
+		        </div>
+		        
+		    </div>
+		   
+	{% endfor %}

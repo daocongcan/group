@@ -1,0 +1,42 @@
+        <div class="container wow fadeInUp" data-wow-duration="2000ms">
+            <div class="row" style="margin-bottom: 50px">
+                <div class="col-sm-3">
+                    <a href="/" class="drop"><b>{{ "Accueil" |_}}</b></a>
+                    <div class="fc_under_text_custom"></div>
+                    <ul class="sitemap">
+                        <li><a class="navigationMenu" href="/#dfm-group"><i>{{ "Propos de DFM Groupe" |_}}</i></a></li>
+                        <li><a class="navigationMenu" href="/#no-values"><i>{{ "Nos valeurs" |_}}</i></a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-4">
+                    <a href="/services-solutions/developpement-logiciel" class="drop"><b>{{ "Services & Solutions" |_}}</b></a>
+                    <div class="fc_under_text_custom"></div>
+                    <ul class="sitemap">
+                        <li><a class="navigationMenu" href="/services-solutions/developpement-logiciel"><i>{{ "Développement logiciel" |_}}</i></a></li>
+                        <li><a class="navigationMenu" href="/services-solutions/realite-virtuelle/"><i>{{ "Réalité Virtuelle" |_}}</i></a></li>
+                        <li><a class="navigationMenu" href="/services-solutions/ingenierie-technique-scientifique-virtuelle/"><i>{{ "Ingénierie Technique & Scientifique & Virtuelle" |_}}</i></a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-2">
+                    <a href="/references" class="drop"><b>{{ "Références" |_}}</b></a>
+                    <div class="fc_under_text_custom"></div>
+                </div>
+                <div class="col-sm-3">
+                    <a href="/contact" class="drop"><b>{{ "Contact" |_}}</b></a>
+                    <div class="fc_under_text_custom"></div>
+                {% if locale == "vn" %}
+                    <ul class="sitemap">
+                        <li>DFM-Engineering, Tòa nhà Helios, Công viên phần mềm Quang Trung, Quận 12, TP HCM</li>
+                        <li><a href="mailto:contact@dfm-engineering.com">contact@dfm-engineering.com</a></li>
+                        <li>(+84) 283715 8010</li>
+                    </ul>
+                {% endif %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-xs-offset-3 text-center" style="color: #959595">
+                    &copy;  {{ "now"|date("Y") }} {{ "DFM-Groupe" |_}}
+                </div>
+                
+            </div>
+        </div>

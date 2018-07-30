@@ -54,9 +54,9 @@ class BrandItem extends ElementItem
     /**
      * Get URL param list by page code
      * @param string $sPageCode
-     * @return array : array
+     * @return array
      */
-    public function getPageParamList($sPageCode) 
+    public function getPageParamList($sPageCode) : array
     {
         $arPageParamList = [];
 

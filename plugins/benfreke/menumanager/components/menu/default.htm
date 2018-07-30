@@ -1,11 +1,11 @@
 {% if parentNode and parentNode.getChildCount %}
-<ul id="menu-main-menu"  class="{{ primaryClasses }}">
+<ul class="{{ primaryClasses }}">
     {% for primaryNav in parentNode.getChildren %}
         {% if primaryNav.enabled %}
             {% if primaryNav.getChildCount and numberOfLevels > 1 %}
                 <li class="dropdown {{ listItemClasses }} {{ primaryNav.getListItemClasses(activeLeft, activeRight) }}">
                     <a href="{{ primaryNav.getLinkHref }}" target="{{ primaryNav.getLinkTarget }}" class="dropdown-toggle" data-toggle="dropdown">
-                        {{ primaryNav.title }} <!-- <span class="glyphicon glyphicon-chevron-down"></span> -->
+                        {{ primaryNav.title }} <span class="glyphicon glyphicon-chevron-down"></span>
                     </a>
             {% else %}
                 <li class="{{ listItemClasses }} {{ primaryNav.getListItemClasses(activeLeft, activeRight) }}">
@@ -20,7 +20,7 @@
                             <li class="{{ listItemClasses }} {{ secondaryNav.getListItemClasses(activeLeft, activeRight) }}">
                                 <a href="{{ secondaryNav.getLinkHref }}" target="{{ secondaryNav.getLinkTarget }}">
                                     {{ secondaryNav.title }}
-                                    <span class="list-style-icon"><!-- <img src="{{ 'assets/images/list-style-1.png'|theme }}" alt="list-style" /> --></span>
+                                    <span class="list-style-icon"><img src="{{ 'assets/images/list-style-1.png'|theme }}" alt="list-style" /></span>
                                 </a>
                                 {% if secondaryNav.getChildCount and numberOfLevels > 2 %}
                                     <ul class="{{ tertiaryClasses }}">
@@ -29,7 +29,7 @@
                                                 <li class="{{ listItemClasses }} {{ tertiaryNav.getListItemClasses(activeLeft, activeRight) }}">
                                                     <a href="{{ tertiaryNav.getLinkHref }}" target="{{ tertiaryNav.getLinkTarget }}">
                                                         {{ tertiaryNav.title }}
-                                                        <span class="list-style-icon"><!-- <img src="{{ 'assets/images/list-style-1.png'|theme }}" alt="list-style" /></span> -->
+                                                        <span class="list-style-icon"><img src="{{ 'assets/images/list-style-1.png'|theme }}" alt="list-style" /></span>
                                                     </a>
 
                                                 </li>
@@ -46,13 +46,16 @@
         {% endif %}
     {% endfor %}
 
-    <!-- <li {% if locale=='fr' %} class="hidden" {% endif %} ><a href="#" data-request="onSwitchLocale" data-request-data="locale: 'fr'"><img width="100%" src="{{ 'assets/images/flags/fr.png'|theme }}" alt="fr"></a></li>
+    <li {% if locale=='fr' %} class="hidden" {% endif %} ><a href="#" data-request="onSwitchLocale" data-request-data="locale: 'fr'"><img width="100%" src="{{ 'assets/images/flags/fr.png'|theme }}" alt="fr"></a></li>
 
-    <li {% if locale=='en' %} class="hidden" {% endif %} ><a href="#" data-request="onSwitchLocale" data-request-data="locale: 'en'"><img width="100%" src="{{ 'assets/images/flags/us.png'|theme }}" alt="en"></a></li> -->
+    <li {% if locale=='en' %} class="hidden" {% endif %} ><a href="#" data-request="onSwitchLocale" data-request-data="locale: 'en'"><img width="100%" src="{{ 'assets/images/flags/us.png'|theme }}" alt="en"></a></li>
 
-    
+    {% if user %}
+    <li><span style="font-size: 12px;">{{ user.name }} | <a data-request="onLogout" >Sign out</a></span></li>
 
-    
+    {% else %}
+        <!-- <li title="{{'espace privé'|_}}"><a href="/login" ><img style="width: 10px;" src="{{ 'assets/images/icon-login.png'|theme }}" alt="icon-login"></a></li> -->
+    {% endif %}
 
 </ul>
 {% endif %}

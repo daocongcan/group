@@ -18,9 +18,9 @@ class SortingListStore extends AbstractStoreWithParam
 
     /**
      * Get ID list from database
-     * @return array : array
+     * @return array
      */
-    protected function getIDListFromDB() 
+    protected function getIDListFromDB() : array
     {
         switch ($this->sValue) {
             case ProductListStore::SORT_PRICE_ASC:
@@ -45,9 +45,9 @@ class SortingListStore extends AbstractStoreWithParam
 
     /**
      * Get product list with custom sorting
-     * @return array : array
+     * @return array
      */
-    protected function getCustomSortingList() 
+    protected function getCustomSortingList() : array
     {
         $arEventResult = Event::fire('shopaholic.sorting.get.list', [$this->sValue]);
         if (empty($arEventResult)) {
@@ -69,9 +69,9 @@ class SortingListStore extends AbstractStoreWithParam
 
     /**
      * Get sorting ID list by offer price (ASC)
-     * @return array : array
+     * @return array
      */
-    protected function getByPriceASC() 
+    protected function getByPriceASC() : array
     {
         //Get product ID list (sort by offer price)
         //We can not use groupBy() in this place
@@ -83,9 +83,9 @@ class SortingListStore extends AbstractStoreWithParam
 
     /**
      * Get sorting ID list by offer price (DESC)
-     * @return array : array
+     * @return array
      */
-    protected function getByPriceDESC() 
+    protected function getByPriceDESC() : array
     {
         //Get product ID list (sort by offer price)
         //We can not use groupBy() in this place
@@ -97,9 +97,9 @@ class SortingListStore extends AbstractStoreWithParam
 
     /**
      * Get new products
-     * @return array : array
+     * @return array
      */
-    protected function getNewProductList() 
+    protected function getNewProductList() : array
     {
         $arElementIDList = (array) Product::orderBy('id', 'desc')->lists('id');
 
@@ -107,10 +107,10 @@ class SortingListStore extends AbstractStoreWithParam
     }
 
     /**
-     * Get new products : array
+     * Get new products
      * @return array
      */
-    protected function getProductList() 
+    protected function getProductList() : array
     {
         $arElementIDList = (array) Product::lists('id');
 

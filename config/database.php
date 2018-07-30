@@ -56,7 +56,7 @@ return [
             'driver'    => 'mysql',
             'host'      => 'localhost',
             'port'      => 3306,
-            'database'  => 'db_mhdnocare',
+            'database'  => 'db_dfm_europe',
             'username'  => 'root',
             'password'  => 'candc123',
             'charset'   => 'utf8',

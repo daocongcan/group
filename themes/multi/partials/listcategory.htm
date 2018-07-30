@@ -1,0 +1,30 @@
+[blogCategories]
+==
+
+<?php
+    use RainLab\Blog\Models\Category;
+    
+    function onStart()
+    {
+        $this['categories'] = Category::where("parent_id",'=',NULL)->get();
+        $this['categories2'] = Category::where("parent_id",'=',"11")->get();
+        
+    }
+?>    
+==
+<style>
+	ul.category-list li ul li { 
+    	display: none;
+	}
+</style>
+
+<!-- <ul class="category-list">
+	{% for category in categories %}
+	    <li {% if category.slug == currentCategorySlug %}class="active"{% endif %} >
+		    <a href="/{{category.slug}}">{{category.name}}</a> 
+	    </li>
+    {% endfor %}
+</ul> -->
+	{% component "blogCategories"%}
+
+

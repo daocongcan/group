@@ -115,9 +115,9 @@ class CategoryItem extends ElementItem
     /**
      * Get URL param list by page code
      * @param string $sPageCode
-     * @return array : array
+     * @return array
      */
-    public function getPageParamList($sPageCode) 
+    public function getPageParamList($sPageCode) : array
     {
         //Get URL params for page
         $arParamList = PageHelper::instance()->getUrlParamList($sPageCode, 'CategoryPage');
@@ -142,9 +142,9 @@ class CategoryItem extends ElementItem
 
     /**
      * Get array with categories slugs
-     * @return array : array
+     * @return array
      */
-    protected function getSlugList() 
+    protected function getSlugList() : array
     {
         $arResult = [$this->slug];
 

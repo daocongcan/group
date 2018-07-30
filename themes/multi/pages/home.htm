@@ -1,0 +1,26 @@
+title = "Home"
+url = "/"
+layout = "default"
+meta_title = "DFM"
+meta_description = "DFM"
+
+[localePicker]
+
+[viewBag]
+
+==
+<p><a class="group1" href="{{ 'assets/images/bonne-annee/bonne-annee6.gif'|theme }}" ></a></p>
+<p><a class="group2" href="{{ 'assets/images/bonne-annee/HPNY.gif'|theme }}" ></a></p>
+<!-- <p><a class="group3" href="https://www.youtube.com/embed/xt_z8mnI-HU?rel=0?version=3&autoplay=1&controls=0&&showinfo=0&loop=1​" ></a></p> -->
+
+<section id="main-slider">
+    {% partial "slides" %}
+</section><!--/#main-slider -->
+
+<section id="features">
+    {% partial "features" %}
+</section><!--/#features-->
+
+<section id="animated-number">
+    {% partial 'facts' %}
+</section><!--/#animated-number-->
