@@ -1,8 +1,7 @@
 title = "Catagory blogs"
-url = "/:slug"
+url = "/:slug?:page"
 layout = "default"
-meta_title = "Test catelogy"
-meta_description = "Meta"
+
 
 
 [blogPosts]
@@ -27,7 +26,8 @@ postPage = "blog/post"
 ==
 
 {% put head %}
-
+    <title>{{ category.name }}</title>
+    <meta name="description" content="">
 
 {% endput %}
 
@@ -94,7 +94,7 @@ postPage = "blog/post"
 
                             </span>
                             
-                            <a href="{{ post.excerpt|raw }}" class="btn btn-primary"> Telechager   </a>
+                            <a href="{{ post.excerpt|raw }}" class="btn btn-primary"> {{'Telechager'|_}}   </a>
                         </div>
 
 

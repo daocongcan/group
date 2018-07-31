@@ -3,6 +3,11 @@ url = "/references"
 layout = "default"
 [localePicker]
 ==
+{% put head %}
+    <title>{{ "Références" |_}}</title>
+    <meta name="description" content="">
+
+{% endput %}
 <ul class="rslides" id="slider1">
   <li><img width="100%" src="{{ 'assets/images/page/reference/PNG/Banner_small.jpg'|theme }}" alt=""></li>
 </ul>
