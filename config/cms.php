@@ -303,4 +303,13 @@ return [
 
     'enableCsrfProtection' => false,
 
+    'storage' => [
+    
+
+        'media' => [
+            
+            'videoExtensions' => ['mp4', 'avi', 'mov', 'mpg']
+        ]
+    ],
+
 ];
