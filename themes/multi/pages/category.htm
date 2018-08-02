@@ -1,5 +1,5 @@
 title = "Catagory blogs"
-url = "/:slug?"
+url = "/:slug/:page?"
 layout = "default"
 
 
@@ -13,14 +13,17 @@ categoryPage = "blog/category"
 postPage = "blog/post"
 
 ==
-<?php
+<?
 
     function onTest()
     {
         $this['value1'] = input('activites');
         $this['value2'] = input('themes');
         $this['value3'] = input('year');
+
     }
+
+    
 ?>
 ==
 

@@ -10,19 +10,24 @@ layout = "default"
         $this['categories'] = Category::where("parent_id",'=',"5")->get();
         $this['categories2'] = Category::where("parent_id",'=',"11")->get();
 
-        $this['posts'] = Post::select('published_at','published')
+        $this['posts2'] = Post::select('published_at','published')
         ->where('published', '=', 1)
-        ->groupBy('published_at')
+        ->groupBy(DB::raw("YEAR(published_at)"))
         ->get();
         
     }
+    
+
+
+
 ?>    
 ==
-{% set posts = blogPosts.posts %}
+{% set posts = posts2 %}
 <div class="container wrap-filter">
     
-    <form data-request="onTest" data-request-update="search: '.left'">    
-        
+    <!-- <form data-request="onTest" data-request-update="search: '.left'">     -->
+    {{ form_open({ method:'get',url:"/filter"}) }}
+
         <div class="col-md-3">
             <p class="ft-title">{{'ACTIVITÉS'|_}}</p>
             <select name="activites" id="s_category" class="form-control"  >
@@ -76,7 +81,8 @@ layout = "default"
             <button type="submit" class="btn btn-primary">{{'Filter'|_}}</button>
         </div>
 
-    </form>    
+    <!-- </form>     -->
+    {{ form_close() }}
 
     <div class="col-md-12 line">
         <hr />    

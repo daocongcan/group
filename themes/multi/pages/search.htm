@@ -1,0 +1,88 @@
+title = "filter"
+url="/filter/:page?"
+layout="default"
+==
+<?
+	
+	use RainLab\Blog\Models\Post;
+	
+	function onStart()
+	{
+
+		$this['activites']= $activites = get('activites');
+		$this['themes']= $themes = get('themes');
+		$this['year']= $year = get('year');
+		$this['page']= $page = get('page');
+
+
+		if( $year!="000" && $activites=="000" && $themes=="000"  ) {
+			
+			$this['posts'] = Post::whereYear('published_at','=', get('year') )->orderBy('id', 'desc')->paginate(3);
+
+		}else if( $activites!="000" && $year=="000" && $themes=="000" )  {
+
+			$this['posts'] = Post::whereHas('categories', function ($query) {
+			    $query->where('id', '=', get('activites') );
+			})->paginate(3);
+
+		}else if ( $activites!="000" && $year=="000" && $themes!="000" )  {
+
+			$this['posts'] = Post::whereHas('categories', function ($query) {
+			    $query->where('id', '=', get('activites') )
+			    ->where('id', '=', get('themes') );
+			})->paginate(3);
+
+		}else if ( $activites!="000" && $year!="000" && $themes=="000" )  {
+
+			$this['posts'] = Post::whereHas('categories', function ($query) {
+			    $query->where('id', '=',  get('activites') )
+			    ->whereYear('published_at','=',  get('year') );
+			})->paginate(3);
+
+		} else if ( $activites!="000" && $year!="000" && $themes!="000" )  {
+
+			$this['posts'] = Post::whereHas('categories', function ($query) {
+			    $query->where('id', '=', get('activites')  )
+			    ->where('id', '=',  get('themes') )
+			    ->whereYear('published_at','=', get('year') );
+			})->paginate(3);
+
+		}  else if ( $themes!="000" && $year=="000" && $activites=="000" ) {
+
+			$this['posts'] = Post::whereHas('categories', function ($query) {
+			    $query->where('id', '=', get('themes')  );
+			})->paginate(3);
+
+		} else if($themes!="000" && $year!="000" &&  $activites=="000"  ) {
+
+			$this['posts'] = Post::whereHas('categories', function ($query) {
+			    $query->where('id', '=',  get('themes'))
+			    ->whereYear('published_at','=',  get('year'));
+			})->paginate(3);
+
+		}else {
+			$this['posts'] = Post::where("published","=",1)->orderBy('id', 'desc')->paginate(3);
+		}
+
+		$this['themes'] = $themes;
+		$this['activites'] = $activites;
+		
+	    // $this['kq'] =  input('value1') + input('value2');
+	    // $this['value1'] = $activites;
+	    // $this['value2'] = $themes;
+
+	    //$this['posts']->setPath("filter?activites=$activites&themes=$themes&year=$year");
+	    
+	    $this['currentPages'] = $this['posts']->total() % 3;
+	    $this['page'] =1;
+	    if(get('page')!=NULL)
+	    	$this['page'] = get('page');		
+	    
+	    	
+	}
+
+	
+?>
+==
+
+{% partial 'search' %}

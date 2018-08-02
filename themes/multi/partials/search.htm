@@ -1,99 +1,61 @@
 title = "Catagory blogs"
-url="/search"
-layout="default"
 
 ==
-<?
-	use RainLab\Blog\Models\Post;
+
+==
 	
-	function onStart()
-	{
-		if( input('year')!="000" && input('activites')=="000" &&input('themes')=="000"  ) {
-			
-			$this['posts'] = Post::whereYear('published_at','=', input('year'))->orderBy('id', 'desc')->get();
 
-		}else if( input('activites')!="000" && input('year')=="000" && input('themes')=="000" )  {
+{% put head %}
+    <title>{{ category.name }}</title>
+    <meta name="description" content="">
 
-			$this['posts'] = Post::whereHas('categories', function ($query) {
-			    $query->where('id', '=', input('activites'));
-			})->get();
+{% endput %}
 
-		}else if ( input('activites')!="000" && input('year')=="000" && input('themes')!="000" )  {
 
-			$this['posts'] = Post::whereHas('categories', function ($query) {
-			    $query->where('id', '=', input('activites'))
-			    ->where('id', '=', input('themes'));
-			})->get();
+<style type="text/css" media="screen">
+    .right {
+        background-color: #ddd;
+    }
+    
+    
+</style>
 
-		}else if ( input('activites')!="000" && input('year')!="000" && input('themes')=="000" )  {
 
-			$this['posts'] = Post::whereHas('categories', function ($query) {
-			    $query->where('id', '=', input('activites'))
-			    ->whereYear('published_at','=', input('year'));
-			})->get();
+<section id="get-in-touch" style="background-image: url({{'assets/images/banner-sub.jpg'|theme}});background-position: center;" >
+    <div class="container" >
+        <div class="section-header category"  >
+            <h2 class="section-title text-center wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;">{{ "filter"|_ }} </h2> 
+            
+           <!--  style="background-image: url({{'assets/images/banner-sub.jpg'|theme}});background-position: center;" -->
 
-		} else if ( input('activites')!="000" && input('year')!="000" && input('themes')!="000" )  {
+           
+        </div>
+    </div>
+</section>
 
-			$this['posts'] = Post::whereHas('categories', function ($query) {
-			    $query->where('id', '=', input('activites'))
-			    ->where('id', '=', input('themes'))
-			    ->whereYear('published_at','=', input('year'));
-			})->get();
+<section>
+    {% partial 'filter' %}
 
-		}  else if ( input('themes')!="000" && input('year')=="000" && input('activites')=="000" ) {
+</section>
+	
 
-			$this['posts'] = Post::whereHas('categories', function ($query) {
-			    $query->where('id', '=', input('themes'));
-			})->get();
 
-		} else if(input('themes')!="000" && input('year')!="000" &&  input('activites')=="000"  ) {
+<section style="padding: 50px 0px 50px;" id="meet-team">
+    <div class="container">	
 
-			$this['posts'] = Post::whereHas('categories', function ($query) {
-			    $query->where('id', '=', input('themes'))
-			    ->whereYear('published_at','=', input('year'));
-			})->get();
+    		<div class="col-md-12">
+			    <h1 class="title" style="text-transform: capitalize;"> {{'Filter'|_}}  </h1>
+			</div>
 
-		}else {
-			$this['posts'] = Post::where("published","=",1)->orderBy('id', 'desc')->get();
-		}
+			{% if posts == "[]" %}
+		    	<div class="col-md-12">
+			        <p>{{'No result'|_}}</p>
+		    	</div>
+			{% endif %}
 
-		$this['themes'] = input('themes');
-		$this['activites'] = input('activites');
 		
-	    // $this['kq'] =  input('value1') + input('value2');
-	    // $this['value1'] = input('activites');
-	    // $this['value2'] = input('themes');
-	    
-	}
-?>
-==
-	
-
-	<div class="col-md-12">
-	    <h1 class="title"> {{'Filter'|_}}  </h1>
-	</div>
-
-	{% if posts == "[]" %}
-    	<div class="col-md-12">
-	        <p>{{'No result'|_}}</p>
-    	</div>
-	{% endif %}
-
-	{% for post in posts %}
-
-		<!-- {{post.categories}}  -->
-
-		<!-- {% for test in post.categories %}
-               
-               {{test['id']}} 
-        
-        {% endfor %} -->
-
-
-		<!-- {{post.categories[0]['pivot']['category_id']}}  -->
-
-
-		    <div class="col-md-12">
+		    <div class="col-md-9">
+		    {% for post in posts %}
 		        <div class="col-md-3">
 		            {% for image in post.featured_images %}
 	                    <a href="{{ post.url }}">
@@ -117,7 +79,34 @@ layout="default"
 		        <div class="col-md-12" style="padding-right: 0px;" >
 		            <hr />    
 		        </div>
-		        
-		    </div>
-		   
-	{% endfor %}
+			{% endfor %}
+
+			<div class="col-md-12" style="text-align: center;">
+				<ul class="pagination">
+					{% if(currentPages>1)  %} 
+						{% for i in 1..currentPages %}
+						<li {% if(i==page)  %} class="active" {% endif %} >
+							<a href="filter?activites={{activites}}&amp;themes={{themes}}&amp;year={{year}}&page={{i}}" rel="prev">{{i}}</a>
+						</li> 
+						{% endfor %}
+
+					{% endif %}
+
+				</ul>
+
+			</div>
+
+		</div>
+		    <div class="col-md-3 right">
+
+                
+                {% partial 'listcategory' %}
+
+            </div>    
+	</div>
+
+		
+</section>   
+	
+
+	

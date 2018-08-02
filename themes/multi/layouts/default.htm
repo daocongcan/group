@@ -1,5 +1,7 @@
 description = "Default layout"
+
 [localePicker]
+forceUrl = 0
 ==
 <?php
 use RainLab\Translate\Classes\Translator;
@@ -11,30 +13,7 @@ function onStart()
         $this['locale'] = $translator->getLocale();
     }
 
-    // <!-- @session_start();
-    // if (isset($_SESSION['langset'])) return;
-    // if (isset($_SERVER["HTTP_CF_IPCOUNTRY"])) {
-    //     $this['country'] = $_SERVER["HTTP_CF_IPCOUNTRY"];
-    // } else {
-    //     $this['country'] = "VN";
-    // }
-
-    // $frSpeakingCountries = array("FR","CA","BE");
-
-    // if (in_array($this['country'], $frSpeakingCountries)) {
     
-    //     $actual_link = "http://".$_SERVER['HTTP_HOST']."/fr".$_SERVER['REQUEST_URI'];
-    //     $_SESSION['langset'] = true;
-    //     $this['test'] = "fr";
-    //     header('Location: '.$actual_link);
-    //     exit();
-    // } else {
-    //     $actual_link = "http://".$_SERVER['HTTP_HOST']."/en".$_SERVER['REQUEST_URI'];
-    //     $_SESSION['langset'] = true;
-    //     $this['test'] = "en";
-    //     header('Location: '.$actual_link);
-    //     exit();
-    // } -->
 }
 ?>
 ==
@@ -68,6 +47,7 @@ function onStart()
 </section>
 
 <footer id="footer">
+
     {% partial "footer" %}
 </footer><!--/#footer-->
 
