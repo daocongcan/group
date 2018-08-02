@@ -83,14 +83,37 @@ title = "Catagory blogs"
 
 			<div class="col-md-12" style="text-align: center;">
 				<ul class="pagination">
+
 					{% if(currentPages>1)  %} 
+
+						{% if(page > 1 )  %}
+							<li>
+								<a href="filter?activites={{activites}}&amp;themes={{themes}}&amp;year={{year}}&page={{page-1}}" rel="next">«</a>
+							</li>
+						{% else %}
+							<li class="disabled"><span>«</span></li>
+						{% endif %}
+
+
 						{% for i in 1..currentPages %}
 						<li {% if(i==page)  %} class="active" {% endif %} >
 							<a href="filter?activites={{activites}}&amp;themes={{themes}}&amp;year={{year}}&page={{i}}" rel="prev">{{i}}</a>
 						</li> 
 						{% endfor %}
 
+						
+						{% if(page < currentPages )  %}
+							<li>
+								<a href="filter?activites={{activites}}&amp;themes={{themes}}&amp;year={{year}}&page={{page+1}}" rel="next">»</a>
+							</li>
+						{% else %}
+							<li class="disabled"><span>»</span></li>
+						{% endif %}
+
+						
+
 					{% endif %}
+					
 
 				</ul>
 
