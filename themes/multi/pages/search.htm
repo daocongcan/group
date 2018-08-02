@@ -28,8 +28,7 @@ layout="default"
 		}else if ( $activites!="000" && $year=="000" && $themes!="000" )  {
 
 			$this['posts'] = Post::whereHas('categories', function ($query) {
-			    $query->where('id', '=', get('activites') )
-			    ->where('id', '=', get('themes') );
+			    $query->whereIn('id',[get('activites'),get('themes') ]);
 			})->paginate(3);
 
 		}else if ( $activites!="000" && $year!="000" && $themes=="000" )  {
@@ -42,8 +41,7 @@ layout="default"
 		} else if ( $activites!="000" && $year!="000" && $themes!="000" )  {
 
 			$this['posts'] = Post::whereHas('categories', function ($query) {
-			    $query->where('id', '=', get('activites')  )
-			    ->where('id', '=',  get('themes') )
+			    $query->whereIn('id',[get('activites'),get('themes') ])
 			    ->whereYear('published_at','=', get('year') );
 			})->paginate(3);
 
@@ -73,6 +71,8 @@ layout="default"
 
 	    //$this['posts']->setPath("filter?activites=$activites&themes=$themes&year=$year");
 	    
+	    $this['count'] = $this['posts']->count();
+
 	    $this['currentPages'] = $this['posts']->total() % 3;
 	    $this['page'] =1;
 	    if(get('page')!=NULL)
@@ -128,7 +128,7 @@ layout="default"
 			    <h1 class="title" style="text-transform: capitalize;"> {{'Filter'|_}}  </h1>
 			</div>
 
-			{% if posts == "[]" %}
+			{% if count == 0 %}
 		    	<div class="col-md-12">
 			        <p>{{'No result'|_}}</p>
 		    	</div>
