@@ -5,7 +5,9 @@ layout="default"
 <?
 	
 	use RainLab\Blog\Models\Post;
-	
+
+	use RainLab\Blog\Models\Category;
+    
 	function onStart()
 	{
 
@@ -65,9 +67,7 @@ layout="default"
 		$this['themes'] = $themes;
 		$this['activites'] = $activites;
 		
-	    // $this['kq'] =  input('value1') + input('value2');
-	    // $this['value1'] = $activites;
-	    // $this['value2'] = $themes;
+	    
 
 	    //$this['posts']->setPath("filter?activites=$activites&themes=$themes&year=$year");
 	    
@@ -77,6 +77,9 @@ layout="default"
 	    $this['page'] =1;
 	    if(get('page')!=NULL)
 	    	$this['page'] = get('page');		
+	    
+
+
 	    
 	    	
 	}

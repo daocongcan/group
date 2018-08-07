@@ -1,6 +1,60 @@
 [blogCategories]
 
 ==
+<?
+
+    use RainLab\Blog\Models\Category;
+    use RainLab\Blog\Models\Post;
+
+    function onStart()
+    {
+        $this['categories'] = $catagories1 =  Category::where("parent_id",'=',NULL)->get();
+
+        $this['categories2'] = Category::where("parent_id",'=',"11")->get();
+
+        $countPosts = array();
+
+        foreach ( $catagories1 as $catagory ) {
+
+            $idCats =  array();
+
+            $subcats = Category::where("parent_id",'=', $catagory->id  )->get();
+
+            $this['slugCat'] = $catagory->slug;
+
+            array_push($idCats, $catagory->id);
+
+
+            foreach ( $subcats as $subcat ) {
+                
+                $subcats2 = Category::where("parent_id",'=', $subcat->id )->get();
+
+                array_push($idCats, $subcat->id);
+
+                foreach ( $subcats2 as $subcat2 ) {
+
+                    array_push($idCats, $subcat2->id);
+
+                }
+
+            }
+
+            $this['idCats'] = $idCats;
+
+            $countPosts = Post::whereHas('categories', function ($query) {
+                        $query->whereIn('category_id', $this['idCats']  )
+                        ->groupBy('title');
+                    })->get();
+
+            $countPost[ $this['slugCat'] ][] = count($countPosts);
+
+        }
+
+        $this['countPosts'] = $countPost;
+    }
+    
+?>
+==
 
 <ul class="category-list">
 	{% for category in categories %}
@@ -13,8 +67,6 @@
                        ( {{countPost[0]}} )
                     {% endif %}
                 {% endfor %}
-                    
-                    
                 
             </a> 
     	</li>
