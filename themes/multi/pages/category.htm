@@ -4,7 +4,7 @@ layout = "default"
 
 
 
-[blogPosts]
+[blogPosts bloga]
 postsPerPage = "3"
 categoryFilter = "{{ :slug }}"
 noPostsMessage = "No posts found"
@@ -12,20 +12,74 @@ sortOrder = "published_at desc"
 categoryPage = "blog/category"
 postPage = "blog/post"
 
+[blogPosts blogb] 
+
 ==
 <?
-
-    function onTest()
+    
+    use RainLab\Blog\Models\Category;
+    use RainLab\Blog\Models\Post;
+    
+    function onStart()
     {
-        $this['value1'] = input('activites');
-        $this['value2'] = input('themes');
-        $this['value3'] = input('year');
+        $this['categories'] = $catagories1 =  Category::where("parent_id",'=',NULL)->get();
+
+        $this['categories2'] = Category::where("parent_id",'=',"11")->get();
+
+        $countPosts = array();
+
+        foreach ( $catagories1 as $catagory ) {
+
+            $idCats =  array();
+
+            $subcats = Category::where("parent_id",'=', $catagory->id  )->get();
+
+            $this['slugCat'] = $catagory->slug;
+
+            array_push($idCats, $catagory->id);
+
+
+            foreach ( $subcats as $subcat ) {
+                
+                $subcats2 = Category::where("parent_id",'=', $subcat->id )->get();
+
+                array_push($idCats, $subcat->id);
+
+                foreach ( $subcats2 as $subcat2 ) {
+
+                    array_push($idCats, $subcat2->id);
+
+                }
+
+            }
+
+            $this['idCats'] = $idCats;
+
+            $countPosts = Post::whereHas('categories', function ($query) {
+                        $query->whereIn('category_id', $this['idCats']  )
+                        ->groupBy('title');
+                    })->get();
+
+            $countPost[ $this['slugCat'] ][] = count($countPosts);
+
+        }
+
+        $this['countPosts'] = $countPost;
 
     }
 
     
 ?>
 ==
+<style>
+    ul.category-list li ul li { 
+        display: none;
+    }
+</style>
+
+{% set category = bloga.category %}
+
+{% set posts = bloga.posts %}
 
 {% put head %}
     <title>{{ category.name }}</title>
@@ -33,14 +87,6 @@ postPage = "blog/post"
 
 {% endput %}
 
-
-<style type="text/css" media="screen">
-    .right {
-        background-color: #ddd;
-    }
-    
-    
-</style>
 
 
 <section id="get-in-touch" style="background-image: url({{'assets/images/banner-sub.jpg'|theme}});background-position: center;" >
@@ -55,6 +101,7 @@ postPage = "blog/post"
     </div>
 </section>
 
+
 <section>
     {% partial 'filter' %}
 
@@ -62,8 +109,10 @@ postPage = "blog/post"
 
 <section style="padding: 50px 0px 50px;" id="meet-team">
     <div class="container">
-            {% set category = blogPosts.category %}
-            {% set posts = blogPosts.posts %}
+            
+
+
+
 
             <div class="col-md-9 left">
 
@@ -72,8 +121,10 @@ postPage = "blog/post"
                 </div>
 
                 {% for post in posts %}
+                    
 
                     <div class="col-md-12">
+                        
                         <div class="col-md-3">
 
 
@@ -105,6 +156,7 @@ postPage = "blog/post"
                         </div>
                         
                     </div>
+
                 {% endfor %}
 
                 <div class="col-md-12" style="text-align: center;">
@@ -116,7 +168,6 @@ postPage = "blog/post"
             </div>
                         
             <div class="col-md-3 right">
-
                 
                 {% partial 'listcategory' %}
 

@@ -1,0 +1,38 @@
+==
+
+{% for post in posts %}
+                    
+
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+
+
+                            <!-- <img src="{{ post.featured_images }}" class="img-responsive" alt="detail"> -->
+
+                            {% for image in post.featured_images %}
+                                <a href="{{ post.url }}"><img data-src="{{ image.filename }}" src="{{ image.path }}" alt="{{ image.description }}" alt="{{ post.slug }}"></a>
+                            {% endfor %}
+                            
+                        </div>
+
+                        <div class="col-md-9 content">
+                            
+                            <h2>
+                                {{ post.title }}
+                                
+                            </h2>
+                            
+                            <span>{{ post.published_at|date('d M, Y') }} Groupe, France | PDF - 117 Ko 
+
+                            </span>
+                            
+                            <a href="{{ post.excerpt|raw }}" class="btn btn-primary"> {{'Telechager'|_}}   </a>
+                        </div>
+
+
+                        <div class="col-md-12" style="padding-right: 0px;">
+                            <hr />    
+                        </div>
+                        
+                    </div>
+                {% endfor %}
